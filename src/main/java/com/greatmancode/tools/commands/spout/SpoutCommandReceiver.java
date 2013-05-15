@@ -16,18 +16,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools;
+package com.greatmancode.tools.commands.spout;
 
-import com.greatmancode.tools.interfaces.Common;
-import com.greatmancode.tools.interfaces.Loader;
+import com.greatmancode.tools.commands.CommandHandler;
+import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 
-public class General {
+import org.spout.api.command.Command;
+import org.spout.api.command.CommandContext;
+import org.spout.api.command.CommandExecutor;
+import org.spout.api.command.CommandSource;
+import org.spout.api.exception.CommandException;
 
-	private Loader loader;
-	private Common common;
-	public General(Loader loader, Common common) {
-		this.loader = loader;
-		this.common = common;
-		common.onEnable();
+public class SpoutCommandReceiver implements CommandExecutor, CommandReceiver {
+
+	private CommandHandler commandHandler;
+
+	public SpoutCommandReceiver(CommandHandler commandHandler) {
+		this.commandHandler = commandHandler;
+	}
+
+	@Override
+	public void processCommand(CommandSource source, Command command, CommandContext args) throws CommandException {
+
 	}
 }

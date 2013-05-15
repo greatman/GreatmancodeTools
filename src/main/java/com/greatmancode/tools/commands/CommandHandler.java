@@ -18,24 +18,37 @@
  */
 package com.greatmancode.tools.commands;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.greatmancode.tools.caller.bukkit.BukkitCaller;
+import com.greatmancode.tools.caller.spout.SpoutCaller;
+import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
+import com.greatmancode.tools.commands.spout.SpoutCommandReceiver;
 import com.greatmancode.tools.interfaces.Caller;
 
 public class CommandHandler {
 
 	private Caller caller;
 	private CommandReceiver commandReceiver;
+	private Map<String, SubCommand> commandList = new HashMap<String, SubCommand>();
 
 	public CommandHandler(Caller caller) {
 		this.caller = caller;
 		if (this.caller instanceof BukkitCaller) {
-			new BukkitCommandReceiver();
+			commandReceiver = new BukkitCommandReceiver(this);
+		} else if (this.caller instanceof SpoutCaller) {
+			commandReceiver = new SpoutCommandReceiver(this);
 		}
 	}
 
 	public Caller getCaller() {
 		return caller;
+	}
+
+	public void registerMainCommand(String name, SubCommand subCommand) {
+		commandList.put(name, subCommand);
 	}
 
 

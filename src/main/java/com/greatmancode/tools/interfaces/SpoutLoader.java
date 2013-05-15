@@ -16,25 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools;
+package com.greatmancode.tools.interfaces;
 
-import com.greatmancode.tools.caller.bukkit.BukkitPlugin;
-import com.greatmancode.tools.interfaces.PluginHook;
+import org.spout.api.plugin.CommonPlugin;
 
-public abstract class Plugin {
-
-	private PluginHook pluginHook;
-	public Plugin() {
-		if (General.getServerType().equals(ServerType.BUKKIT)) {
-			pluginHook = new BukkitPlugin();
-		}
-	}
-
-	public void onEnable() {
-
-	}
-
-	public void onDisable() {
-
-	}
+public abstract class SpoutLoader extends CommonPlugin {
 }

@@ -20,8 +20,9 @@ package com.greatmancode.tools.interfaces;
 
 import java.io.File;
 import java.util.List;
+import java.util.logging.Logger;
 
-import com.greatmancode.craftconomy3.commands.interfaces.CommandManager;
+import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 
 /**
  * Represents a server Caller
@@ -149,7 +150,7 @@ public interface Caller {
 	 * @param help The help line of the command
 	 * @param manager The manager that manage the command.
 	 */
-	void addCommand(String name, String help, CommandManager manager);
+	void addCommand(String name, String help, CommandReceiver manager);
 
 	/**
 	 * Retrieve the server version.
@@ -187,4 +188,6 @@ public interface Caller {
 	 * @return True if the server is in online mode. Else false.
 	 */
 	boolean isOnlineMode();
+
+	Logger getLogger();
 }

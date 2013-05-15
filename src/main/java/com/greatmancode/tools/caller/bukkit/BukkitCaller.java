@@ -23,7 +23,10 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
+import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.Caller;
 import com.greatmancode.tools.interfaces.Loader;
@@ -71,9 +74,9 @@ public class BukkitCaller implements Caller {
 	public void sendMessage(String playerName, String message) {
 		Player p = loader.getServer().getPlayerExact(playerName);
 		if (p != null) {
-			p.sendMessage(addColor(Common.getInstance().getLanguageManager().getString("command_prefix") + message));
+			p.sendMessage(addColor(message));
 		} else {
-			loader.getServer().getConsoleSender().sendMessage(addColor(Common.getInstance().getLanguageManager().getString("command_prefix") + message));
+			loader.getServer().getConsoleSender().sendMessage(addColor(message));
 		}
 	}
 
@@ -181,9 +184,9 @@ public class BukkitCaller implements Caller {
 	}
 
 	@Override
-	public void addCommand(String name, String help, CommandManager manager) {
-		if (manager instanceof BukkitCommandManager) {
-			loader.getCommand(name).setExecutor((BukkitCommandManager) manager);
+	public void addCommand(String name, String help, CommandReceiver manager) {
+		if (manager instanceof BukkitCommandReceiver) {
+			loader.getCommand(name).setExecutor((BukkitCommandReceiver) manager);
 		}
 	}
 
@@ -208,7 +211,7 @@ public class BukkitCaller implements Caller {
 			loader.getPluginClassLoader().addURL(new File(path).toURI().toURL());
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			Common.getInstance().sendConsoleMessage(Level.SEVERE, String.format(Common.getInstance().getLanguageManager().getString("invalid_library"), path, e.getMessage()));
+			getLogger().log(Level.SEVERE, "Invalid library!", e.getMessage());
 		}
 	}
 
@@ -226,5 +229,10 @@ public class BukkitCaller implements Caller {
 	@Override
 	public boolean isOnlineMode() {
 		return Bukkit.getServer().getOnlineMode();
+	}
+
+	@Override
+	public Logger getLogger() {
+		return Bukkit.getLogger();
 	}
 }
