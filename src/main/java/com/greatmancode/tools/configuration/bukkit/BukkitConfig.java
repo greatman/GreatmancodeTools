@@ -53,16 +53,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
  */
 public class BukkitConfig extends Config {
 	private final YamlConfiguration configFile;
-	private final File file;
-	private final Caller caller;
 
-	public BukkitConfig(File folder, String fileName, Caller caller) {
-		this.caller = caller;
-		file = new File(folder, fileName);
-
-		if (!file.exists()) {
-			initializeConfig(file, fileName);
-		}
+	public BukkitConfig(File folder, String fileName, Caller caller, boolean create) {
+		super(folder, fileName, caller, create);
 		configFile = YamlConfiguration.loadConfiguration(file);
 	}
 

@@ -21,7 +21,7 @@ package com.greatmancode.tools.interfaces;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.PluginClassLoader;
 
-public abstract class BukkitLoader extends JavaPlugin {
+public abstract class BukkitLoader extends JavaPlugin implements Loader {
 
 	@Override
 	public abstract void onEnable();

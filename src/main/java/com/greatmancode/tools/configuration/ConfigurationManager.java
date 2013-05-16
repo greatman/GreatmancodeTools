@@ -45,17 +45,15 @@ public class ConfigurationManager {
 	public Config loadFile(File folder, String fileName, boolean loadDefaultValues, boolean loadDefaultFile) {
 		Config file = null;
 		if (caller instanceof BukkitCaller || caller instanceof UnitTestCaller) {
-			file = new BukkitConfig(folder, fileName, caller);
+			file = new BukkitConfig(folder, fileName, caller, loadDefaultFile);
 		} else if (caller instanceof SpoutCaller) {
-			file = new SpoutConfig(folder, fileName, caller);
+			file = new SpoutConfig(folder, fileName, caller, loadDefaultFile);
 		}
 		if (file != null) {
 			if (loadDefaultValues) {
 				for (Map.Entry<String, Object> entry : defaultValues.entrySet())  {
 					file.setValue(entry.getKey(), entry.getValue());
 				}
-			} else if (loadDefaultFile) {
-				file.initializeConfig(new File(folder, fileName), fileName);
 			}
 		}
 		return file;

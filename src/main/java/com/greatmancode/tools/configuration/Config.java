@@ -43,12 +43,25 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 
+import com.greatmancode.tools.interfaces.Caller;
+
 /**
  * Represents a Configuration handler
  * @author greatman
  */
 public abstract class Config {
 	private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
+	protected final Caller caller;
+	protected final File file;
+
+	public Config(File folder, String fileName, Caller caller, boolean create) {
+		this.caller = caller;
+		file = new File(folder, fileName);
+
+		if (create) {
+			initializeConfig(file, fileName);
+		}
+	}
 
 	/**
 	 * Retrieve a integer from the configuration
@@ -112,8 +125,7 @@ public abstract class Config {
 			file.getParentFile().mkdirs();
 			file.createNewFile();
 		} catch (IOException e) {
-			//TODO: Fix this
-			//Common.getInstance().getLogger().severe("Error while trying to create the file " + file.getName() + "! Error is: " + e.getMessage());
+			caller.getLogger().severe("Error while trying to create the file " + file.getName() + "! Error is: " + e.getMessage());
 		}
 		URL url = this.getClass().getResource("/" + fileName);
 
@@ -132,7 +144,7 @@ public abstract class Config {
 				defaultStream.close();
 			} catch (IOException e1) {
 				//TODO: Fix this
-				//Common.getInstance().getLogger().severe("Error while trying to copy the default file + " + file.getName() + ". Error is: " + e1.getMessage());
+				caller.getLogger().severe("Error while trying to copy the default file + " + file.getName() + ". Error is: " + e1.getMessage());
 			}
 		}
 	}

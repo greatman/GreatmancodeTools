@@ -53,13 +53,8 @@ import org.spout.api.util.config.yaml.YamlConfiguration;
  */
 public class SpoutConfig extends Config {
 	private YamlConfiguration config = null;
-	private final Caller caller;
-	public SpoutConfig(File folder, String fileName, Caller caller) {
-		this.caller = caller;
-		File file = new File(folder, fileName);
-		if (!file.exists()) {
-			initializeConfig(file, fileName);
-		}
+	public SpoutConfig(File folder, String fileName, Caller caller, boolean create) {
+		super(folder, fileName, caller, create);
 		config = new YamlConfiguration(file);
 		try {
 			config.load();

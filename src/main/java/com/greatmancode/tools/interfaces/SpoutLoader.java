@@ -20,5 +20,5 @@ package com.greatmancode.tools.interfaces;
 
 import org.spout.api.plugin.CommonPlugin;
 
-public abstract class SpoutLoader extends CommonPlugin {
+public abstract class SpoutLoader extends CommonPlugin implements Loader{
 }
