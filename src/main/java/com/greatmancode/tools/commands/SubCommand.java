@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.greatmancode.tools.commands.interfaces.Command;
-import com.greatmancode.tools.commands.interfaces.CommandManager;
+import com.greatmancode.tools.commands.interfaces.CommandExecutor;
 
 public class SubCommand implements Command {
 
@@ -45,8 +45,8 @@ public class SubCommand implements Command {
 	public void execute(String command, String sender, String[] args) {
 		if (commandExist(command)) {
 			Command entry = commandList.get(command);
-			if (entry instanceof CommandManager) {
-				CommandManager cmd = ((CommandManager) entry);
+			if (entry instanceof CommandExecutor) {
+				CommandExecutor cmd = ((CommandExecutor) entry);
 				if (commandHandler.getCaller().checkPermission(sender, cmd.getPermissionNode())) {
 					cmd.execute(sender, args);
 				} else {
