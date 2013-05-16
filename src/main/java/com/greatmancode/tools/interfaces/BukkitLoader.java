@@ -23,12 +23,6 @@ import org.bukkit.plugin.java.PluginClassLoader;
 
 public abstract class BukkitLoader extends JavaPlugin implements Loader {
 
-	@Override
-	public abstract void onEnable();
-
-	@Override
-	public abstract void onDisable();
-
 	/**
 	 * Retrieve the PluginClassLoader of Bukkit
 	 * @return The PluginClassLoader of Bukkit
