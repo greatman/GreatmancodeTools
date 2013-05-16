@@ -36,7 +36,7 @@ import static junit.framework.Assert.assertNotNull;
 public class DatabaseTest {
 	@Test
 	public void test() throws URISyntaxException, InvalidDatabaseConstructor, TableRegistrationException, ConnectionException {
-		DatabaseManager dbManager = new DatabaseManager(DatabaseType.SQLite, "test_", new File(new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "testConfig.db"));
+		DatabaseManager dbManager = new DatabaseManager(DatabaseType.SQLITE, "test_", new File(new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "testConfig.db"));
 		dbManager.registerTable(TestTable.class);
 		dbManager.connect();
 
