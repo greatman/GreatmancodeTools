@@ -26,16 +26,22 @@ import com.greatmancode.tools.commands.interfaces.Command;
 import com.greatmancode.tools.commands.interfaces.CommandExecutor;
 
 public class SubCommand implements Command {
-
 	private Map<String, Command> commandList = new HashMap<String, Command>();
 	private CommandHandler commandHandler;
+	private SubCommand parent;
+	private String name;
 
-	public SubCommand(CommandHandler commandHandler) {
+	public SubCommand(String name, CommandHandler commandHandler, SubCommand parent) {
+		this.name = name;
 		this.commandHandler = commandHandler;
+		this.parent = parent;
 	}
 
 	public void addCommand(String name, Command command) {
 		commandList.put(name, command);
+		if (command instanceof CommandExecutor) {
+			commandHandler.getCaller().registerPermission(((CommandExecutor) command).getPermissionNode());
+		}
 	}
 
 	public boolean commandExist(String name) {
@@ -48,11 +54,14 @@ public class SubCommand implements Command {
 			if (entry instanceof CommandExecutor) {
 				CommandExecutor cmd = ((CommandExecutor) entry);
 				if (commandHandler.getCaller().checkPermission(sender, cmd.getPermissionNode())) {
-					cmd.execute(sender, args);
+					if (args.length >= cmd.minArgs() && args.length <= cmd.maxArgs()) {
+						cmd.execute(sender, args);
+					} else {
+						commandHandler.getCaller().sendMessage(sender, cmd.help());
+					}
 				} else {
 					commandHandler.getCaller().sendMessage(sender, "{{DARK_RED}}Permission denied!");
 				}
-
 			} else if (entry instanceof SubCommand) {
 				SubCommand subCommand = (SubCommand) entry;
 
@@ -71,11 +80,25 @@ public class SubCommand implements Command {
 					}
 					((SubCommand) entry).execute(subSubCommand, sender, newArgs);
 				} else {
-					commandHandler.getCaller().sendMessage(sender, "{{DARK_RED}}Invalid argument. Valid arguments are: " + subCommand.getSubCommandList());
+					commandHandler.getCaller().sendMessage(sender, "{{DARK_GREEN}}========= {{WHITE}}Help {{DARK_GREEN}}========");
+					for (Map.Entry<String, Command> iteratorEntry : commandList.entrySet()) {
+						if (iteratorEntry instanceof CommandExecutor) {
+							CommandExecutor cmd = ((CommandExecutor) iteratorEntry.getValue());
+							if (commandHandler.getCaller().checkPermission(sender, cmd.getPermissionNode())) {
+								commandHandler.getCaller().sendMessage(sender, cmd.help());
+							}
+						} else {
+							String subCommandResult = "";
+							SubCommand subCmd = this;
+							while (subCmd.parent != null) {
+								subCommandResult = subCmd.parent.name + "" + subCommandResult;
+							}
+							subCommandResult = "/" + subCommandResult + " " + name;
+							commandHandler.getCaller().sendMessage(sender, subCommandResult);
+						}
+					}
 				}
-
 			}
-
 		}
 	}
 

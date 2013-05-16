@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.greatmancode</groupId>
-    <artifactId>tools</artifactId>
-    <version>1.0-SNAPSHOT</version>
+	<groupId>com.greatmancode</groupId>
+	<artifactId>tools</artifactId>
+	<version>1.0-SNAPSHOT</version>
 	<name>GreatmancodeTools</name>
 	<inceptionYear>2013</inceptionYear>
 	<url>https://github.com/greatman/GreatmancodeTools</url>
@@ -49,6 +49,10 @@
 		<repository>
 			<id>Me</id>
 			<url>http://repo.greatmancode.com/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>Plugin Metrics</id>
+			<url>http://repo.mcstats.org/content/repositories/public</url>
 		</repository>
 	</repositories>
 
@@ -99,6 +103,12 @@
 			<version>3.7.2</version>
 			<type>jar</type>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mcstats.standalone</groupId>
+			<artifactId>metrics</artifactId>
+			<version>R6</version>
 		</dependency>
 	</dependencies>
 

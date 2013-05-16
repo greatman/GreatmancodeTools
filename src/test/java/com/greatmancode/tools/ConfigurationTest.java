@@ -32,7 +32,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class ConfigurationTest {
-
 	@Test
 	public void test() throws URISyntaxException {
 		ConfigurationManager configurationManager = new ConfigurationManager(new UnitTestCaller());

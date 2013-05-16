@@ -34,7 +34,6 @@ import com.greatmancode.tools.interfaces.Caller;
  * @author greatman
  */
 public class ConfigurationManager {
-
 	private Caller caller;
 	private Map<String, Object> defaultValues = new HashMap<String, Object>();
 
@@ -51,7 +50,7 @@ public class ConfigurationManager {
 		}
 		if (file != null) {
 			if (loadDefaultValues) {
-				for (Map.Entry<String, Object> entry : defaultValues.entrySet())  {
+				for (Map.Entry<String, Object> entry : defaultValues.entrySet()) {
 					file.setValue(entry.getKey(), entry.getValue());
 				}
 			}

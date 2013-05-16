@@ -32,8 +32,6 @@ import com.greatmancode.tools.database.interfaces.DatabaseType;
 import com.greatmancode.tools.database.throwable.InvalidDatabaseConstructor;
 
 public class DatabaseManager {
-
-
 	private Database db = null;
 
 	public DatabaseManager(DatabaseType type, String tablePrefix, File path) throws InvalidDatabaseConstructor {
@@ -42,17 +40,15 @@ public class DatabaseManager {
 			Configuration config;
 			if (type.equals(DatabaseType.H2)) {
 				config = new H2Configuration();
-				((H2Configuration)config).setDatabase(path.getAbsolutePath());
-
+				((H2Configuration) config).setDatabase(path.getAbsolutePath());
 			} else {
 				config = new SQLiteConfiguration(path.getAbsolutePath());
-				((SQLiteConfiguration)config).setPrefix(tablePrefix);
+				((SQLiteConfiguration) config).setPrefix(tablePrefix);
 			}
 			initialiseDatabase(config);
 		} else {
 			throw new InvalidDatabaseConstructor();
 		}
-
 	}
 
 	public DatabaseManager(DatabaseType type, String address, int port, String username, String password, String database, String tablePrefix) throws InvalidDatabaseConstructor {

@@ -22,7 +22,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.PluginClassLoader;
 
 public abstract class BukkitLoader extends JavaPlugin implements Loader {
-
 	/**
 	 * Retrieve the PluginClassLoader of Bukkit
 	 * @return The PluginClassLoader of Bukkit

@@ -18,7 +18,7 @@
  */
 package com.greatmancode.tools.commands.interfaces;
 
-public abstract class CommandExecutor implements Command{
+public abstract class CommandExecutor implements Command {
 	/**
 	 * The execution of the command
 	 * @param sender The sender of the command

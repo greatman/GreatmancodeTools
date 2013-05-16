@@ -112,8 +112,8 @@ public abstract class Config {
 	 */
 	public abstract boolean has(String path);
 
+	public abstract Map<String, String> getStringMap(String path);
 
-	public abstract Map<String,String> getStringMap(String path);
 	/**
 	 * Initialize a configuration file with the default file located in the .jar. Only creates the file if the default file doesn't exist.
 	 * @param file The path to to the file.

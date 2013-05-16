@@ -29,7 +29,6 @@ import org.spout.api.command.CommandSource;
 import org.spout.api.exception.CommandException;
 
 public class SpoutCommandReceiver implements CommandExecutor, CommandReceiver {
-
 	private CommandHandler commandHandler;
 
 	public SpoutCommandReceiver(CommandHandler commandHandler) {

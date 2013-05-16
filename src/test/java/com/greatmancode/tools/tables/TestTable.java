@@ -24,10 +24,8 @@ import com.alta189.simplesave.Table;
 
 @Table("table")
 public class TestTable {
-
 	@Id
 	public int id;
-
 	@Field
 	public String test;
 }

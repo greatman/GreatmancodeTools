@@ -19,7 +19,6 @@
 package com.greatmancode.tools.interfaces;
 
 public interface Common {
-
 	public void onEnable();
 
 	public void onDisable();

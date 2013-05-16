@@ -39,7 +39,6 @@ package com.greatmancode.tools.configuration.bukkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.greatmancode.tools.configuration.Config;
@@ -100,7 +99,7 @@ public class BukkitConfig extends Config {
 	}
 
 	@Override
-	public Map<String,String> getStringMap(String path) {
+	public Map<String, String> getStringMap(String path) {
 		Map<String, String> values = new HashMap<String, String>();
 		ConfigurationSection configurationSection = configFile.getConfigurationSection(path);
 		if (configurationSection != null) {

@@ -16,43 +16,40 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.commands;
+package com.greatmancode.tools.utils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
 
 import com.greatmancode.tools.caller.bukkit.BukkitCaller;
 import com.greatmancode.tools.caller.spout.SpoutCaller;
-import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
-import com.greatmancode.tools.commands.interfaces.CommandReceiver;
-import com.greatmancode.tools.commands.spout.SpoutCommandReceiver;
 import com.greatmancode.tools.interfaces.Caller;
 
-public class CommandHandler {
+public class Metrics extends org.mcstats.Metrics {
 	private Caller caller;
-	private CommandReceiver commandReceiver;
-	private Map<String, SubCommand> commandList = new HashMap<String, SubCommand>();
 
-	public CommandHandler(Caller caller) {
+	public Metrics(String pluginName, String pluginVersion, Caller caller) throws IOException {
+		super(pluginName, pluginVersion);
 		this.caller = caller;
-		if (this.caller instanceof BukkitCaller) {
-			commandReceiver = new BukkitCommandReceiver(this);
-		} else if (this.caller instanceof SpoutCaller) {
-			commandReceiver = new SpoutCommandReceiver(this);
+	}
+
+	@Override
+	public String getFullServerVersion() {
+		if (caller instanceof SpoutCaller) {
+			return "Spout " + caller.getServerVersion();
+		} else if (caller instanceof BukkitCaller) {
+			return caller.getServerVersion();
 		}
+		return "UNKNOWN";
 	}
 
-	public Caller getCaller() {
-		return caller;
+	@Override
+	public int getPlayersOnline() {
+		return caller.getOnlinePlayers().size();
 	}
 
-	public CommandHandler registerMainCommand(String name, SubCommand subCommand) {
-		commandList.put(name, subCommand);
-		caller.addCommand(name, "", commandReceiver);
-		return this;
-	}
-
-	public SubCommand getCommand(String name) {
-		return commandList.get(name);
+	@Override
+	public File getConfigFile() {
+		return new File(new File(caller.getDataFolder().getParentFile(), "PluginMetrics"), "config.yml");
 	}
 }

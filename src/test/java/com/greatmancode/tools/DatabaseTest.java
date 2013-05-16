@@ -21,9 +21,6 @@ package com.greatmancode.tools;
 import java.io.File;
 import java.net.URISyntaxException;
 
-import com.alta189.simplesave.Field;
-import com.alta189.simplesave.Id;
-import com.alta189.simplesave.Table;
 import com.alta189.simplesave.exceptions.ConnectionException;
 import com.alta189.simplesave.exceptions.TableRegistrationException;
 import com.greatmancode.tools.database.DatabaseManager;
@@ -37,7 +34,6 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
 public class DatabaseTest {
-
 	@Test
 	public void test() throws URISyntaxException, InvalidDatabaseConstructor, TableRegistrationException, ConnectionException {
 		DatabaseManager dbManager = new DatabaseManager(DatabaseType.SQLite, "test_", new File(new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "testConfig.db"));
@@ -51,7 +47,5 @@ public class DatabaseTest {
 		assertNotNull(table);
 		assertEquals("wow", table.test);
 	}
-
-
 }
 

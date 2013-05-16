@@ -27,7 +27,6 @@ import com.greatmancode.tools.configuration.ConfigurationManager;
 import com.greatmancode.tools.interfaces.Caller;
 
 public class LanguageManager {
-
 	private static final String MAIN_KEY = "language";
 	private static final String SEPARATOR = ".";
 	private Config languageFile = null;
@@ -47,10 +46,13 @@ public class LanguageManager {
 			languageFile.setValue(MAIN_KEY + SEPARATOR + key, value);
 			loadLanguage();
 		}
-
 	}
 
 	public String parse(String key, Object... args) {
 		return String.format(languageList.get(key), args);
+	}
+
+	public String getString(String key) {
+		return languageList.get(key);
 	}
 }

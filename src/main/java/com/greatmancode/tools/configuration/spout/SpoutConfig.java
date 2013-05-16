@@ -38,7 +38,6 @@ package com.greatmancode.tools.configuration.spout;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.greatmancode.tools.configuration.Config;
@@ -53,6 +52,7 @@ import org.spout.api.util.config.yaml.YamlConfiguration;
  */
 public class SpoutConfig extends Config {
 	private YamlConfiguration config = null;
+
 	public SpoutConfig(File folder, String fileName, Caller caller, boolean create) {
 		super(folder, fileName, caller, create);
 		config = new YamlConfiguration(file);
@@ -104,7 +104,7 @@ public class SpoutConfig extends Config {
 	}
 
 	@Override
-	public Map<String,String> getStringMap(String path) {
+	public Map<String, String> getStringMap(String path) {
 		Map<String, String> values = new HashMap<String, String>();
 		Map<String, ConfigurationNode> list = config.getNode(path).getChildren();
 		for (Map.Entry<String, ConfigurationNode> entry : list.entrySet()) {

@@ -25,10 +25,10 @@ import com.greatmancode.tools.ServerType;
  * @author greatman
  */
 public interface Loader {
-
 	public void onEnable();
 
 	public void onDisable();
+
 	/**
 	 * Give the current server backend.
 	 * @return The current server backend.

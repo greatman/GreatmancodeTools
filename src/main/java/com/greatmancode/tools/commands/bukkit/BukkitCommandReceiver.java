@@ -27,12 +27,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
-
 	private CommandHandler commandHandler;
 
 	public BukkitCommandReceiver(CommandHandler commandHandler) {
 		this.commandHandler = commandHandler;
 	}
+
 	@Override
 	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
 		SubCommand subCommand = commandHandler.getCommand(command.getName());

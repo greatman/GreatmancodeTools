@@ -29,7 +29,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class LanguageTest {
-
 	@Test
 	public void test() throws URISyntaxException {
 		LanguageManager languageManager = new LanguageManager(new UnitTestCaller(), new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "languageTest.yml");
