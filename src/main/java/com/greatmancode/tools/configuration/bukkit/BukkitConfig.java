@@ -110,8 +110,10 @@ public class BukkitConfig extends Config {
 	public Map<String,String> getStringMap(String path) {
 		Map<String, String> values = new HashMap<String, String>();
 		ConfigurationSection configurationSection = configFile.getConfigurationSection(path);
-		for (Map.Entry<String, Object> entry : configurationSection.getValues(false).entrySet()) {
-			values.put(entry.getKey(), (String) entry.getValue());
+		if (configurationSection != null) {
+			for (Map.Entry<String, Object> entry : configurationSection.getValues(false).entrySet()) {
+				values.put(entry.getKey(), (String) entry.getValue());
+			}
 		}
 		return values;
 	}

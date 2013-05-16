@@ -43,8 +43,11 @@ public class LanguageManager {
 	}
 
 	public void addLanguageEntry(String key, String value) {
-		languageFile.setValue(MAIN_KEY + SEPARATOR + key, value);
-		loadLanguage();
+		if (!languageList.containsKey(key)) {
+			languageFile.setValue(MAIN_KEY + SEPARATOR + key, value);
+			loadLanguage();
+		}
+
 	}
 
 	public String parse(String key, Object... args) {

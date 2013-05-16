@@ -19,6 +19,7 @@
 package com.greatmancode.tools.commands.spout;
 
 import com.greatmancode.tools.commands.CommandHandler;
+import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 
 import org.spout.api.command.Command;
@@ -37,6 +38,18 @@ public class SpoutCommandReceiver implements CommandExecutor, CommandReceiver {
 
 	@Override
 	public void processCommand(CommandSource source, Command command, CommandContext args) throws CommandException {
-
+		SubCommand subCommand = commandHandler.getCommand(command.getPreferredName());
+		if (subCommand != null) {
+			String[] newArgs;
+			if (args.length() == 0) {
+				newArgs = new String[0];
+			} else {
+				newArgs = new String[args.length() - 1];
+				for (int i = 1; i <= newArgs.length; i++) {
+					newArgs[i - 1] = args.getString(i);
+				}
+			}
+			subCommand.execute(newArgs[0], source.getName(), newArgs);
+		}
 	}
 }

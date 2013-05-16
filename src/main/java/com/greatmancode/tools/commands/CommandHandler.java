@@ -24,6 +24,7 @@ import java.util.Map;
 import com.greatmancode.tools.caller.bukkit.BukkitCaller;
 import com.greatmancode.tools.caller.spout.SpoutCaller;
 import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
+import com.greatmancode.tools.commands.interfaces.Command;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.commands.spout.SpoutCommandReceiver;
 import com.greatmancode.tools.interfaces.Caller;
@@ -51,5 +52,8 @@ public class CommandHandler {
 		commandList.put(name, subCommand);
 	}
 
+	public SubCommand getCommand(String name) {
+		return commandList.get(name);
+	}
 
 }

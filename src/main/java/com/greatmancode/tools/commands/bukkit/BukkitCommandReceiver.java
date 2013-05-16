@@ -19,6 +19,7 @@
 package com.greatmancode.tools.commands.bukkit;
 
 import com.greatmancode.tools.commands.CommandHandler;
+import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 
 import org.bukkit.command.Command;
@@ -33,7 +34,19 @@ public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
 		this.commandHandler = commandHandler;
 	}
 	@Override
-	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
+		SubCommand subCommand = commandHandler.getCommand(command.getName());
+		if (subCommand != null) {
+			String[] newArgs;
+			if (args.length == 1) {
+				newArgs = new String[0];
+			} else {
+				newArgs = new String[args.length - 1];
+				System.arraycopy(args, 1, newArgs, 0, args.length - 1);
+			}
+			subCommand.execute(newArgs[0], commandSender.getName(), newArgs);
+			return true;
+		}
 		return false;
 	}
 }
