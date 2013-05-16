@@ -35,7 +35,7 @@ public class DatabaseManager {
 	private Database db = null;
 
 	public DatabaseManager(DatabaseType type, String tablePrefix, File path) throws InvalidDatabaseConstructor {
-		if (type.equals(DatabaseType.H2) || type.equals(DatabaseType.SQLite)) {
+		if (type.equals(DatabaseType.H2) || type.equals(DatabaseType.SQLITE)) {
 
 			Configuration config;
 			if (type.equals(DatabaseType.H2)) {
@@ -52,7 +52,7 @@ public class DatabaseManager {
 	}
 
 	public DatabaseManager(DatabaseType type, String address, int port, String username, String password, String database, String tablePrefix) throws InvalidDatabaseConstructor {
-		if (type.equals(DatabaseType.MySQL)) {
+		if (type.equals(DatabaseType.MYSQL)) {
 			MySQLConfiguration config = new MySQLConfiguration();
 			config.setHost(address);
 			config.setPort(port);

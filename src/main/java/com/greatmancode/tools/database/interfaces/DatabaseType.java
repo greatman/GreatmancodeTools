@@ -19,7 +19,7 @@
 package com.greatmancode.tools.database.interfaces;
 
 public enum DatabaseType {
-	MySQL,
-	SQLite,
+	MYSQL,
+	SQLITE,
 	H2
 }
