@@ -38,6 +38,7 @@ package com.greatmancode.tools.configuration.bukkit;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,6 +53,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
  */
 public class BukkitConfig extends Config {
 	private final YamlConfiguration configFile;
+
+	public BukkitConfig(InputStream is, Caller caller) {
+		super(is, caller);
+		configFile = YamlConfiguration.loadConfiguration(is);
+	}
 
 	public BukkitConfig(File folder, String fileName, Caller caller, boolean create) {
 		super(folder, fileName, caller, create);

@@ -18,8 +18,10 @@
  */
 package com.greatmancode.tools.interfaces;
 
+import java.util.logging.Logger;
+
 public interface Common {
-	public void onEnable();
+	public void onEnable(Caller caller, Logger log);
 
 	public void onDisable();
 }

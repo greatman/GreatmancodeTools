@@ -53,9 +53,17 @@ public abstract class Config {
 	private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 	protected final Caller caller;
 	protected final File file;
+	protected final InputStream is;
+
+	public Config(InputStream is, Caller caller) {
+		file = null;
+		this.is = is;
+		this.caller = caller;
+	}
 
 	public Config(File folder, String fileName, Caller caller, boolean create) {
 		this.caller = caller;
+		this.is = null;
 		file = new File(folder, fileName);
 
 		if (create && !file.exists()) {

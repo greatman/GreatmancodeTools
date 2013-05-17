@@ -30,6 +30,7 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
  */
 public abstract class Caller {
 	private String commandPrefix = "";
+
 	/**
 	 * Disable the plugin
 	 */
