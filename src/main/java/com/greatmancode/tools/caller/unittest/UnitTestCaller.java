@@ -86,7 +86,13 @@ public class UnitTestCaller extends Caller {
 
 	@Override
 	public File getDataFolder() {
-		File file = new File(System.getProperty("java.io.tmpdir"));
+		File file;
+		if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+			file = new File(System.getProperty("java.io.tmpdir"));
+		} else {
+			file = new File("/tmp");
+		}
+
 		file = new File(file.getParentFile(), String.valueOf(dir));
 		file.mkdir();
 		System.out.println(file.getAbsolutePath());
