@@ -92,10 +92,10 @@ public class UnitTestCaller extends Caller {
 		} else {
 			file = new File("/tmp");
 		}
-
-		file = new File(file.getParentFile(), String.valueOf(dir));
+		System.out.println("First path:" + file.getAbsolutePath());
+		file = new File(file.getAbsoluteFile(), String.valueOf(dir));
 		file.mkdir();
-		System.out.println(file.getAbsolutePath());
+		System.out.println("Second path:" + file.getAbsolutePath());
 		return file;
 	}
 
