@@ -21,18 +21,27 @@ package com.greatmancode.tools.caller.unittest;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.Loader;
 
 /**
  * Special caller for unit tests.
  * @author Greatman
  */
-public class UnitTestCaller implements Caller {
+public class UnitTestCaller extends Caller {
 	public static final String worldName = "UnitTestWorld";
 	public static final String worldName2 = "UnitTestWorld2";
+	public static final int dir = new Random().nextInt(9999999);
+
+	private Loader loader;
+	public UnitTestCaller(Loader loader) {
+		this.loader = loader;
+	}
 
 	@Override
 	public void disablePlugin() {
@@ -77,9 +86,10 @@ public class UnitTestCaller implements Caller {
 
 	@Override
 	public File getDataFolder() {
-		File file = new File(UnitTestCaller.class.getProtectionDomain().getCodeSource().getLocation().getPath());
-		file = new File(file.getParentFile(), "unittests");
+		File file = new File(System.getProperty("java.io.tmpdir"));
+		file = new File(file.getParentFile(), String.valueOf(dir));
 		file.mkdir();
+		System.out.println(file.getAbsolutePath());
 		return file;
 	}
 

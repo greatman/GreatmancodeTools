@@ -28,11 +28,20 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
  * Represents a server Caller
  * @author greatman
  */
-public interface Caller {
+public abstract class Caller {
+	private String commandPrefix = "";
 	/**
 	 * Disable the plugin
 	 */
-	void disablePlugin();
+	public abstract void disablePlugin();
+
+	public void setCommandPrefix(String prefix) {
+		commandPrefix = prefix;
+	}
+
+	public String getCommandPrefix() {
+		return commandPrefix;
+	}
 
 	/**
 	 * Check the permissions of a player
@@ -40,54 +49,54 @@ public interface Caller {
 	 * @param perm The permission node to check
 	 * @return True if the player have the permission. Else false (Always true for the Console)
 	 */
-	boolean checkPermission(String playerName, String perm);
+	public abstract boolean checkPermission(String playerName, String perm);
 
 	/**
 	 * Sends a message to a player
 	 * @param playerName The player name to send the message
 	 * @param message The message to send
 	 */
-	void sendMessage(String playerName, String message);
+	public abstract void sendMessage(String playerName, String message);
 
 	/**
 	 * Retrieve the world name that a player is currently in
 	 * @param playerName The player name to retrieve the world
 	 * @return The world name the player is currently in. Returns "" when the player is offline
 	 */
-	String getPlayerWorld(String playerName);
+	public abstract String getPlayerWorld(String playerName);
 
 	/**
 	 * Checks if a player is online
 	 * @param playerName The player name
 	 * @return True if the player is online. Else false.
 	 */
-	boolean isOnline(String playerName);
+	public abstract boolean isOnline(String playerName);
 
 	/**
 	 * Add color in a message
 	 * @param message The message to add color in
 	 * @return The message with colors.
 	 */
-	String addColor(String message);
+	public abstract String addColor(String message);
 
 	/**
 	 * Checks if a world exist.
 	 * @param worldName The world name to check
 	 * @return True if the world exist. Else false.
 	 */
-	boolean worldExist(String worldName);
+	public abstract boolean worldExist(String worldName);
 
 	/**
 	 * Retrieve the default world of the server
 	 * @return The default world name
 	 */
-	String getDefaultWorld();
+	public abstract String getDefaultWorld();
 
 	/**
 	 * Get the data folder (Aka. the plugin folder)
 	 * @return The data folder
 	 */
-	File getDataFolder();
+	public abstract File getDataFolder();
 
 	/**
 	 * Schedule something to be run each X seconds.
@@ -103,7 +112,7 @@ public interface Caller {
 	 * @param repeating How much seconds to be waiting bewtween each repeats? (0 to disable)
 	 * @return the task ID
 	 */
-	int schedule(Runnable entry, long firstStart, long repeating);
+	public abstract int schedule(Runnable entry, long firstStart, long repeating);
 
 	/**
 	 * Schedule a repeating task to be run.
@@ -113,13 +122,13 @@ public interface Caller {
 	 * @param async Should the task be async? (Threaded)
 	 * @return the task ID
 	 */
-	int schedule(Runnable entry, long firstStart, long repeating, boolean async);
+	public abstract int schedule(Runnable entry, long firstStart, long repeating, boolean async);
 
 	/**
 	 * Cancel a current scheduled task
 	 * @param id The task ID.
 	 */
-	void cancelSchedule(int id);
+	public abstract void cancelSchedule(int id);
 
 	/**
 	 * Delay a task
@@ -127,7 +136,7 @@ public interface Caller {
 	 * @param start When should the task be started? (In seconds)
 	 * @return The task ID
 	 */
-	int delay(Runnable entry, long start);
+	public abstract int delay(Runnable entry, long start);
 
 	/**
 	 * Delay a task
@@ -136,13 +145,13 @@ public interface Caller {
 	 * @param async Should the task be Async? (Threaded)
 	 * @return The task ID
 	 */
-	int delay(Runnable entry, long start, boolean async);
+	public abstract int delay(Runnable entry, long start, boolean async);
 
 	/**
 	 * Retrieve a list of online players
 	 * @return A list of all players online.
 	 */
-	List<String> getOnlinePlayers();
+	public abstract List<String> getOnlinePlayers();
 
 	/**
 	 * Add a command in the server
@@ -150,44 +159,44 @@ public interface Caller {
 	 * @param help The help line of the command
 	 * @param manager The manager that manage the command.
 	 */
-	void addCommand(String name, String help, CommandReceiver manager);
+	public abstract void addCommand(String name, String help, CommandReceiver manager);
 
 	/**
 	 * Retrieve the server version.
 	 * @return The server version.
 	 */
-	String getServerVersion();
+	public abstract String getServerVersion();
 
 	/**
 	 * Retrieve the plugin version.
 	 * @return The plugin version.
 	 */
-	String getPluginVersion();
+	public abstract String getPluginVersion();
 
 	/**
 	 * Check if the user is a Operator.
 	 * @param playerName The player name to check
 	 * @return True if the player is a OP else false.
 	 */
-	boolean isOp(String playerName);
+	public abstract boolean isOp(String playerName);
 
 	/**
 	 * Load a library.
 	 * @param path The path to the .jar of the library.
 	 */
-	void loadLibrary(String path);
+	public abstract void loadLibrary(String path);
 
 	/**
 	 * Register a permission on the server.
 	 * @param permissionNode The permission node to register.
 	 */
-	void registerPermission(String permissionNode);
+	public abstract void registerPermission(String permissionNode);
 
 	/**
 	 * Gives if the server is in online mode or not.
 	 * @return True if the server is in online mode. Else false.
 	 */
-	boolean isOnlineMode();
+	public abstract boolean isOnlineMode();
 
-	Logger getLogger();
+	public abstract Logger getLogger();
 }

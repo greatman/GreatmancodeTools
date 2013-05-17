@@ -32,7 +32,8 @@ public class CommandHandler {
 	private Caller caller;
 	private CommandReceiver commandReceiver;
 	private Map<String, SubCommand> commandList = new HashMap<String, SubCommand>();
-
+	private int currentLevel = 0;
+	private String wrongLevelMsg = "Wrong level!";
 	public CommandHandler(Caller caller) {
 		this.caller = caller;
 		if (this.caller instanceof BukkitCaller) {
@@ -44,6 +45,26 @@ public class CommandHandler {
 
 	public Caller getCaller() {
 		return caller;
+	}
+
+	public void setLevel(int level) {
+		currentLevel = level;
+	}
+
+	/**
+	 * Current Command Handler level. Level allows you to block certain commands.
+	 * @return The current level
+	 */
+	public int getLevel() {
+		return currentLevel;
+	}
+
+	public String getWrongLevelMsg() {
+		return wrongLevelMsg;
+	}
+
+	public void setWrongLevelMsg(String msg) {
+		wrongLevelMsg = msg;
 	}
 
 	public CommandHandler registerMainCommand(String name, SubCommand subCommand) {

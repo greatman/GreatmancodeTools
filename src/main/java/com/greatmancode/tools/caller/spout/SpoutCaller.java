@@ -39,7 +39,7 @@ import org.spout.api.scheduler.TaskPriority;
  * Server caller for Spout
  * @author greatman
  */
-public class SpoutCaller implements Caller {
+public class SpoutCaller extends Caller {
 	private final SpoutLoader loader;
 
 	/**
@@ -74,7 +74,7 @@ public class SpoutCaller implements Caller {
 		if (p != null) {
 			p.sendMessage(ChatArguments.fromFormatString(message));
 		} else {
-			loader.getEngine().getCommandSource().sendMessage(ChatArguments.fromFormatString(message));
+			loader.getEngine().getCommandSource().sendMessage(ChatArguments.fromFormatString(getCommandPrefix() + message));
 		}
 	}
 

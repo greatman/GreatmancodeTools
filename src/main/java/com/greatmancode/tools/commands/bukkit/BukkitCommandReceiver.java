@@ -37,14 +37,16 @@ public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
 	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
 		SubCommand subCommand = commandHandler.getCommand(command.getName());
 		if (subCommand != null) {
+			String subCommandValue = "";
 			String[] newArgs;
-			if (args.length == 1) {
+			if (args.length <= 1) {
 				newArgs = new String[0];
 			} else {
 				newArgs = new String[args.length - 1];
+				subCommandValue = args[0];
 				System.arraycopy(args, 1, newArgs, 0, args.length - 1);
 			}
-			subCommand.execute(newArgs[0], commandSender.getName(), newArgs);
+			subCommand.execute(subCommandValue, commandSender.getName(), newArgs);
 			return true;
 		}
 		return false;

@@ -58,7 +58,7 @@ public abstract class Config {
 		this.caller = caller;
 		file = new File(folder, fileName);
 
-		if (create) {
+		if (create && !file.exists()) {
 			initializeConfig(file, fileName);
 		}
 	}

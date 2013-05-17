@@ -40,7 +40,7 @@ import org.bukkit.permissions.Permission;
  * Server caller for Craftbukkit
  * @author greatman
  */
-public class BukkitCaller implements Caller {
+public class BukkitCaller extends Caller {
 	private static final long TICK_LENGTH = 20L;
 	private final BukkitLoader loader;
 
@@ -76,7 +76,7 @@ public class BukkitCaller implements Caller {
 		if (p != null) {
 			p.sendMessage(addColor(message));
 		} else {
-			loader.getServer().getConsoleSender().sendMessage(addColor(message));
+			loader.getServer().getConsoleSender().sendMessage(addColor(getCommandPrefix() + message));
 		}
 	}
 
