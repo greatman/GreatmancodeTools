@@ -72,7 +72,7 @@ public class SpoutCaller extends Caller {
 	public void sendMessage(String playerName, String message) {
 		Player p = loader.getEngine().getPlayer(playerName, true);
 		if (p != null) {
-			p.sendMessage(ChatArguments.fromFormatString(message));
+			p.sendMessage(ChatArguments.fromFormatString(getCommandPrefix() + message));
 		} else {
 			loader.getEngine().getCommandSource().sendMessage(ChatArguments.fromFormatString(getCommandPrefix() + message));
 		}

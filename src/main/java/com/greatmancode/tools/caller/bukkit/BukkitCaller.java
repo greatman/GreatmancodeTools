@@ -74,7 +74,7 @@ public class BukkitCaller extends Caller {
 	public void sendMessage(String playerName, String message) {
 		Player p = loader.getServer().getPlayerExact(playerName);
 		if (p != null) {
-			p.sendMessage(addColor(message));
+			p.sendMessage(addColor(getCommandPrefix() + message));
 		} else {
 			loader.getServer().getConsoleSender().sendMessage(addColor(getCommandPrefix() + message));
 		}
