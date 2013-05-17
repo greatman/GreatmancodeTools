@@ -41,6 +41,7 @@ public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
 			String[] newArgs;
 			if (args.length <= 1) {
 				newArgs = new String[0];
+				subCommandValue = args[0];
 			} else {
 				newArgs = new String[args.length - 1];
 				subCommandValue = args[0];

@@ -39,16 +39,19 @@ public class SpoutCommandReceiver implements CommandExecutor, CommandReceiver {
 	public void processCommand(CommandSource source, Command command, CommandContext args) throws CommandException {
 		SubCommand subCommand = commandHandler.getCommand(command.getPreferredName());
 		if (subCommand != null) {
+			String subCommandValue = "";
 			String[] newArgs;
-			if (args.length() == 0) {
+			if (args.length() <= 1) {
 				newArgs = new String[0];
+				subCommandValue = args.getString(0);
 			} else {
 				newArgs = new String[args.length() - 1];
+				subCommandValue = args.getString(0);
 				for (int i = 1; i <= newArgs.length; i++) {
 					newArgs[i - 1] = args.getString(i);
 				}
 			}
-			subCommand.execute(newArgs[0], source.getName(), newArgs);
+			subCommand.execute(subCommandValue, source.getName(), newArgs);
 		}
 	}
 }
