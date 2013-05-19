@@ -57,6 +57,11 @@ public class SpoutConfig extends Config {
 	public SpoutConfig(InputStream is, Caller caller) {
 		super(is, caller);
 		config = new YamlConfiguration(is);
+		try {
+			config.load();
+		} catch (ConfigurationException e) {
+			caller.getLogger().severe("Unable to load the configuration file! Message:" + e.getMessage());
+		}
 	}
 
 	public SpoutConfig(File folder, String fileName, Caller caller) {
