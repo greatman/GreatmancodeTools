@@ -167,11 +167,11 @@ public class CanaryCaller extends Caller {
 
 	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
-		try {
+		/*try {
 			Canary.commands().registerCommand((CanaryCommand) manager, ((CanaryLoader)loader), false);
 		} catch (CommandDependencyException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	@Override

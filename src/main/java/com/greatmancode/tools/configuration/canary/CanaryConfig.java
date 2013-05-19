@@ -21,6 +21,7 @@ package com.greatmancode.tools.configuration.canary;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.greatmancode.tools.configuration.Config;
@@ -73,6 +74,7 @@ public class CanaryConfig extends Config {
 		} else if (value instanceof Integer) {
 			Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).setInt(path, (Integer) value);
 		}
+		Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).save();
 	}
 
 	@Override
@@ -82,6 +84,14 @@ public class CanaryConfig extends Config {
 
 	@Override
 	public Map<String, String> getStringMap(String path) {
-		return Collections.EMPTY_MAP; //TODO: Fix this
+		Map<String, String> result = new HashMap<String, String>();
+		Map<String, String> map = Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).getPropertiesMap();
+		for (Map.Entry<String, String> entry: map.entrySet()) {
+			if (entry.getKey().contains(path)) {
+				String key = entry.getKey().replace(path + ".", "");
+				result.put(key, entry.getValue());
+			}
+		}
+		return result;
 	}
 }
