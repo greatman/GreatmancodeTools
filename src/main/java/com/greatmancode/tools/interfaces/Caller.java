@@ -30,6 +30,15 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
  */
 public abstract class Caller {
 	private String commandPrefix = "";
+	protected final Loader loader;
+
+	public Caller(Loader loader) {
+		this.loader = loader;
+	}
+
+	public Loader getLoader() {
+		return loader;
+	}
 
 	/**
 	 * Disable the plugin

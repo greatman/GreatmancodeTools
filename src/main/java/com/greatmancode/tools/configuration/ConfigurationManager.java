@@ -23,9 +23,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.greatmancode.tools.caller.bukkit.BukkitCaller;
+import com.greatmancode.tools.caller.canary.CanaryCaller;
 import com.greatmancode.tools.caller.spout.SpoutCaller;
 import com.greatmancode.tools.caller.unittest.UnitTestCaller;
 import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
+import com.greatmancode.tools.configuration.canary.CanaryConfig;
 import com.greatmancode.tools.configuration.spout.SpoutConfig;
 import com.greatmancode.tools.interfaces.Caller;
 
@@ -47,6 +49,8 @@ public class ConfigurationManager {
 			file = new BukkitConfig(folder, fileName, caller, loadDefaultFile);
 		} else if (caller instanceof SpoutCaller) {
 			file = new SpoutConfig(folder, fileName, caller, loadDefaultFile);
+		} else if (caller instanceof CanaryCaller) {
+			file = new CanaryConfig(folder, fileName, caller, loadDefaultFile);
 		}
 		if (file != null) {
 			if (loadDefaultValues) {

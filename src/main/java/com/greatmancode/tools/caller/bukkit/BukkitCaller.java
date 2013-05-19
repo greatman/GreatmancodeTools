@@ -42,25 +42,21 @@ import org.bukkit.permissions.Permission;
  */
 public class BukkitCaller extends Caller {
 	private static final long TICK_LENGTH = 20L;
-	private final BukkitLoader loader;
-
-	/**
-	 * Load the Bukkit caller.
-	 * @param loader The {@link BukkitCaller}
-	 */
+	
+	
 	public BukkitCaller(Loader loader) {
-		this.loader = (BukkitLoader) loader;
+		super(loader);
 	}
 
 	@Override
 	public void disablePlugin() {
-		loader.getPluginLoader().disablePlugin(loader);
+		((BukkitLoader)loader).getPluginLoader().disablePlugin(((BukkitLoader)loader));
 	}
 
 	@Override
 	public boolean checkPermission(String playerName, String perm) {
 		boolean result;
-		Player p = loader.getServer().getPlayerExact(playerName);
+		Player p = ((BukkitLoader)loader).getServer().getPlayerExact(playerName);
 		if (p != null) {
 			result = p.isOp() || p.hasPermission(perm);
 		} else {
@@ -72,18 +68,18 @@ public class BukkitCaller extends Caller {
 
 	@Override
 	public void sendMessage(String playerName, String message) {
-		Player p = loader.getServer().getPlayerExact(playerName);
+		Player p = ((BukkitLoader)loader).getServer().getPlayerExact(playerName);
 		if (p != null) {
 			p.sendMessage(addColor(getCommandPrefix() + message));
 		} else {
-			loader.getServer().getConsoleSender().sendMessage(addColor(getCommandPrefix() + message));
+			((BukkitLoader)loader).getServer().getConsoleSender().sendMessage(addColor(getCommandPrefix() + message));
 		}
 	}
 
 	@Override
 	public String getPlayerWorld(String playerName) {
 		String result = "";
-		Player p = loader.getServer().getPlayerExact(playerName);
+		Player p = ((BukkitLoader)loader).getServer().getPlayerExact(playerName);
 		if (p != null) {
 			result = p.getWorld().getName();
 		}
@@ -92,7 +88,7 @@ public class BukkitCaller extends Caller {
 
 	@Override
 	public boolean isOnline(String playerName) {
-		return loader.getServer().getPlayerExact(playerName) != null;
+		return ((BukkitLoader)loader).getServer().getPlayerExact(playerName) != null;
 	}
 
 	@Override
@@ -119,17 +115,17 @@ public class BukkitCaller extends Caller {
 
 	@Override
 	public String getDefaultWorld() {
-		return loader.getServer().getWorlds().get(0).getName();
+		return ((BukkitLoader)loader).getServer().getWorlds().get(0).getName();
 	}
 
 	@Override
 	public boolean worldExist(String worldName) {
-		return loader.getServer().getWorld(worldName) != null;
+		return ((BukkitLoader)loader).getServer().getWorld(worldName) != null;
 	}
 
 	@Override
 	public File getDataFolder() {
-		return loader.getDataFolder();
+		return ((BukkitLoader)loader).getDataFolder();
 	}
 
 	@Override
@@ -141,15 +137,15 @@ public class BukkitCaller extends Caller {
 	public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
 		if (!async) {
 			if (repeating == 0) {
-				return loader.getServer().getScheduler().runTaskLater(loader, entry, firstStart * TICK_LENGTH).getTaskId();
+				return ((BukkitLoader)loader).getServer().getScheduler().runTaskLater(((BukkitLoader)loader), entry, firstStart * TICK_LENGTH).getTaskId();
 			} else {
-				return loader.getServer().getScheduler().scheduleSyncRepeatingTask(loader, entry, firstStart * TICK_LENGTH, repeating * TICK_LENGTH);
+				return ((BukkitLoader)loader).getServer().getScheduler().scheduleSyncRepeatingTask(((BukkitLoader)loader), entry, firstStart * TICK_LENGTH, repeating * TICK_LENGTH);
 			}
 		} else {
 			if (repeating == 0) {
-				return loader.getServer().getScheduler().runTaskLaterAsynchronously(loader, entry, firstStart * TICK_LENGTH).getTaskId();
+				return ((BukkitLoader)loader).getServer().getScheduler().runTaskLaterAsynchronously(((BukkitLoader)loader), entry, firstStart * TICK_LENGTH).getTaskId();
 			} else {
-				return loader.getServer().getScheduler().runTaskTimerAsynchronously(loader, entry, firstStart * TICK_LENGTH, repeating * TICK_LENGTH).getTaskId();
+				return ((BukkitLoader)loader).getServer().getScheduler().runTaskTimerAsynchronously(((BukkitLoader)loader), entry, firstStart * TICK_LENGTH, repeating * TICK_LENGTH).getTaskId();
 			}
 		}
 	}
@@ -157,7 +153,7 @@ public class BukkitCaller extends Caller {
 	@Override
 	public List<String> getOnlinePlayers() {
 		List<String> list = new ArrayList<String>();
-		Player[] pList = loader.getServer().getOnlinePlayers();
+		Player[] pList = ((BukkitLoader)loader).getServer().getOnlinePlayers();
 		for (Player p : pList) {
 			list.add(p.getName());
 		}
@@ -166,7 +162,7 @@ public class BukkitCaller extends Caller {
 
 	@Override
 	public void cancelSchedule(int id) {
-		loader.getServer().getScheduler().cancelTask(id);
+		((BukkitLoader)loader).getServer().getScheduler().cancelTask(id);
 	}
 
 	@Override
@@ -177,16 +173,16 @@ public class BukkitCaller extends Caller {
 	@Override
 	public int delay(Runnable entry, long start, boolean async) {
 		if (!async) {
-			return loader.getServer().getScheduler().scheduleSyncDelayedTask(loader, entry, start * TICK_LENGTH);
+			return ((BukkitLoader)loader).getServer().getScheduler().scheduleSyncDelayedTask(((BukkitLoader)loader), entry, start * TICK_LENGTH);
 		} else {
-			return loader.getServer().getScheduler().runTaskLaterAsynchronously(loader, entry, start * TICK_LENGTH).getTaskId();
+			return ((BukkitLoader)loader).getServer().getScheduler().runTaskLaterAsynchronously(((BukkitLoader)loader), entry, start * TICK_LENGTH).getTaskId();
 		}
 	}
 
 	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
 		if (manager instanceof BukkitCommandReceiver) {
-			loader.getCommand(name).setExecutor((BukkitCommandReceiver) manager);
+			((BukkitLoader)loader).getCommand(name).setExecutor((BukkitCommandReceiver) manager);
 		}
 	}
 
@@ -197,18 +193,18 @@ public class BukkitCaller extends Caller {
 
 	@Override
 	public String getPluginVersion() {
-		return loader.getDescription().getVersion();
+		return ((BukkitLoader)loader).getDescription().getVersion();
 	}
 
 	@Override
 	public boolean isOp(String playerName) {
-		return loader.getServer().getOfflinePlayer(playerName).isOp();
+		return ((BukkitLoader)loader).getServer().getOfflinePlayer(playerName).isOp();
 	}
 
 	@Override
 	public void loadLibrary(String path) {
 		try {
-			loader.getPluginClassLoader().addURL(new File(path).toURI().toURL());
+			((BukkitLoader)loader).getPluginClassLoader().addURL(new File(path).toURI().toURL());
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			getLogger().log(Level.SEVERE, "Invalid library!", e.getMessage());
@@ -219,7 +215,7 @@ public class BukkitCaller extends Caller {
 	public void registerPermission(String permissionNode) {
 		if (permissionNode != null) {
 			try {
-				loader.getServer().getPluginManager().addPermission(new Permission(permissionNode));
+				((BukkitLoader)loader).getServer().getPluginManager().addPermission(new Permission(permissionNode));
 			} catch (IllegalArgumentException e) {
 				//Do nothing. We don't care if the permission was already registered.
 			}

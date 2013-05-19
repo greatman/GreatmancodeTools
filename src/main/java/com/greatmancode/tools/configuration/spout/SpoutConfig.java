@@ -37,6 +37,7 @@
 package com.greatmancode.tools.configuration.spout;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,6 +53,11 @@ import org.spout.api.util.config.yaml.YamlConfiguration;
  */
 public class SpoutConfig extends Config {
 	private YamlConfiguration config = null;
+
+	public SpoutConfig(InputStream is, Caller caller) {
+		super(is, caller);
+		config = new YamlConfiguration(is);
+	}
 
 	public SpoutConfig(File folder, String fileName, Caller caller, boolean create) {
 		super(folder, fileName, caller, create);

@@ -19,64 +19,72 @@
 package com.greatmancode.tools.interfaces;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.bukkit.BukkitCaller;
-import com.greatmancode.tools.configuration.ConfigurationManager;
+import com.greatmancode.tools.caller.canary.CanaryCaller;
 import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
+import com.greatmancode.tools.configuration.canary.CanaryConfig;
 
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.PluginClassLoader;
+import net.canarymod.plugin.Plugin;
 
-public class BukkitLoader extends JavaPlugin implements Loader {
-
+public class CanaryLoader extends Plugin implements Loader {
 	private Common common;
 	@Override
 	public void onEnable() {
-		BukkitCaller bukkitCaller = new BukkitCaller(this);
-		BukkitConfig bukkitConfig = new BukkitConfig(this.getClass().getResourceAsStream("/loader.yml"), bukkitCaller);
-		String mainClass = bukkitConfig.getString("main-class");
-		try {
-			Class<?> clazz = Class.forName(mainClass);
-			if (Common.class.isAssignableFrom(clazz)) {
-				common = (Common) clazz.newInstance();
-				common.onEnable(bukkitCaller, getLogger());
-			} else {
-				getLogger().severe("The class " + mainClass + " is invalid!");
-				this.getServer().getPluginManager().disablePlugin(this);
-			}
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			this.getServer().getPluginManager().disablePlugin(this);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-			this.getServer().getPluginManager().disablePlugin(this);
-		} catch (IllegalAccessException e) {
-			this.getServer().getPluginManager().disablePlugin(this);
-		}
+		//Not used
 	}
 
 	@Override
 	public void onDisable() {
-		common.onDisable();
+		//Not used
 	}
 
 	@Override
 	public ServerType getServerType() {
-		return ServerType.BUKKIT;
+		return ServerType.CANARY;
 	}
 
-	/**
-	 * Retrieve the PluginClassLoader of Bukkit
-	 * @return The PluginClassLoader of Bukkit
-	 */
-	public PluginClassLoader getPluginClassLoader() {
-		return (PluginClassLoader) this.getClassLoader();
+	@Override
+	public boolean enable() {
+		CanaryCaller canaryCaller = new CanaryCaller(this);
+		InputStream is = this.getClass().getResourceAsStream("/loader.yml");
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		try {
+			String mainClass = br.readLine();
+			System.out.println("LINE:" + mainClass);
+			mainClass = mainClass.split("main-class:")[1].trim();
+
+			System.out.println("result:" + mainClass);
+			Class<?> clazz = Class.forName(mainClass);
+
+			if (Common.class.isAssignableFrom(clazz)) {
+				common = (Common) clazz.newInstance();
+				common.onEnable(canaryCaller, this.getLogman().getParent());
+				return true;
+			} else {
+				this.getLogman().severe("The class " + mainClass + " is invalid!");
+				return false;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+			return false;
+		} catch (IllegalAccessException e) {
+			return false;
+		}
+		return false;
+	}
+
+	@Override
+	public void disable() {
+
 	}
 }

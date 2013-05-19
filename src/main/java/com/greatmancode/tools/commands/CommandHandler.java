@@ -22,8 +22,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.greatmancode.tools.caller.bukkit.BukkitCaller;
+import com.greatmancode.tools.caller.canary.CanaryCaller;
 import com.greatmancode.tools.caller.spout.SpoutCaller;
 import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
+import com.greatmancode.tools.commands.canary.CanaryCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.commands.spout.SpoutCommandReceiver;
 import com.greatmancode.tools.interfaces.Caller;
@@ -40,6 +42,8 @@ public class CommandHandler {
 			commandReceiver = new BukkitCommandReceiver(this);
 		} else if (this.caller instanceof SpoutCaller) {
 			commandReceiver = new SpoutCommandReceiver(this);
+		} else if (this.caller instanceof CanaryCaller) {
+			commandReceiver = new CanaryCommandReceiver(this);
 		}
 	}
 

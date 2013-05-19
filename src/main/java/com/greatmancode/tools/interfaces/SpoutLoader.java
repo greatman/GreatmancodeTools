@@ -18,7 +18,49 @@
  */
 package com.greatmancode.tools.interfaces;
 
+import com.greatmancode.tools.ServerType;
+import com.greatmancode.tools.caller.spout.SpoutCaller;
+import com.greatmancode.tools.configuration.spout.SpoutConfig;
+
 import org.spout.api.plugin.CommonPlugin;
 
-public abstract class SpoutLoader extends CommonPlugin implements Loader {
+public class SpoutLoader extends CommonPlugin implements Loader {
+
+	private Common common;
+	@Override
+	public void onEnable() {
+
+		SpoutCaller spoutCaller = new SpoutCaller(this);
+		SpoutConfig spoutConfig = new SpoutConfig(this.getClass().getResourceAsStream("/loader.yml"), spoutCaller);
+		String mainClass = spoutConfig.getString("main-class");
+		try {
+			Class<?> clazz = Class.forName(mainClass);
+			if (Common.class.isAssignableFrom(clazz)) {
+				common = (Common) clazz.newInstance();
+				common.onEnable(spoutCaller, getLogger());
+			} else {
+				getLogger().severe("The class " + mainClass + " is invalid!");
+				this.getEngine().getPluginManager().disablePlugin(this);
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			this.getEngine().getPluginManager().disablePlugin(this);
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+			this.getEngine().getPluginManager().disablePlugin(this);
+		} catch (IllegalAccessException e) {
+			this.getEngine().getPluginManager().disablePlugin(this);
+		}
+	}
+
+	@Override
+	public void onDisable() {
+		common.onDisable();
+	}
+
+	@Override
+	public ServerType getServerType() {
+		return ServerType.SPOUT;
+	}
 }

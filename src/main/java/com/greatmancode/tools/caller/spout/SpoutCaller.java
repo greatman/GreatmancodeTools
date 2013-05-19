@@ -40,25 +40,20 @@ import org.spout.api.scheduler.TaskPriority;
  * @author greatman
  */
 public class SpoutCaller extends Caller {
-	private final SpoutLoader loader;
 
-	/**
-	 * Load the Spout Caller
-	 * @param loader The {@link SpoutLoader}
-	 */
 	public SpoutCaller(Loader loader) {
-		this.loader = (SpoutLoader) loader;
+		super(loader);
 	}
 
 	@Override
 	public void disablePlugin() {
-		loader.getPluginLoader().disablePlugin(loader);
+		((SpoutLoader)loader).getPluginLoader().disablePlugin((SpoutLoader)loader);
 	}
 
 	@Override
 	public boolean checkPermission(String playerName, String perm) {
 		boolean result;
-		Player p = loader.getEngine().getPlayer(playerName, true);
+		Player p = ((SpoutLoader)loader).getEngine().getPlayer(playerName, true);
 		if (p != null) {
 			result = p.hasPermission(perm);
 		} else {
@@ -70,18 +65,18 @@ public class SpoutCaller extends Caller {
 
 	@Override
 	public void sendMessage(String playerName, String message) {
-		Player p = loader.getEngine().getPlayer(playerName, true);
+		Player p = ((SpoutLoader)loader).getEngine().getPlayer(playerName, true);
 		if (p != null) {
 			p.sendMessage(ChatArguments.fromFormatString(getCommandPrefix() + message));
 		} else {
-			loader.getEngine().getCommandSource().sendMessage(ChatArguments.fromFormatString(getCommandPrefix() + message));
+			((SpoutLoader)loader).getEngine().getCommandSource().sendMessage(ChatArguments.fromFormatString(getCommandPrefix() + message));
 		}
 	}
 
 	@Override
 	public String getPlayerWorld(String playerName) {
 		String worldName = "";
-		Player p = loader.getEngine().getPlayer(playerName, true);
+		Player p = ((SpoutLoader)loader).getEngine().getPlayer(playerName, true);
 		if (p != null) {
 			worldName = p.getWorld().getName();
 		}
@@ -90,7 +85,7 @@ public class SpoutCaller extends Caller {
 
 	@Override
 	public boolean isOnline(String playerName) {
-		return loader.getEngine().getPlayer(playerName, true) != null;
+		return ((SpoutLoader)loader).getEngine().getPlayer(playerName, true) != null;
 	}
 
 	@Override
@@ -101,17 +96,17 @@ public class SpoutCaller extends Caller {
 
 	@Override
 	public boolean worldExist(String worldName) {
-		return loader.getEngine().getWorld(worldName) != null;
+		return ((SpoutLoader)loader).getEngine().getWorld(worldName) != null;
 	}
 
 	@Override
 	public String getDefaultWorld() {
-		return loader.getEngine().getWorlds().iterator().next().getName();
+		return ((SpoutLoader)loader).getEngine().getWorlds().iterator().next().getName();
 	}
 
 	@Override
 	public File getDataFolder() {
-		return loader.getDataFolder();
+		return ((SpoutLoader)loader).getDataFolder();
 	}
 
 	@Override
@@ -123,16 +118,16 @@ public class SpoutCaller extends Caller {
 	public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
 		//TODO: Spout don't have the Async anymore for some reasons..
 		//if (!async) {
-		return loader.getEngine().getScheduler().scheduleSyncRepeatingTask(loader, entry, TimeUnit.MILLISECONDS.convert(firstStart, TimeUnit.SECONDS), TimeUnit.MILLISECONDS.convert(repeating, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
+		return ((SpoutLoader)loader).getEngine().getScheduler().scheduleSyncRepeatingTask(loader, entry, TimeUnit.MILLISECONDS.convert(firstStart, TimeUnit.SECONDS), TimeUnit.MILLISECONDS.convert(repeating, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
 		//} else {
-		//return loader.getEngine().getScheduler().scheduleAsyncRepeatingTask(loader, entry, TimeUnit.MILLISECONDS.convert(firstStart, TimeUnit.SECONDS), TimeUnit.MILLISECONDS.convert(repeating, TimeUnit.SECONDS), TaskPriority.NORMAL);
+		//return ((SpoutLoader)loader).getEngine().getScheduler().scheduleAsyncRepeatingTask(loader, entry, TimeUnit.MILLISECONDS.convert(firstStart, TimeUnit.SECONDS), TimeUnit.MILLISECONDS.convert(repeating, TimeUnit.SECONDS), TaskPriority.NORMAL);
 		//}
 	}
 
 	@Override
 	public List<String> getOnlinePlayers() {
 		List<String> list = new ArrayList<String>();
-		Player[] pList = ((Server) loader.getEngine()).getOnlinePlayers();
+		Player[] pList = ((Server) ((SpoutLoader)loader).getEngine()).getOnlinePlayers();
 		for (Player p : pList) {
 			list.add(p.getName());
 		}
@@ -141,7 +136,7 @@ public class SpoutCaller extends Caller {
 
 	@Override
 	public void cancelSchedule(int id) {
-		loader.getEngine().getScheduler().cancelTask(id);
+		((SpoutLoader)loader).getEngine().getScheduler().cancelTask(id);
 	}
 
 	@Override
@@ -152,27 +147,27 @@ public class SpoutCaller extends Caller {
 	@Override
 	public int delay(Runnable entry, long start, boolean async) {
 		if (!async) {
-			return loader.getEngine().getScheduler().scheduleSyncDelayedTask(loader, entry, TimeUnit.MILLISECONDS.convert(start, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
+			return ((SpoutLoader)loader).getEngine().getScheduler().scheduleSyncDelayedTask(loader, entry, TimeUnit.MILLISECONDS.convert(start, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
 		} else {
-			return loader.getEngine().getScheduler().scheduleAsyncDelayedTask(loader, entry, TimeUnit.MILLISECONDS.convert(start, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
+			return ((SpoutLoader)loader).getEngine().getScheduler().scheduleAsyncDelayedTask(loader, entry, TimeUnit.MILLISECONDS.convert(start, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
 		}
 	}
 
 	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
 		if (manager instanceof SpoutCommandReceiver) {
-			loader.getEngine().getRootCommand().addSubCommand(loader, name).setHelp(help).setExecutor((SpoutCommandReceiver) manager);
+			((SpoutLoader)loader).getEngine().getRootCommand().addSubCommand(((SpoutLoader)loader), name).setHelp(help).setExecutor((SpoutCommandReceiver) manager);
 		}
 	}
 
 	@Override
 	public String getServerVersion() {
-		return loader.getEngine().getAPIVersion();
+		return ((SpoutLoader)loader).getEngine().getAPIVersion();
 	}
 
 	@Override
 	public String getPluginVersion() {
-		return loader.getDescription().getVersion();
+		return ((SpoutLoader)loader).getDescription().getVersion();
 	}
 
 	@Override
@@ -183,7 +178,7 @@ public class SpoutCaller extends Caller {
 
 	@Override
 	public void loadLibrary(String path) {
-		loader.loadLibrary(new File(path));
+		((SpoutLoader)loader).loadLibrary(new File(path));
 	}
 
 	@Override
@@ -198,6 +193,6 @@ public class SpoutCaller extends Caller {
 
 	@Override
 	public Logger getLogger() {
-		return loader.getLogger();
+		return ((SpoutLoader)loader).getLogger();
 	}
 }

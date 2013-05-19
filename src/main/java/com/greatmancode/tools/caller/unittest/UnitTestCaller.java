@@ -38,9 +38,8 @@ public class UnitTestCaller extends Caller {
 	public static final String worldName2 = "UnitTestWorld2";
 	public static final int dir = new Random().nextInt(9999999);
 
-	private Loader loader;
 	public UnitTestCaller(Loader loader) {
-		this.loader = loader;
+		super(loader);
 	}
 
 	@Override

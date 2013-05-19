@@ -50,6 +50,10 @@
 			<id>Me</id>
 			<url>http://repo.greatmancode.com/content/groups/public/</url>
 		</repository>
+		<repository>
+			<id>Canary-repo</id>
+			<url>http://repo.visualillusionsent.net/</url>
+		</repository>
 	</repositories>
 
 	<distributionManagement>
@@ -99,6 +103,11 @@
 			<version>3.7.2</version>
 			<type>jar</type>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.canarymod</groupId>
+			<artifactId>CanaryLib</artifactId>
+			<version>0.8-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -174,6 +183,7 @@
 									<exclude>org.spout:spoutapi</exclude>
 									<exclude>commons-lang:commons-lang</exclude>
 									<exclude>org.yaml:snakeyaml</exclude>
+									<exclude>net.canarymod:CanaryLib</exclude>
 								</excludes>
 							</artifactSet>
 						</configuration>

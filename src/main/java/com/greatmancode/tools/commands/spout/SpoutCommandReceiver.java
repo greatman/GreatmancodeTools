@@ -43,7 +43,9 @@ public class SpoutCommandReceiver implements CommandExecutor, CommandReceiver {
 			String[] newArgs;
 			if (args.length() <= 1) {
 				newArgs = new String[0];
-				subCommandValue = args.getString(0);
+				if (args.length() != 0) {
+					subCommandValue = args.getString(0);
+				}
 			} else {
 				newArgs = new String[args.length() - 1];
 				subCommandValue = args.getString(0);
