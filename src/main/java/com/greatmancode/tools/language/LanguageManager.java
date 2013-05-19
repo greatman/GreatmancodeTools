@@ -33,7 +33,7 @@ public class LanguageManager {
 	private Map<String, String> languageList = new HashMap<String, String>();
 
 	public LanguageManager(Caller caller, File path, String fileName) {
-		languageFile = new ConfigurationManager(caller).loadFile(path, fileName, false, false);
+		languageFile = new ConfigurationManager(caller).loadFile(path, fileName);
 		loadLanguage();
 	}
 

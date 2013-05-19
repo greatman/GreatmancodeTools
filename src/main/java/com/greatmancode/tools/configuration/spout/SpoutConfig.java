@@ -59,8 +59,8 @@ public class SpoutConfig extends Config {
 		config = new YamlConfiguration(is);
 	}
 
-	public SpoutConfig(File folder, String fileName, Caller caller, boolean create) {
-		super(folder, fileName, caller, create);
+	public SpoutConfig(File folder, String fileName, Caller caller) {
+		super(folder, fileName, caller);
 		config = new YamlConfiguration(file);
 		try {
 			config.load();

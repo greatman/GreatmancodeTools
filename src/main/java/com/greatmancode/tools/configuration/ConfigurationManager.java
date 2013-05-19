@@ -37,37 +37,20 @@ import com.greatmancode.tools.interfaces.Caller;
  */
 public class ConfigurationManager {
 	private Caller caller;
-	private Map<String, Object> defaultValues = new HashMap<String, Object>();
 
 	public ConfigurationManager(Caller caller) {
 		this.caller = caller;
 	}
 
-	public Config loadFile(File folder, String fileName, boolean loadDefaultValues, boolean loadDefaultFile) {
+	public Config loadFile(File folder, String fileName) {
 		Config file = null;
 		if (caller instanceof BukkitCaller || caller instanceof UnitTestCaller) {
-			file = new BukkitConfig(folder, fileName, caller, loadDefaultFile);
+			file = new BukkitConfig(folder, fileName, caller);
 		} else if (caller instanceof SpoutCaller) {
-			file = new SpoutConfig(folder, fileName, caller, loadDefaultFile);
+			file = new SpoutConfig(folder, fileName, caller);
 		} else if (caller instanceof CanaryCaller) {
-			file = new CanaryConfig(folder, fileName, caller, loadDefaultFile);
-		}
-		if (file != null) {
-			if (loadDefaultValues) {
-				for (Map.Entry<String, Object> entry : defaultValues.entrySet()) {
-					file.setValue(entry.getKey(), entry.getValue());
-				}
-			}
+			file = new CanaryConfig(folder, fileName, caller);
 		}
 		return file;
-	}
-
-	/**
-	 * Add a default value to add to the configuration file
-	 * @param name The path to the default value
-	 * @param value The value
-	 */
-	public void setDefaultValue(String name, Object value) {
-		defaultValues.put(name, value);
 	}
 }

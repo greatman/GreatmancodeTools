@@ -61,14 +61,10 @@ public abstract class Config {
 		this.caller = caller;
 	}
 
-	public Config(File folder, String fileName, Caller caller, boolean create) {
+	public Config(File folder, String fileName, Caller caller) {
 		this.caller = caller;
 		this.is = null;
 		file = new File(folder, fileName);
-
-		if (create && !file.exists()) {
-			initializeConfig(file, fileName);
-		}
 	}
 
 	/**
@@ -122,38 +118,4 @@ public abstract class Config {
 
 	public abstract Map<String, String> getStringMap(String path);
 
-	/**
-	 * Initialize a configuration file with the default file located in the .jar. Only creates the file if the default file doesn't exist.
-	 * @param file The path to to the file.
-	 * @param fileName The fileName.
-	 */
-	// TODO: Maybe improve the 2nd parameter?
-	public void initializeConfig(File file, String fileName) {
-		try {
-			file.getParentFile().mkdirs();
-			file.createNewFile();
-		} catch (IOException e) {
-			caller.getLogger().severe("Error while trying to create the file " + file.getName() + "! Error is: " + e.getMessage());
-		}
-		URL url = this.getClass().getResource("/" + fileName);
-
-		if (url != null) {
-			try {
-				InputStream defaultStream = url.openStream();
-				FileOutputStream fos = new FileOutputStream(file);
-
-				byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
-				int n = 0;
-				while (-1 != (n = defaultStream.read(buffer))) {
-					fos.write(buffer, 0, n);
-				}
-				fos.flush();
-				fos.close();
-				defaultStream.close();
-			} catch (IOException e1) {
-				//TODO: Fix this
-				caller.getLogger().severe("Error while trying to copy the default file + " + file.getName() + ". Error is: " + e1.getMessage());
-			}
-		}
-	}
 }

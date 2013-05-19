@@ -36,7 +36,7 @@ public class ConfigurationTest {
 	@Test
 	public void test() throws URISyntaxException {
 		ConfigurationManager configurationManager = new ConfigurationManager(new UnitTestCaller(new UnitTestLoader()));
-		Config config = configurationManager.loadFile(new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "testConfig.yml", false, false);
+		Config config = configurationManager.loadFile(new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "testConfig.yml");
 		config.setValue("test", 1);
 		assertEquals(1, config.getInt("test"));
 		config.setValue("test", "test3");

@@ -31,8 +31,8 @@ import net.canarymod.config.Configuration;
 
 public class CanaryConfig extends Config {
 
-	public CanaryConfig(File folder, String fileName, Caller caller, boolean create) {
-		super(folder, fileName, caller, create);
+	public CanaryConfig(File folder, String fileName, Caller caller) {
+		super(folder, fileName, caller);
 	}
 
 	@Override

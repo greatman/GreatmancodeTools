@@ -59,8 +59,8 @@ public class BukkitConfig extends Config {
 		configFile = YamlConfiguration.loadConfiguration(is);
 	}
 
-	public BukkitConfig(File folder, String fileName, Caller caller, boolean create) {
-		super(folder, fileName, caller, create);
+	public BukkitConfig(File folder, String fileName, Caller caller) {
+		super(folder, fileName, caller);
 		configFile = YamlConfiguration.loadConfiguration(file);
 	}
 
