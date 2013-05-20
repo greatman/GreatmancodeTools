@@ -54,6 +54,8 @@ public class SubCommand implements Command {
 	}
 
 	public void execute(String command, String sender, String[] args) {
+		System.out.println("RECEIVED COMMAND:" + command);
+		System.out.println("args:" + Arrays.toString(args));
 		if (level <= commandHandler.getLevel()) {
 			if (commandExist(command)) {
 				Command entry = commandList.get(command);

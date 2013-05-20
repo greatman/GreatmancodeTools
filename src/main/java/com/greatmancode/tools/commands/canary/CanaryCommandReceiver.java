@@ -18,6 +18,8 @@
  */
 package com.greatmancode.tools.commands.canary;
 
+import java.util.Arrays;
+
 import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
@@ -35,6 +37,7 @@ public class CanaryCommandReceiver implements CommandReceiver, CommandExecute {
 
 	@Override
 	public void execute(MessageReceiver messageReceiver, String[] args) {
+		System.out.println("PARAMETERS: " + Arrays.toString(args));
 		SubCommand subCommand = commandHandler.getCommand(args[0]);
 		if (subCommand != null) {
 			String subCommandValue = "";
@@ -45,9 +48,9 @@ public class CanaryCommandReceiver implements CommandReceiver, CommandExecute {
 					subCommandValue = args[1];
 				}
 			} else {
-				newArgs = new String[args.length - 1];
+				newArgs = new String[args.length - 2];
 				subCommandValue = args[1];
-				System.arraycopy(args, 1, newArgs, 0, args.length - 1);
+				System.arraycopy(args, 2, newArgs, 0, args.length - 2);
 			}
 			subCommand.execute(subCommandValue, messageReceiver.getName(), newArgs);
 		}
