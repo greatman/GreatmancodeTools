@@ -24,10 +24,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import com.greatmancode.tools.ServerType;
-import com.greatmancode.tools.caller.bukkit.BukkitCaller;
 import com.greatmancode.tools.caller.canary.CanaryCaller;
-import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
-import com.greatmancode.tools.configuration.canary.CanaryConfig;
 
 import net.canarymod.plugin.Plugin;
 

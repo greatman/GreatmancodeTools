@@ -24,8 +24,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.greatmancode.tools.commands.canary.CanaryCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.interfaces.Caller;
 import com.greatmancode.tools.interfaces.CanaryLoader;
@@ -35,8 +37,12 @@ import net.canarymod.Canary;
 import net.canarymod.commandsys.CanaryCommand;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.canarymod.config.Configuration;
+import net.canarymod.plugin.Plugin;
 import net.canarymod.tasks.ServerTask;
 import net.canarymod.tasks.ServerTaskManager;
+import net.larry1123.lib.CanaryUtil;
+import net.larry1123.lib.plugin.commands.CommandData;
+import net.visualillusionsent.utils.LocaleHelper;
 
 public class CanaryCaller extends Caller {
 
@@ -51,12 +57,20 @@ public class CanaryCaller extends Caller {
 
 	@Override
 	public boolean checkPermission(String playerName, String perm) {
+		if (playerName.equals("Console")) {
+			return true;
+		}
 		return Canary.getServer().getPlayer(playerName).hasPermission(perm);
 	}
 
 	@Override
 	public void sendMessage(String playerName, String message) {
-		Canary.getServer().getPlayer(playerName).sendMessage(addColor(message));
+		if (playerName.equals("Console")) {
+			((CanaryLoader)loader).getLogman().log(Level.INFO, message);
+		} else {
+			Canary.getServer().getPlayer(playerName).sendMessage(addColor(message));
+		}
+
 	}
 
 	@Override
@@ -167,11 +181,12 @@ public class CanaryCaller extends Caller {
 
 	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
-		/*try {
-			Canary.commands().registerCommand((CanaryCommand) manager, ((CanaryLoader)loader), false);
+
+		try {
+			CanaryUtil.commands().registerCommand(new CommandData(new String[] {name}, new String[0], help, help), ((CanaryLoader)loader), null, ((CanaryCommandReceiver)manager), false);
 		} catch (CommandDependencyException e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 
 	@Override
@@ -192,11 +207,7 @@ public class CanaryCaller extends Caller {
 
 	@Override
 	public void loadLibrary(String path) {
-		try {
-			((CanaryLoader)loader).getLoader().addURL(new URL(path));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+		//Put stuff in lib folder mofo
 	}
 
 	@Override

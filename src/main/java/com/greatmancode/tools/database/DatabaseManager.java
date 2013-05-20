@@ -47,7 +47,7 @@ public class DatabaseManager {
 				config = new H2Configuration();
 				((H2Configuration) config).setDatabase(path.getAbsolutePath());
 			} else {
-				if (caller instanceof SpoutCaller || caller instanceof CanaryCaller) {
+				if (caller instanceof SpoutCaller) {
 					caller.loadLibrary(caller.getDataFolder() + File.separator + "sqlite.jar");
 				}
 				config = new SQLiteConfiguration(path.getAbsolutePath());
