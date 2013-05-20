@@ -201,8 +201,7 @@ public class CanaryCaller extends Caller {
 
 	@Override
 	public String getServerVersion() {
-		//return Canary.getServer().get
-		return null; //TODO: Ehhhhh
+		return Canary.getServer().getServerVersion() + " - " + Canary.getServer().getCanaryModVersion();
 	}
 
 	@Override
