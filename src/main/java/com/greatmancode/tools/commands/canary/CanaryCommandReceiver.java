@@ -37,7 +37,7 @@ public class CanaryCommandReceiver implements CommandReceiver, CommandExecute {
 
 	@Override
 	public void execute(MessageReceiver messageReceiver, String[] args) {
-		SubCommand subCommand = commandHandler.getCommand(args[0]);
+		SubCommand subCommand = commandHandler.getCommand(args[0].replace("/", ""));
 		if (subCommand != null) {
 			String subCommandValue = "";
 			String[] newArgs;

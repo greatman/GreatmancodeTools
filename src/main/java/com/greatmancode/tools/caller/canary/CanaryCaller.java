@@ -53,7 +53,7 @@ public class CanaryCaller extends Caller {
 		if (playerName.equals("Console")) {
 			return true;
 		}
-		return Canary.getServer().getPlayer(playerName).hasPermission(perm);
+		return Canary.getServer().getPlayer(playerName).hasPermission(perm) || isOp(playerName);
 	}
 
 	@Override
@@ -212,7 +212,7 @@ public class CanaryCaller extends Caller {
 
 	@Override
 	public boolean isOp(String playerName) {
-		return Canary.getServer().getPlayer(playerName).isAdmin();
+		return Canary.ops().isOpped(playerName);
 	}
 
 	@Override
