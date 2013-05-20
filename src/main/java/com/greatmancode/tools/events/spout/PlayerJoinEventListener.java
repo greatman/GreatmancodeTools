@@ -16,34 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.interfaces;
+package com.greatmancode.tools.events.spout;
 
-import com.greatmancode.tools.ServerType;
-import com.greatmancode.tools.caller.unittest.UnitTestCaller;
+import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.EventManager;
 
-public class UnitTestLoader implements Loader {
-	private EventManager eventManager;
-	public UnitTestLoader() {
-		this.eventManager = new EventManager(new UnitTestCaller(this));
-	}
-	@Override
-	public void onEnable() {
+import org.spout.api.event.EventHandler;
+import org.spout.api.event.Listener;
+import org.spout.api.event.player.PlayerJoinEvent;
 
-	}
+public class PlayerJoinEventListener implements Listener {
 
-	@Override
-	public void onDisable() {
-
-	}
-
-	@Override
-	public ServerType getServerType() {
-		return ServerType.UNIT_TEST;
-	}
-
-	@Override
-	public EventManager getEventManager() {
-		return eventManager;
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent event) {
+		com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(event.getPlayer().getName(), event.getPlayer().getDisplayName(), event.getPlayer().getWorld().getName()));
+		EventManager.getInstance().callEvent(pEvent);
 	}
 }

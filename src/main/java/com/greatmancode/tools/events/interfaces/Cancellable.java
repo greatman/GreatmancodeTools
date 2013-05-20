@@ -16,34 +16,24 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.interfaces;
+package com.greatmancode.tools.events.interfaces;
 
-import com.greatmancode.tools.ServerType;
-import com.greatmancode.tools.caller.unittest.UnitTestCaller;
-import com.greatmancode.tools.events.EventManager;
+/**
+ * Interface for events that can be cancelled, to prevent them from propagating to downstream handlers.
+ */
+public interface Cancellable {
 
-public class UnitTestLoader implements Loader {
-	private EventManager eventManager;
-	public UnitTestLoader() {
-		this.eventManager = new EventManager(new UnitTestCaller(this));
-	}
-	@Override
-	public void onEnable() {
+	/**
+	 * If an event stops propagating (ie, is cancelled) partway through an even
+	 * slot, that slot will not cease execution, but future even slots will not
+	 * be called.
+	 * @param cancelled True to set event canceled, False to uncancel event.
+	 */
+	void setCancelled(boolean cancelled);
 
-	}
-
-	@Override
-	public void onDisable() {
-
-	}
-
-	@Override
-	public ServerType getServerType() {
-		return ServerType.UNIT_TEST;
-	}
-
-	@Override
-	public EventManager getEventManager() {
-		return eventManager;
-	}
+	/**
+	 * Get event canceled state.
+	 * @return whether event is cancelled
+	 */
+	boolean isCancelled();
 }

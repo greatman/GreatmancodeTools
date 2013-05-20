@@ -44,6 +44,7 @@ public class ConfigurationManager {
 
 	public Config loadFile(File folder, String fileName) {
 		Config file = null;
+
 		if (caller instanceof BukkitCaller || caller instanceof UnitTestCaller) {
 			file = new BukkitConfig(folder, fileName, caller);
 		} else if (caller instanceof SpoutCaller) {

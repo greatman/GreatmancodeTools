@@ -16,34 +16,41 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.interfaces;
+package com.greatmancode.tools.entities;
 
-import com.greatmancode.tools.ServerType;
-import com.greatmancode.tools.caller.unittest.UnitTestCaller;
-import com.greatmancode.tools.events.EventManager;
+public class Player {
 
-public class UnitTestLoader implements Loader {
-	private EventManager eventManager;
-	public UnitTestLoader() {
-		this.eventManager = new EventManager(new UnitTestCaller(this));
-	}
-	@Override
-	public void onEnable() {
+	private String name;
+	private String displayName;
+	private String worldName;
 
+	public Player(String name, String displayName, String worldName) {
+		this.name = name;
+		this.displayName = displayName;
+		this.worldName = worldName;
 	}
 
-	@Override
-	public void onDisable() {
-
+	public String getName() {
+		return name;
 	}
 
-	@Override
-	public ServerType getServerType() {
-		return ServerType.UNIT_TEST;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Override
-	public EventManager getEventManager() {
-		return eventManager;
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public String getWorldName() {
+		return worldName;
+	}
+
+	public void setWorldName(String worldName) {
+		this.worldName = worldName;
 	}
 }

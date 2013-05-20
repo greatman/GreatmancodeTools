@@ -25,11 +25,14 @@ import java.io.InputStreamReader;
 
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.canary.CanaryCaller;
+import com.greatmancode.tools.events.EventManager;
 
 import net.canarymod.plugin.Plugin;
 
 public class CanaryLoader extends Plugin implements Loader {
 	private Common common;
+	private EventManager eventManager;
+
 	@Override
 	public void onEnable() {
 		//Not used
@@ -46,8 +49,15 @@ public class CanaryLoader extends Plugin implements Loader {
 	}
 
 	@Override
+	public EventManager getEventManager() {
+		return eventManager;
+	}
+
+	@Override
 	public boolean enable() {
+
 		CanaryCaller canaryCaller = new CanaryCaller(this);
+		eventManager = new EventManager(canaryCaller);
 		InputStream is = this.getClass().getResourceAsStream("/loader.yml");
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		try {

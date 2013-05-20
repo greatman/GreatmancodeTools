@@ -29,6 +29,7 @@ import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.bukkit.BukkitCaller;
 import com.greatmancode.tools.configuration.ConfigurationManager;
 import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
+import com.greatmancode.tools.events.EventManager;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.PluginClassLoader;
@@ -36,9 +37,13 @@ import org.bukkit.plugin.java.PluginClassLoader;
 public class BukkitLoader extends JavaPlugin implements Loader {
 
 	private Common common;
+	private EventManager eventManager;
+
 	@Override
 	public void onEnable() {
+
 		BukkitCaller bukkitCaller = new BukkitCaller(this);
+		eventManager = new EventManager(bukkitCaller);
 		BukkitConfig bukkitConfig = new BukkitConfig(this.getClass().getResourceAsStream("/loader.yml"), bukkitCaller);
 		String mainClass = bukkitConfig.getString("main-class");
 		try {
@@ -78,5 +83,9 @@ public class BukkitLoader extends JavaPlugin implements Loader {
 	 */
 	public PluginClassLoader getPluginClassLoader() {
 		return (PluginClassLoader) this.getClassLoader();
+	}
+
+	public EventManager getEventManager() {
+		return eventManager;
 	}
 }

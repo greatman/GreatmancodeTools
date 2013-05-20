@@ -16,34 +16,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.interfaces;
+package com.greatmancode.tools.events.playerEvent;
 
-import com.greatmancode.tools.ServerType;
-import com.greatmancode.tools.caller.unittest.UnitTestCaller;
-import com.greatmancode.tools.events.EventManager;
+import com.greatmancode.tools.entities.Player;
+import com.greatmancode.tools.events.Event;
 
-public class UnitTestLoader implements Loader {
-	private EventManager eventManager;
-	public UnitTestLoader() {
-		this.eventManager = new EventManager(new UnitTestCaller(this));
-	}
-	@Override
-	public void onEnable() {
+public class PlayerJoinEvent extends Event {
 
+	private Player p;
+	public PlayerJoinEvent(Player p) {
+		this.p = p;
 	}
 
-	@Override
-	public void onDisable() {
-
-	}
-
-	@Override
-	public ServerType getServerType() {
-		return ServerType.UNIT_TEST;
-	}
-
-	@Override
-	public EventManager getEventManager() {
-		return eventManager;
+	public Player getPlayer() {
+		return p;
 	}
 }

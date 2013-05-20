@@ -16,34 +16,31 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.interfaces;
+package com.greatmancode.tools.events.spout;
 
-import com.greatmancode.tools.ServerType;
-import com.greatmancode.tools.caller.unittest.UnitTestCaller;
-import com.greatmancode.tools.events.EventManager;
+import java.util.HashMap;
+import java.util.Map;
 
-public class UnitTestLoader implements Loader {
-	private EventManager eventManager;
-	public UnitTestLoader() {
-		this.eventManager = new EventManager(new UnitTestCaller(this));
-	}
-	@Override
-	public void onEnable() {
+import com.greatmancode.tools.events.interfaces.ServerEventManager;
+import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
+import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.Loader;
 
-	}
+import org.spout.api.Spout;
+import org.spout.api.event.Listener;
 
-	@Override
-	public void onDisable() {
+public class SpoutEventManager implements ServerEventManager {
 
-	}
+	private Map<String, Listener> map = new HashMap<String, Listener>();
 
-	@Override
-	public ServerType getServerType() {
-		return ServerType.UNIT_TEST;
+	public SpoutEventManager() {
+		map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());
 	}
 
 	@Override
-	public EventManager getEventManager() {
-		return eventManager;
+	public void eventRegistered(String event, Caller caller) {
+		if (map.containsKey(event)) {
+			Spout.getEngine().getEventManager().registerEvents(map.get(event), caller.getLoader());
+		}
 	}
 }

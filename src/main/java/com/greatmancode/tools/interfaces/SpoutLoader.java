@@ -21,16 +21,18 @@ package com.greatmancode.tools.interfaces;
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.spout.SpoutCaller;
 import com.greatmancode.tools.configuration.spout.SpoutConfig;
+import com.greatmancode.tools.events.EventManager;
 
 import org.spout.api.plugin.CommonPlugin;
 
 public class SpoutLoader extends CommonPlugin implements Loader {
 
 	private Common common;
+	private EventManager eventManager;
 	@Override
 	public void onEnable() {
-
 		SpoutCaller spoutCaller = new SpoutCaller(this);
+		eventManager = new EventManager(spoutCaller);
 		SpoutConfig spoutConfig = new SpoutConfig(this.getClass().getResourceAsStream("/loader.yml"), spoutCaller);
 		String mainClass = spoutConfig.getString("main-class");
 		try {
@@ -62,5 +64,10 @@ public class SpoutLoader extends CommonPlugin implements Loader {
 	@Override
 	public ServerType getServerType() {
 		return ServerType.SPOUT;
+	}
+
+	@Override
+	public EventManager getEventManager() {
+		return eventManager;
 	}
 }

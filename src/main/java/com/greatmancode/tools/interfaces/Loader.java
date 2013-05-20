@@ -19,6 +19,7 @@
 package com.greatmancode.tools.interfaces;
 
 import com.greatmancode.tools.ServerType;
+import com.greatmancode.tools.events.EventManager;
 
 /**
  * A loader is called when the plugin is launched on the server.
@@ -34,4 +35,6 @@ public interface Loader {
 	 * @return The current server backend.
 	 */
 	ServerType getServerType();
+
+	EventManager getEventManager();
 }
