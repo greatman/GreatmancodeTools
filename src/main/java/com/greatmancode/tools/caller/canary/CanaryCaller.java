@@ -59,9 +59,9 @@ public class CanaryCaller extends Caller {
 	@Override
 	public void sendMessage(String playerName, String message) {
 		if (playerName.equals("Console")) {
-			Canary.getServer().message(addColor(message));
+			Canary.getServer().message(addColor(getCommandPrefix() + message));
 		} else {
-			Canary.getServer().getPlayer(playerName).sendMessage(addColor(message));
+			Canary.getServer().getPlayer(playerName).sendMessage(addColor(getCommandPrefix() + message));
 		}
 
 	}
