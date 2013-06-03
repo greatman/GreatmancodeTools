@@ -23,12 +23,12 @@ import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 
 import org.spout.api.command.Command;
-import org.spout.api.command.CommandContext;
-import org.spout.api.command.CommandExecutor;
+import org.spout.api.command.CommandArguments;
 import org.spout.api.command.CommandSource;
+import org.spout.api.command.Executor;
 import org.spout.api.exception.CommandException;
 
-public class SpoutCommandReceiver implements CommandExecutor, CommandReceiver {
+public class SpoutCommandReceiver implements Executor, CommandReceiver {
 	private CommandHandler commandHandler;
 
 	public SpoutCommandReceiver(CommandHandler commandHandler) {
@@ -36,8 +36,8 @@ public class SpoutCommandReceiver implements CommandExecutor, CommandReceiver {
 	}
 
 	@Override
-	public void processCommand(CommandSource source, Command command, CommandContext args) throws CommandException {
-		SubCommand subCommand = commandHandler.getCommand(command.getPreferredName());
+	public void execute(CommandSource source, Command command, CommandArguments args) throws CommandException {
+		SubCommand subCommand = commandHandler.getCommand(command.getName());
 		if (subCommand != null) {
 			String subCommandValue = "";
 			String[] newArgs;
