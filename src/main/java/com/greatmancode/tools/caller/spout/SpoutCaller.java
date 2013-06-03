@@ -31,7 +31,6 @@ import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.SpoutLoader;
 
 import org.spout.api.Server;
-import org.spout.api.chat.ChatArguments;
 import org.spout.api.entity.Player;
 import org.spout.api.scheduler.TaskPriority;
 
@@ -67,9 +66,10 @@ public class SpoutCaller extends Caller {
 	public void sendMessage(String playerName, String message) {
 		Player p = ((SpoutLoader)loader).getEngine().getPlayer(playerName, true);
 		if (p != null) {
-			p.sendMessage(ChatArguments.fromFormatString(getCommandPrefix() + message));
+
+			p.sendMessage(addColor(getCommandPrefix() + message));
 		} else {
-			((SpoutLoader)loader).getEngine().getCommandSource().sendMessage(ChatArguments.fromFormatString(getCommandPrefix() + message));
+			((SpoutLoader)loader).getEngine().getCommandSource().sendMessage(addColor(getCommandPrefix() + message));
 		}
 	}
 
@@ -90,8 +90,24 @@ public class SpoutCaller extends Caller {
 
 	@Override
 	public String addColor(String str) {
-		// Useless with Spout
-		return null;
+		String coloredString = str;
+		coloredString = coloredString.replace("{{BLACK}}", SpoutChatStyle.BLACK.toString());
+		coloredString = coloredString.replace("{{DARK_BLUE}}", SpoutChatStyle.DARK_BLUE.toString());
+		coloredString = coloredString.replace("{{DARK_GREEN}}", SpoutChatStyle.DARK_GREEN.toString());
+		coloredString = coloredString.replace("{{DARK_CYAN}}", SpoutChatStyle.DARK_AQUA.toString());
+		coloredString = coloredString.replace("{{DARK_RED}}", SpoutChatStyle.DARK_RED.toString());
+		coloredString = coloredString.replace("{{PURPLE}}", SpoutChatStyle.PURPLE.toString());
+		coloredString = coloredString.replace("{{GOLD}}", SpoutChatStyle.GOLD.toString());
+		coloredString = coloredString.replace("{{GRAY}}", SpoutChatStyle.GRAY.toString());
+		coloredString = coloredString.replace("{{DARK_GRAY}}", SpoutChatStyle.DARK_GRAY.toString());
+		coloredString = coloredString.replace("{{BLUE}}", SpoutChatStyle.BLUE.toString());
+		coloredString = coloredString.replace("{{BRIGHT_GREEN}}", SpoutChatStyle.GREEN.toString());
+		coloredString = coloredString.replace("{{CYAN}}", SpoutChatStyle.AQUA.toString());
+		coloredString = coloredString.replace("{{RED}}", SpoutChatStyle.RED.toString());
+		coloredString = coloredString.replace("{{PINK}}", SpoutChatStyle.PINK.toString());
+		coloredString = coloredString.replace("{{YELLOW}}", SpoutChatStyle.YELLOW.toString());
+		coloredString = coloredString.replace("{{WHITE}}", SpoutChatStyle.WHITE.toString());
+		return coloredString;
 	}
 
 	@Override
@@ -156,7 +172,7 @@ public class SpoutCaller extends Caller {
 	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
 		if (manager instanceof SpoutCommandReceiver) {
-			((SpoutLoader)loader).getEngine().getRootCommand().addSubCommand(((SpoutLoader)loader), name).setHelp(help).setExecutor((SpoutCommandReceiver) manager);
+			((SpoutLoader)loader).getEngine().getCommandManager().getCommand(name, true).setHelp(help).setExecutor((SpoutCommandReceiver) manager);
 		}
 	}
 
