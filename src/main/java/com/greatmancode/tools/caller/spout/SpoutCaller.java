@@ -26,6 +26,8 @@ import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.commands.spout.SpoutCommandReceiver;
+import com.greatmancode.tools.events.Event;
+import com.greatmancode.tools.events.event.EconomyChangeEvent;
 import com.greatmancode.tools.interfaces.Caller;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.SpoutLoader;
@@ -210,5 +212,13 @@ public class SpoutCaller extends Caller {
 	@Override
 	public Logger getLogger() {
 		return ((SpoutLoader)loader).getLogger();
+	}
+
+	@Override
+	public void throwEvent(Event event) {
+		if (event instanceof EconomyChangeEvent) {
+			((SpoutLoader)loader).getEngine().getEventManager().callEvent(new com.greatmancode.tools.events.spout.events.EconomyChangeEvent(((EconomyChangeEvent) event).getAccount(), ((EconomyChangeEvent) event).getAmount()));
+		}
+
 	}
 }

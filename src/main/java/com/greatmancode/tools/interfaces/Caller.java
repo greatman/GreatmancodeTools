@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
+import com.greatmancode.tools.events.Event;
 
 /**
  * Represents a server Caller
@@ -209,4 +210,6 @@ public abstract class Caller {
 	public abstract boolean isOnlineMode();
 
 	public abstract Logger getLogger();
+
+	public abstract void throwEvent(Event event);
 }

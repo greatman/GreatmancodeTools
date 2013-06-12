@@ -25,6 +25,9 @@ import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.canary.CanaryCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
+import com.greatmancode.tools.events.Event;
+import com.greatmancode.tools.events.canary.hooks.EconomyChangeHook;
+import com.greatmancode.tools.events.event.EconomyChangeEvent;
 import com.greatmancode.tools.interfaces.Caller;
 import com.greatmancode.tools.interfaces.CanaryLoader;
 import com.greatmancode.tools.interfaces.Loader;
@@ -235,5 +238,12 @@ public class CanaryCaller extends Caller {
 	@Override
 	public Logger getLogger() {
 		return ((CanaryLoader)loader).getLogman().getParent();
+	}
+
+	@Override
+	public void throwEvent(Event event) {
+		if (event instanceof EconomyChangeEvent) {
+			Canary.hooks().callHook(new EconomyChangeHook(((EconomyChangeEvent) event).getAccount(),((EconomyChangeEvent) event).getAmount()));
+		}
 	}
 }

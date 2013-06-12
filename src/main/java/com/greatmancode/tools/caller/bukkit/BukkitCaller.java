@@ -27,6 +27,8 @@ import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
+import com.greatmancode.tools.events.Event;
+import com.greatmancode.tools.events.event.EconomyChangeEvent;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.Caller;
 import com.greatmancode.tools.interfaces.Loader;
@@ -230,5 +232,12 @@ public class BukkitCaller extends Caller {
 	@Override
 	public Logger getLogger() {
 		return Bukkit.getLogger();
+	}
+
+	@Override
+	public void throwEvent(Event event) {
+		if (event instanceof EconomyChangeEvent) {
+			((BukkitLoader)loader).getServer().getPluginManager().callEvent(new com.greatmancode.tools.events.bukkit.events.EconomyChangeEvent(((EconomyChangeEvent) event).getAccount(), ((EconomyChangeEvent) event).getAmount()));
+		}
 	}
 }

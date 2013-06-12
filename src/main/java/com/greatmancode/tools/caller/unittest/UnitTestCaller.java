@@ -26,6 +26,7 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
+import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Caller;
 import com.greatmancode.tools.interfaces.Loader;
 
@@ -176,5 +177,10 @@ public class UnitTestCaller extends Caller {
 	@Override
 	public Logger getLogger() {
 		return Logger.getLogger(this.getClass().getName());
+	}
+
+	@Override
+	public void throwEvent(Event event) {
+		//TODO: Something here
 	}
 }
