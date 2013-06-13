@@ -23,9 +23,9 @@ import com.greatmancode.tools.caller.spout.SpoutCaller;
 import com.greatmancode.tools.configuration.spout.SpoutConfig;
 import com.greatmancode.tools.events.EventManager;
 
-import org.spout.api.plugin.CommonPlugin;
+import org.spout.api.plugin.Plugin;
 
-public class SpoutLoader extends CommonPlugin implements Loader {
+public class SpoutLoader extends Plugin implements Loader {
 
 	private Common common;
 	private EventManager eventManager;

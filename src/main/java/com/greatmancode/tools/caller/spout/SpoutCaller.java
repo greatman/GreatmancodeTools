@@ -19,6 +19,8 @@
 package com.greatmancode.tools.caller.spout;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -34,6 +36,7 @@ import com.greatmancode.tools.interfaces.SpoutLoader;
 
 import org.spout.api.Server;
 import org.spout.api.entity.Player;
+import org.spout.api.plugin.PluginClassLoader;
 import org.spout.api.scheduler.TaskPriority;
 
 /**
@@ -48,7 +51,7 @@ public class SpoutCaller extends Caller {
 
 	@Override
 	public void disablePlugin() {
-		((SpoutLoader)loader).getPluginLoader().disablePlugin((SpoutLoader)loader);
+		((SpoutLoader)loader).getPluginLoader().disablePlugin((SpoutLoader) loader);
 	}
 
 	@Override
@@ -196,7 +199,12 @@ public class SpoutCaller extends Caller {
 
 	@Override
 	public void loadLibrary(String path) {
-		((SpoutLoader)loader).loadLibrary(new File(path));
+		//TODO: Currently broken
+		/*try {
+			((PluginClassLoader)((SpoutLoader) loader).getClassLoader()).addURL(new File(path).toURI().toURL());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}*/
 	}
 
 	@Override

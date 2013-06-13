@@ -23,6 +23,7 @@ import org.bukkit.event.HandlerList;
 
 public class EconomyChangeEvent extends Event {
 
+	private static final HandlerList handlers = new HandlerList();
 	private final String account;
 	private final double amount;
 	public EconomyChangeEvent(String account, double amount) {
@@ -40,6 +41,6 @@ public class EconomyChangeEvent extends Event {
 
 	@Override
 	public HandlerList getHandlers() {
-		return null;
+		return handlers;
 	}
 }
