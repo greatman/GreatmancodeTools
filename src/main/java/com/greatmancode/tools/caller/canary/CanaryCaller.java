@@ -48,7 +48,7 @@ public class CanaryCaller extends Caller {
 
 	@Override
 	public void disablePlugin() {
-
+		Canary.loader().disablePlugin(((CanaryLoader)loader).getName());
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class CanaryCaller extends Caller {
 		if (playerName.equals("Console")) {
 			Canary.getServer().message(addColor(getCommandPrefix() + message));
 		} else {
-			Canary.getServer().getPlayer(playerName).sendMessage(addColor(getCommandPrefix() + message));
+			Canary.getServer().getPlayer(playerName).message(addColor(getCommandPrefix() + message));
 		}
 
 	}
