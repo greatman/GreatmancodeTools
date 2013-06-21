@@ -199,12 +199,7 @@ public class SpoutCaller extends Caller {
 
 	@Override
 	public void loadLibrary(String path) {
-		//TODO: Currently broken
-		/*try {
-			((PluginClassLoader)((SpoutLoader) loader).getClassLoader()).addURL(new File(path).toURI().toURL());
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}*/
+		((SpoutLoader)loader).loadLibrary(new File(path));
 	}
 
 	@Override
