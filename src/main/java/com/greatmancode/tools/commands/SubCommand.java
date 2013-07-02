@@ -45,7 +45,7 @@ public class SubCommand implements Command {
 	public void addCommand(String name, Command command) {
 		commandList.put(name, command);
 		if (command instanceof CommandExecutor) {
-			commandHandler.getCaller().registerPermission(((CommandExecutor) command).getPermissionNode());
+			commandHandler.getServerCaller().registerPermission(((CommandExecutor) command).getPermissionNode());
 		}
 	}
 
@@ -59,14 +59,14 @@ public class SubCommand implements Command {
 				Command entry = commandList.get(command);
 				if (entry instanceof CommandExecutor) {
 					CommandExecutor cmd = ((CommandExecutor) entry);
-					if (commandHandler.getCaller().checkPermission(sender, cmd.getPermissionNode())) {
+					if (commandHandler.getServerCaller().getPlayerCaller().checkPermission(sender, cmd.getPermissionNode())) {
 						if (args.length >= cmd.minArgs() && args.length <= cmd.maxArgs()) {
 							cmd.execute(sender, args);
 						} else {
-							commandHandler.getCaller().sendMessage(sender, cmd.help());
+							commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, cmd.help());
 						}
 					} else {
-						commandHandler.getCaller().sendMessage(sender, "{{DARK_RED}}Permission denied!");
+						commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, "{{DARK_RED}}Permission denied!");
 					}
 				} else if (entry instanceof SubCommand) {
 					SubCommand subCommand = (SubCommand) entry;
@@ -86,12 +86,12 @@ public class SubCommand implements Command {
 						}
 						((SubCommand) entry).execute(subSubCommand, sender, newArgs);
 					} else {
-						commandHandler.getCaller().sendMessage(sender, "{{DARK_GREEN}}========= {{WHITE}}Help {{DARK_GREEN}}========");
+						commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, "{{DARK_GREEN}}========= {{WHITE}}Help {{DARK_GREEN}}========");
 						for (Map.Entry<String, Command> iteratorEntry : commandList.entrySet()) {
 							if (iteratorEntry instanceof CommandExecutor) {
 								CommandExecutor cmd = ((CommandExecutor) iteratorEntry.getValue());
-								if (commandHandler.getCaller().checkPermission(sender, cmd.getPermissionNode())) {
-									commandHandler.getCaller().sendMessage(sender, cmd.help());
+								if (commandHandler.getServerCaller().getPlayerCaller().checkPermission(sender, cmd.getPermissionNode())) {
+									commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, cmd.help());
 								}
 							} else {
 								String subCommandResult = "";
@@ -100,14 +100,14 @@ public class SubCommand implements Command {
 									subCommandResult = subCmd.parent.name + "" + subCommandResult;
 								}
 								subCommandResult = "/" + subCommandResult + " " + name;
-								commandHandler.getCaller().sendMessage(sender, subCommandResult);
+								commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, subCommandResult);
 							}
 						}
 					}
 				}
 			}
 		} else {
-			commandHandler.getCaller().sendMessage(sender, commandHandler.getWrongLevelMsg());
+			commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, commandHandler.getWrongLevelMsg());
 		}
 	}
 

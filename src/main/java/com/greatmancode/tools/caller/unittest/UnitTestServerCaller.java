@@ -22,50 +22,30 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.Loader;
 
 /**
- * Special caller for unit tests.
+ * Special serverCaller for unit tests.
  * @author Greatman
  */
-public class UnitTestCaller extends Caller {
+public class UnitTestServerCaller extends ServerCaller {
 	public static final String worldName = "UnitTestWorld";
 	public static final String worldName2 = "UnitTestWorld2";
 	public static final int dir = new Random().nextInt(9999999);
 
-	public UnitTestCaller(Loader loader) {
+	public UnitTestServerCaller(Loader loader) {
 		super(loader);
+		addPlayerCaller(new UnitTestPlayerCaller(this));
+		addSchedulerCaller(new UnitTestSchedulerCaller(this));
 	}
 
 	@Override
 	public void disablePlugin() {
-	}
-
-	@Override
-	public boolean checkPermission(String playerName, String perm) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void sendMessage(String playerName, String message) {
-		System.out.println(playerName + ":" + message);
-	}
-
-	@Override
-	public String getPlayerWorld(String playerName) {
-		return "UnitTestWorld";
-	}
-
-	@Override
-	public boolean isOnline(String playerName) {
-		return playerName.equals("console");
 	}
 
 	@Override
@@ -100,43 +80,6 @@ public class UnitTestCaller extends Caller {
 	}
 
 	@Override
-	public int schedule(Runnable entry, long firstStart, long repeating) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void cancelSchedule(int id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public int delay(Runnable entry, long start) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int delay(Runnable entry, long start, boolean async) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<String> getOnlinePlayers() {
-		List<String> list = new ArrayList<String>();
-		list.add("UnitTestPlayer");
-		return list;
-	}
-
-	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
 		// TODO Auto-generated method stub
 
@@ -152,10 +95,7 @@ public class UnitTestCaller extends Caller {
 		return "1.0";
 	}
 
-	@Override
-	public boolean isOp(String playerName) {
-		return playerName.equals("UnitTestPlayer");
-	}
+
 
 	@Override
 	public void loadLibrary(String path) {

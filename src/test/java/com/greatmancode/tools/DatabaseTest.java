@@ -23,7 +23,7 @@ import java.net.URISyntaxException;
 
 import com.alta189.simplesave.exceptions.ConnectionException;
 import com.alta189.simplesave.exceptions.TableRegistrationException;
-import com.greatmancode.tools.caller.unittest.UnitTestCaller;
+import com.greatmancode.tools.caller.unittest.UnitTestServerCaller;
 import com.greatmancode.tools.database.DatabaseManager;
 import com.greatmancode.tools.database.interfaces.DatabaseType;
 import com.greatmancode.tools.database.throwable.InvalidDatabaseConstructor;
@@ -38,7 +38,7 @@ import static junit.framework.Assert.assertNotNull;
 public class DatabaseTest {
 	@Test
 	public void test() throws URISyntaxException, InvalidDatabaseConstructor, TableRegistrationException, ConnectionException {
-		DatabaseManager dbManager = new DatabaseManager(DatabaseType.SQLITE, "test_", new File(new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "testConfig.db"), new UnitTestCaller(new UnitTestLoader()));
+		DatabaseManager dbManager = new DatabaseManager(DatabaseType.SQLITE, "test_", new File(new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "testConfig.db"), new UnitTestServerCaller(new UnitTestLoader()));
 		dbManager.registerTable(TestTable.class);
 		dbManager.connect();
 

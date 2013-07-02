@@ -21,34 +21,34 @@ package com.greatmancode.tools.commands;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.greatmancode.tools.caller.bukkit.BukkitCaller;
-import com.greatmancode.tools.caller.canary.CanaryCaller;
-import com.greatmancode.tools.caller.spout.SpoutCaller;
+import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
+import com.greatmancode.tools.caller.canary.CanaryServerCaller;
+import com.greatmancode.tools.caller.spout.SpoutServerCaller;
 import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
 import com.greatmancode.tools.commands.canary.CanaryCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.commands.spout.SpoutCommandReceiver;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class CommandHandler {
-	private Caller caller;
+	private ServerCaller serverCaller;
 	private CommandReceiver commandReceiver;
 	private Map<String, SubCommand> commandList = new HashMap<String, SubCommand>();
 	private int currentLevel = 0;
 	private String wrongLevelMsg = "Wrong level!";
-	public CommandHandler(Caller caller) {
-		this.caller = caller;
-		if (this.caller instanceof BukkitCaller) {
+	public CommandHandler(ServerCaller serverCaller) {
+		this.serverCaller = serverCaller;
+		if (this.serverCaller instanceof BukkitServerCaller) {
 			commandReceiver = new BukkitCommandReceiver(this);
-		} else if (this.caller instanceof SpoutCaller) {
+		} else if (this.serverCaller instanceof SpoutServerCaller) {
 			commandReceiver = new SpoutCommandReceiver(this);
-		} else if (this.caller instanceof CanaryCaller) {
+		} else if (this.serverCaller instanceof CanaryServerCaller) {
 			commandReceiver = new CanaryCommandReceiver(this);
 		}
 	}
 
-	public Caller getCaller() {
-		return caller;
+	public ServerCaller getServerCaller() {
+		return serverCaller;
 	}
 
 	public void setLevel(int level) {
@@ -73,7 +73,7 @@ public class CommandHandler {
 
 	public CommandHandler registerMainCommand(String name, SubCommand subCommand) {
 		commandList.put(name, subCommand);
-		caller.addCommand(name, "", commandReceiver);
+		serverCaller.addCommand(name, "", commandReceiver);
 		return this;
 	}
 

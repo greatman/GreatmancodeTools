@@ -24,7 +24,7 @@ import java.util.Map;
 
 import com.greatmancode.tools.configuration.Config;
 import com.greatmancode.tools.configuration.ConfigurationManager;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class LanguageManager {
 	private static final String MAIN_KEY = "language";
@@ -32,8 +32,8 @@ public class LanguageManager {
 	private Config languageFile = null;
 	private Map<String, String> languageList = new HashMap<String, String>();
 
-	public LanguageManager(Caller caller, File path, String fileName) {
-		languageFile = new ConfigurationManager(caller).loadFile(path, fileName);
+	public LanguageManager(ServerCaller serverCaller, File path, String fileName) {
+		languageFile = new ConfigurationManager(serverCaller).loadFile(path, fileName);
 		loadLanguage();
 	}
 

@@ -28,7 +28,7 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.events.canary.hooks.EconomyChangeHook;
 import com.greatmancode.tools.events.event.EconomyChangeEvent;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.CanaryLoader;
 import com.greatmancode.tools.interfaces.Loader;
 
@@ -40,43 +40,17 @@ import net.canarymod.tasks.ServerTaskManager;
 import net.larry1123.lib.CanaryUtil;
 import net.larry1123.lib.plugin.commands.CommandData;
 
-public class CanaryCaller extends Caller {
+public class CanaryServerCaller extends ServerCaller {
 
-	public CanaryCaller(Loader loader) {
+	public CanaryServerCaller(Loader loader) {
 		super(loader);
+		addPlayerCaller(new CanaryPlayerCaller(this));
+		addSchedulerCaller(new CanarySchedulerCaller(this));
 	}
 
 	@Override
 	public void disablePlugin() {
 		Canary.loader().disablePlugin(((CanaryLoader)loader).getName());
-	}
-
-	@Override
-	public boolean checkPermission(String playerName, String perm) {
-		if (playerName.equals("Console")) {
-			return true;
-		}
-		return Canary.getServer().getPlayer(playerName).hasPermission(perm) || isOp(playerName);
-	}
-
-	@Override
-	public void sendMessage(String playerName, String message) {
-		if (playerName.equals("Console")) {
-			Canary.getServer().message(addColor(getCommandPrefix() + message));
-		} else {
-			Canary.getServer().getPlayer(playerName).message(addColor(getCommandPrefix() + message));
-		}
-
-	}
-
-	@Override
-	public String getPlayerWorld(String playerName) {
-		return Canary.getServer().getPlayer(playerName).getWorld().getName();
-	}
-
-	@Override
-	public boolean isOnline(String playerName) {
-		return Canary.getServer().getPlayer(playerName) != null;
 	}
 
 	@Override
@@ -113,84 +87,11 @@ public class CanaryCaller extends Caller {
 
 	@Override
 	public File getDataFolder() {
-		File folder = new File(new File(CanaryCaller.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile(), "Craftconomy3");
+		File folder = new File(new File(CanaryServerCaller.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile(), "Craftconomy3");
 		folder.mkdirs();
 		return folder;
 	}
 
-	@Override
-	public int schedule(final Runnable entry, long firstStart, long repeating) {
-
-		if (repeating != 0) {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader)loader), repeating, true) {
-				@Override
-				public void run() {
-					entry.run();
-				}
-			});
-		} else {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader)loader), firstStart, false) {
-				@Override
-				public void run() {
-					entry.run();
-				}
-			});
-		}
-		return 0;
-	}
-
-	@Override
-	public int schedule(final Runnable entry, long firstStart, long repeating, boolean async) {
-		if (repeating != 0) {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader)loader), repeating, true) {
-				@Override
-				public void run() {
-					entry.run();
-				}
-			});
-		} else {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader)loader), firstStart, false) {
-				@Override
-				public void run() {
-					entry.run();
-				}
-			});
-		}
-		return 0;
-	}
-
-	@Override
-	public void cancelSchedule(int id) {
-
-	}
-
-	@Override
-	public int delay(final Runnable entry, long start) {
-
-		ServerTaskManager.addTask(new ServerTask(((CanaryLoader)loader), start, false) {
-		@Override
-			public void run() {
-				entry.run();
-			}
-		});
-		return 0;
-	}
-
-	@Override
-	public int delay(final Runnable entry, long start, boolean async) {
-		ServerTaskManager.addTask(new ServerTask(((CanaryLoader)loader), start, false) {
-			@Override
-			public void run() {
-				entry.run();
-			}
-		});
-		return 0;
-	}
-
-	@Override
-	public List<String> getOnlinePlayers() {
-		return Arrays.asList(Canary.getServer().getPlayerNameList());
-	}
 
 	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
@@ -210,11 +111,6 @@ public class CanaryCaller extends Caller {
 	@Override
 	public String getPluginVersion() {
 		return ((CanaryLoader)loader).getVersion();
-	}
-
-	@Override
-	public boolean isOp(String playerName) {
-		return Canary.ops().isOpped(playerName);
 	}
 
 	@Override

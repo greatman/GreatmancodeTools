@@ -37,13 +37,10 @@
 package com.greatmancode.tools.configuration;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Map;
 
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 /**
  * Represents a Configuration handler
@@ -51,18 +48,18 @@ import com.greatmancode.tools.interfaces.Caller;
  */
 public abstract class Config {
 	private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
-	protected final Caller caller;
+	protected final ServerCaller serverCaller;
 	protected final File file;
 	protected final InputStream is;
 
-	public Config(InputStream is, Caller caller) {
+	public Config(InputStream is, ServerCaller serverCaller) {
 		file = null;
 		this.is = is;
-		this.caller = caller;
+		this.serverCaller = serverCaller;
 	}
 
-	public Config(File folder, String fileName, Caller caller) {
-		this.caller = caller;
+	public Config(File folder, String fileName, ServerCaller serverCaller) {
+		this.serverCaller = serverCaller;
 		this.is = null;
 		file = new File(folder, fileName);
 	}

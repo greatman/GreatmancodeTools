@@ -19,7 +19,7 @@
 package com.greatmancode.tools.interfaces;
 
 import com.greatmancode.tools.ServerType;
-import com.greatmancode.tools.caller.spout.SpoutCaller;
+import com.greatmancode.tools.caller.spout.SpoutServerCaller;
 import com.greatmancode.tools.configuration.spout.SpoutConfig;
 import com.greatmancode.tools.events.EventManager;
 
@@ -31,7 +31,7 @@ public class SpoutLoader extends Plugin implements Loader {
 	private EventManager eventManager;
 	@Override
 	public void onEnable() {
-		SpoutCaller spoutCaller = new SpoutCaller(this);
+		SpoutServerCaller spoutCaller = new SpoutServerCaller(this);
 		eventManager = new EventManager(spoutCaller);
 		SpoutConfig spoutConfig = new SpoutConfig(this.getClass().getResourceAsStream("/loader.yml"), spoutCaller);
 		String mainClass = spoutConfig.getString("main-class");

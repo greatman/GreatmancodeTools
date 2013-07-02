@@ -21,7 +21,7 @@ package com.greatmancode.tools;
 import java.io.File;
 import java.net.URISyntaxException;
 
-import com.greatmancode.tools.caller.unittest.UnitTestCaller;
+import com.greatmancode.tools.caller.unittest.UnitTestServerCaller;
 import com.greatmancode.tools.configuration.Config;
 import com.greatmancode.tools.configuration.ConfigurationManager;
 import com.greatmancode.tools.interfaces.UnitTestLoader;
@@ -35,7 +35,7 @@ import static org.junit.Assert.assertTrue;
 public class ConfigurationTest {
 	@Test
 	public void test() throws URISyntaxException {
-		ConfigurationManager configurationManager = new ConfigurationManager(new UnitTestCaller(new UnitTestLoader()));
+		ConfigurationManager configurationManager = new ConfigurationManager(new UnitTestServerCaller(new UnitTestLoader()));
 		Config config = configurationManager.loadFile(new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "testConfig.yml");
 		config.setValue("test", 1);
 		assertEquals(1, config.getInt("test"));

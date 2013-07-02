@@ -19,12 +19,11 @@
 package com.greatmancode.tools.events.unittest;
 
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
-import com.greatmancode.tools.interfaces.Caller;
-import com.greatmancode.tools.interfaces.Loader;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class UnitTestEventManager implements ServerEventManager {
 	@Override
-	public void eventRegistered(String event, Caller caller) {
+	public void eventRegistered(String event, ServerCaller serverCaller) {
 
 	}
 }

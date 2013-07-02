@@ -42,7 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.greatmancode.tools.configuration.Config;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import org.spout.api.exception.ConfigurationException;
 import org.spout.api.util.config.ConfigurationNode;
@@ -54,23 +54,23 @@ import org.spout.api.util.config.yaml.YamlConfiguration;
 public class SpoutConfig extends Config {
 	private YamlConfiguration config = null;
 
-	public SpoutConfig(InputStream is, Caller caller) {
-		super(is, caller);
+	public SpoutConfig(InputStream is, ServerCaller serverCaller) {
+		super(is, serverCaller);
 		config = new YamlConfiguration(is);
 		try {
 			config.load();
 		} catch (ConfigurationException e) {
-			caller.getLogger().severe("Unable to load the configuration file! Message:" + e.getMessage());
+			serverCaller.getLogger().severe("Unable to load the configuration file! Message:" + e.getMessage());
 		}
 	}
 
-	public SpoutConfig(File folder, String fileName, Caller caller) {
-		super(folder, fileName, caller);
+	public SpoutConfig(File folder, String fileName, ServerCaller serverCaller) {
+		super(folder, fileName, serverCaller);
 		config = new YamlConfiguration(file);
 		try {
 			config.load();
 		} catch (ConfigurationException e) {
-			caller.getLogger().severe("Unable to load the configuration file! Message:" + e.getMessage());
+			serverCaller.getLogger().severe("Unable to load the configuration file! Message:" + e.getMessage());
 		}
 	}
 
@@ -105,7 +105,7 @@ public class SpoutConfig extends Config {
 		try {
 			config.save();
 		} catch (ConfigurationException e) {
-			caller.getLogger().severe("Unable to save the file " + config.getFile().getName() + "! Message: " + e.getMessage());
+			serverCaller.getLogger().severe("Unable to save the file " + config.getFile().getName() + "! Message: " + e.getMessage());
 		}
 	}
 

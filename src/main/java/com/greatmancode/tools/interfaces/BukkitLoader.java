@@ -18,16 +18,8 @@
  */
 package com.greatmancode.tools.interfaces;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-
 import com.greatmancode.tools.ServerType;
-import com.greatmancode.tools.caller.bukkit.BukkitCaller;
-import com.greatmancode.tools.configuration.ConfigurationManager;
+import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
 import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
 import com.greatmancode.tools.events.EventManager;
 
@@ -42,7 +34,7 @@ public class BukkitLoader extends JavaPlugin implements Loader {
 	@Override
 	public void onEnable() {
 
-		BukkitCaller bukkitCaller = new BukkitCaller(this);
+		BukkitServerCaller bukkitCaller = new BukkitServerCaller(this);
 		eventManager = new EventManager(bukkitCaller);
 		BukkitConfig bukkitConfig = new BukkitConfig(this.getClass().getResourceAsStream("/loader.yml"), bukkitCaller);
 		String mainClass = bukkitConfig.getString("main-class");

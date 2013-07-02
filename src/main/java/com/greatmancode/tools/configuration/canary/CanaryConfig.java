@@ -19,73 +19,71 @@
 package com.greatmancode.tools.configuration.canary;
 
 import java.io.File;
-import java.io.InputStream;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.greatmancode.tools.configuration.Config;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.CanaryLoader;
 
 import net.canarymod.config.Configuration;
 
 public class CanaryConfig extends Config {
 
-	public CanaryConfig(File folder, String fileName, Caller caller) {
-		super(folder, fileName, caller);
+	public CanaryConfig(File folder, String fileName, ServerCaller serverCaller) {
+		super(folder, fileName, serverCaller);
 	}
 
 	@Override
 	public int getInt(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).getInt(path);
+		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getInt(path);
 	}
 
 	@Override
 	public long getLong(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).getLong(path);
+		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getLong(path);
 	}
 
 	@Override
 	public double getDouble(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).getDouble(path);
+		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getDouble(path);
 	}
 
 	@Override
 	public String getString(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).getString(path);
+		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getString(path);
 	}
 
 	@Override
 	public boolean getBoolean(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).getBoolean(path);
+		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getBoolean(path);
 	}
 
 	@Override
 	public void setValue(String path, Object value) {
 		if (value instanceof Boolean) {
-			Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).setBoolean(path, (Boolean) value);
+			Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).setBoolean(path, (Boolean) value);
 		} else if (value instanceof Long) {
-			Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).setLong(path, (Long) value);
+			Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).setLong(path, (Long) value);
 		} else if (value instanceof Double) {
-			Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).setDouble(path, (Double) value);
+			Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).setDouble(path, (Double) value);
 		} else if (value instanceof String) {
-			Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).setString(path, (String) value);
+			Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).setString(path, (String) value);
 		} else if (value instanceof Integer) {
-			Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).setInt(path, (Integer) value);
+			Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).setInt(path, (Integer) value);
 		}
-		Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).save();
+		Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).save();
 	}
 
 	@Override
 	public boolean has(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).containsKey(path);
+		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).containsKey(path);
 	}
 
 	@Override
 	public Map<String, String> getStringMap(String path) {
 		Map<String, String> result = new HashMap<String, String>();
-		Map<String, String> map = Configuration.getPluginConfig(((CanaryLoader)caller.getLoader()).getName()).getPropertiesMap();
+		Map<String, String> map = Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getPropertiesMap();
 		for (Map.Entry<String, String> entry: map.entrySet()) {
 			if (entry.getKey().contains(path)) {
 				String key = entry.getKey().replace(path + ".", "");

@@ -30,7 +30,7 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.events.event.EconomyChangeEvent;
 import com.greatmancode.tools.interfaces.BukkitLoader;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.Loader;
 
 import org.bukkit.Bukkit;
@@ -39,15 +39,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
 /**
- * Server caller for Craftbukkit
+ * Server serverCaller for Craftbukkit
  * @author greatman
  */
-public class BukkitCaller extends Caller {
-	private static final long TICK_LENGTH = 20L;
+public class BukkitServerCaller extends ServerCaller {
 	
-	
-	public BukkitCaller(Loader loader) {
+	public BukkitServerCaller(Loader loader) {
 		super(loader);
+		addPlayerCaller(new BukkitPlayerCaller(this));
+		addSchedulerCaller(new BukkitSchedulerCaller(this));
 	}
 
 	@Override
@@ -55,43 +55,7 @@ public class BukkitCaller extends Caller {
 		((BukkitLoader)loader).getPluginLoader().disablePlugin(((BukkitLoader)loader));
 	}
 
-	@Override
-	public boolean checkPermission(String playerName, String perm) {
-		boolean result;
-		Player p = ((BukkitLoader)loader).getServer().getPlayerExact(playerName);
-		if (p != null) {
-			result = p.isOp() || p.hasPermission(perm);
-		} else {
-			// It's the console
-			result = true;
-		}
-		return result;
-	}
 
-	@Override
-	public void sendMessage(String playerName, String message) {
-		Player p = ((BukkitLoader)loader).getServer().getPlayerExact(playerName);
-		if (p != null) {
-			p.sendMessage(addColor(getCommandPrefix() + message));
-		} else {
-			((BukkitLoader)loader).getServer().getConsoleSender().sendMessage(addColor(getCommandPrefix() + message));
-		}
-	}
-
-	@Override
-	public String getPlayerWorld(String playerName) {
-		String result = "";
-		Player p = ((BukkitLoader)loader).getServer().getPlayerExact(playerName);
-		if (p != null) {
-			result = p.getWorld().getName();
-		}
-		return result;
-	}
-
-	@Override
-	public boolean isOnline(String playerName) {
-		return ((BukkitLoader)loader).getServer().getPlayerExact(playerName) != null;
-	}
 
 	@Override
 	public String addColor(String str) {
@@ -131,57 +95,6 @@ public class BukkitCaller extends Caller {
 	}
 
 	@Override
-	public int schedule(Runnable entry, long firstStart, long repeating) {
-		return schedule(entry, firstStart, repeating, false);
-	}
-
-	@Override
-	public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
-		if (!async) {
-			if (repeating == 0) {
-				return ((BukkitLoader)loader).getServer().getScheduler().runTaskLater(((BukkitLoader)loader), entry, firstStart * TICK_LENGTH).getTaskId();
-			} else {
-				return ((BukkitLoader)loader).getServer().getScheduler().scheduleSyncRepeatingTask(((BukkitLoader)loader), entry, firstStart * TICK_LENGTH, repeating * TICK_LENGTH);
-			}
-		} else {
-			if (repeating == 0) {
-				return ((BukkitLoader)loader).getServer().getScheduler().runTaskLaterAsynchronously(((BukkitLoader)loader), entry, firstStart * TICK_LENGTH).getTaskId();
-			} else {
-				return ((BukkitLoader)loader).getServer().getScheduler().runTaskTimerAsynchronously(((BukkitLoader)loader), entry, firstStart * TICK_LENGTH, repeating * TICK_LENGTH).getTaskId();
-			}
-		}
-	}
-
-	@Override
-	public List<String> getOnlinePlayers() {
-		List<String> list = new ArrayList<String>();
-		Player[] pList = ((BukkitLoader)loader).getServer().getOnlinePlayers();
-		for (Player p : pList) {
-			list.add(p.getName());
-		}
-		return list;
-	}
-
-	@Override
-	public void cancelSchedule(int id) {
-		((BukkitLoader)loader).getServer().getScheduler().cancelTask(id);
-	}
-
-	@Override
-	public int delay(Runnable entry, long start) {
-		return delay(entry, start, false);
-	}
-
-	@Override
-	public int delay(Runnable entry, long start, boolean async) {
-		if (!async) {
-			return ((BukkitLoader)loader).getServer().getScheduler().scheduleSyncDelayedTask(((BukkitLoader)loader), entry, start * TICK_LENGTH);
-		} else {
-			return ((BukkitLoader)loader).getServer().getScheduler().runTaskLaterAsynchronously(((BukkitLoader)loader), entry, start * TICK_LENGTH).getTaskId();
-		}
-	}
-
-	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
 		if (manager instanceof BukkitCommandReceiver) {
 			((BukkitLoader)loader).getCommand(name).setExecutor((BukkitCommandReceiver) manager);
@@ -198,10 +111,7 @@ public class BukkitCaller extends Caller {
 		return ((BukkitLoader)loader).getDescription().getVersion();
 	}
 
-	@Override
-	public boolean isOp(String playerName) {
-		return ((BukkitLoader)loader).getServer().getOfflinePlayer(playerName).isOp();
-	}
+
 
 	@Override
 	public void loadLibrary(String path) {

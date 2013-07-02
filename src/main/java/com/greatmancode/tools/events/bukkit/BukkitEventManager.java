@@ -21,12 +21,10 @@ package com.greatmancode.tools.events.bukkit;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
 import com.greatmancode.tools.interfaces.BukkitLoader;
-import com.greatmancode.tools.interfaces.Caller;
-import com.greatmancode.tools.interfaces.Loader;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -39,9 +37,9 @@ public class BukkitEventManager implements ServerEventManager {
 		map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());
 	}
 
-	public void eventRegistered(String event, Caller caller) {
+	public void eventRegistered(String event, ServerCaller serverCaller) {
 		if (map.containsKey(event)) {
-			Bukkit.getServer().getPluginManager().registerEvents(map.get(event), ((BukkitLoader)caller.getLoader()));
+			Bukkit.getServer().getPluginManager().registerEvents(map.get(event), ((BukkitLoader) serverCaller.getLoader()));
 		}
 	}
 }

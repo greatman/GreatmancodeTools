@@ -22,10 +22,10 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.greatmancode.tools.caller.bukkit.BukkitCaller;
-import com.greatmancode.tools.caller.canary.CanaryCaller;
-import com.greatmancode.tools.caller.spout.SpoutCaller;
-import com.greatmancode.tools.caller.unittest.UnitTestCaller;
+import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
+import com.greatmancode.tools.caller.canary.CanaryServerCaller;
+import com.greatmancode.tools.caller.spout.SpoutServerCaller;
+import com.greatmancode.tools.caller.unittest.UnitTestServerCaller;
 import com.greatmancode.tools.events.bukkit.BukkitEventManager;
 import com.greatmancode.tools.events.canary.CanaryEventManager;
 import com.greatmancode.tools.events.interfaces.EventHandler;
@@ -33,28 +33,27 @@ import com.greatmancode.tools.events.interfaces.Listener;
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.events.spout.SpoutEventManager;
 import com.greatmancode.tools.events.unittest.UnitTestEventManager;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.Common;
-import com.greatmancode.tools.interfaces.Loader;
 
 public class EventManager {
 
 	private Map<String, ListenerRegistration> eventList = new HashMap<String, ListenerRegistration>();
 	private static EventManager instance;
 	private ServerEventManager eventManager;
-	private Caller caller;
+	private ServerCaller serverCaller;
 
-	public EventManager(Caller caller) {
+	public EventManager(ServerCaller serverCaller) {
 		instance = this;
-		this.caller = caller;
+		this.serverCaller = serverCaller;
 
-		if (caller instanceof SpoutCaller) {
+		if (serverCaller instanceof SpoutServerCaller) {
 			eventManager = new SpoutEventManager();
-		} else if (caller instanceof BukkitCaller) {
+		} else if (serverCaller instanceof BukkitServerCaller) {
 		   eventManager = new BukkitEventManager();
-		} else if (caller instanceof CanaryCaller) {
+		} else if (serverCaller instanceof CanaryServerCaller) {
 		   eventManager = new CanaryEventManager();
-		} else if (caller instanceof UnitTestCaller) {
+		} else if (serverCaller instanceof UnitTestServerCaller) {
 			eventManager = new UnitTestEventManager();
 		}
 	}
@@ -92,7 +91,7 @@ public class EventManager {
 					if (parameters.length == 1) {
 						for (Class<?> parameter : parameters) {
 							if (Event.class.isAssignableFrom(parameter)) {
-								eventManager.eventRegistered(((Class<Event>)parameter).getName(), caller);
+								eventManager.eventRegistered(((Class<Event>)parameter).getName(), serverCaller);
 								if (eventList.containsKey(parameter.getName())) {
 									eventList.get(parameter.getName()).addListener(listener, method);
 								} else {

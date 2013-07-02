@@ -28,27 +28,26 @@ import com.alta189.simplesave.exceptions.TableRegistrationException;
 import com.alta189.simplesave.h2.H2Configuration;
 import com.alta189.simplesave.mysql.MySQLConfiguration;
 import com.alta189.simplesave.sqlite.SQLiteConfiguration;
-import com.greatmancode.tools.caller.canary.CanaryCaller;
-import com.greatmancode.tools.caller.spout.SpoutCaller;
+import com.greatmancode.tools.caller.spout.SpoutServerCaller;
 import com.greatmancode.tools.database.interfaces.DatabaseType;
 import com.greatmancode.tools.database.throwable.InvalidDatabaseConstructor;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class DatabaseManager {
 	private Database db = null;
-	private Caller caller;
+	private ServerCaller serverCaller;
 
-	public DatabaseManager(DatabaseType type, String tablePrefix, File path, Caller caller) throws InvalidDatabaseConstructor {
+	public DatabaseManager(DatabaseType type, String tablePrefix, File path, ServerCaller serverCaller) throws InvalidDatabaseConstructor {
 		if (type.equals(DatabaseType.H2) || type.equals(DatabaseType.SQLITE)) {
-			this.caller = caller;
+			this.serverCaller = serverCaller;
 			Configuration config;
 			if (type.equals(DatabaseType.H2)) {
-				caller.loadLibrary(caller.getDataFolder() + File.separator + "h2.jar");
+				serverCaller.loadLibrary(serverCaller.getDataFolder() + File.separator + "h2.jar");
 				config = new H2Configuration();
 				((H2Configuration) config).setDatabase(path.getAbsolutePath());
 			} else {
-				if (caller instanceof SpoutCaller) {
-					caller.loadLibrary(caller.getDataFolder() + File.separator + "sqlite.jar");
+				if (serverCaller instanceof SpoutServerCaller) {
+					serverCaller.loadLibrary(serverCaller.getDataFolder() + File.separator + "sqlite.jar");
 				}
 				config = new SQLiteConfiguration(path.getAbsolutePath());
 				((SQLiteConfiguration) config).setPrefix(tablePrefix);
@@ -59,11 +58,11 @@ public class DatabaseManager {
 		}
 	}
 
-	public DatabaseManager(DatabaseType type, String address, int port, String username, String password, String database, String tablePrefix, Caller caller) throws InvalidDatabaseConstructor {
+	public DatabaseManager(DatabaseType type, String address, int port, String username, String password, String database, String tablePrefix, ServerCaller serverCaller) throws InvalidDatabaseConstructor {
 		if (type.equals(DatabaseType.MYSQL)) {
-			this.caller = caller;
-			if (caller instanceof SpoutCaller) {
-				caller.loadLibrary(caller.getDataFolder() + File.separator + "mysql.jar");
+			this.serverCaller = serverCaller;
+			if (serverCaller instanceof SpoutServerCaller) {
+				serverCaller.loadLibrary(serverCaller.getDataFolder() + File.separator + "mysql.jar");
 			}
 			MySQLConfiguration config = new MySQLConfiguration();
 			config.setHost(address);

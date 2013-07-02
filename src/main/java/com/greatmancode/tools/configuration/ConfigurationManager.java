@@ -19,38 +19,36 @@
 package com.greatmancode.tools.configuration;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
-import com.greatmancode.tools.caller.bukkit.BukkitCaller;
-import com.greatmancode.tools.caller.canary.CanaryCaller;
-import com.greatmancode.tools.caller.spout.SpoutCaller;
-import com.greatmancode.tools.caller.unittest.UnitTestCaller;
+import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
+import com.greatmancode.tools.caller.canary.CanaryServerCaller;
+import com.greatmancode.tools.caller.spout.SpoutServerCaller;
+import com.greatmancode.tools.caller.unittest.UnitTestServerCaller;
 import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
 import com.greatmancode.tools.configuration.canary.CanaryConfig;
 import com.greatmancode.tools.configuration.spout.SpoutConfig;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 /**
  * Configuration Loader. Load the configuration with the Server configuration manager.
  * @author greatman
  */
 public class ConfigurationManager {
-	private Caller caller;
+	private ServerCaller serverCaller;
 
-	public ConfigurationManager(Caller caller) {
-		this.caller = caller;
+	public ConfigurationManager(ServerCaller serverCaller) {
+		this.serverCaller = serverCaller;
 	}
 
 	public Config loadFile(File folder, String fileName) {
 		Config file = null;
 
-		if (caller instanceof BukkitCaller || caller instanceof UnitTestCaller) {
-			file = new BukkitConfig(folder, fileName, caller);
-		} else if (caller instanceof SpoutCaller) {
-			file = new SpoutConfig(folder, fileName, caller);
-		} else if (caller instanceof CanaryCaller) {
-			file = new CanaryConfig(folder, fileName, caller);
+		if (serverCaller instanceof BukkitServerCaller || serverCaller instanceof UnitTestServerCaller) {
+			file = new BukkitConfig(folder, fileName, serverCaller);
+		} else if (serverCaller instanceof SpoutServerCaller) {
+			file = new SpoutConfig(folder, fileName, serverCaller);
+		} else if (serverCaller instanceof CanaryServerCaller) {
+			file = new CanaryConfig(folder, fileName, serverCaller);
 		}
 		return file;
 	}

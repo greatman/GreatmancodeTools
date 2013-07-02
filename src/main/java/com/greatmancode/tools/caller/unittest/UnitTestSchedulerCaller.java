@@ -16,10 +16,44 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.events.interfaces;
+package com.greatmancode.tools.caller.unittest;
 
+import com.greatmancode.tools.interfaces.caller.SchedulerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
-public interface ServerEventManager {
-	void eventRegistered(String event, ServerCaller serverCaller);
+public class UnitTestSchedulerCaller extends SchedulerCaller {
+
+	public UnitTestSchedulerCaller(ServerCaller caller) {
+		super(caller);
+	}
+
+	@Override
+	public int schedule(Runnable entry, long firstStart, long repeating) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void cancelSchedule(int id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int delay(Runnable entry, long start) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delay(Runnable entry, long start, boolean async) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

@@ -43,7 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.greatmancode.tools.configuration.Config;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -54,13 +54,13 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public class BukkitConfig extends Config {
 	private final YamlConfiguration configFile;
 
-	public BukkitConfig(InputStream is, Caller caller) {
-		super(is, caller);
+	public BukkitConfig(InputStream is, ServerCaller serverCaller) {
+		super(is, serverCaller);
 		configFile = YamlConfiguration.loadConfiguration(is);
 	}
 
-	public BukkitConfig(File folder, String fileName, Caller caller) {
-		super(folder, fileName, caller);
+	public BukkitConfig(File folder, String fileName, ServerCaller serverCaller) {
+		super(folder, fileName, serverCaller);
 		configFile = YamlConfiguration.loadConfiguration(file);
 	}
 
@@ -95,7 +95,7 @@ public class BukkitConfig extends Config {
 		try {
 			configFile.save(file);
 		} catch (IOException e) {
-			caller.getLogger().severe("Error while saving + " + file.getName() + ". Error: " + e.getMessage());
+			serverCaller.getLogger().severe("Error while saving + " + file.getName() + ". Error: " + e.getMessage());
 		}
 	}
 

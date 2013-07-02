@@ -20,8 +20,10 @@ package com.greatmancode.tools.interfaces;
 
 import java.util.logging.Logger;
 
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
+
 public interface Common {
-	public void onEnable(Caller caller, Logger log);
+	public void onEnable(ServerCaller serverCaller, Logger log);
 
 	public void onDisable();
 }

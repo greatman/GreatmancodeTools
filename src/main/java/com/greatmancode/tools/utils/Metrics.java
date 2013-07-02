@@ -53,7 +53,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Method;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
@@ -62,14 +61,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 
-import com.greatmancode.tools.caller.bukkit.BukkitCaller;
-import com.greatmancode.tools.caller.spout.SpoutCaller;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
+import com.greatmancode.tools.caller.spout.SpoutServerCaller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 /**
  * <p> The metrics class obtains data about a plugin and submits statistics about it to the metrics backend. </p> <p>
@@ -148,13 +146,13 @@ public class Metrics {
 	 */
 	private Thread thread = null;
 
-	private final Caller caller;
+	private final ServerCaller serverCaller;
 
-	public Metrics(String pluginName, String pluginVersion, Caller caller) throws IOException {
+	public Metrics(String pluginName, String pluginVersion, ServerCaller serverCaller) throws IOException {
 		if (pluginName == null || pluginVersion == null) {
 			throw new IllegalArgumentException("Plugin cannot be null");
 		}
-		this.caller = caller;
+		this.serverCaller = serverCaller;
 		this.pluginName = pluginName;
 		this.pluginVersion = pluginVersion;
 
@@ -182,21 +180,21 @@ public class Metrics {
 	}
 
 	public String getFullServerVersion() {
-		if (caller instanceof SpoutCaller) {
-			return "Spout " + caller.getServerVersion();
-		} else if (caller instanceof BukkitCaller) {
-			return caller.getServerVersion();
+		if (serverCaller instanceof SpoutServerCaller) {
+			return "Spout " + serverCaller.getServerVersion();
+		} else if (serverCaller instanceof BukkitServerCaller) {
+			return serverCaller.getServerVersion();
 		}
 		return "UNKNOWN";
 	}
 
 	public int getPlayersOnline() {
-		return caller.getOnlinePlayers().size();
+		return serverCaller.getPlayerCaller().getOnlinePlayers().size();
 	}
 
 
 	public File getConfigFile() {
-		return new File(new File(caller.getDataFolder().getParentFile(), "PluginMetrics"), "config.yml");
+		return new File(new File(serverCaller.getDataFolder().getParentFile(), "PluginMetrics"), "config.yml");
 	}
 
 	/**

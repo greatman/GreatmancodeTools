@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.interfaces;
+package com.greatmancode.tools.interfaces.caller;
 
 import java.io.File;
 import java.util.List;
@@ -24,21 +24,46 @@ import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
+import com.greatmancode.tools.interfaces.Loader;
 
 /**
- * Represents a server Caller
+ * Represents a server ServerCaller
  * @author greatman
  */
-public abstract class Caller {
+public abstract class ServerCaller {
 	private String commandPrefix = "";
+	private PlayerCaller playerCaller;
+	private SchedulerCaller schedulerCaller;
+
 	protected final Loader loader;
 
-	public Caller(Loader loader) {
+	public ServerCaller(Loader loader) {
 		this.loader = loader;
+
+	}
+
+	protected void addPlayerCaller(PlayerCaller caller) {
+		if (this.playerCaller == null) {
+			this.playerCaller = caller;
+		}
+	}
+
+	protected void addSchedulerCaller(SchedulerCaller caller) {
+		if (this.schedulerCaller == null) {
+			this.schedulerCaller = caller;
+		}
 	}
 
 	public Loader getLoader() {
 		return loader;
+	}
+
+	public PlayerCaller getPlayerCaller() {
+		return playerCaller;
+	}
+
+	public SchedulerCaller getSchedulerCaller() {
+		return schedulerCaller;
 	}
 
 	/**
@@ -54,34 +79,6 @@ public abstract class Caller {
 		return commandPrefix;
 	}
 
-	/**
-	 * Check the permissions of a player
-	 * @param playerName The player name to check
-	 * @param perm The permission node to check
-	 * @return True if the player have the permission. Else false (Always true for the Console)
-	 */
-	public abstract boolean checkPermission(String playerName, String perm);
-
-	/**
-	 * Sends a message to a player
-	 * @param playerName The player name to send the message
-	 * @param message The message to send
-	 */
-	public abstract void sendMessage(String playerName, String message);
-
-	/**
-	 * Retrieve the world name that a player is currently in
-	 * @param playerName The player name to retrieve the world
-	 * @return The world name the player is currently in. Returns "" when the player is offline
-	 */
-	public abstract String getPlayerWorld(String playerName);
-
-	/**
-	 * Checks if a player is online
-	 * @param playerName The player name
-	 * @return True if the player is online. Else false.
-	 */
-	public abstract boolean isOnline(String playerName);
 
 	/**
 	 * Add color in a message
@@ -110,61 +107,6 @@ public abstract class Caller {
 	public abstract File getDataFolder();
 
 	/**
-	 * Schedule something to be run each X seconds.
-	 *
-	 * @param entry the runnable class
-	 * @param firstStart When we should run this class first?
-	 * @param repeating What is the interval to be run at? (In seconds)
-	 */
-	/**
-	 * Schedule a repeating task to be run in non-async mode.
-	 * @param entry The Runnable to be run.
-	 * @param firstStart When should the task be run (In seconds)
-	 * @param repeating How much seconds to be waiting bewtween each repeats? (0 to disable)
-	 * @return the task ID
-	 */
-	public abstract int schedule(Runnable entry, long firstStart, long repeating);
-
-	/**
-	 * Schedule a repeating task to be run.
-	 * @param entry The Runnable to be run.
-	 * @param firstStart When should the task be run (In seconds)
-	 * @param repeating How much seconds to be waiting bewtween each repeats? (0 to disable)
-	 * @param async Should the task be async? (Threaded)
-	 * @return the task ID
-	 */
-	public abstract int schedule(Runnable entry, long firstStart, long repeating, boolean async);
-
-	/**
-	 * Cancel a current scheduled task
-	 * @param id The task ID.
-	 */
-	public abstract void cancelSchedule(int id);
-
-	/**
-	 * Delay a task
-	 * @param entry The task to delay
-	 * @param start When should the task be started? (In seconds)
-	 * @return The task ID
-	 */
-	public abstract int delay(Runnable entry, long start);
-
-	/**
-	 * Delay a task
-	 * @param entry The task to delay
-	 * @param start When should the task be started? (In seconds)
-	 * @param async Should the task be Async? (Threaded)
-	 * @return The task ID
-	 */
-	public abstract int delay(Runnable entry, long start, boolean async);
-
-	/**
-	 * Retrieve a list of online players
-	 * @return A list of all players online.
-	 */
-	public abstract List<String> getOnlinePlayers();
-
-	/**
 	 * Add a command in the server
 	 * @param name The name of the command
 	 * @param help The help line of the command
@@ -183,13 +125,6 @@ public abstract class Caller {
 	 * @return The plugin version.
 	 */
 	public abstract String getPluginVersion();
-
-	/**
-	 * Check if the user is a Operator.
-	 * @param playerName The player name to check
-	 * @return True if the player is a OP else false.
-	 */
-	public abstract boolean isOp(String playerName);
 
 	/**
 	 * Load a library.

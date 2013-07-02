@@ -18,22 +18,21 @@
  */
 package com.greatmancode.tools.events;
 
-import com.greatmancode.tools.caller.bukkit.BukkitCaller;
 import com.greatmancode.tools.events.event.EconomyChangeEvent;
 import com.greatmancode.tools.events.interfaces.EventHandler;
 import com.greatmancode.tools.events.interfaces.Listener;
-import com.greatmancode.tools.interfaces.Caller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class EventListener implements Listener {
 
-	private Caller caller;
+	private ServerCaller serverCaller;
 
-	public EventListener(Caller caller) {
-		this.caller = caller;
+	public EventListener(ServerCaller serverCaller) {
+		this.serverCaller = serverCaller;
 	}
 
 	@EventHandler
 	public void onEconomyChange(EconomyChangeEvent event) {
-		caller.throwEvent(event);
+		serverCaller.throwEvent(event);
 	}
 }

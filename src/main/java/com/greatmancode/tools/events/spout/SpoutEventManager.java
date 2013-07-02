@@ -23,8 +23,7 @@ import java.util.Map;
 
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
-import com.greatmancode.tools.interfaces.Caller;
-import com.greatmancode.tools.interfaces.Loader;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import org.spout.api.Spout;
 import org.spout.api.event.Listener;
@@ -38,9 +37,9 @@ public class SpoutEventManager implements ServerEventManager {
 	}
 
 	@Override
-	public void eventRegistered(String event, Caller caller) {
+	public void eventRegistered(String event, ServerCaller serverCaller) {
 		if (map.containsKey(event)) {
-			Spout.getEngine().getEventManager().registerEvents(map.get(event), caller.getLoader());
+			Spout.getEngine().getEventManager().registerEvents(map.get(event), serverCaller.getLoader());
 		}
 	}
 }
