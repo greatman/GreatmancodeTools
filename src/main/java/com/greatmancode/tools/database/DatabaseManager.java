@@ -89,6 +89,11 @@ public class DatabaseManager {
 		}
 	}
 
+	public void close() throws ConnectionException {
+		if (db != null) {
+			db.close();
+		}
+	}
 	public Database getDatabase() {
 		return db;
 	}
