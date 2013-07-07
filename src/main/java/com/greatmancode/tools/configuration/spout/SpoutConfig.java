@@ -44,9 +44,9 @@ import java.util.Map;
 import com.greatmancode.tools.configuration.Config;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
-import org.spout.api.exception.ConfigurationException;
-import org.spout.api.util.config.ConfigurationNode;
-import org.spout.api.util.config.yaml.YamlConfiguration;
+import org.spout.cereal.config.ConfigurationException;
+import org.spout.cereal.config.ConfigurationNode;
+import org.spout.cereal.config.yaml.YamlConfiguration;
 
 /**
  * This class handles YAML from Spout imports.
