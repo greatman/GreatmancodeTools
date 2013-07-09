@@ -77,7 +77,7 @@ public class SpoutServerCaller extends ServerCaller {
 
 	@Override
 	public boolean worldExist(String worldName) {
-		return ((SpoutLoader)loader).getEngine().getWorld(worldName) != null;
+		return ((Server)((SpoutLoader)loader).getEngine()).getWorld(worldName) != null;
 	}
 
 	@Override

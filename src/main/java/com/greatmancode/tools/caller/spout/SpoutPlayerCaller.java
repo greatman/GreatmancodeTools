@@ -37,7 +37,7 @@ public class SpoutPlayerCaller extends PlayerCaller {
 	@Override
 	public boolean checkPermission(String playerName, String perm) {
 		boolean result;
-		Player p = ((SpoutLoader)getCaller().getLoader()).getEngine().getPlayer(playerName, true);
+		Player p = ((Server)((SpoutLoader)getCaller().getLoader()).getEngine()).getPlayer(playerName, true);
 		if (p != null) {
 			result = p.hasPermission(perm);
 		} else {
@@ -49,7 +49,7 @@ public class SpoutPlayerCaller extends PlayerCaller {
 
 	@Override
 	public void sendMessage(String playerName, String message) {
-		Player p = ((SpoutLoader)getCaller().getLoader()).getEngine().getPlayer(playerName, true);
+		Player p = ((Server)((SpoutLoader)getCaller().getLoader()).getEngine()).getPlayer(playerName, true);
 		if (p != null) {
 
 			p.sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
@@ -61,7 +61,7 @@ public class SpoutPlayerCaller extends PlayerCaller {
 	@Override
 	public String getPlayerWorld(String playerName) {
 		String worldName = "";
-		Player p = ((SpoutLoader)getCaller().getLoader()).getEngine().getPlayer(playerName, true);
+		Player p = ((Server)((SpoutLoader)getCaller().getLoader()).getEngine()).getPlayer(playerName, true);
 		if (p != null) {
 			worldName = p.getWorld().getName();
 		}
@@ -70,7 +70,7 @@ public class SpoutPlayerCaller extends PlayerCaller {
 
 	@Override
 	public boolean isOnline(String playerName) {
-		return ((SpoutLoader)getCaller().getLoader()).getEngine().getPlayer(playerName, true) != null;
+		return ((Server)((SpoutLoader)getCaller().getLoader()).getEngine()).getPlayer(playerName, true) != null;
 	}
 
 	@Override
