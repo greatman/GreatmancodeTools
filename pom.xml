@@ -54,6 +54,10 @@
 			<id>CanaryUtil-repo</id>
 			<url>http://home.larry1123.net/plugin/repository/everything</url>
 		</repository>
+		<repository>
+			<id>MCStats</id>
+			<url>http://repo.mcstats.org/content/groups/public/</url>
+		</repository>
 	</repositories>
 
 	<distributionManagement>
@@ -114,7 +118,13 @@
 			<artifactId>CanaryUtil</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.mcstats.standalone</groupId>
+			<artifactId>metrics</artifactId>
+			<version>R7</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
