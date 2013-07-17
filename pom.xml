@@ -112,7 +112,7 @@
 		<dependency>
 			<groupId>net.larry1123</groupId>
 			<artifactId>CanaryUtil</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -181,6 +181,12 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+							<relocations>
+								<relocation>
+									<pattern>net.larry1123.lib</pattern>
+									<shadedPattern>com.greatmancode.craftconomy3.net.larry1123.lib</shadedPattern>
+								</relocation>
+							</relocations>
 							<artifactSet>
 								<excludes>
 									<exclude>junit:junit</exclude>

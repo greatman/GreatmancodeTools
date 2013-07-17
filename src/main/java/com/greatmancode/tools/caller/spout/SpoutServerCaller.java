@@ -19,9 +19,6 @@
 package com.greatmancode.tools.caller.spout;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
@@ -33,8 +30,6 @@ import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.SpoutLoader;
 
 import org.spout.api.Server;
-import org.spout.api.entity.Player;
-import org.spout.api.scheduler.TaskPriority;
 
 /**
  * Server serverCaller for Spout
@@ -72,6 +67,11 @@ public class SpoutServerCaller extends ServerCaller {
 		coloredString = coloredString.replace("{{PINK}}", SpoutChatStyle.PINK.toString());
 		coloredString = coloredString.replace("{{YELLOW}}", SpoutChatStyle.YELLOW.toString());
 		coloredString = coloredString.replace("{{WHITE}}", SpoutChatStyle.WHITE.toString());
+		coloredString = coloredString.replace("{{OBFUSCATED}}", SpoutChatStyle.OBFUSCATED.toString());
+		coloredString = coloredString.replace("{{BOLD}}", SpoutChatStyle.BOLD.toString());
+		coloredString = coloredString.replace("{{UNDERLINE}}", SpoutChatStyle.UNDERLINE.toString());
+		coloredString = coloredString.replace("{{ITALIC}}", SpoutChatStyle.ITALIC.toString());
+		coloredString = coloredString.replace("{{RESET}}", SpoutChatStyle.RESET.toString());
 		return coloredString;
 	}
 

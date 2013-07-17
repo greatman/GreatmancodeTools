@@ -76,6 +76,12 @@ public class BukkitServerCaller extends ServerCaller {
 		coloredString = coloredString.replace("{{PINK}}", ChatColor.LIGHT_PURPLE.toString());
 		coloredString = coloredString.replace("{{YELLOW}}", ChatColor.YELLOW.toString());
 		coloredString = coloredString.replace("{{WHITE}}", ChatColor.WHITE.toString());
+		coloredString = coloredString.replace("{{OBFUSCATED}}", ChatColor.MAGIC.toString());
+		coloredString = coloredString.replace("{{BOLD}}", ChatColor.BOLD.toString());
+		coloredString = coloredString.replace("{{STRIKETHROUGH}}", ChatColor.STRIKETHROUGH.toString());
+		coloredString = coloredString.replace("{{UNDERLINE}}", ChatColor.UNDERLINE.toString());
+		coloredString = coloredString.replace("{{ITALIC}}", ChatColor.ITALIC.toString());
+		coloredString = coloredString.replace("{{RESET}}", ChatColor.RESET.toString());
 		return coloredString;
 	}
 

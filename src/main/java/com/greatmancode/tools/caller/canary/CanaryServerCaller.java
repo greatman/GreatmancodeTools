@@ -19,8 +19,6 @@
 package com.greatmancode.tools.caller.canary;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.canary.CanaryCommandReceiver;
@@ -34,9 +32,8 @@ import com.greatmancode.tools.interfaces.Loader;
 
 import net.canarymod.Canary;
 import net.canarymod.chat.Colors;
+import net.canarymod.chat.TextFormat;
 import net.canarymod.commandsys.CommandDependencyException;
-import net.canarymod.tasks.ServerTask;
-import net.canarymod.tasks.ServerTaskManager;
 import net.larry1123.lib.CanaryUtil;
 import net.larry1123.lib.plugin.commands.CommandData;
 
@@ -72,6 +69,12 @@ public class CanaryServerCaller extends ServerCaller {
 		coloredString = coloredString.replace("{{PINK}}", Colors.PINK.toString());
 		coloredString = coloredString.replace("{{YELLOW}}", Colors.YELLOW.toString());
 		coloredString = coloredString.replace("{{WHITE}}", Colors.WHITE.toString());
+		coloredString = coloredString.replace("{{OBFUSCATED}}", TextFormat.RANDOM.toString());
+		coloredString = coloredString.replace("{{BOLD}}", TextFormat.BOLD.toString());
+		coloredString = coloredString.replace("{{STRIKETHROUGH}}", TextFormat.STRIKE.toString());
+		coloredString = coloredString.replace("{{UNDERLINE}}", TextFormat.UNDERLINED.toString());
+		coloredString = coloredString.replace("{{ITALIC}}", TextFormat.ITALICS.toString());
+		coloredString = coloredString.replace("{{RESET}}", TextFormat.RESET.toString());
 		return coloredString;
 	}
 
