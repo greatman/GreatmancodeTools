@@ -18,6 +18,8 @@
  */
 package com.greatmancode.tools.commands.spout;
 
+import java.util.List;
+
 import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
@@ -39,18 +41,19 @@ public class SpoutCommandReceiver implements Executor, CommandReceiver {
 	public void execute(CommandSource source, Command command, CommandArguments args) throws CommandException {
 		SubCommand subCommand = commandHandler.getCommand(command.getName());
 		if (subCommand != null) {
+			List<String> realArgs = args.get();
 			String subCommandValue = "";
 			String[] newArgs;
 			if (args.length() <= 1) {
 				newArgs = new String[0];
 				if (args.length() != 0) {
-					subCommandValue = args.getString(0);
+					subCommandValue = realArgs.get(0);
 				}
 			} else {
 				newArgs = new String[args.length() - 1];
-				subCommandValue = args.getString(0);
+				subCommandValue = realArgs.get(0);
 				for (int i = 1; i <= newArgs.length; i++) {
-					newArgs[i - 1] = args.getString(i);
+					newArgs[i - 1] = realArgs.get(i);
 				}
 			}
 			subCommand.execute(subCommandValue, source.getName(), newArgs);
