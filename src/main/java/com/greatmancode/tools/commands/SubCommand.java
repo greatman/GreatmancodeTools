@@ -60,6 +60,10 @@ public class SubCommand implements Command {
 				if (entry instanceof CommandExecutor) {
 					CommandExecutor cmd = ((CommandExecutor) entry);
 					if (commandHandler.getServerCaller().getPlayerCaller().checkPermission(sender, cmd.getPermissionNode())) {
+						if (cmd.playerOnly() && sender.equalsIgnoreCase("console")) {
+							commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, "{{DARK_RED}}Only players can do this command!");
+							return;
+						}
 						if (args.length >= cmd.minArgs() && args.length <= cmd.maxArgs()) {
 							cmd.execute(sender, args);
 						} else {
