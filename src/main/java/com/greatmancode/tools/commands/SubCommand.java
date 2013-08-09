@@ -38,6 +38,7 @@ public class SubCommand implements Command {
 		this.parent = parent;
 		this.level = level;
 	}
+
 	public SubCommand(String name, CommandHandler commandHandler, SubCommand parent) {
 		this(name, commandHandler, parent, 0);
 	}
@@ -89,27 +90,28 @@ public class SubCommand implements Command {
 							System.arraycopy(args, 1, newArgs, 0, args.length - 1);
 						}
 						((SubCommand) entry).execute(subSubCommand, sender, newArgs);
-					} else {
-						commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, "{{DARK_GREEN}}========= {{WHITE}}Help {{DARK_GREEN}}========");
-						for (Map.Entry<String, Command> iteratorEntry : commandList.entrySet()) {
-							if (iteratorEntry instanceof CommandExecutor) {
-								CommandExecutor cmd = ((CommandExecutor) iteratorEntry.getValue());
-								if (commandHandler.getServerCaller().getPlayerCaller().checkPermission(sender, cmd.getPermissionNode())) {
-									commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, cmd.help());
-								}
-							} else {
-								String subCommandResult = "";
-								SubCommand subCmd = this;
-								while (subCmd.parent != null) {
-									subCommandResult = subCmd.parent.name + "" + subCommandResult;
-								}
-								subCommandResult = "/" + subCommandResult + " " + name;
-								commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, subCommandResult);
-							}
-						}
 					}
 				}
-			}
+			} else {
+                commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, "{{DARK_GREEN}}========= {{WHITE}}Help {{DARK_GREEN}}========");
+                for (Map.Entry<String, Command> iteratorEntry : commandList.entrySet()) {
+                    Command commandEntry = iteratorEntry.getValue();
+                    if (commandEntry instanceof CommandExecutor) {
+                        CommandExecutor cmd = ((CommandExecutor) iteratorEntry.getValue());
+                        if (commandHandler.getServerCaller().getPlayerCaller().checkPermission(sender, cmd.getPermissionNode())) {
+                            commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, cmd.help());
+                        }
+                    } else {
+                        SubCommand subCmd = (SubCommand) commandEntry;
+                        String subCommandResult = "";
+                        while (subCmd.parent != null) {
+                            subCommandResult = subCmd.parent.name + "" + subCommandResult;
+                        }
+                        subCommandResult = "/" + subCommandResult + " " + subCmd.name;
+                        commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, subCommandResult);
+                    }
+                }
+            }
 		} else {
 			commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, commandHandler.getWrongLevelMsg());
 		}
