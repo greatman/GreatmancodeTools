@@ -26,9 +26,9 @@ import com.greatmancode.tools.events.EventManager;
  * @author greatman
  */
 public interface Loader {
-	public void onEnable();
+	void onEnable();
 
-	public void onDisable();
+	void onDisable();
 
 	/**
 	 * Give the current server backend.

@@ -26,9 +26,9 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.events.canary.hooks.EconomyChangeHook;
 import com.greatmancode.tools.events.event.EconomyChangeEvent;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.CanaryLoader;
 import com.greatmancode.tools.interfaces.Loader;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import net.canarymod.Canary;
 import net.canarymod.chat.Colors;
@@ -38,7 +38,6 @@ import net.larry1123.lib.CanaryUtil;
 import net.larry1123.lib.plugin.commands.CommandData;
 
 public class CanaryServerCaller extends ServerCaller {
-
 	public CanaryServerCaller(Loader loader) {
 		super(loader);
 		addPlayerCaller(new CanaryPlayerCaller(this));
@@ -47,7 +46,7 @@ public class CanaryServerCaller extends ServerCaller {
 
 	@Override
 	public void disablePlugin() {
-		Canary.loader().disablePlugin(((CanaryLoader)loader).getName());
+		Canary.loader().disablePlugin(((CanaryLoader) loader).getName());
 	}
 
 	@Override
@@ -95,12 +94,11 @@ public class CanaryServerCaller extends ServerCaller {
 		return folder;
 	}
 
-
 	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
 
 		try {
-			CanaryUtil.commands().registerCommand(new CommandData(new String[] {name}, new String[0], help, help), ((CanaryLoader)loader), null, ((CanaryCommandReceiver)manager), false);
+			CanaryUtil.commands().registerCommand(new CommandData(new String[]{name}, new String[0], help, help), ((CanaryLoader) loader), null, ((CanaryCommandReceiver) manager), false);
 		} catch (CommandDependencyException e) {
 			e.printStackTrace();
 		}
@@ -113,7 +111,7 @@ public class CanaryServerCaller extends ServerCaller {
 
 	@Override
 	public String getPluginVersion() {
-		return ((CanaryLoader)loader).getVersion();
+		return ((CanaryLoader) loader).getVersion();
 	}
 
 	@Override
@@ -136,13 +134,13 @@ public class CanaryServerCaller extends ServerCaller {
 
 	@Override
 	public Logger getLogger() {
-		return ((CanaryLoader)loader).getLogman().getParent();
+		return ((CanaryLoader) loader).getLogman().getParent();
 	}
 
 	@Override
 	public void throwEvent(Event event) {
 		if (event instanceof EconomyChangeEvent) {
-			Canary.hooks().callHook(new EconomyChangeHook(((EconomyChangeEvent) event).getAccount(),((EconomyChangeEvent) event).getAmount()));
+			Canary.hooks().callHook(new EconomyChangeHook(((EconomyChangeEvent) event).getAccount(), ((EconomyChangeEvent) event).getAmount()));
 		}
 	}
 }

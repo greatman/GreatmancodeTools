@@ -26,7 +26,6 @@ import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.plugin.PluginListener;
 
 public class PlayerJoinEventListener implements PluginListener {
-
 	@HookHandler
 	public void onPlayerJoin(ConnectionHook hook) {
 		com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(hook.getPlayer().getName(), hook.getPlayer().getDisplayName(), hook.getPlayer().getWorld().getName()));

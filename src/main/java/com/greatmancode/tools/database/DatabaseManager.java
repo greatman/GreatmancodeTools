@@ -94,6 +94,7 @@ public class DatabaseManager {
 			db.close();
 		}
 	}
+
 	public Database getDatabase() {
 		return db;
 	}

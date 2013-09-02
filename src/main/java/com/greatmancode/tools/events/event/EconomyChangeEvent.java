@@ -24,7 +24,6 @@ import com.greatmancode.tools.events.Event;
  * Represents a change in a economy account
  */
 public class EconomyChangeEvent extends Event {
-
 	private final String account;
 	private final double amount;
 

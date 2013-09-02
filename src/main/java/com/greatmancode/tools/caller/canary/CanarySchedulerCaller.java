@@ -18,19 +18,14 @@
  */
 package com.greatmancode.tools.caller.canary;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.greatmancode.tools.interfaces.CanaryLoader;
 import com.greatmancode.tools.interfaces.caller.SchedulerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
-import net.canarymod.Canary;
 import net.canarymod.tasks.ServerTask;
 import net.canarymod.tasks.ServerTaskManager;
 
 public class CanarySchedulerCaller extends SchedulerCaller {
-
 	public CanarySchedulerCaller(ServerCaller caller) {
 		super(caller);
 	}
@@ -46,7 +41,7 @@ public class CanarySchedulerCaller extends SchedulerCaller {
 				}
 			});
 		} else {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader)getCaller().getLoader()), firstStart, false) {
+			ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), firstStart, false) {
 				@Override
 				public void run() {
 					entry.run();
@@ -59,14 +54,14 @@ public class CanarySchedulerCaller extends SchedulerCaller {
 	@Override
 	public int schedule(final Runnable entry, long firstStart, long repeating, boolean async) {
 		if (repeating != 0) {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader)getCaller().getLoader()), repeating, true) {
+			ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), repeating, true) {
 				@Override
 				public void run() {
 					entry.run();
 				}
 			});
 		} else {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader)getCaller().getLoader()), firstStart, false) {
+			ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), firstStart, false) {
 				@Override
 				public void run() {
 					entry.run();
@@ -84,7 +79,7 @@ public class CanarySchedulerCaller extends SchedulerCaller {
 	@Override
 	public int delay(final Runnable entry, long start) {
 
-		ServerTaskManager.addTask(new ServerTask(((CanaryLoader)getCaller().getLoader()), start, false) {
+		ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), start, false) {
 			@Override
 			public void run() {
 				entry.run();
@@ -95,7 +90,7 @@ public class CanarySchedulerCaller extends SchedulerCaller {
 
 	@Override
 	public int delay(final Runnable entry, long start, boolean async) {
-		ServerTaskManager.addTask(new ServerTask(((CanaryLoader)getCaller().getLoader()), start, false) {
+		ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), start, false) {
 			@Override
 			public void run() {
 				entry.run();

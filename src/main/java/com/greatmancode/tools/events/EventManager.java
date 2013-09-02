@@ -33,11 +33,10 @@ import com.greatmancode.tools.events.interfaces.Listener;
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.events.spout.SpoutEventManager;
 import com.greatmancode.tools.events.unittest.UnitTestEventManager;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.Common;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class EventManager {
-
 	private Map<String, ListenerRegistration> eventList = new HashMap<String, ListenerRegistration>();
 	private static EventManager instance;
 	private ServerEventManager eventManager;
@@ -50,9 +49,9 @@ public class EventManager {
 		if (serverCaller instanceof SpoutServerCaller) {
 			eventManager = new SpoutEventManager();
 		} else if (serverCaller instanceof BukkitServerCaller) {
-		   eventManager = new BukkitEventManager();
+			eventManager = new BukkitEventManager();
 		} else if (serverCaller instanceof CanaryServerCaller) {
-		   eventManager = new CanaryEventManager();
+			eventManager = new CanaryEventManager();
 		} else if (serverCaller instanceof UnitTestServerCaller) {
 			eventManager = new UnitTestEventManager();
 		}
@@ -91,16 +90,14 @@ public class EventManager {
 					if (parameters.length == 1) {
 						for (Class<?> parameter : parameters) {
 							if (Event.class.isAssignableFrom(parameter)) {
-								eventManager.eventRegistered(((Class<Event>)parameter).getName(), serverCaller);
+								eventManager.eventRegistered(((Class<Event>) parameter).getName(), serverCaller);
 								if (eventList.containsKey(parameter.getName())) {
 									eventList.get(parameter.getName()).addListener(listener, method);
 								} else {
 									ListenerRegistration registration = new ListenerRegistration();
 									registration.addListener(listener, method);
 									eventList.put(parameter.getName(), registration);
-
 								}
-
 							}
 						}
 					}

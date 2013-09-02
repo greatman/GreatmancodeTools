@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public interface Common {
-	public void onEnable(ServerCaller serverCaller, Logger log);
+	void onEnable(ServerCaller serverCaller, Logger log);
 
-	public void onDisable();
+	void onDisable();
 }

@@ -22,10 +22,10 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class EconomyChangeEvent extends Event {
-
 	private static final HandlerList handlers = new HandlerList();
 	private final String account;
 	private final double amount;
+
 	public EconomyChangeEvent(String account, double amount) {
 		this.account = account;
 		this.amount = amount;

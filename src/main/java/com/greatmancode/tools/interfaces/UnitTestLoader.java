@@ -24,9 +24,11 @@ import com.greatmancode.tools.events.EventManager;
 
 public class UnitTestLoader implements Loader {
 	private EventManager eventManager;
+
 	public UnitTestLoader() {
 		this.eventManager = new EventManager(new UnitTestServerCaller(this));
 	}
+
 	@Override
 	public void onEnable() {
 

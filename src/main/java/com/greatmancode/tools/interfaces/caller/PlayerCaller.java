@@ -20,8 +20,6 @@ package com.greatmancode.tools.interfaces.caller;
 
 import java.util.List;
 
-import com.greatmancode.tools.interfaces.Loader;
-
 public abstract class PlayerCaller {
 	protected final ServerCaller caller;
 
@@ -74,5 +72,4 @@ public abstract class PlayerCaller {
 	 * @return True if the player is a OP else false.
 	 */
 	public abstract boolean isOp(String playerName);
-
 }

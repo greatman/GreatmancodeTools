@@ -22,7 +22,6 @@ import com.greatmancode.tools.interfaces.caller.SchedulerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class UnitTestSchedulerCaller extends SchedulerCaller {
-
 	public UnitTestSchedulerCaller(ServerCaller caller) {
 		super(caller);
 	}

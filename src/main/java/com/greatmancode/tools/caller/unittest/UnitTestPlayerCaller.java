@@ -25,7 +25,6 @@ import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class UnitTestPlayerCaller extends PlayerCaller {
-
 	public UnitTestPlayerCaller(ServerCaller caller) {
 		super(caller);
 	}

@@ -21,9 +21,9 @@ package com.greatmancode.tools.events.canary.hooks;
 import net.canarymod.hook.Hook;
 
 public class EconomyChangeHook extends Hook {
-
 	private final String account;
 	private final double amount;
+
 	public EconomyChangeHook(String account, double amount) {
 		this.account = account;
 		this.amount = amount;
@@ -36,5 +36,4 @@ public class EconomyChangeHook extends Hook {
 	public String getAccount() {
 		return account;
 	}
-
 }

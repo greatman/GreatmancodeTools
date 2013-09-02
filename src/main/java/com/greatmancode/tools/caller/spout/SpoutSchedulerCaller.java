@@ -20,14 +20,12 @@ package com.greatmancode.tools.caller.spout;
 
 import java.util.concurrent.TimeUnit;
 
-import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.SpoutLoader;
 import com.greatmancode.tools.interfaces.caller.SchedulerCaller;
 
 import org.spout.api.scheduler.TaskPriority;
 
 public class SpoutSchedulerCaller extends SchedulerCaller {
-
 	public SpoutSchedulerCaller(SpoutServerCaller caller) {
 		super(caller);
 	}
@@ -41,7 +39,7 @@ public class SpoutSchedulerCaller extends SchedulerCaller {
 	public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
 		//TODO: Spout don't have the Async anymore for some reasons..
 		//if (!async) {
-		return ((SpoutLoader)getCaller().getLoader()).getEngine().getScheduler().scheduleSyncRepeatingTask(getCaller().getLoader(), entry, TimeUnit.MILLISECONDS.convert(firstStart, TimeUnit.SECONDS), TimeUnit.MILLISECONDS.convert(repeating, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
+		return ((SpoutLoader) getCaller().getLoader()).getEngine().getScheduler().scheduleSyncRepeatingTask(getCaller().getLoader(), entry, TimeUnit.MILLISECONDS.convert(firstStart, TimeUnit.SECONDS), TimeUnit.MILLISECONDS.convert(repeating, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
 		//} else {
 		//return ((SpoutLoader)loader).getEngine().getScheduler().scheduleAsyncRepeatingTask(loader, entry, TimeUnit.MILLISECONDS.convert(firstStart, TimeUnit.SECONDS), TimeUnit.MILLISECONDS.convert(repeating, TimeUnit.SECONDS), TaskPriority.NORMAL);
 		//}
@@ -49,7 +47,7 @@ public class SpoutSchedulerCaller extends SchedulerCaller {
 
 	@Override
 	public void cancelSchedule(int id) {
-		((SpoutLoader)getCaller().getLoader()).getEngine().getScheduler().cancelTask(id);
+		((SpoutLoader) getCaller().getLoader()).getEngine().getScheduler().cancelTask(id);
 	}
 
 	@Override
@@ -60,9 +58,9 @@ public class SpoutSchedulerCaller extends SchedulerCaller {
 	@Override
 	public int delay(Runnable entry, long start, boolean async) {
 		if (!async) {
-			return ((SpoutLoader)getCaller().getLoader()).getEngine().getScheduler().scheduleSyncDelayedTask(getCaller().getLoader(), entry, TimeUnit.MILLISECONDS.convert(start, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
+			return ((SpoutLoader) getCaller().getLoader()).getEngine().getScheduler().scheduleSyncDelayedTask(getCaller().getLoader(), entry, TimeUnit.MILLISECONDS.convert(start, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
 		} else {
-			return ((SpoutLoader)getCaller().getLoader()).getEngine().getScheduler().scheduleAsyncDelayedTask(getCaller().getLoader(), entry, TimeUnit.MILLISECONDS.convert(start, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
+			return ((SpoutLoader) getCaller().getLoader()).getEngine().getScheduler().scheduleAsyncDelayedTask(getCaller().getLoader(), entry, TimeUnit.MILLISECONDS.convert(start, TimeUnit.SECONDS), TaskPriority.NORMAL).getTaskId();
 		}
 	}
 }

@@ -33,13 +33,12 @@ public class Event {
 	/**
 	 * Set cancelled status. Events which wish to be cancellable should implement Cancellable and implement setCancelled as:
 	 * <p/>
-	 *
+	 * <p/>
 	 * <pre>
 	 * public void setCancelled(boolean cancelled) {
 	 * 	super.setCancelled(cancelled);
 	 * }
 	 * </pre>
-	 *
 	 * @param cancelled True to cancel event
 	 */
 	protected void setCancelled(boolean cancelled) {
@@ -48,7 +47,6 @@ public class Event {
 
 	/**
 	 * Returning true will prevent calling.
-	 *
 	 * @return false if the event is propogating; events which do not implement Cancellable should never return true here.
 	 */
 	public boolean isCancelled() {

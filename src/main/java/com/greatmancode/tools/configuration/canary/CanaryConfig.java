@@ -23,68 +23,67 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.greatmancode.tools.configuration.Config;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.CanaryLoader;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import net.canarymod.config.Configuration;
 
 public class CanaryConfig extends Config {
-
 	public CanaryConfig(File folder, String fileName, ServerCaller serverCaller) {
 		super(folder, fileName, serverCaller);
 	}
 
 	@Override
 	public int getInt(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getInt(path);
+		return Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).getInt(path);
 	}
 
 	@Override
 	public long getLong(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getLong(path);
+		return Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).getLong(path);
 	}
 
 	@Override
 	public double getDouble(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getDouble(path);
+		return Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).getDouble(path);
 	}
 
 	@Override
 	public String getString(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getString(path);
+		return Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).getString(path);
 	}
 
 	@Override
 	public boolean getBoolean(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getBoolean(path);
+		return Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).getBoolean(path);
 	}
 
 	@Override
 	public void setValue(String path, Object value) {
 		if (value instanceof Boolean) {
-			Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).setBoolean(path, (Boolean) value);
+			Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).setBoolean(path, (Boolean) value);
 		} else if (value instanceof Long) {
-			Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).setLong(path, (Long) value);
+			Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).setLong(path, (Long) value);
 		} else if (value instanceof Double) {
-			Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).setDouble(path, (Double) value);
+			Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).setDouble(path, (Double) value);
 		} else if (value instanceof String) {
-			Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).setString(path, (String) value);
+			Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).setString(path, (String) value);
 		} else if (value instanceof Integer) {
-			Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).setInt(path, (Integer) value);
+			Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).setInt(path, (Integer) value);
 		}
-		Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).save();
+		Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).save();
 	}
 
 	@Override
 	public boolean has(String path) {
-		return Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).containsKey(path);
+		return Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).containsKey(path);
 	}
 
 	@Override
 	public Map<String, String> getStringMap(String path) {
 		Map<String, String> result = new HashMap<String, String>();
-		Map<String, String> map = Configuration.getPluginConfig(((CanaryLoader) serverCaller.getLoader()).getName()).getPropertiesMap();
-		for (Map.Entry<String, String> entry: map.entrySet()) {
+		Map<String, String> map = Configuration.getPluginConfig((CanaryLoader) serverCaller.getLoader()).getPropertiesMap();
+		for (Map.Entry<String, String> entry : map.entrySet()) {
 			if (entry.getKey().contains(path)) {
 				String key = entry.getKey().replace(path + ".", "");
 				result.put(key, entry.getValue());

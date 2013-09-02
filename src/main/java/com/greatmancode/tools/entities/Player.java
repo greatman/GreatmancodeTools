@@ -19,7 +19,6 @@
 package com.greatmancode.tools.entities;
 
 public class Player {
-
 	private String name;
 	private String displayName;
 	private String worldName;

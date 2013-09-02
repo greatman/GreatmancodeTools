@@ -28,8 +28,6 @@ import org.spout.api.Server;
 import org.spout.api.entity.Player;
 
 public class SpoutPlayerCaller extends PlayerCaller {
-
-
 	public SpoutPlayerCaller(SpoutServerCaller caller) {
 		super(caller);
 	}
@@ -37,7 +35,7 @@ public class SpoutPlayerCaller extends PlayerCaller {
 	@Override
 	public boolean checkPermission(String playerName, String perm) {
 		boolean result;
-		Player p = ((Server)((SpoutLoader)getCaller().getLoader()).getEngine()).getPlayer(playerName, true);
+		Player p = ((Server) ((SpoutLoader) getCaller().getLoader()).getEngine()).getPlayer(playerName, true);
 		if (p != null) {
 			result = p.hasPermission(perm);
 		} else {
@@ -49,19 +47,19 @@ public class SpoutPlayerCaller extends PlayerCaller {
 
 	@Override
 	public void sendMessage(String playerName, String message) {
-		Player p = ((Server)((SpoutLoader)getCaller().getLoader()).getEngine()).getPlayer(playerName, true);
+		Player p = ((Server) ((SpoutLoader) getCaller().getLoader()).getEngine()).getPlayer(playerName, true);
 		if (p != null) {
 
 			p.sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
 		} else {
-			((SpoutLoader)getCaller().getLoader()).getEngine().getCommandSource().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
+			((SpoutLoader) getCaller().getLoader()).getEngine().getCommandSource().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
 		}
 	}
 
 	@Override
 	public String getPlayerWorld(String playerName) {
 		String worldName = "";
-		Player p = ((Server)((SpoutLoader)getCaller().getLoader()).getEngine()).getPlayer(playerName, true);
+		Player p = ((Server) ((SpoutLoader) getCaller().getLoader()).getEngine()).getPlayer(playerName, true);
 		if (p != null) {
 			worldName = p.getWorld().getName();
 		}
@@ -70,19 +68,18 @@ public class SpoutPlayerCaller extends PlayerCaller {
 
 	@Override
 	public boolean isOnline(String playerName) {
-		return ((Server)((SpoutLoader)getCaller().getLoader()).getEngine()).getPlayer(playerName, true) != null;
+		return ((Server) ((SpoutLoader) getCaller().getLoader()).getEngine()).getPlayer(playerName, true) != null;
 	}
 
 	@Override
 	public List<String> getOnlinePlayers() {
 		List<String> list = new ArrayList<String>();
-		Player[] pList = ((Server) ((SpoutLoader)getCaller().getLoader()).getEngine()).getOnlinePlayers();
+		Player[] pList = ((Server) ((SpoutLoader) getCaller().getLoader()).getEngine()).getOnlinePlayers();
 		for (Player p : pList) {
 			list.add(p.getName());
 		}
 		return list;
 	}
-
 
 	@Override
 	public boolean isOp(String playerName) {

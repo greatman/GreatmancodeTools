@@ -55,14 +55,13 @@ public class VersionChecker {
 			if (nodeList.getLength() >= 1) {
 				Node node = nodeList.item(0);
 				if (node instanceof Element) {
-					String data = ((Element)node).getAttribute("number");
+					String data = ((Element) node).getAttribute("number");
 					if (!data.contains(currentVersion)) {
 						oldVersion = true;
 						newVersion = data;
 					}
 				}
 			}
-
 		} catch (Exception e) {
 			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Error while trying to check for the latest version. The error is: " + e.getMessage());
 		}

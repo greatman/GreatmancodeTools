@@ -114,5 +114,4 @@ public abstract class Config {
 	public abstract boolean has(String path);
 
 	public abstract Map<String, String> getStringMap(String path);
-
 }

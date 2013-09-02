@@ -51,6 +51,10 @@
 			<url>http://repo.greatmancode.com/content/groups/public/</url>
 		</repository>
 		<repository>
+			<id>CanaryLib-repo</id>
+			<url>http://repo.visualillusionsent.net/</url>
+		</repository>
+		<repository>
 			<id>CanaryUtil-repo</id>
 			<url>http://home.larry1123.net/plugin/repository/everything</url>
 		</repository>
@@ -107,12 +111,12 @@
 		<dependency>
 			<groupId>net.canarymod</groupId>
 			<artifactId>CanaryLib</artifactId>
-			<version>0.8-SNAPSHOT</version>
+			<version>1.0-RC-1</version>
 		</dependency>
 		<dependency>
 			<groupId>net.larry1123</groupId>
 			<artifactId>CanaryUtil</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<version>0.1.5-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

@@ -26,8 +26,7 @@ import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import net.canarymod.Canary;
 
-public class CanaryPlayerCaller extends PlayerCaller{
-
+public class CanaryPlayerCaller extends PlayerCaller {
 	public CanaryPlayerCaller(ServerCaller caller) {
 		super(caller);
 	}
@@ -47,7 +46,6 @@ public class CanaryPlayerCaller extends PlayerCaller{
 		} else {
 			Canary.getServer().getPlayer(playerName).message(getCaller().addColor(getCaller().getCommandPrefix() + message));
 		}
-
 	}
 
 	@Override

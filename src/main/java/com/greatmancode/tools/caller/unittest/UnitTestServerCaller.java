@@ -19,15 +19,13 @@
 package com.greatmancode.tools.caller.unittest;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.Loader;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 /**
  * Special serverCaller for unit tests.
@@ -94,8 +92,6 @@ public class UnitTestServerCaller extends ServerCaller {
 	public String getPluginVersion() {
 		return "1.0";
 	}
-
-
 
 	@Override
 	public void loadLibrary(String path) {

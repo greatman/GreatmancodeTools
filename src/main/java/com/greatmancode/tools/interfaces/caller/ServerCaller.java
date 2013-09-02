@@ -19,7 +19,6 @@
 package com.greatmancode.tools.interfaces.caller;
 
 import java.io.File;
-import java.util.List;
 import java.util.logging.Logger;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
@@ -34,12 +33,10 @@ public abstract class ServerCaller {
 	private String commandPrefix = "";
 	private PlayerCaller playerCaller;
 	private SchedulerCaller schedulerCaller;
-
 	protected final Loader loader;
 
 	public ServerCaller(Loader loader) {
 		this.loader = loader;
-
 	}
 
 	protected void addPlayerCaller(PlayerCaller caller) {
@@ -78,7 +75,6 @@ public abstract class ServerCaller {
 	public String getCommandPrefix() {
 		return commandPrefix;
 	}
-
 
 	/**
 	 * Add color in a message

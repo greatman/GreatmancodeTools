@@ -30,7 +30,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 
 public class BukkitEventManager implements ServerEventManager {
-
 	private Map<String, Listener> map = new HashMap<String, Listener>();
 
 	public BukkitEventManager() {

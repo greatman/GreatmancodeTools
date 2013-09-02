@@ -22,7 +22,6 @@ package com.greatmancode.tools.events.interfaces;
  * Interface for events that can be cancelled, to prevent them from propagating to downstream handlers.
  */
 public interface Cancellable {
-
 	/**
 	 * If an event stops propagating (ie, is cancelled) partway through an even
 	 * slot, that slot will not cease execution, but future even slots will not

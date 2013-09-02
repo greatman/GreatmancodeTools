@@ -26,7 +26,6 @@ import java.util.Map;
 import com.greatmancode.tools.events.interfaces.Listener;
 
 public class ListenerRegistration {
-
 	private Map<Listener, Method> list = new HashMap<Listener, Method>();
 
 	public void addListener(Listener listener, Method method) {

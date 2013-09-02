@@ -18,8 +18,6 @@
  */
 package com.greatmancode.tools.commands.canary;
 
-import java.util.Arrays;
-
 import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
@@ -28,7 +26,6 @@ import net.canarymod.chat.MessageReceiver;
 import net.larry1123.lib.plugin.commands.CommandExecute;
 
 public class CanaryCommandReceiver implements CommandReceiver, CommandExecute {
-
 	private CommandHandler commandHandler;
 
 	public CanaryCommandReceiver(CommandHandler commandHandler) {

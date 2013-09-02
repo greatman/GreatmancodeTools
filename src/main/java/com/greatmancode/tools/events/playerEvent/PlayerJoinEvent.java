@@ -22,8 +22,8 @@ import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.Event;
 
 public class PlayerJoinEvent extends Event {
-
 	private Player p;
+
 	public PlayerJoinEvent(Player p) {
 		this.p = p;
 	}

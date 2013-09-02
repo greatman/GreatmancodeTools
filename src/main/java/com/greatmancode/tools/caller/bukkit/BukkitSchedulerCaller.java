@@ -23,7 +23,6 @@ import com.greatmancode.tools.interfaces.caller.SchedulerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class BukkitSchedulerCaller extends SchedulerCaller {
-
 	private static final long TICK_LENGTH = 20L;
 
 	public BukkitSchedulerCaller(ServerCaller caller) {
@@ -39,24 +38,22 @@ public class BukkitSchedulerCaller extends SchedulerCaller {
 	public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
 		if (!async) {
 			if (repeating == 0) {
-				return ((BukkitLoader)getCaller().getLoader()).getServer().getScheduler().runTaskLater(((BukkitLoader)getCaller().getLoader()), entry, firstStart * TICK_LENGTH).getTaskId();
+				return ((BukkitLoader) getCaller().getLoader()).getServer().getScheduler().runTaskLater(((BukkitLoader) getCaller().getLoader()), entry, firstStart * TICK_LENGTH).getTaskId();
 			} else {
-				return ((BukkitLoader)getCaller().getLoader()).getServer().getScheduler().scheduleSyncRepeatingTask(((BukkitLoader)getCaller().getLoader()), entry, firstStart * TICK_LENGTH, repeating * TICK_LENGTH);
+				return ((BukkitLoader) getCaller().getLoader()).getServer().getScheduler().scheduleSyncRepeatingTask(((BukkitLoader) getCaller().getLoader()), entry, firstStart * TICK_LENGTH, repeating * TICK_LENGTH);
 			}
 		} else {
 			if (repeating == 0) {
-				return ((BukkitLoader)getCaller().getLoader()).getServer().getScheduler().runTaskLaterAsynchronously(((BukkitLoader)getCaller().getLoader()), entry, firstStart * TICK_LENGTH).getTaskId();
+				return ((BukkitLoader) getCaller().getLoader()).getServer().getScheduler().runTaskLaterAsynchronously(((BukkitLoader) getCaller().getLoader()), entry, firstStart * TICK_LENGTH).getTaskId();
 			} else {
-				return ((BukkitLoader)getCaller().getLoader()).getServer().getScheduler().runTaskTimerAsynchronously(((BukkitLoader)getCaller().getLoader()), entry, firstStart * TICK_LENGTH, repeating * TICK_LENGTH).getTaskId();
+				return ((BukkitLoader) getCaller().getLoader()).getServer().getScheduler().runTaskTimerAsynchronously(((BukkitLoader) getCaller().getLoader()), entry, firstStart * TICK_LENGTH, repeating * TICK_LENGTH).getTaskId();
 			}
 		}
 	}
 
-
-
 	@Override
 	public void cancelSchedule(int id) {
-		((BukkitLoader)getCaller().getLoader()).getServer().getScheduler().cancelTask(id);
+		((BukkitLoader) getCaller().getLoader()).getServer().getScheduler().cancelTask(id);
 	}
 
 	@Override
@@ -67,9 +64,9 @@ public class BukkitSchedulerCaller extends SchedulerCaller {
 	@Override
 	public int delay(Runnable entry, long start, boolean async) {
 		if (!async) {
-			return ((BukkitLoader)getCaller().getLoader()).getServer().getScheduler().scheduleSyncDelayedTask(((BukkitLoader)getCaller().getLoader()), entry, start * TICK_LENGTH);
+			return ((BukkitLoader) getCaller().getLoader()).getServer().getScheduler().scheduleSyncDelayedTask(((BukkitLoader) getCaller().getLoader()), entry, start * TICK_LENGTH);
 		} else {
-			return ((BukkitLoader)getCaller().getLoader()).getServer().getScheduler().runTaskLaterAsynchronously(((BukkitLoader)getCaller().getLoader()), entry, start * TICK_LENGTH).getTaskId();
+			return ((BukkitLoader) getCaller().getLoader()).getServer().getScheduler().runTaskLaterAsynchronously(((BukkitLoader) getCaller().getLoader()), entry, start * TICK_LENGTH).getTaskId();
 		}
 	}
 }

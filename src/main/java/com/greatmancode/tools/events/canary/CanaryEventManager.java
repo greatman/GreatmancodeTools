@@ -23,14 +23,13 @@ import java.util.Map;
 
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.CanaryLoader;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import net.canarymod.Canary;
 import net.canarymod.plugin.PluginListener;
 
 public class CanaryEventManager implements ServerEventManager {
-
 	private Map<String, PluginListener> map = new HashMap<String, PluginListener>();
 
 	public CanaryEventManager() {

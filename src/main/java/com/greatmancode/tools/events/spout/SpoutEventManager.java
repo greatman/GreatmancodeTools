@@ -29,7 +29,6 @@ import org.spout.api.Spout;
 import org.spout.api.event.Listener;
 
 public class SpoutEventManager implements ServerEventManager {
-
 	private Map<String, Listener> map = new HashMap<String, Listener>();
 
 	public SpoutEventManager() {

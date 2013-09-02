@@ -18,8 +18,6 @@
  */
 package com.greatmancode.tools.interfaces.caller;
 
-import com.greatmancode.tools.interfaces.Loader;
-
 public abstract class SchedulerCaller {
 	protected final ServerCaller caller;
 

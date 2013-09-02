@@ -24,7 +24,6 @@ import com.greatmancode.tools.events.interfaces.Listener;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class EventListener implements Listener {
-
 	private ServerCaller serverCaller;
 
 	public EventListener(ServerCaller serverCaller) {

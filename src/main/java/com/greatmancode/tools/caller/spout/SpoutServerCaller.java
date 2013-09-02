@@ -25,9 +25,9 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.commands.spout.SpoutCommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.events.event.EconomyChangeEvent;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.SpoutLoader;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import org.spout.api.Server;
 
@@ -36,7 +36,6 @@ import org.spout.api.Server;
  * @author greatman
  */
 public class SpoutServerCaller extends ServerCaller {
-
 	public SpoutServerCaller(Loader loader) {
 		super(loader);
 		addPlayerCaller(new SpoutPlayerCaller(this));
@@ -45,7 +44,7 @@ public class SpoutServerCaller extends ServerCaller {
 
 	@Override
 	public void disablePlugin() {
-		((SpoutLoader)loader).getPluginLoader().disablePlugin((SpoutLoader) loader);
+		((SpoutLoader) loader).getPluginLoader().disablePlugin((SpoutLoader) loader);
 	}
 
 	@Override
@@ -77,39 +76,39 @@ public class SpoutServerCaller extends ServerCaller {
 
 	@Override
 	public boolean worldExist(String worldName) {
-		return ((Server)((SpoutLoader)loader).getEngine()).getWorld(worldName) != null;
+		return ((Server) ((SpoutLoader) loader).getEngine()).getWorld(worldName) != null;
 	}
 
 	@Override
 	public String getDefaultWorld() {
-		return ((SpoutLoader)loader).getEngine().getWorlds().iterator().next().getName();
+		return ((SpoutLoader) loader).getEngine().getWorlds().iterator().next().getName();
 	}
 
 	@Override
 	public File getDataFolder() {
-		return ((SpoutLoader)loader).getDataFolder();
+		return ((SpoutLoader) loader).getDataFolder();
 	}
 
 	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
 		if (manager instanceof SpoutCommandReceiver) {
-			((SpoutLoader)loader).getEngine().getCommandManager().getCommand(name, true).setHelp(help).setExecutor((SpoutCommandReceiver) manager);
+			((SpoutLoader) loader).getEngine().getCommandManager().getCommand(name, true).setHelp(help).setExecutor((SpoutCommandReceiver) manager);
 		}
 	}
 
 	@Override
 	public String getServerVersion() {
-		return ((SpoutLoader)loader).getEngine().getAPIVersion();
+		return ((SpoutLoader) loader).getEngine().getAPIVersion();
 	}
 
 	@Override
 	public String getPluginVersion() {
-		return ((SpoutLoader)loader).getDescription().getVersion();
+		return ((SpoutLoader) loader).getDescription().getVersion();
 	}
 
 	@Override
 	public void loadLibrary(String path) {
-		((SpoutLoader)loader).loadLibrary(new File(path));
+		((SpoutLoader) loader).loadLibrary(new File(path));
 	}
 
 	@Override
@@ -124,14 +123,13 @@ public class SpoutServerCaller extends ServerCaller {
 
 	@Override
 	public Logger getLogger() {
-		return ((SpoutLoader)loader).getLogger();
+		return ((SpoutLoader) loader).getLogger();
 	}
 
 	@Override
 	public void throwEvent(Event event) {
 		if (event instanceof EconomyChangeEvent) {
-			((SpoutLoader)loader).getEngine().getEventManager().callEvent(new com.greatmancode.tools.events.spout.events.EconomyChangeEvent(((EconomyChangeEvent) event).getAccount(), ((EconomyChangeEvent) event).getAmount()));
+			((SpoutLoader) loader).getEngine().getEventManager().callEvent(new com.greatmancode.tools.events.spout.events.EconomyChangeEvent(((EconomyChangeEvent) event).getAccount(), ((EconomyChangeEvent) event).getAmount()));
 		}
-
 	}
 }

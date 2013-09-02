@@ -20,8 +20,6 @@ package com.greatmancode.tools.caller.bukkit;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,12 +28,11 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.events.event.EconomyChangeEvent;
 import com.greatmancode.tools.interfaces.BukkitLoader;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.interfaces.Loader;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
 /**
@@ -43,7 +40,6 @@ import org.bukkit.permissions.Permission;
  * @author greatman
  */
 public class BukkitServerCaller extends ServerCaller {
-	
 	public BukkitServerCaller(Loader loader) {
 		super(loader);
 		addPlayerCaller(new BukkitPlayerCaller(this));
@@ -52,10 +48,8 @@ public class BukkitServerCaller extends ServerCaller {
 
 	@Override
 	public void disablePlugin() {
-		((BukkitLoader)loader).getPluginLoader().disablePlugin(((BukkitLoader)loader));
+		((BukkitLoader) loader).getPluginLoader().disablePlugin(((BukkitLoader) loader));
 	}
-
-
 
 	@Override
 	public String addColor(String str) {
@@ -87,23 +81,23 @@ public class BukkitServerCaller extends ServerCaller {
 
 	@Override
 	public String getDefaultWorld() {
-		return ((BukkitLoader)loader).getServer().getWorlds().get(0).getName();
+		return ((BukkitLoader) loader).getServer().getWorlds().get(0).getName();
 	}
 
 	@Override
 	public boolean worldExist(String worldName) {
-		return ((BukkitLoader)loader).getServer().getWorld(worldName) != null;
+		return ((BukkitLoader) loader).getServer().getWorld(worldName) != null;
 	}
 
 	@Override
 	public File getDataFolder() {
-		return ((BukkitLoader)loader).getDataFolder();
+		return ((BukkitLoader) loader).getDataFolder();
 	}
 
 	@Override
 	public void addCommand(String name, String help, CommandReceiver manager) {
 		if (manager instanceof BukkitCommandReceiver) {
-			((BukkitLoader)loader).getCommand(name).setExecutor((BukkitCommandReceiver) manager);
+			((BukkitLoader) loader).getCommand(name).setExecutor((BukkitCommandReceiver) manager);
 		}
 	}
 
@@ -114,15 +108,13 @@ public class BukkitServerCaller extends ServerCaller {
 
 	@Override
 	public String getPluginVersion() {
-		return ((BukkitLoader)loader).getDescription().getVersion();
+		return ((BukkitLoader) loader).getDescription().getVersion();
 	}
-
-
 
 	@Override
 	public void loadLibrary(String path) {
 		try {
-			((BukkitLoader)loader).getPluginClassLoader().addURL(new File(path).toURI().toURL());
+			((BukkitLoader) loader).getPluginClassLoader().addURL(new File(path).toURI().toURL());
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			getLogger().log(Level.SEVERE, "Invalid library!", e.getMessage());
@@ -133,7 +125,7 @@ public class BukkitServerCaller extends ServerCaller {
 	public void registerPermission(String permissionNode) {
 		if (permissionNode != null) {
 			try {
-				((BukkitLoader)loader).getServer().getPluginManager().addPermission(new Permission(permissionNode));
+				((BukkitLoader) loader).getServer().getPluginManager().addPermission(new Permission(permissionNode));
 			} catch (IllegalArgumentException e) {
 				//Do nothing. We don't care if the permission was already registered.
 			}
@@ -153,7 +145,7 @@ public class BukkitServerCaller extends ServerCaller {
 	@Override
 	public void throwEvent(Event event) {
 		if (event instanceof EconomyChangeEvent) {
-			((BukkitLoader)loader).getServer().getPluginManager().callEvent(new com.greatmancode.tools.events.bukkit.events.EconomyChangeEvent(((EconomyChangeEvent) event).getAccount(), ((EconomyChangeEvent) event).getAmount()));
+			((BukkitLoader) loader).getServer().getPluginManager().callEvent(new com.greatmancode.tools.events.bukkit.events.EconomyChangeEvent(((EconomyChangeEvent) event).getAccount(), ((EconomyChangeEvent) event).getAmount()));
 		}
 	}
 }

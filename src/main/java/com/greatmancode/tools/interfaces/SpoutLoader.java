@@ -26,9 +26,9 @@ import com.greatmancode.tools.events.EventManager;
 import org.spout.api.plugin.Plugin;
 
 public class SpoutLoader extends Plugin implements Loader {
-
 	private Common common;
 	private EventManager eventManager;
+
 	@Override
 	public void onEnable() {
 		SpoutServerCaller spoutCaller = new SpoutServerCaller(this);
@@ -44,7 +44,6 @@ public class SpoutLoader extends Plugin implements Loader {
 				getLogger().severe("The class " + mainClass + " is invalid!");
 				this.getEngine().getPluginManager().disablePlugin(this);
 			}
-
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			this.getEngine().getPluginManager().disablePlugin(this);

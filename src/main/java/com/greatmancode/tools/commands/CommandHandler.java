@@ -36,6 +36,7 @@ public class CommandHandler {
 	private Map<String, SubCommand> commandList = new HashMap<String, SubCommand>();
 	private int currentLevel = 0;
 	private String wrongLevelMsg = "Wrong level!";
+
 	public CommandHandler(ServerCaller serverCaller) {
 		this.serverCaller = serverCaller;
 		if (this.serverCaller instanceof BukkitServerCaller) {

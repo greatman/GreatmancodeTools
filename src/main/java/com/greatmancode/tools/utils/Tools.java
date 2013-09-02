@@ -23,7 +23,6 @@ package com.greatmancode.tools.utils;
  * @author greatman
  */
 public class Tools {
-
 	protected Tools() {
 		throw new UnsupportedOperationException();
 	}

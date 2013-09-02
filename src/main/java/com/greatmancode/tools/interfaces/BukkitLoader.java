@@ -27,7 +27,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.PluginClassLoader;
 
 public class BukkitLoader extends JavaPlugin implements Loader {
-
 	private Common common;
 	private EventManager eventManager;
 
@@ -47,7 +46,6 @@ public class BukkitLoader extends JavaPlugin implements Loader {
 				getLogger().severe("The class " + mainClass + " is invalid!");
 				this.getServer().getPluginManager().disablePlugin(this);
 			}
-
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			this.getServer().getPluginManager().disablePlugin(this);
