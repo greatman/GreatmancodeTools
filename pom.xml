@@ -40,7 +40,7 @@
 	<repositories>
 		<repository>
 			<id>spout-repo</id>
-			<url>http://nexus.spout.org/content/groups/public/</url>
+			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
 		</repository>
 		<repository>
 			<id>bukkit-repo</id>
@@ -164,18 +164,6 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>1.7.1</version>
 				<executions>
@@ -192,7 +180,7 @@
 								</relocation>
 								<relocation>
 									<pattern>com.alta189.simplesave</pattern>
-									<shadedPattern>com.greatmancode.simplesave</shadedPattern>
+									<shadedPattern>com.greatmancode.alta189</shadedPattern>
 								</relocation>
 							</relocations>
 							<artifactSet>
@@ -203,6 +191,10 @@
 									<exclude>commons-lang:commons-lang</exclude>
 									<exclude>org.yaml:snakeyaml</exclude>
 									<exclude>net.canarymod:CanaryLib</exclude>
+									<exclude>mysql:mysql-connector-java</exclude>
+									<exclude>net.visualillusionsent:viutils</exclude>
+									<exclude>org.jdom:jdom2</exclude>
+									<exclude>org.apache.commons:commons-lang3</exclude>
 								</excludes>
 							</artifactSet>
 						</configuration>
