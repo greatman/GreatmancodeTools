@@ -178,10 +178,6 @@
 									<pattern>net.larry1123.lib</pattern>
 									<shadedPattern>com.greatmancode.tools.net.larry1123.lib</shadedPattern>
 								</relocation>
-								<relocation>
-									<pattern>com.alta189.simplesave</pattern>
-									<shadedPattern>com.greatmancode.alta189</shadedPattern>
-								</relocation>
 							</relocations>
 							<artifactSet>
 								<excludes>
