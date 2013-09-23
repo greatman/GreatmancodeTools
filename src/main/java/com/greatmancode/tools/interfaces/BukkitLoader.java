@@ -78,4 +78,9 @@ public class BukkitLoader extends JavaPlugin implements Loader {
 	public EventManager getEventManager() {
 		return eventManager;
 	}
+
+	@Override
+	public Common getCommon() {
+		return common;
+	}
 }

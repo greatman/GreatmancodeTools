@@ -37,4 +37,10 @@ public interface Loader {
 	ServerType getServerType();
 
 	EventManager getEventManager();
+
+	/**
+	 * Retrieve the common class. Usually you would cast it to the plugin version.
+	 * @return The common class
+	 */
+	Common getCommon();
 }

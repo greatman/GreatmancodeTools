@@ -69,4 +69,9 @@ public class SpoutLoader extends Plugin implements Loader {
 	public EventManager getEventManager() {
 		return eventManager;
 	}
+
+	@Override
+	public Common getCommon() {
+		return common;
+	}
 }

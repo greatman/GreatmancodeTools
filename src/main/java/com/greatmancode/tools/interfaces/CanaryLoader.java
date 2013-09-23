@@ -54,6 +54,11 @@ public class CanaryLoader extends Plugin implements Loader {
 	}
 
 	@Override
+	public Common getCommon() {
+		return common;
+	}
+
+	@Override
 	public boolean enable() {
 
 		CanaryServerCaller canaryCaller = new CanaryServerCaller(this);
