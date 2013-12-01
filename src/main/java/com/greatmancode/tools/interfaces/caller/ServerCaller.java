@@ -122,6 +122,12 @@ public abstract class ServerCaller {
 	 */
 	public abstract String getPluginVersion();
 
+    /**
+     * Retrieve the plugin name.
+     * @return The plugin name.
+     */
+    public abstract String getPluginName();
+
 	/**
 	 * Load a library.
 	 * @param path The path to the .jar of the library.

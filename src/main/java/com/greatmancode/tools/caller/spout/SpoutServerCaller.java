@@ -106,7 +106,12 @@ public class SpoutServerCaller extends ServerCaller {
 		return ((SpoutLoader) loader).getDescription().getVersion();
 	}
 
-	@Override
+    @Override
+    public String getPluginName() {
+        return ((SpoutLoader) loader).getName();
+    }
+
+    @Override
 	public void loadLibrary(String path) {
 		((SpoutLoader) loader).loadLibrary(new File(path));
 	}

@@ -114,7 +114,12 @@ public class CanaryServerCaller extends ServerCaller {
 		return ((CanaryLoader) loader).getVersion();
 	}
 
-	@Override
+    @Override
+    public String getPluginName() {
+        return ((CanaryLoader) loader).getName();
+    }
+
+    @Override
 	public void loadLibrary(String path) {
 		//Put stuff in lib folder mofo
 	}

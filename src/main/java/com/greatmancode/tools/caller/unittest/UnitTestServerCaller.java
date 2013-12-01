@@ -93,7 +93,12 @@ public class UnitTestServerCaller extends ServerCaller {
 		return "1.0";
 	}
 
-	@Override
+    @Override
+    public String getPluginName() {
+        return "UnitTestPlugin";
+    }
+
+    @Override
 	public void loadLibrary(String path) {
 		// TODO Auto-generated method stub
 

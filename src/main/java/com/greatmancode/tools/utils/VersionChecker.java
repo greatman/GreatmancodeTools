@@ -33,36 +33,38 @@ import org.w3c.dom.NodeList;
  */
 public class VersionChecker {
 	private boolean oldVersion = false;
-	private String newVersion = "";
+	private int newVersion = 0;
 
 	/**
 	 * Initialize the VersionChecker by checking if the plugin is outdated.
 	 * @param currentVersion The current plugin version.
 	 */
-	public VersionChecker(String currentVersion) {
-		if (currentVersion.contains("SNAPSHOT")) {
-			Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "You are running a dev-build! Be sure that you check on the website if there's a new version!");
+	public VersionChecker(String jobName, String currentVersion) {
+		if (currentVersion.contains("unknown-unknown-unknown")) {
+			Logger.getLogger(this.getClass().getName()).log(Level.WARNING, "You are running a self-built version! Be sure that you check on the website if there's a new version!");
 			return;
 		}
-		String pluginUrlString = "http://build.greatmancode.com/guestAuth/app/rest/builds?locator=pinned:true&buildType:bt2";
+        String pluginUrlString = "http://build.greatmancode.com/job/"+jobName+"/promotion/api/xml?depth=1";
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		Document dom;
 		try {
 			URL url = new URL(pluginUrlString);
 			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(url.openConnection().getInputStream());
-			Element root = doc.getDocumentElement();
-			NodeList nodeList = root.getChildNodes();
-			if (nodeList.getLength() >= 1) {
-				Node node = nodeList.item(0);
-				if (node instanceof Element) {
-					String data = ((Element) node).getAttribute("number");
-					if (!data.contains(currentVersion)) {
-						oldVersion = true;
-						newVersion = data;
-					}
-				}
-			}
+            Node list = doc.getElementsByTagName("lastBuild").item(0);
+            String buildURL = ((Element)list).getElementsByTagName("url").item(0).getTextContent();
+            doc = factory.newDocumentBuilder().parse(buildURL + "api/xml?depth=1");
+            Node entry = ((Element)doc.getElementsByTagName("number").item(1));
+            String data = entry.getTextContent();
+
+            //We check if the version retrieved is higher than the one we run on
+            int buildNumber = Integer.parseInt(currentVersion.split("jenkins-Craftconomy3-")[1]);
+            int jenkinsBuildNumber = Integer.parseInt(data);
+            if (buildNumber < jenkinsBuildNumber) {
+                oldVersion = true;
+                newVersion = jenkinsBuildNumber;
+            }
+
 		} catch (Exception e) {
+            e.printStackTrace();
 			Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Error while trying to check for the latest version. The error is: " + e.getMessage());
 		}
 	}
@@ -79,7 +81,7 @@ public class VersionChecker {
 	 * Returns the new version of the plugin.
 	 * @return The new version of the plugin.
 	 */
-	public String getNewVersion() {
+	public int getNewVersion() {
 		return newVersion;
 	}
 }

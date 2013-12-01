@@ -111,7 +111,12 @@ public class BukkitServerCaller extends ServerCaller {
 		return ((BukkitLoader) loader).getDescription().getVersion();
 	}
 
-	@Override
+    @Override
+    public String getPluginName() {
+        return ((BukkitLoader) loader).getName();
+    }
+
+    @Override
 	public void loadLibrary(String path) {
 		try {
 			((BukkitLoader) loader).getPluginClassLoader().addURL(new File(path).toURI().toURL());
