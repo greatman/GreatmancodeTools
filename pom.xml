@@ -185,25 +185,18 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+                            <minimizeJar>true</minimizeJar>
 							<relocations>
 								<relocation>
-									<pattern>net.larry1123.lib</pattern>
-									<shadedPattern>com.greatmancode.tools.net.larry1123.lib</shadedPattern>
+									<pattern>net.larry1123.util</pattern>
+									<shadedPattern>com.greatmancode.tools.net.larry1123.util</shadedPattern>
 								</relocation>
 							</relocations>
 							<artifactSet>
-								<excludes>
-									<exclude>junit:junit</exclude>
-									<exclude>org.bukkit:bukkit</exclude>
-									<exclude>org.spout:spoutapi</exclude>
-									<exclude>commons-lang:commons-lang</exclude>
-									<exclude>org.yaml:snakeyaml</exclude>
-									<exclude>net.canarymod:CanaryLib</exclude>
-									<exclude>mysql:mysql-connector-java</exclude>
-									<exclude>net.visualillusionsent:viutils</exclude>
-									<exclude>org.jdom:jdom2</exclude>
-									<exclude>org.apache.commons:commons-lang3</exclude>
-								</excludes>
+                                <includes>
+                                    <include>net.larry1123:CanaryUtil</include>
+                                    <include>com.alta189:simplesave</include>
+                                </includes>
 							</artifactSet>
 						</configuration>
 					</execution>
