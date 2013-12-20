@@ -23,7 +23,7 @@ import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 
 import net.canarymod.chat.MessageReceiver;
-import net.larry1123.util.plugin.commands.CommandExecute;
+import net.larry1123.util.api.plugin.commands.CommandExecute;
 
 public class CanaryCommandReceiver implements CommandReceiver, CommandExecute {
 	private CommandHandler commandHandler;

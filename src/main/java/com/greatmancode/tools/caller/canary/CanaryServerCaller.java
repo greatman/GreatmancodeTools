@@ -35,7 +35,7 @@ import net.canarymod.chat.Colors;
 import net.canarymod.chat.TextFormat;
 import net.canarymod.commandsys.CommandDependencyException;
 import net.larry1123.util.CanaryUtil;
-import net.larry1123.util.plugin.commands.CommandData;
+import net.larry1123.util.api.plugin.commands.CommandData;
 
 public class CanaryServerCaller extends ServerCaller {
 	public CanaryServerCaller(Loader loader) {
