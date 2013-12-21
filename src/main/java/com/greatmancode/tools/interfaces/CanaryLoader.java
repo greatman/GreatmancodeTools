@@ -67,10 +67,8 @@ public class CanaryLoader extends Plugin implements Loader {
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		try {
 			String mainClass = br.readLine();
-			System.out.println("LINE:" + mainClass);
 			mainClass = mainClass.split("main-class:")[1].trim();
 
-			System.out.println("result:" + mainClass);
 			Class<?> clazz = Class.forName(mainClass);
 
 			if (Common.class.isAssignableFrom(clazz)) {
