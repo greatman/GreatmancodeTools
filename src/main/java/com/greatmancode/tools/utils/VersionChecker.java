@@ -30,6 +30,7 @@ import org.w3c.dom.NodeList;
 
 /**
  * Class that allow to check if the plugin is on the latest version.
+ * @Deprecated No longer used
  */
 public class VersionChecker {
 	private boolean oldVersion = false;
@@ -38,6 +39,7 @@ public class VersionChecker {
 	/**
 	 * Initialize the VersionChecker by checking if the plugin is outdated.
 	 * @param currentVersion The current plugin version.
+     * @deprecated
 	 */
 	public VersionChecker(String jobName, String currentVersion) {
 		if (currentVersion.contains("unknown-unknown-unknown")) {
