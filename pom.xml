@@ -187,14 +187,9 @@
 						<configuration>
                             <minimizeJar>true</minimizeJar>
 							<relocations>
-								<relocation>
-									<pattern>net.larry1123.util</pattern>
-									<shadedPattern>com.greatmancode.tools.net.larry1123.util</shadedPattern>
-								</relocation>
 							</relocations>
 							<artifactSet>
                                 <includes>
-                                    <include>net.larry1123:CanaryUtil</include>
                                     <include>com.alta189:simplesave</include>
                                 </includes>
 							</artifactSet>
