@@ -118,12 +118,7 @@ public class BukkitServerCaller extends ServerCaller {
 
     @Override
 	public void loadLibrary(String path) {
-		try {
-			((BukkitLoader) loader).getPluginClassLoader().addURL(new File(path).toURI().toURL());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			getLogger().log(Level.SEVERE, "Invalid library!", e.getMessage());
-		}
+        throw new UnsupportedOperationException("Loading libraries are not supported on Bukkit.");
 	}
 
 	@Override

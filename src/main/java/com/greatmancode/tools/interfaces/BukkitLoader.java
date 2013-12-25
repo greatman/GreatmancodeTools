@@ -24,7 +24,8 @@ import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
 import com.greatmancode.tools.events.EventManager;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.PluginClassLoader;
+
+import java.net.URLClassLoader;
 
 public class BukkitLoader extends JavaPlugin implements Loader {
 	private Common common;
@@ -32,7 +33,6 @@ public class BukkitLoader extends JavaPlugin implements Loader {
 
 	@Override
 	public void onEnable() {
-
 		BukkitServerCaller bukkitCaller = new BukkitServerCaller(this);
 		eventManager = new EventManager(bukkitCaller);
 		BukkitConfig bukkitConfig = new BukkitConfig(this.getClass().getResourceAsStream("/loader.yml"), bukkitCaller);
@@ -65,14 +65,6 @@ public class BukkitLoader extends JavaPlugin implements Loader {
 	@Override
 	public ServerType getServerType() {
 		return ServerType.BUKKIT;
-	}
-
-	/**
-	 * Retrieve the PluginClassLoader of Bukkit
-	 * @return The PluginClassLoader of Bukkit
-	 */
-	public PluginClassLoader getPluginClassLoader() {
-		return (PluginClassLoader) this.getClassLoader();
 	}
 
 	public EventManager getEventManager() {
