@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.logging.Logger;
 
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.canary.CanaryServerCaller;
@@ -73,10 +74,10 @@ public class CanaryLoader extends Plugin implements Loader {
 
 			if (Common.class.isAssignableFrom(clazz)) {
 				common = (Common) clazz.newInstance();
-				common.onEnable(canaryCaller, this.getLogman().getParent());
+				common.onEnable(canaryCaller, Logger.getLogger(getName()));
 				return true;
 			} else {
-				this.getLogman().severe("The class " + mainClass + " is invalid!");
+				this.getLogman().logSevere("The class " + mainClass + " is invalid!");
 				return false;
 			}
 		} catch (IOException e) {

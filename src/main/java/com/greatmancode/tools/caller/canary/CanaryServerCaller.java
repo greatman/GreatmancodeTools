@@ -34,6 +34,7 @@ import net.canarymod.Canary;
 import net.canarymod.chat.Colors;
 import net.canarymod.chat.TextFormat;
 import net.canarymod.commandsys.CommandDependencyException;
+import net.canarymod.plugin.Plugin;
 import net.larry1123.util.CanaryUtil;
 import net.larry1123.util.api.plugin.commands.CommandData;
 
@@ -139,7 +140,7 @@ public class CanaryServerCaller extends ServerCaller {
 
 	@Override
 	public Logger getLogger() {
-		return ((CanaryLoader) loader).getLogman().getParent();
+		return Logger.getLogger(((Plugin)loader).getName());
 	}
 
 	@Override
