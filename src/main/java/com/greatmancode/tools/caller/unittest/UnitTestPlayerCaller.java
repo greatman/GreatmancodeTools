@@ -37,7 +37,7 @@ public class UnitTestPlayerCaller extends PlayerCaller {
 
     @Override
     public void sendMessage(String playerName, String message) {
-        System.out.println(playerName + ":" + message);
+        caller.getLogger().info(playerName + ":" + message);
     }
 
     @Override
