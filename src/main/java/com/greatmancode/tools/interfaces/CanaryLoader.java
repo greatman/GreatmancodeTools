@@ -18,17 +18,16 @@
  */
 package com.greatmancode.tools.interfaces;
 
+import com.greatmancode.tools.ServerType;
+import com.greatmancode.tools.caller.canary.CanaryServerCaller;
+import com.greatmancode.tools.events.EventManager;
+import net.canarymod.plugin.Plugin;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
-
-import com.greatmancode.tools.ServerType;
-import com.greatmancode.tools.caller.canary.CanaryServerCaller;
-import com.greatmancode.tools.events.EventManager;
-
-import net.canarymod.plugin.Plugin;
 
 public class CanaryLoader extends Plugin implements Loader {
 	private Common common;
@@ -77,7 +76,7 @@ public class CanaryLoader extends Plugin implements Loader {
 				common.onEnable(canaryCaller, Logger.getLogger(getName()));
 				return true;
 			} else {
-				this.getLogman().logSevere("The class " + mainClass + " is invalid!");
+				this.getLogman().error("The class " + mainClass + " is invalid!");
 				return false;
 			}
 		} catch (IOException e) {
