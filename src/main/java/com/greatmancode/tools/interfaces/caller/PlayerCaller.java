@@ -21,55 +21,61 @@ package com.greatmancode.tools.interfaces.caller;
 import java.util.List;
 
 public abstract class PlayerCaller {
-	protected final ServerCaller caller;
+    protected final ServerCaller caller;
 
-	public PlayerCaller(ServerCaller caller) {
-		this.caller = caller;
-	}
+    public PlayerCaller(ServerCaller caller) {
+        this.caller = caller;
+    }
 
-	public ServerCaller getCaller() {
-		return caller;
-	}
+    public ServerCaller getCaller() {
+        return caller;
+    }
 
-	/**
-	 * Check the permissions of a player
-	 * @param playerName The player name to check
-	 * @param perm The permission node to check
-	 * @return True if the player have the permission. Else false (Always true for the Console)
-	 */
-	public abstract boolean checkPermission(String playerName, String perm);
+    /**
+     * Check the permissions of a player
+     *
+     * @param playerName The player name to check
+     * @param perm       The permission node to check
+     * @return True if the player have the permission. Else false (Always true for the Console)
+     */
+    public abstract boolean checkPermission(String playerName, String perm);
 
-	/**
-	 * Sends a message to a player
-	 * @param playerName The player name to send the message
-	 * @param message The message to send
-	 */
-	public abstract void sendMessage(String playerName, String message);
+    /**
+     * Sends a message to a player
+     *
+     * @param playerName The player name to send the message
+     * @param message    The message to send
+     */
+    public abstract void sendMessage(String playerName, String message);
 
-	/**
-	 * Retrieve the world name that a player is currently in
-	 * @param playerName The player name to retrieve the world
-	 * @return The world name the player is currently in. Returns "" when the player is offline
-	 */
-	public abstract String getPlayerWorld(String playerName);
+    /**
+     * Retrieve the world name that a player is currently in
+     *
+     * @param playerName The player name to retrieve the world
+     * @return The world name the player is currently in. Returns "" when the player is offline
+     */
+    public abstract String getPlayerWorld(String playerName);
 
-	/**
-	 * Checks if a player is online
-	 * @param playerName The player name
-	 * @return True if the player is online. Else false.
-	 */
-	public abstract boolean isOnline(String playerName);
+    /**
+     * Checks if a player is online
+     *
+     * @param playerName The player name
+     * @return True if the player is online. Else false.
+     */
+    public abstract boolean isOnline(String playerName);
 
-	/**
-	 * Retrieve a list of online players
-	 * @return A list of all players online.
-	 */
-	public abstract List<String> getOnlinePlayers();
+    /**
+     * Retrieve a list of online players
+     *
+     * @return A list of all players online.
+     */
+    public abstract List<String> getOnlinePlayers();
 
-	/**
-	 * Check if the user is a Operator.
-	 * @param playerName The player name to check
-	 * @return True if the player is a OP else false.
-	 */
-	public abstract boolean isOp(String playerName);
+    /**
+     * Check if the user is a Operator.
+     *
+     * @param playerName The player name to check
+     * @return True if the player is a OP else false.
+     */
+    public abstract boolean isOp(String playerName);
 }

@@ -21,37 +21,36 @@ package com.greatmancode.tools.commands.bukkit;
 import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
-	private CommandHandler commandHandler;
+    private CommandHandler commandHandler;
 
-	public BukkitCommandReceiver(CommandHandler commandHandler) {
-		this.commandHandler = commandHandler;
-	}
+    public BukkitCommandReceiver(CommandHandler commandHandler) {
+        this.commandHandler = commandHandler;
+    }
 
-	@Override
-	public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-		SubCommand subCommand = commandHandler.getCommand(command.getName());
-		if (subCommand != null) {
-			String subCommandValue = "";
-			String[] newArgs;
-			if (args.length <= 1) {
-				newArgs = new String[0];
-				if (args.length != 0) {
-					subCommandValue = args[0];
-				}
-			} else {
-				newArgs = new String[args.length - 1];
-				subCommandValue = args[0];
-				System.arraycopy(args, 1, newArgs, 0, args.length - 1);
-			}
-			subCommand.execute(subCommandValue, commandSender.getName(), newArgs);
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
+        SubCommand subCommand = commandHandler.getCommand(command.getName());
+        if (subCommand != null) {
+            String subCommandValue = "";
+            String[] newArgs;
+            if (args.length <= 1) {
+                newArgs = new String[0];
+                if (args.length != 0) {
+                    subCommandValue = args[0];
+                }
+            } else {
+                newArgs = new String[args.length - 1];
+                subCommandValue = args[0];
+                System.arraycopy(args, 1, newArgs, 0, args.length - 1);
+            }
+            subCommand.execute(subCommandValue, commandSender.getName(), newArgs);
+            return true;
+        }
+        return false;
+    }
 }

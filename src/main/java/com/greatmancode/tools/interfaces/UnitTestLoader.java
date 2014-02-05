@@ -23,34 +23,34 @@ import com.greatmancode.tools.caller.unittest.UnitTestServerCaller;
 import com.greatmancode.tools.events.EventManager;
 
 public class UnitTestLoader implements Loader {
-	private EventManager eventManager;
+    private EventManager eventManager;
 
-	public UnitTestLoader() {
-		this.eventManager = new EventManager(new UnitTestServerCaller(this));
-	}
+    public UnitTestLoader() {
+        this.eventManager = new EventManager(new UnitTestServerCaller(this));
+    }
 
-	@Override
-	public void onEnable() {
+    @Override
+    public void onEnable() {
 
-	}
+    }
 
-	@Override
-	public void onDisable() {
+    @Override
+    public void onDisable() {
 
-	}
+    }
 
-	@Override
-	public ServerType getServerType() {
-		return ServerType.UNIT_TEST;
-	}
+    @Override
+    public ServerType getServerType() {
+        return ServerType.UNIT_TEST;
+    }
 
-	@Override
-	public EventManager getEventManager() {
-		return eventManager;
-	}
+    @Override
+    public EventManager getEventManager() {
+        return eventManager;
+    }
 
-	@Override
-	public Common getCommon() {
-		return null;
-	}
+    @Override
+    public Common getCommon() {
+        return null;
+    }
 }

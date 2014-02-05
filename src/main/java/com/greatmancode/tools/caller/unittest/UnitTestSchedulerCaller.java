@@ -22,37 +22,37 @@ import com.greatmancode.tools.interfaces.caller.SchedulerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class UnitTestSchedulerCaller extends SchedulerCaller {
-	public UnitTestSchedulerCaller(ServerCaller caller) {
-		super(caller);
-	}
+    public UnitTestSchedulerCaller(ServerCaller caller) {
+        super(caller);
+    }
 
-	@Override
-	public int schedule(Runnable entry, long firstStart, long repeating) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public int schedule(Runnable entry, long firstStart, long repeating) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	@Override
-	public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	@Override
-	public void cancelSchedule(int id) {
-		// TODO Auto-generated method stub
+    @Override
+    public void cancelSchedule(int id) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public int delay(Runnable entry, long start) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public int delay(Runnable entry, long start) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	@Override
-	public int delay(Runnable entry, long start, boolean async) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    @Override
+    public int delay(Runnable entry, long start, boolean async) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }

@@ -23,24 +23,27 @@ import com.greatmancode.tools.events.EventManager;
 
 /**
  * A loader is called when the plugin is launched on the server.
+ *
  * @author greatman
  */
 public interface Loader {
-	void onEnable();
+    void onEnable();
 
-	void onDisable();
+    void onDisable();
 
-	/**
-	 * Give the current server backend.
-	 * @return The current server backend.
-	 */
-	ServerType getServerType();
+    /**
+     * Give the current server backend.
+     *
+     * @return The current server backend.
+     */
+    ServerType getServerType();
 
-	EventManager getEventManager();
+    EventManager getEventManager();
 
-	/**
-	 * Retrieve the common class. Usually you would cast it to the plugin version.
-	 * @return The common class
-	 */
-	Common getCommon();
+    /**
+     * Retrieve the common class. Usually you would cast it to the plugin version.
+     *
+     * @return The common class
+     */
+    Common getCommon();
 }

@@ -24,14 +24,14 @@ import com.greatmancode.tools.events.interfaces.Listener;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class EventListener implements Listener {
-	private ServerCaller serverCaller;
+    private ServerCaller serverCaller;
 
-	public EventListener(ServerCaller serverCaller) {
-		this.serverCaller = serverCaller;
-	}
+    public EventListener(ServerCaller serverCaller) {
+        this.serverCaller = serverCaller;
+    }
 
-	@EventHandler
-	public void onEconomyChange(EconomyChangeEvent event) {
-		serverCaller.throwEvent(event);
-	}
+    @EventHandler
+    public void onEconomyChange(EconomyChangeEvent event) {
+        serverCaller.throwEvent(event);
+    }
 }

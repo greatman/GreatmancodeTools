@@ -18,8 +18,6 @@
  */
 package com.greatmancode.tools.configuration;
 
-import java.io.File;
-
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
 import com.greatmancode.tools.caller.canary.CanaryServerCaller;
 import com.greatmancode.tools.caller.spout.SpoutServerCaller;
@@ -29,27 +27,30 @@ import com.greatmancode.tools.configuration.canary.CanaryConfig;
 import com.greatmancode.tools.configuration.spout.SpoutConfig;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
+import java.io.File;
+
 /**
  * Configuration Loader. Load the configuration with the Server configuration manager.
+ *
  * @author greatman
  */
 public class ConfigurationManager {
-	private ServerCaller serverCaller;
+    private ServerCaller serverCaller;
 
-	public ConfigurationManager(ServerCaller serverCaller) {
-		this.serverCaller = serverCaller;
-	}
+    public ConfigurationManager(ServerCaller serverCaller) {
+        this.serverCaller = serverCaller;
+    }
 
-	public Config loadFile(File folder, String fileName) {
-		Config file = null;
+    public Config loadFile(File folder, String fileName) {
+        Config file = null;
 
-		if (serverCaller instanceof BukkitServerCaller || serverCaller instanceof UnitTestServerCaller) {
-			file = new BukkitConfig(folder, fileName, serverCaller);
-		} else if (serverCaller instanceof SpoutServerCaller) {
-			file = new SpoutConfig(folder, fileName, serverCaller);
-		} else if (serverCaller instanceof CanaryServerCaller) {
-			file = new CanaryConfig(folder, fileName, serverCaller);
-		}
-		return file;
-	}
+        if (serverCaller instanceof BukkitServerCaller || serverCaller instanceof UnitTestServerCaller) {
+            file = new BukkitConfig(folder, fileName, serverCaller);
+        } else if (serverCaller instanceof SpoutServerCaller) {
+            file = new SpoutConfig(folder, fileName, serverCaller);
+        } else if (serverCaller instanceof CanaryServerCaller) {
+            file = new CanaryConfig(folder, fileName, serverCaller);
+        }
+        return file;
+    }
 }

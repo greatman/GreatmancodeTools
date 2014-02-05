@@ -36,83 +36,82 @@
  */
 package com.greatmancode.tools.configuration.bukkit;
 
+import com.greatmancode.tools.configuration.Config;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.greatmancode.tools.configuration.Config;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
-
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
-
 /**
  * This class handles YAML files with the Bukkit imports.
  */
 public class BukkitConfig extends Config {
-	private final YamlConfiguration configFile;
+    private final YamlConfiguration configFile;
 
-	public BukkitConfig(InputStream is, ServerCaller serverCaller) {
-		super(is, serverCaller);
-		configFile = YamlConfiguration.loadConfiguration(is);
-	}
+    public BukkitConfig(InputStream is, ServerCaller serverCaller) {
+        super(is, serverCaller);
+        configFile = YamlConfiguration.loadConfiguration(is);
+    }
 
-	public BukkitConfig(File folder, String fileName, ServerCaller serverCaller) {
-		super(folder, fileName, serverCaller);
-		configFile = YamlConfiguration.loadConfiguration(file);
-	}
+    public BukkitConfig(File folder, String fileName, ServerCaller serverCaller) {
+        super(folder, fileName, serverCaller);
+        configFile = YamlConfiguration.loadConfiguration(file);
+    }
 
-	@Override
-	public int getInt(String path) {
-		return configFile.getInt(path);
-	}
+    @Override
+    public int getInt(String path) {
+        return configFile.getInt(path);
+    }
 
-	@Override
-	public long getLong(String path) {
-		return configFile.getLong(path);
-	}
+    @Override
+    public long getLong(String path) {
+        return configFile.getLong(path);
+    }
 
-	@Override
-	public double getDouble(String path) {
-		return configFile.getDouble(path);
-	}
+    @Override
+    public double getDouble(String path) {
+        return configFile.getDouble(path);
+    }
 
-	@Override
-	public String getString(String path) {
-		return configFile.getString(path);
-	}
+    @Override
+    public String getString(String path) {
+        return configFile.getString(path);
+    }
 
-	@Override
-	public boolean getBoolean(String path) {
-		return configFile.getBoolean(path);
-	}
+    @Override
+    public boolean getBoolean(String path) {
+        return configFile.getBoolean(path);
+    }
 
-	@Override
-	public void setValue(String path, Object value) {
-		configFile.set(path, value);
-		try {
-			configFile.save(file);
-		} catch (IOException e) {
-			serverCaller.getLogger().severe("Error while saving + " + file.getName() + ". Error: " + e.getMessage());
-		}
-	}
+    @Override
+    public void setValue(String path, Object value) {
+        configFile.set(path, value);
+        try {
+            configFile.save(file);
+        } catch (IOException e) {
+            serverCaller.getLogger().severe("Error while saving + " + file.getName() + ". Error: " + e.getMessage());
+        }
+    }
 
-	@Override
-	public boolean has(String path) {
-		return configFile.contains(path);
-	}
+    @Override
+    public boolean has(String path) {
+        return configFile.contains(path);
+    }
 
-	@Override
-	public Map<String, String> getStringMap(String path) {
-		Map<String, String> values = new HashMap<String, String>();
-		ConfigurationSection configurationSection = configFile.getConfigurationSection(path);
-		if (configurationSection != null) {
-			for (Map.Entry<String, Object> entry : configurationSection.getValues(false).entrySet()) {
-				values.put(entry.getKey(), (String) entry.getValue());
-			}
-		}
-		return values;
-	}
+    @Override
+    public Map<String, String> getStringMap(String path) {
+        Map<String, String> values = new HashMap<String, String>();
+        ConfigurationSection configurationSection = configFile.getConfigurationSection(path);
+        if (configurationSection != null) {
+            for (Map.Entry<String, Object> entry : configurationSection.getValues(false).entrySet()) {
+                values.put(entry.getKey(), (String) entry.getValue());
+            }
+        }
+        return values;
+    }
 }

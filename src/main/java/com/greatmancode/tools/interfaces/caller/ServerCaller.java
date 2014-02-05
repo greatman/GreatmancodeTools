@@ -18,135 +18,147 @@
  */
 package com.greatmancode.tools.interfaces.caller;
 
-import java.io.File;
-import java.util.logging.Logger;
-
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Loader;
 
+import java.io.File;
+import java.util.logging.Logger;
+
 /**
  * Represents a server ServerCaller
+ *
  * @author greatman
  */
 public abstract class ServerCaller {
-	private String commandPrefix = "";
-	private PlayerCaller playerCaller;
-	private SchedulerCaller schedulerCaller;
-	protected final Loader loader;
+    private String commandPrefix = "";
+    private PlayerCaller playerCaller;
+    private SchedulerCaller schedulerCaller;
+    protected final Loader loader;
 
-	public ServerCaller(Loader loader) {
-		this.loader = loader;
-	}
+    public ServerCaller(Loader loader) {
+        this.loader = loader;
+    }
 
-	protected void addPlayerCaller(PlayerCaller caller) {
-		if (this.playerCaller == null) {
-			this.playerCaller = caller;
-		}
-	}
+    protected void addPlayerCaller(PlayerCaller caller) {
+        if (this.playerCaller == null) {
+            this.playerCaller = caller;
+        }
+    }
 
-	protected void addSchedulerCaller(SchedulerCaller caller) {
-		if (this.schedulerCaller == null) {
-			this.schedulerCaller = caller;
-		}
-	}
+    protected void addSchedulerCaller(SchedulerCaller caller) {
+        if (this.schedulerCaller == null) {
+            this.schedulerCaller = caller;
+        }
+    }
 
-	public Loader getLoader() {
-		return loader;
-	}
+    public Loader getLoader() {
+        return loader;
+    }
 
-	public PlayerCaller getPlayerCaller() {
-		return playerCaller;
-	}
+    public PlayerCaller getPlayerCaller() {
+        return playerCaller;
+    }
 
-	public SchedulerCaller getSchedulerCaller() {
-		return schedulerCaller;
-	}
+    public SchedulerCaller getSchedulerCaller() {
+        return schedulerCaller;
+    }
 
-	/**
-	 * Disable the plugin
-	 */
-	public abstract void disablePlugin();
+    /**
+     * Disable the plugin
+     */
+    public abstract void disablePlugin();
 
-	public void setCommandPrefix(String prefix) {
-		commandPrefix = prefix;
-	}
+    public void setCommandPrefix(String prefix) {
+        commandPrefix = prefix;
+    }
 
-	public String getCommandPrefix() {
-		return commandPrefix;
-	}
+    public String getCommandPrefix() {
+        return commandPrefix;
+    }
 
-	/**
-	 * Add color in a message
-	 * @param message The message to add color in
-	 * @return The message with colors.
-	 */
-	public abstract String addColor(String message);
+    /**
+     * Add color in a message
+     *
+     * @param message The message to add color in
+     * @return The message with colors.
+     */
+    public abstract String addColor(String message);
 
-	/**
-	 * Checks if a world exist.
-	 * @param worldName The world name to check
-	 * @return True if the world exist. Else false.
-	 */
-	public abstract boolean worldExist(String worldName);
+    /**
+     * Checks if a world exist.
+     *
+     * @param worldName The world name to check
+     * @return True if the world exist. Else false.
+     */
+    public abstract boolean worldExist(String worldName);
 
-	/**
-	 * Retrieve the default world of the server
-	 * @return The default world name
-	 */
-	public abstract String getDefaultWorld();
+    /**
+     * Retrieve the default world of the server
+     *
+     * @return The default world name
+     */
+    public abstract String getDefaultWorld();
 
-	/**
-	 * Get the data folder (Aka. the plugin folder)
-	 * @return The data folder
-	 */
-	public abstract File getDataFolder();
+    /**
+     * Get the data folder (Aka. the plugin folder)
+     *
+     * @return The data folder
+     */
+    public abstract File getDataFolder();
 
-	/**
-	 * Add a command in the server
-	 * @param name The name of the command
-	 * @param help The help line of the command
-	 * @param manager The manager that manage the command.
-	 */
-	public abstract void addCommand(String name, String help, CommandReceiver manager);
+    /**
+     * Add a command in the server
+     *
+     * @param name    The name of the command
+     * @param help    The help line of the command
+     * @param manager The manager that manage the command.
+     */
+    public abstract void addCommand(String name, String help, CommandReceiver manager);
 
-	/**
-	 * Retrieve the server version.
-	 * @return The server version.
-	 */
-	public abstract String getServerVersion();
+    /**
+     * Retrieve the server version.
+     *
+     * @return The server version.
+     */
+    public abstract String getServerVersion();
 
-	/**
-	 * Retrieve the plugin version.
-	 * @return The plugin version.
-	 */
-	public abstract String getPluginVersion();
+    /**
+     * Retrieve the plugin version.
+     *
+     * @return The plugin version.
+     */
+    public abstract String getPluginVersion();
 
     /**
      * Retrieve the plugin name.
+     *
      * @return The plugin name.
      */
     public abstract String getPluginName();
 
-	/**
-	 * Load a library.
-	 * @param path The path to the .jar of the library.
-	 */
-	public abstract void loadLibrary(String path);
+    /**
+     * Load a library.
+     *
+     * @param path The path to the .jar of the library.
+     */
+    public abstract void loadLibrary(String path);
 
-	/**
-	 * Register a permission on the server.
-	 * @param permissionNode The permission node to register.
-	 */
-	public abstract void registerPermission(String permissionNode);
+    /**
+     * Register a permission on the server.
+     *
+     * @param permissionNode The permission node to register.
+     */
+    public abstract void registerPermission(String permissionNode);
 
-	/**
-	 * Gives if the server is in online mode or not.
-	 * @return True if the server is in online mode. Else false.
-	 */
-	public abstract boolean isOnlineMode();
+    /**
+     * Gives if the server is in online mode or not.
+     *
+     * @return True if the server is in online mode. Else false.
+     */
+    public abstract boolean isOnlineMode();
 
-	public abstract Logger getLogger();
+    public abstract Logger getLogger();
 
-	public abstract void throwEvent(Event event);
+    public abstract void throwEvent(Event event);
 }

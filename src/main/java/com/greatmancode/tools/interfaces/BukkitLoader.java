@@ -22,57 +22,54 @@ import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
 import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
 import com.greatmancode.tools.events.EventManager;
-
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.net.URLClassLoader;
-
 public class BukkitLoader extends JavaPlugin implements Loader {
-	private Common common;
-	private EventManager eventManager;
+    private Common common;
+    private EventManager eventManager;
 
-	@Override
-	public void onEnable() {
-		BukkitServerCaller bukkitCaller = new BukkitServerCaller(this);
-		eventManager = new EventManager(bukkitCaller);
-		BukkitConfig bukkitConfig = new BukkitConfig(this.getClass().getResourceAsStream("/loader.yml"), bukkitCaller);
-		String mainClass = bukkitConfig.getString("main-class");
-		try {
-			Class<?> clazz = Class.forName(mainClass);
-			if (Common.class.isAssignableFrom(clazz)) {
-				common = (Common) clazz.newInstance();
-				common.onEnable(bukkitCaller, getLogger());
-			} else {
-				getLogger().severe("The class " + mainClass + " is invalid!");
-				this.getServer().getPluginManager().disablePlugin(this);
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			this.getServer().getPluginManager().disablePlugin(this);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-			this.getServer().getPluginManager().disablePlugin(this);
-		} catch (IllegalAccessException e) {
-			this.getServer().getPluginManager().disablePlugin(this);
-		}
-	}
+    @Override
+    public void onEnable() {
+        BukkitServerCaller bukkitCaller = new BukkitServerCaller(this);
+        eventManager = new EventManager(bukkitCaller);
+        BukkitConfig bukkitConfig = new BukkitConfig(this.getClass().getResourceAsStream("/loader.yml"), bukkitCaller);
+        String mainClass = bukkitConfig.getString("main-class");
+        try {
+            Class<?> clazz = Class.forName(mainClass);
+            if (Common.class.isAssignableFrom(clazz)) {
+                common = (Common) clazz.newInstance();
+                common.onEnable(bukkitCaller, getLogger());
+            } else {
+                getLogger().severe("The class " + mainClass + " is invalid!");
+                this.getServer().getPluginManager().disablePlugin(this);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            this.getServer().getPluginManager().disablePlugin(this);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+            this.getServer().getPluginManager().disablePlugin(this);
+        } catch (IllegalAccessException e) {
+            this.getServer().getPluginManager().disablePlugin(this);
+        }
+    }
 
-	@Override
-	public void onDisable() {
-		common.onDisable();
-	}
+    @Override
+    public void onDisable() {
+        common.onDisable();
+    }
 
-	@Override
-	public ServerType getServerType() {
-		return ServerType.BUKKIT;
-	}
+    @Override
+    public ServerType getServerType() {
+        return ServerType.BUKKIT;
+    }
 
-	public EventManager getEventManager() {
-		return eventManager;
-	}
+    public EventManager getEventManager() {
+        return eventManager;
+    }
 
-	@Override
-	public Common getCommon() {
-		return common;
-	}
+    @Override
+    public Common getCommon() {
+        return common;
+    }
 }

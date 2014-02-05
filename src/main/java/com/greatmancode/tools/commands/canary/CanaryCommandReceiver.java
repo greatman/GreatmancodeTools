@@ -21,34 +21,33 @@ package com.greatmancode.tools.commands.canary;
 import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
-
 import net.canarymod.chat.MessageReceiver;
 import net.larry1123.util.api.plugin.commands.CommandExecute;
 
 public class CanaryCommandReceiver implements CommandReceiver, CommandExecute {
-	private CommandHandler commandHandler;
+    private CommandHandler commandHandler;
 
-	public CanaryCommandReceiver(CommandHandler commandHandler) {
-		this.commandHandler = commandHandler;
-	}
+    public CanaryCommandReceiver(CommandHandler commandHandler) {
+        this.commandHandler = commandHandler;
+    }
 
-	@Override
-	public void execute(MessageReceiver messageReceiver, String[] args) {
-		SubCommand subCommand = commandHandler.getCommand(args[0].replace("/", ""));
-		if (subCommand != null) {
-			String subCommandValue = "";
-			String[] newArgs;
-			if (args.length <= 2) {
-				newArgs = new String[0];
-				if (args.length == 2) {
-					subCommandValue = args[1];
-				}
-			} else {
-				newArgs = new String[args.length - 2];
-				subCommandValue = args[1];
-				System.arraycopy(args, 2, newArgs, 0, args.length - 2);
-			}
-			subCommand.execute(subCommandValue, messageReceiver.getName(), newArgs);
-		}
-	}
+    @Override
+    public void execute(MessageReceiver messageReceiver, String[] args) {
+        SubCommand subCommand = commandHandler.getCommand(args[0].replace("/", ""));
+        if (subCommand != null) {
+            String subCommandValue = "";
+            String[] newArgs;
+            if (args.length <= 2) {
+                newArgs = new String[0];
+                if (args.length == 2) {
+                    subCommandValue = args[1];
+                }
+            } else {
+                newArgs = new String[args.length - 2];
+                subCommandValue = args[1];
+                System.arraycopy(args, 2, newArgs, 0, args.length - 2);
+            }
+            subCommand.execute(subCommandValue, messageReceiver.getName(), newArgs);
+        }
+    }
 }

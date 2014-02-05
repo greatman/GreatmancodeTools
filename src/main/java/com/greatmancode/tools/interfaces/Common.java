@@ -18,12 +18,12 @@
  */
 package com.greatmancode.tools.interfaces;
 
-import java.util.logging.Logger;
-
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
-public interface Common {
-	void onEnable(ServerCaller serverCaller, Logger log);
+import java.util.logging.Logger;
 
-	void onDisable();
+public interface Common {
+    void onEnable(ServerCaller serverCaller, Logger log);
+
+    void onDisable();
 }

@@ -22,13 +22,13 @@ import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.Event;
 
 public class PlayerJoinEvent extends Event {
-	private Player p;
+    private Player p;
 
-	public PlayerJoinEvent(Player p) {
-		this.p = p;
-	}
+    public PlayerJoinEvent(Player p) {
+        this.p = p;
+    }
 
-	public Player getPlayer() {
-		return p;
-	}
+    public Player getPlayer() {
+        return p;
+    }
 }

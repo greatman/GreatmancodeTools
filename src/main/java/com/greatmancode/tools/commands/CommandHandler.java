@@ -18,9 +18,6 @@
  */
 package com.greatmancode.tools.commands;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
 import com.greatmancode.tools.caller.canary.CanaryServerCaller;
 import com.greatmancode.tools.caller.spout.SpoutServerCaller;
@@ -30,55 +27,59 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.commands.spout.SpoutCommandReceiver;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CommandHandler {
-	private ServerCaller serverCaller;
-	private CommandReceiver commandReceiver;
-	private Map<String, SubCommand> commandList = new HashMap<String, SubCommand>();
-	private int currentLevel = 0;
-	private String wrongLevelMsg = "Wrong level!";
+    private ServerCaller serverCaller;
+    private CommandReceiver commandReceiver;
+    private Map<String, SubCommand> commandList = new HashMap<String, SubCommand>();
+    private int currentLevel = 0;
+    private String wrongLevelMsg = "Wrong level!";
 
-	public CommandHandler(ServerCaller serverCaller) {
-		this.serverCaller = serverCaller;
-		if (this.serverCaller instanceof BukkitServerCaller) {
-			commandReceiver = new BukkitCommandReceiver(this);
-		} else if (this.serverCaller instanceof SpoutServerCaller) {
-			commandReceiver = new SpoutCommandReceiver(this);
-		} else if (this.serverCaller instanceof CanaryServerCaller) {
-			commandReceiver = new CanaryCommandReceiver(this);
-		}
-	}
+    public CommandHandler(ServerCaller serverCaller) {
+        this.serverCaller = serverCaller;
+        if (this.serverCaller instanceof BukkitServerCaller) {
+            commandReceiver = new BukkitCommandReceiver(this);
+        } else if (this.serverCaller instanceof SpoutServerCaller) {
+            commandReceiver = new SpoutCommandReceiver(this);
+        } else if (this.serverCaller instanceof CanaryServerCaller) {
+            commandReceiver = new CanaryCommandReceiver(this);
+        }
+    }
 
-	public ServerCaller getServerCaller() {
-		return serverCaller;
-	}
+    public ServerCaller getServerCaller() {
+        return serverCaller;
+    }
 
-	public void setLevel(int level) {
-		currentLevel = level;
-	}
+    public void setLevel(int level) {
+        currentLevel = level;
+    }
 
-	/**
-	 * Current Command Handler level. Level allows you to block certain commands.
-	 * @return The current level
-	 */
-	public int getLevel() {
-		return currentLevel;
-	}
+    /**
+     * Current Command Handler level. Level allows you to block certain commands.
+     *
+     * @return The current level
+     */
+    public int getLevel() {
+        return currentLevel;
+    }
 
-	public String getWrongLevelMsg() {
-		return wrongLevelMsg;
-	}
+    public String getWrongLevelMsg() {
+        return wrongLevelMsg;
+    }
 
-	public void setWrongLevelMsg(String msg) {
-		wrongLevelMsg = msg;
-	}
+    public void setWrongLevelMsg(String msg) {
+        wrongLevelMsg = msg;
+    }
 
-	public CommandHandler registerMainCommand(String name, SubCommand subCommand) {
-		commandList.put(name, subCommand);
-		serverCaller.addCommand(name, "", commandReceiver);
-		return this;
-	}
+    public CommandHandler registerMainCommand(String name, SubCommand subCommand) {
+        commandList.put(name, subCommand);
+        serverCaller.addCommand(name, "", commandReceiver);
+        return this;
+    }
 
-	public SubCommand getCommand(String name) {
-		return commandList.get(name);
-	}
+    public SubCommand getCommand(String name) {
+        return commandList.get(name);
+    }
 }

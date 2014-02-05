@@ -18,27 +18,26 @@
  */
 package com.greatmancode.tools.events.spout;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
-
 import org.spout.api.Spout;
 import org.spout.api.event.Listener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SpoutEventManager implements ServerEventManager {
-	private Map<String, Listener> map = new HashMap<String, Listener>();
+    private Map<String, Listener> map = new HashMap<String, Listener>();
 
-	public SpoutEventManager() {
-		map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());
-	}
+    public SpoutEventManager() {
+        map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());
+    }
 
-	@Override
-	public void eventRegistered(String event, ServerCaller serverCaller) {
-		if (map.containsKey(event)) {
-			Spout.getEngine().getEventManager().registerEvents(map.get(event), serverCaller.getLoader());
-		}
-	}
+    @Override
+    public void eventRegistered(String event, ServerCaller serverCaller) {
+        if (map.containsKey(event)) {
+            Spout.getEngine().getEventManager().registerEvents(map.get(event), serverCaller.getLoader());
+        }
+    }
 }

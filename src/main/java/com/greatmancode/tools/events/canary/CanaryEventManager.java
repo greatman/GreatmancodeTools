@@ -18,27 +18,26 @@
  */
 package com.greatmancode.tools.events.canary;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
 import com.greatmancode.tools.interfaces.CanaryLoader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
-
 import net.canarymod.Canary;
 import net.canarymod.plugin.PluginListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CanaryEventManager implements ServerEventManager {
-	private Map<String, PluginListener> map = new HashMap<String, PluginListener>();
+    private Map<String, PluginListener> map = new HashMap<String, PluginListener>();
 
-	public CanaryEventManager() {
-		map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());
-	}
+    public CanaryEventManager() {
+        map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());
+    }
 
-	public void eventRegistered(String event, ServerCaller serverCaller) {
-		if (map.containsKey(event)) {
-			Canary.hooks().registerListener(map.get(event), ((CanaryLoader) serverCaller.getLoader()));
-		}
-	}
+    public void eventRegistered(String event, ServerCaller serverCaller) {
+        if (map.containsKey(event)) {
+            Canary.hooks().registerListener(map.get(event), ((CanaryLoader) serverCaller.getLoader()));
+        }
+    }
 }

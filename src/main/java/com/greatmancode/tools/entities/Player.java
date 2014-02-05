@@ -19,37 +19,37 @@
 package com.greatmancode.tools.entities;
 
 public class Player {
-	private String name;
-	private String displayName;
-	private String worldName;
+    private String name;
+    private String displayName;
+    private String worldName;
 
-	public Player(String name, String displayName, String worldName) {
-		this.name = name;
-		this.displayName = displayName;
-		this.worldName = worldName;
-	}
+    public Player(String name, String displayName, String worldName) {
+        this.name = name;
+        this.displayName = displayName;
+        this.worldName = worldName;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getDisplayName() {
-		return displayName;
-	}
+    public String getDisplayName() {
+        return displayName;
+    }
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
-	public String getWorldName() {
-		return worldName;
-	}
+    public String getWorldName() {
+        return worldName;
+    }
 
-	public void setWorldName(String worldName) {
-		this.worldName = worldName;
-	}
+    public void setWorldName(String worldName) {
+        this.worldName = worldName;
+    }
 }

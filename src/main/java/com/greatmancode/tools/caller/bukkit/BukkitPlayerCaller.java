@@ -18,70 +18,69 @@
  */
 package com.greatmancode.tools.caller.bukkit;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
-
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BukkitPlayerCaller extends PlayerCaller {
-	public BukkitPlayerCaller(ServerCaller caller) {
-		super(caller);
-	}
+    public BukkitPlayerCaller(ServerCaller caller) {
+        super(caller);
+    }
 
-	@Override
-	public boolean checkPermission(String playerName, String perm) {
-		boolean result;
-		Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
-		if (p != null) {
-			result = p.isOp() || p.hasPermission(perm);
-		} else {
-			// It's the console
-			result = true;
-		}
-		return result;
-	}
+    @Override
+    public boolean checkPermission(String playerName, String perm) {
+        boolean result;
+        Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
+        if (p != null) {
+            result = p.isOp() || p.hasPermission(perm);
+        } else {
+            // It's the console
+            result = true;
+        }
+        return result;
+    }
 
-	@Override
-	public void sendMessage(String playerName, String message) {
-		Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
-		if (p != null) {
-			p.sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
-		} else {
-			((BukkitLoader) getCaller().getLoader()).getServer().getConsoleSender().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
-		}
-	}
+    @Override
+    public void sendMessage(String playerName, String message) {
+        Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
+        if (p != null) {
+            p.sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
+        } else {
+            ((BukkitLoader) getCaller().getLoader()).getServer().getConsoleSender().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
+        }
+    }
 
-	@Override
-	public String getPlayerWorld(String playerName) {
-		String result = "";
-		Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
-		if (p != null) {
-			result = p.getWorld().getName();
-		}
-		return result;
-	}
+    @Override
+    public String getPlayerWorld(String playerName) {
+        String result = "";
+        Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
+        if (p != null) {
+            result = p.getWorld().getName();
+        }
+        return result;
+    }
 
-	@Override
-	public boolean isOnline(String playerName) {
-		return ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName) != null;
-	}
+    @Override
+    public boolean isOnline(String playerName) {
+        return ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName) != null;
+    }
 
-	@Override
-	public List<String> getOnlinePlayers() {
-		List<String> list = new ArrayList<String>();
-		Player[] pList = ((BukkitLoader) getCaller().getLoader()).getServer().getOnlinePlayers();
-		for (Player p : pList) {
-			list.add(p.getName());
-		}
-		return list;
-	}
+    @Override
+    public List<String> getOnlinePlayers() {
+        List<String> list = new ArrayList<String>();
+        Player[] pList = ((BukkitLoader) getCaller().getLoader()).getServer().getOnlinePlayers();
+        for (Player p : pList) {
+            list.add(p.getName());
+        }
+        return list;
+    }
 
-	@Override
-	public boolean isOp(String playerName) {
-		return ((BukkitLoader) getCaller().getLoader()).getServer().getOfflinePlayer(playerName).isOp();
-	}
+    @Override
+    public boolean isOp(String playerName) {
+        return ((BukkitLoader) getCaller().getLoader()).getServer().getOfflinePlayer(playerName).isOp();
+    }
 }

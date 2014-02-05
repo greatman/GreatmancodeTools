@@ -36,91 +36,90 @@
  */
 package com.greatmancode.tools.configuration.spout;
 
+import com.greatmancode.tools.configuration.Config;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
+import org.spout.cereal.config.ConfigurationException;
+import org.spout.cereal.config.ConfigurationNode;
+import org.spout.cereal.config.yaml.YamlConfiguration;
+
 import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.greatmancode.tools.configuration.Config;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
-
-import org.spout.cereal.config.ConfigurationException;
-import org.spout.cereal.config.ConfigurationNode;
-import org.spout.cereal.config.yaml.YamlConfiguration;
-
 /**
  * This class handles YAML from Spout imports.
  */
 public class SpoutConfig extends Config {
-	private YamlConfiguration config = null;
+    private YamlConfiguration config = null;
 
-	public SpoutConfig(InputStream is, ServerCaller serverCaller) {
-		super(is, serverCaller);
-		config = new YamlConfiguration(is);
-		try {
-			config.load();
-		} catch (ConfigurationException e) {
-			serverCaller.getLogger().severe("Unable to load the configuration file! Message:" + e.getMessage());
-		}
-	}
+    public SpoutConfig(InputStream is, ServerCaller serverCaller) {
+        super(is, serverCaller);
+        config = new YamlConfiguration(is);
+        try {
+            config.load();
+        } catch (ConfigurationException e) {
+            serverCaller.getLogger().severe("Unable to load the configuration file! Message:" + e.getMessage());
+        }
+    }
 
-	public SpoutConfig(File folder, String fileName, ServerCaller serverCaller) {
-		super(folder, fileName, serverCaller);
-		config = new YamlConfiguration(file);
-		try {
-			config.load();
-		} catch (ConfigurationException e) {
-			serverCaller.getLogger().severe("Unable to load the configuration file! Message:" + e.getMessage());
-		}
-	}
+    public SpoutConfig(File folder, String fileName, ServerCaller serverCaller) {
+        super(folder, fileName, serverCaller);
+        config = new YamlConfiguration(file);
+        try {
+            config.load();
+        } catch (ConfigurationException e) {
+            serverCaller.getLogger().severe("Unable to load the configuration file! Message:" + e.getMessage());
+        }
+    }
 
-	@Override
-	public int getInt(String path) {
-		return config.getNode(path).getInt();
-	}
+    @Override
+    public int getInt(String path) {
+        return config.getNode(path).getInt();
+    }
 
-	@Override
-	public long getLong(String path) {
-		return config.getNode(path).getLong();
-	}
+    @Override
+    public long getLong(String path) {
+        return config.getNode(path).getLong();
+    }
 
-	@Override
-	public double getDouble(String path) {
-		return config.getNode(path).getDouble();
-	}
+    @Override
+    public double getDouble(String path) {
+        return config.getNode(path).getDouble();
+    }
 
-	@Override
-	public String getString(String path) {
-		return config.getNode(path).getString();
-	}
+    @Override
+    public String getString(String path) {
+        return config.getNode(path).getString();
+    }
 
-	@Override
-	public boolean getBoolean(String path) {
-		return config.getNode(path).getBoolean();
-	}
+    @Override
+    public boolean getBoolean(String path) {
+        return config.getNode(path).getBoolean();
+    }
 
-	@Override
-	public void setValue(String path, Object value) {
-		config.getNode(path).setValue(value);
-		try {
-			config.save();
-		} catch (ConfigurationException e) {
-			serverCaller.getLogger().severe("Unable to save the file " + config.getFile().getName() + "! Message: " + e.getMessage());
-		}
-	}
+    @Override
+    public void setValue(String path, Object value) {
+        config.getNode(path).setValue(value);
+        try {
+            config.save();
+        } catch (ConfigurationException e) {
+            serverCaller.getLogger().severe("Unable to save the file " + config.getFile().getName() + "! Message: " + e.getMessage());
+        }
+    }
 
-	@Override
-	public boolean has(String path) {
-		return config.getNode(path).isAttached();
-	}
+    @Override
+    public boolean has(String path) {
+        return config.getNode(path).isAttached();
+    }
 
-	@Override
-	public Map<String, String> getStringMap(String path) {
-		Map<String, String> values = new HashMap<String, String>();
-		Map<String, ConfigurationNode> list = config.getNode(path).getChildren();
-		for (Map.Entry<String, ConfigurationNode> entry : list.entrySet()) {
-			values.put(entry.getKey(), entry.getValue().getString());
-		}
-		return values;
-	}
+    @Override
+    public Map<String, String> getStringMap(String path) {
+        Map<String, String> values = new HashMap<String, String>();
+        Map<String, ConfigurationNode> list = config.getNode(path).getChildren();
+        for (Map.Entry<String, ConfigurationNode> entry : list.entrySet()) {
+            values.put(entry.getKey(), entry.getValue().getString());
+        }
+        return values;
+    }
 }

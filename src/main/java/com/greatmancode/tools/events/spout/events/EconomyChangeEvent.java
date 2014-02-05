@@ -22,25 +22,25 @@ import org.spout.api.event.Event;
 import org.spout.api.event.HandlerList;
 
 public class EconomyChangeEvent extends Event {
-	private static final HandlerList handlers = new HandlerList();
-	private final String account;
-	private final double amount;
+    private static final HandlerList handlers = new HandlerList();
+    private final String account;
+    private final double amount;
 
-	public EconomyChangeEvent(String account, double amount) {
-		this.account = account;
-		this.amount = amount;
-	}
+    public EconomyChangeEvent(String account, double amount) {
+        this.account = account;
+        this.amount = amount;
+    }
 
-	public double getAmount() {
-		return amount;
-	}
+    public double getAmount() {
+        return amount;
+    }
 
-	public String getAccount() {
-		return account;
-	}
+    public String getAccount() {
+        return account;
+    }
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
+    }
 }

@@ -18,53 +18,52 @@
  */
 package com.greatmancode.tools.caller.canary;
 
+import com.greatmancode.tools.interfaces.caller.PlayerCaller;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
+import net.canarymod.Canary;
+
 import java.util.Arrays;
 import java.util.List;
 
-import com.greatmancode.tools.interfaces.caller.PlayerCaller;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
-
-import net.canarymod.Canary;
-
 public class CanaryPlayerCaller extends PlayerCaller {
-	public CanaryPlayerCaller(ServerCaller caller) {
-		super(caller);
-	}
+    public CanaryPlayerCaller(ServerCaller caller) {
+        super(caller);
+    }
 
-	@Override
-	public boolean checkPermission(String playerName, String perm) {
-		if (playerName.equals("Console")) {
-			return true;
-		}
-		return Canary.getServer().getPlayer(playerName).hasPermission(perm) || isOp(playerName);
-	}
+    @Override
+    public boolean checkPermission(String playerName, String perm) {
+        if (playerName.equals("Console")) {
+            return true;
+        }
+        return Canary.getServer().getPlayer(playerName).hasPermission(perm) || isOp(playerName);
+    }
 
-	@Override
-	public void sendMessage(String playerName, String message) {
-		if (playerName.equals("Console")) {
-			Canary.getServer().message(getCaller().addColor(getCaller().getCommandPrefix() + message));
-		} else {
-			Canary.getServer().getPlayer(playerName).message(getCaller().addColor(getCaller().getCommandPrefix() + message));
-		}
-	}
+    @Override
+    public void sendMessage(String playerName, String message) {
+        if (playerName.equals("Console")) {
+            Canary.getServer().message(getCaller().addColor(getCaller().getCommandPrefix() + message));
+        } else {
+            Canary.getServer().getPlayer(playerName).message(getCaller().addColor(getCaller().getCommandPrefix() + message));
+        }
+    }
 
-	@Override
-	public String getPlayerWorld(String playerName) {
-		return Canary.getServer().getPlayer(playerName).getWorld().getName();
-	}
+    @Override
+    public String getPlayerWorld(String playerName) {
+        return Canary.getServer().getPlayer(playerName).getWorld().getName();
+    }
 
-	@Override
-	public boolean isOnline(String playerName) {
-		return Canary.getServer().getPlayer(playerName) != null;
-	}
+    @Override
+    public boolean isOnline(String playerName) {
+        return Canary.getServer().getPlayer(playerName) != null;
+    }
 
-	@Override
-	public List<String> getOnlinePlayers() {
-		return Arrays.asList(Canary.getServer().getPlayerNameList());
-	}
+    @Override
+    public List<String> getOnlinePlayers() {
+        return Arrays.asList(Canary.getServer().getPlayerNameList());
+    }
 
-	@Override
-	public boolean isOp(String playerName) {
-		return Canary.ops().isOpped(playerName);
-	}
+    @Override
+    public boolean isOp(String playerName) {
+        return Canary.ops().isOpped(playerName);
+    }
 }

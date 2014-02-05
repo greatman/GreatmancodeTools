@@ -20,15 +20,14 @@ package com.greatmancode.tools.events.canary;
 
 import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.EventManager;
-
 import net.canarymod.hook.HookHandler;
 import net.canarymod.hook.player.ConnectionHook;
 import net.canarymod.plugin.PluginListener;
 
 public class PlayerJoinEventListener implements PluginListener {
-	@HookHandler
-	public void onPlayerJoin(ConnectionHook hook) {
-		com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(hook.getPlayer().getName(), hook.getPlayer().getDisplayName(), hook.getPlayer().getWorld().getName()));
-		EventManager.getInstance().callEvent(pEvent);
-	}
+    @HookHandler
+    public void onPlayerJoin(ConnectionHook hook) {
+        com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(hook.getPlayer().getName(), hook.getPlayer().getDisplayName(), hook.getPlayer().getWorld().getName()));
+        EventManager.getInstance().callEvent(pEvent);
+    }
 }

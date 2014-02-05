@@ -19,8 +19,8 @@
 package com.greatmancode.tools;
 
 public enum ServerType {
-	BUKKIT,
-	SPOUT,
-	UNIT_TEST,
-	CANARY
+    BUKKIT,
+    SPOUT,
+    UNIT_TEST,
+    CANARY
 }

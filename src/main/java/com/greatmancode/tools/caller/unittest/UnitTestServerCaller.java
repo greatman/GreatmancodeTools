@@ -18,80 +18,81 @@
  */
 package com.greatmancode.tools.caller.unittest;
 
-import java.io.File;
-import java.util.Random;
-import java.util.logging.Logger;
-
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
+import java.io.File;
+import java.util.Random;
+import java.util.logging.Logger;
+
 /**
  * Special serverCaller for unit tests.
+ *
  * @author Greatman
  */
 public class UnitTestServerCaller extends ServerCaller {
-	public static final String worldName = "UnitTestWorld";
-	public static final String worldName2 = "UnitTestWorld2";
-	public static final int dir = new Random().nextInt(9999999);
+    public static final String worldName = "UnitTestWorld";
+    public static final String worldName2 = "UnitTestWorld2";
+    public static final int dir = new Random().nextInt(9999999);
 
-	public UnitTestServerCaller(Loader loader) {
-		super(loader);
-		addPlayerCaller(new UnitTestPlayerCaller(this));
-		addSchedulerCaller(new UnitTestSchedulerCaller(this));
-	}
+    public UnitTestServerCaller(Loader loader) {
+        super(loader);
+        addPlayerCaller(new UnitTestPlayerCaller(this));
+        addSchedulerCaller(new UnitTestSchedulerCaller(this));
+    }
 
-	@Override
-	public void disablePlugin() {
-	}
+    @Override
+    public void disablePlugin() {
+    }
 
-	@Override
-	public String addColor(String message) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public String addColor(String message) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public boolean worldExist(String worldName) {
-		return worldName.equalsIgnoreCase(this.worldName) || worldName.equalsIgnoreCase(worldName2);
-	}
+    @Override
+    public boolean worldExist(String worldName) {
+        return worldName.equalsIgnoreCase(this.worldName) || worldName.equalsIgnoreCase(worldName2);
+    }
 
-	@Override
-	public String getDefaultWorld() {
-		return "UnitTestWorld";
-	}
+    @Override
+    public String getDefaultWorld() {
+        return "UnitTestWorld";
+    }
 
-	@Override
-	public File getDataFolder() {
-		File file;
-		if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-			file = new File(System.getProperty("java.io.tmpdir"));
-		} else {
-			file = new File("/tmp");
-		}
-		System.out.println("First path:" + file.getAbsolutePath());
-		file = new File(file.getAbsoluteFile(), String.valueOf(dir));
-		file.mkdir();
-		System.out.println("Second path:" + file.getAbsolutePath());
-		return file;
-	}
+    @Override
+    public File getDataFolder() {
+        File file;
+        if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            file = new File(System.getProperty("java.io.tmpdir"));
+        } else {
+            file = new File("/tmp");
+        }
+        System.out.println("First path:" + file.getAbsolutePath());
+        file = new File(file.getAbsoluteFile(), String.valueOf(dir));
+        file.mkdir();
+        System.out.println("Second path:" + file.getAbsolutePath());
+        return file;
+    }
 
-	@Override
-	public void addCommand(String name, String help, CommandReceiver manager) {
-		// TODO Auto-generated method stub
+    @Override
+    public void addCommand(String name, String help, CommandReceiver manager) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public String getServerVersion() {
-		return "UnitTest 1.0";
-	}
+    @Override
+    public String getServerVersion() {
+        return "UnitTest 1.0";
+    }
 
-	@Override
-	public String getPluginVersion() {
-		return "1.0";
-	}
+    @Override
+    public String getPluginVersion() {
+        return "1.0";
+    }
 
     @Override
     public String getPluginName() {
@@ -99,29 +100,29 @@ public class UnitTestServerCaller extends ServerCaller {
     }
 
     @Override
-	public void loadLibrary(String path) {
-		// TODO Auto-generated method stub
+    public void loadLibrary(String path) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void registerPermission(String permissionNode) {
-		// TODO Auto-generated method stub
+    @Override
+    public void registerPermission(String permissionNode) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public boolean isOnlineMode() {
-		return true;
-	}
+    @Override
+    public boolean isOnlineMode() {
+        return true;
+    }
 
-	@Override
-	public Logger getLogger() {
-		return Logger.getLogger(this.getClass().getName());
-	}
+    @Override
+    public Logger getLogger() {
+        return Logger.getLogger(this.getClass().getName());
+    }
 
-	@Override
-	public void throwEvent(Event event) {
-		//TODO: Something here
-	}
+    @Override
+    public void throwEvent(Event event) {
+        //TODO: Something here
+    }
 }

@@ -30,71 +30,71 @@ import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
 public class CanaryLoader extends Plugin implements Loader {
-	private Common common;
-	private EventManager eventManager;
+    private Common common;
+    private EventManager eventManager;
 
-	@Override
-	public void onEnable() {
-		//Not used
-	}
+    @Override
+    public void onEnable() {
+        //Not used
+    }
 
-	@Override
-	public void onDisable() {
-		//Not used
-	}
+    @Override
+    public void onDisable() {
+        //Not used
+    }
 
-	@Override
-	public ServerType getServerType() {
-		return ServerType.CANARY;
-	}
+    @Override
+    public ServerType getServerType() {
+        return ServerType.CANARY;
+    }
 
-	@Override
-	public EventManager getEventManager() {
-		return eventManager;
-	}
+    @Override
+    public EventManager getEventManager() {
+        return eventManager;
+    }
 
-	@Override
-	public Common getCommon() {
-		return common;
-	}
+    @Override
+    public Common getCommon() {
+        return common;
+    }
 
-	@Override
-	public boolean enable() {
+    @Override
+    public boolean enable() {
 
-		CanaryServerCaller canaryCaller = new CanaryServerCaller(this);
-		eventManager = new EventManager(canaryCaller);
-		InputStream is = this.getClass().getResourceAsStream("/loader.yml");
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
-		try {
-			String mainClass = br.readLine();
-			mainClass = mainClass.split("main-class:")[1].trim();
+        CanaryServerCaller canaryCaller = new CanaryServerCaller(this);
+        eventManager = new EventManager(canaryCaller);
+        InputStream is = this.getClass().getResourceAsStream("/loader.yml");
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        try {
+            String mainClass = br.readLine();
+            mainClass = mainClass.split("main-class:")[1].trim();
 
-			Class<?> clazz = Class.forName(mainClass);
+            Class<?> clazz = Class.forName(mainClass);
 
-			if (Common.class.isAssignableFrom(clazz)) {
-				common = (Common) clazz.newInstance();
-				common.onEnable(canaryCaller, Logger.getLogger(getName()));
-				return true;
-			} else {
-				this.getLogman().error("The class " + mainClass + " is invalid!");
-				return false;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			return false;
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-			return false;
-		} catch (IllegalAccessException e) {
-			return false;
-		}
-		return false;
-	}
+            if (Common.class.isAssignableFrom(clazz)) {
+                common = (Common) clazz.newInstance();
+                common.onEnable(canaryCaller, Logger.getLogger(getName()));
+                return true;
+            } else {
+                this.getLogman().error("The class " + mainClass + " is invalid!");
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IllegalAccessException e) {
+            return false;
+        }
+        return false;
+    }
 
-	@Override
-	public void disable() {
+    @Override
+    public void disable() {
 
-	}
+    }
 }

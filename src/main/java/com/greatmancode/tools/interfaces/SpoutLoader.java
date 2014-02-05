@@ -22,56 +22,55 @@ import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.spout.SpoutServerCaller;
 import com.greatmancode.tools.configuration.spout.SpoutConfig;
 import com.greatmancode.tools.events.EventManager;
-
 import org.spout.api.plugin.Plugin;
 
 public class SpoutLoader extends Plugin implements Loader {
-	private Common common;
-	private EventManager eventManager;
+    private Common common;
+    private EventManager eventManager;
 
-	@Override
-	public void onEnable() {
-		SpoutServerCaller spoutCaller = new SpoutServerCaller(this);
-		eventManager = new EventManager(spoutCaller);
-		SpoutConfig spoutConfig = new SpoutConfig(this.getClass().getResourceAsStream("/loader.yml"), spoutCaller);
-		String mainClass = spoutConfig.getString("main-class");
-		try {
-			Class<?> clazz = Class.forName(mainClass);
-			if (Common.class.isAssignableFrom(clazz)) {
-				common = (Common) clazz.newInstance();
-				common.onEnable(spoutCaller, getLogger());
-			} else {
-				getLogger().severe("The class " + mainClass + " is invalid!");
-				this.getEngine().getPluginManager().disablePlugin(this);
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			this.getEngine().getPluginManager().disablePlugin(this);
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-			this.getEngine().getPluginManager().disablePlugin(this);
-		} catch (IllegalAccessException e) {
-			this.getEngine().getPluginManager().disablePlugin(this);
-		}
-	}
+    @Override
+    public void onEnable() {
+        SpoutServerCaller spoutCaller = new SpoutServerCaller(this);
+        eventManager = new EventManager(spoutCaller);
+        SpoutConfig spoutConfig = new SpoutConfig(this.getClass().getResourceAsStream("/loader.yml"), spoutCaller);
+        String mainClass = spoutConfig.getString("main-class");
+        try {
+            Class<?> clazz = Class.forName(mainClass);
+            if (Common.class.isAssignableFrom(clazz)) {
+                common = (Common) clazz.newInstance();
+                common.onEnable(spoutCaller, getLogger());
+            } else {
+                getLogger().severe("The class " + mainClass + " is invalid!");
+                this.getEngine().getPluginManager().disablePlugin(this);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            this.getEngine().getPluginManager().disablePlugin(this);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+            this.getEngine().getPluginManager().disablePlugin(this);
+        } catch (IllegalAccessException e) {
+            this.getEngine().getPluginManager().disablePlugin(this);
+        }
+    }
 
-	@Override
-	public void onDisable() {
-		common.onDisable();
-	}
+    @Override
+    public void onDisable() {
+        common.onDisable();
+    }
 
-	@Override
-	public ServerType getServerType() {
-		return ServerType.SPOUT;
-	}
+    @Override
+    public ServerType getServerType() {
+        return ServerType.SPOUT;
+    }
 
-	@Override
-	public EventManager getEventManager() {
-		return eventManager;
-	}
+    @Override
+    public EventManager getEventManager() {
+        return eventManager;
+    }
 
-	@Override
-	public Common getCommon() {
-		return common;
-	}
+    @Override
+    public Common getCommon() {
+        return common;
+    }
 }

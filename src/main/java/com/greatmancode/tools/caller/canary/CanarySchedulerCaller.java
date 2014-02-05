@@ -21,81 +21,80 @@ package com.greatmancode.tools.caller.canary;
 import com.greatmancode.tools.interfaces.CanaryLoader;
 import com.greatmancode.tools.interfaces.caller.SchedulerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
-
 import net.canarymod.tasks.ServerTask;
 import net.canarymod.tasks.ServerTaskManager;
 
 public class CanarySchedulerCaller extends SchedulerCaller {
-	public CanarySchedulerCaller(ServerCaller caller) {
-		super(caller);
-	}
+    public CanarySchedulerCaller(ServerCaller caller) {
+        super(caller);
+    }
 
-	@Override
-	public int schedule(final Runnable entry, long firstStart, long repeating) {
+    @Override
+    public int schedule(final Runnable entry, long firstStart, long repeating) {
 
-		if (repeating != 0) {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), repeating, true) {
-				@Override
-				public void run() {
-					entry.run();
-				}
-			});
-		} else {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), firstStart, false) {
-				@Override
-				public void run() {
-					entry.run();
-				}
-			});
-		}
-		return 0;
-	}
+        if (repeating != 0) {
+            ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), repeating, true) {
+                @Override
+                public void run() {
+                    entry.run();
+                }
+            });
+        } else {
+            ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), firstStart, false) {
+                @Override
+                public void run() {
+                    entry.run();
+                }
+            });
+        }
+        return 0;
+    }
 
-	@Override
-	public int schedule(final Runnable entry, long firstStart, long repeating, boolean async) {
-		if (repeating != 0) {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), repeating, true) {
-				@Override
-				public void run() {
-					entry.run();
-				}
-			});
-		} else {
-			ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), firstStart, false) {
-				@Override
-				public void run() {
-					entry.run();
-				}
-			});
-		}
-		return 0;
-	}
+    @Override
+    public int schedule(final Runnable entry, long firstStart, long repeating, boolean async) {
+        if (repeating != 0) {
+            ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), repeating, true) {
+                @Override
+                public void run() {
+                    entry.run();
+                }
+            });
+        } else {
+            ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), firstStart, false) {
+                @Override
+                public void run() {
+                    entry.run();
+                }
+            });
+        }
+        return 0;
+    }
 
-	@Override
-	public void cancelSchedule(int id) {
+    @Override
+    public void cancelSchedule(int id) {
 
-	}
+    }
 
-	@Override
-	public int delay(final Runnable entry, long start) {
+    @Override
+    public int delay(final Runnable entry, long start) {
 
-		ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), start, false) {
-			@Override
-			public void run() {
-				entry.run();
-			}
-		});
-		return 0;
-	}
+        ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), start, false) {
+            @Override
+            public void run() {
+                entry.run();
+            }
+        });
+        return 0;
+    }
 
-	@Override
-	public int delay(final Runnable entry, long start, boolean async) {
-		ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), start, false) {
-			@Override
-			public void run() {
-				entry.run();
-			}
-		});
-		return 0;
-	}
+    @Override
+    public int delay(final Runnable entry, long start, boolean async) {
+        ServerTaskManager.addTask(new ServerTask(((CanaryLoader) getCaller().getLoader()), start, false) {
+            @Override
+            public void run() {
+                entry.run();
+            }
+        });
+        return 0;
+    }
 }

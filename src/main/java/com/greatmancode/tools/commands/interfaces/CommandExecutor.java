@@ -19,40 +19,46 @@
 package com.greatmancode.tools.commands.interfaces;
 
 public abstract class CommandExecutor implements Command {
-	/**
-	 * The execution of the command
-	 * @param sender The sender of the command
-	 * @param args A String array of all the arguments
-	 */
-	public abstract void execute(String sender, String[] args);
+    /**
+     * The execution of the command
+     *
+     * @param sender The sender of the command
+     * @param args   A String array of all the arguments
+     */
+    public abstract void execute(String sender, String[] args);
 
-	/**
-	 * Returns a usage/help line about the command
-	 * @return A string containing the usage/help about the command.
-	 */
-	public abstract String help();
+    /**
+     * Returns a usage/help line about the command
+     *
+     * @return A string containing the usage/help about the command.
+     */
+    public abstract String help();
 
-	/**
-	 * The maximum number of arguments that this command take
-	 * @return The maximum number of arguments
-	 */
-	public abstract int maxArgs();
+    /**
+     * The maximum number of arguments that this command take
+     *
+     * @return The maximum number of arguments
+     */
+    public abstract int maxArgs();
 
-	/**
-	 * The minimum number of arguments this command take
-	 * @return The minimum number of arguments
-	 */
-	public abstract int minArgs();
+    /**
+     * The minimum number of arguments this command take
+     *
+     * @return The minimum number of arguments
+     */
+    public abstract int minArgs();
 
-	/**
-	 * State if this command is for Players only
-	 * @return True if the command is for player only else false.
-	 */
-	public abstract boolean playerOnly();
+    /**
+     * State if this command is for Players only
+     *
+     * @return True if the command is for player only else false.
+     */
+    public abstract boolean playerOnly();
 
-	/**
-	 * Returns the permission node of this command.
-	 * @return The permission node of this command.
-	 */
-	public abstract String getPermissionNode();
+    /**
+     * Returns the permission node of this command.
+     *
+     * @return The permission node of this command.
+     */
+    public abstract String getPermissionNode();
 }

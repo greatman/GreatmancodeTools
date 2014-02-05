@@ -18,27 +18,26 @@
  */
 package com.greatmancode.tools.events.bukkit;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
-
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BukkitEventManager implements ServerEventManager {
-	private Map<String, Listener> map = new HashMap<String, Listener>();
+    private Map<String, Listener> map = new HashMap<String, Listener>();
 
-	public BukkitEventManager() {
-		map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());
-	}
+    public BukkitEventManager() {
+        map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());
+    }
 
-	public void eventRegistered(String event, ServerCaller serverCaller) {
-		if (map.containsKey(event)) {
-			Bukkit.getServer().getPluginManager().registerEvents(map.get(event), ((BukkitLoader) serverCaller.getLoader()));
-		}
-	}
+    public void eventRegistered(String event, ServerCaller serverCaller) {
+        if (map.containsKey(event)) {
+            Bukkit.getServer().getPluginManager().registerEvents(map.get(event), ((BukkitLoader) serverCaller.getLoader()));
+        }
+    }
 }

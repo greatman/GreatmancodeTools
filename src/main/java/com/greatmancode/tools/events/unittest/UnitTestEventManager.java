@@ -22,8 +22,8 @@ import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public class UnitTestEventManager implements ServerEventManager {
-	@Override
-	public void eventRegistered(String event, ServerCaller serverCaller) {
+    @Override
+    public void eventRegistered(String event, ServerCaller serverCaller) {
 
-	}
+    }
 }

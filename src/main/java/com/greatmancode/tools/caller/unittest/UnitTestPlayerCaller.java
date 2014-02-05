@@ -18,47 +18,47 @@
  */
 package com.greatmancode.tools.caller.unittest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UnitTestPlayerCaller extends PlayerCaller {
-	public UnitTestPlayerCaller(ServerCaller caller) {
-		super(caller);
-	}
+    public UnitTestPlayerCaller(ServerCaller caller) {
+        super(caller);
+    }
 
-	@Override
-	public boolean checkPermission(String playerName, String perm) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean checkPermission(String playerName, String perm) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public void sendMessage(String playerName, String message) {
-		System.out.println(playerName + ":" + message);
-	}
+    @Override
+    public void sendMessage(String playerName, String message) {
+        System.out.println(playerName + ":" + message);
+    }
 
-	@Override
-	public String getPlayerWorld(String playerName) {
-		return "UnitTestWorld";
-	}
+    @Override
+    public String getPlayerWorld(String playerName) {
+        return "UnitTestWorld";
+    }
 
-	@Override
-	public boolean isOnline(String playerName) {
-		return playerName.equals("console");
-	}
+    @Override
+    public boolean isOnline(String playerName) {
+        return playerName.equals("console");
+    }
 
-	@Override
-	public boolean isOp(String playerName) {
-		return playerName.equals("UnitTestPlayer");
-	}
+    @Override
+    public boolean isOp(String playerName) {
+        return playerName.equals("UnitTestPlayer");
+    }
 
-	@Override
-	public List<String> getOnlinePlayers() {
-		List<String> list = new ArrayList<String>();
-		list.add("UnitTestPlayer");
-		return list;
-	}
+    @Override
+    public List<String> getOnlinePlayers() {
+        List<String> list = new ArrayList<String>();
+        list.add("UnitTestPlayer");
+        return list;
+    }
 }

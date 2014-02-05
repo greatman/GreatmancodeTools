@@ -18,45 +18,44 @@
  */
 package com.greatmancode.tools.commands.spout;
 
-import java.util.List;
-
 import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
-
 import org.spout.api.command.Command;
 import org.spout.api.command.CommandArguments;
 import org.spout.api.command.CommandSource;
 import org.spout.api.command.Executor;
 import org.spout.api.exception.CommandException;
 
+import java.util.List;
+
 public class SpoutCommandReceiver implements Executor, CommandReceiver {
-	private CommandHandler commandHandler;
+    private CommandHandler commandHandler;
 
-	public SpoutCommandReceiver(CommandHandler commandHandler) {
-		this.commandHandler = commandHandler;
-	}
+    public SpoutCommandReceiver(CommandHandler commandHandler) {
+        this.commandHandler = commandHandler;
+    }
 
-	@Override
-	public void execute(CommandSource source, Command command, CommandArguments args) throws CommandException {
-		SubCommand subCommand = commandHandler.getCommand(command.getName());
-		if (subCommand != null) {
-			List<String> realArgs = args.get();
-			String subCommandValue = "";
-			String[] newArgs;
-			if (args.length() <= 1) {
-				newArgs = new String[0];
-				if (args.length() != 0) {
-					subCommandValue = realArgs.get(0);
-				}
-			} else {
-				newArgs = new String[args.length() - 1];
-				subCommandValue = realArgs.get(0);
-				for (int i = 1; i <= newArgs.length; i++) {
-					newArgs[i - 1] = realArgs.get(i);
-				}
-			}
-			subCommand.execute(subCommandValue, source.getName(), newArgs);
-		}
-	}
+    @Override
+    public void execute(CommandSource source, Command command, CommandArguments args) throws CommandException {
+        SubCommand subCommand = commandHandler.getCommand(command.getName());
+        if (subCommand != null) {
+            List<String> realArgs = args.get();
+            String subCommandValue = "";
+            String[] newArgs;
+            if (args.length() <= 1) {
+                newArgs = new String[0];
+                if (args.length() != 0) {
+                    subCommandValue = realArgs.get(0);
+                }
+            } else {
+                newArgs = new String[args.length() - 1];
+                subCommandValue = realArgs.get(0);
+                for (int i = 1; i <= newArgs.length; i++) {
+                    newArgs[i - 1] = realArgs.get(i);
+                }
+            }
+            subCommand.execute(subCommandValue, source.getName(), newArgs);
+        }
+    }
 }

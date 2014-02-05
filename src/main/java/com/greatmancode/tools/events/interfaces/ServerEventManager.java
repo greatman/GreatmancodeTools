@@ -21,5 +21,5 @@ package com.greatmancode.tools.events.interfaces;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 public interface ServerEventManager {
-	void eventRegistered(String event, ServerCaller serverCaller);
+    void eventRegistered(String event, ServerCaller serverCaller);
 }

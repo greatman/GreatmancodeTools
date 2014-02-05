@@ -18,41 +18,41 @@
  */
 package com.greatmancode.tools.language;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.greatmancode.tools.configuration.Config;
 import com.greatmancode.tools.configuration.ConfigurationManager;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 public class LanguageManager {
-	private static final String MAIN_KEY = "language";
-	private static final String SEPARATOR = ".";
-	private Config languageFile = null;
-	private Map<String, String> languageList = new HashMap<String, String>();
+    private static final String MAIN_KEY = "language";
+    private static final String SEPARATOR = ".";
+    private Config languageFile = null;
+    private Map<String, String> languageList = new HashMap<String, String>();
 
-	public LanguageManager(ServerCaller serverCaller, File path, String fileName) {
-		languageFile = new ConfigurationManager(serverCaller).loadFile(path, fileName);
-		loadLanguage();
-	}
+    public LanguageManager(ServerCaller serverCaller, File path, String fileName) {
+        languageFile = new ConfigurationManager(serverCaller).loadFile(path, fileName);
+        loadLanguage();
+    }
 
-	private void loadLanguage() {
-		languageList = languageFile.getStringMap(MAIN_KEY);
-	}
+    private void loadLanguage() {
+        languageList = languageFile.getStringMap(MAIN_KEY);
+    }
 
-	public void addLanguageEntry(String key, String value) {
-		if (!languageList.containsKey(key)) {
-			languageFile.setValue(MAIN_KEY + SEPARATOR + key, value);
-			loadLanguage();
-		}
-	}
+    public void addLanguageEntry(String key, String value) {
+        if (!languageList.containsKey(key)) {
+            languageFile.setValue(MAIN_KEY + SEPARATOR + key, value);
+            loadLanguage();
+        }
+    }
 
-	public String parse(String key, Object... args) {
-		return String.format(languageList.get(key), args);
-	}
+    public String parse(String key, Object... args) {
+        return String.format(languageList.get(key), args);
+    }
 
-	public String getString(String key) {
-		return languageList.get(key);
-	}
+    public String getString(String key) {
+        return languageList.get(key);
+    }
 }

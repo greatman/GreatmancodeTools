@@ -18,36 +18,36 @@
  */
 package com.greatmancode.tools.events;
 
+import com.greatmancode.tools.events.interfaces.Listener;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.greatmancode.tools.events.interfaces.Listener;
-
 public class ListenerRegistration {
-	private Map<Listener, Method> list = new HashMap<Listener, Method>();
+    private Map<Listener, Method> list = new HashMap<Listener, Method>();
 
-	public void addListener(Listener listener, Method method) {
-		if (listener != null && method != null) {
-			list.put(listener, method);
-		}
-	}
+    public void addListener(Listener listener, Method method) {
+        if (listener != null && method != null) {
+            list.put(listener, method);
+        }
+    }
 
-	protected void callEvent(Event event) {
-		for (Map.Entry<Listener, Method> methodList : list.entrySet()) {
-			try {
-				methodList.getValue().invoke(methodList.getKey(), event);
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
+    protected void callEvent(Event event) {
+        for (Map.Entry<Listener, Method> methodList : list.entrySet()) {
+            try {
+                methodList.getValue().invoke(methodList.getKey(), event);
+            } catch (IllegalAccessException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
 }
