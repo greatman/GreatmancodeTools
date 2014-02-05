@@ -76,6 +76,7 @@ public class BukkitServerCaller extends ServerCaller {
 		coloredString = coloredString.replace("{{UNDERLINE}}", ChatColor.UNDERLINE.toString());
 		coloredString = coloredString.replace("{{ITALIC}}", ChatColor.ITALIC.toString());
 		coloredString = coloredString.replace("{{RESET}}", ChatColor.RESET.toString());
+        coloredString = ChatColor.translateAlternateColorCodes('&', coloredString);
 		return coloredString;
 	}
 
