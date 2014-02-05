@@ -80,14 +80,15 @@ public class CanaryLoader extends Plugin implements Loader {
                 return false;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            this.getLogman().error("Unable to load the main class!", e);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            this.getLogman().error("Unable to load the main class!", e);
             return false;
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            this.getLogman().error("Unable to load the main class!", e);
             return false;
         } catch (IllegalAccessException e) {
+            this.getLogman().error("Unable to load the main class!", e);
             return false;
         }
         return false;

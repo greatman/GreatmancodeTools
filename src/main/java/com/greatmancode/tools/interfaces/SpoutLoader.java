@@ -24,6 +24,8 @@ import com.greatmancode.tools.configuration.spout.SpoutConfig;
 import com.greatmancode.tools.events.EventManager;
 import org.spout.api.plugin.Plugin;
 
+import java.util.logging.Level;
+
 public class SpoutLoader extends Plugin implements Loader {
     private Common common;
     private EventManager eventManager;
@@ -44,12 +46,13 @@ public class SpoutLoader extends Plugin implements Loader {
                 this.getEngine().getPluginManager().disablePlugin(this);
             }
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
             this.getEngine().getPluginManager().disablePlugin(this);
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
             this.getEngine().getPluginManager().disablePlugin(this);
         } catch (IllegalAccessException e) {
+            getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
             this.getEngine().getPluginManager().disablePlugin(this);
         }
     }

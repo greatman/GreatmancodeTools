@@ -57,24 +57,39 @@ public class Updater {
     private String versionType;
     private String versionGameVersion;
 
-    private boolean announce; // Whether to announce file downloads
+    // Whether to announce file downloads
+    private boolean announce;
     private ServerCaller caller;
-    private URL url; // Connecting to RSS
-    private Thread thread; // Updater thread
+    // Connecting to RSS
+    private URL url;
+    // Updater thread
+    private Thread thread;
 
-    private int id = -1; // Project's Curse ID
-    private String apiKey = null; // BukkitDev ServerMods API key
-    private static final String TITLE_VALUE = "name"; // Gets remote file's title
-    private static final String LINK_VALUE = "downloadUrl"; // Gets remote file's download link
-    private static final String TYPE_VALUE = "releaseType"; // Gets remote file's release type
-    private static final String VERSION_VALUE = "gameVersion"; // Gets remote file's build version
-    private static final String QUERY = "/servermods/files?projectIds="; // Path to GET
-    private static final String HOST = "https://api.curseforge.com"; // Slugs will be appended to this to get to the project's RSS feed
+    // Project's Curse ID
+    private int id = -1;
+    // BukkitDev ServerMods API key
+    private String apiKey = null;
+    // Gets remote file's title
+    private static final String TITLE_VALUE = "name";
+    // Gets remote file's download link
+    private static final String LINK_VALUE = "downloadUrl";
+    // Gets remote file's release type
+    private static final String TYPE_VALUE = "releaseType";
+    // Gets remote file's build version
+    private static final String VERSION_VALUE = "gameVersion";
+    // Path to GET
+    private static final String QUERY = "/servermods/files?projectIds=";
+    // Slugs will be appended to this to get to the project's RSS feed
+    private static final String HOST = "https://api.curseforge.com";
 
-    private static final String[] NO_UPDATE_TAG = {"-DEV", "-PRE", "-SNAPSHOT"}; // If the version number contains one of these, don't update.
-    private static final int BYTE_SIZE = 1024; // Used for downloading files
-    private YamlConfiguration config; // Config file
-    private Updater.UpdateResult result = Updater.UpdateResult.SUCCESS; // Used for determining the outcome of the update process
+    // If the version number contains one of these, don't update.
+    private static final String[] NO_UPDATE_TAG = {"-DEV", "-PRE", "-SNAPSHOT"};
+    // Used for downloading files
+    private static final int BYTE_SIZE = 1024;
+    // Config file
+    private YamlConfiguration config;
+    // Used for determining the outcome of the update process
+    private Updater.UpdateResult result = Updater.UpdateResult.SUCCESS;
 
     /**
      * Gives the dev the result of the update process. Can be obtained by called getResult().

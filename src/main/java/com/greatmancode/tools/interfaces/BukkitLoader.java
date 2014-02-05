@@ -24,6 +24,8 @@ import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
 import com.greatmancode.tools.events.EventManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.logging.Level;
+
 public class BukkitLoader extends JavaPlugin implements Loader {
     private Common common;
     private EventManager eventManager;
@@ -44,12 +46,13 @@ public class BukkitLoader extends JavaPlugin implements Loader {
                 this.getServer().getPluginManager().disablePlugin(this);
             }
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
             this.getServer().getPluginManager().disablePlugin(this);
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
             this.getServer().getPluginManager().disablePlugin(this);
         } catch (IllegalAccessException e) {
+            getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
             this.getServer().getPluginManager().disablePlugin(this);
         }
     }
