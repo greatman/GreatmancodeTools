@@ -65,16 +65,8 @@ public class UnitTestServerCaller extends ServerCaller {
 
     @Override
     public File getDataFolder() {
-        File file;
-        if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-            file = new File(System.getProperty("java.io.tmpdir"));
-        } else {
-            file = new File("/tmp");
-        }
-        System.out.println("First path:" + file.getAbsolutePath());
-        file = new File(file.getAbsoluteFile(), String.valueOf(dir));
-        file.mkdir();
-        System.out.println("Second path:" + file.getAbsolutePath());
+        File file = new File(new File(new File("."), "target"),"testfiles");
+        file.mkdirs();
         return file;
     }
 
