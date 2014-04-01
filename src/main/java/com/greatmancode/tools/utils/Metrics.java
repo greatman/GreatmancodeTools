@@ -499,7 +499,7 @@ public class Metrics {
      * GZip compress a string of bytes
      *
      * @param input
-     * @return
+     * @return a byte array
      */
     public static byte[] gzip(String input) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

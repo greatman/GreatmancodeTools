@@ -54,10 +54,6 @@
 			<id>CanaryLib-repo</id>
 			<url>http://repo2.visualillusionsent.net/</url>
 		</repository>
-		<repository>
-			<id>CanaryUtil-repo</id>
-			<url>http://home.larry1123.net/plugin/repository/everything</url>
-		</repository>
 	</repositories>
 
 	<distributionManagement>

@@ -32,8 +32,6 @@ public class Event {
 
     /**
      * Set cancelled status. Events which wish to be cancellable should implement Cancellable and implement setCancelled as:
-     * <p/>
-     * <p/>
      * <pre>
      * public void setCancelled(boolean cancelled) {
      * 	super.setCancelled(cancelled);

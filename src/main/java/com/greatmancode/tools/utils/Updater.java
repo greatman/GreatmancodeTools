@@ -33,14 +33,12 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Check dev.bukkit.org to find updates for a given plugin, and download the updates if needed.
- * <p/>
+ * Check dev.bukkit.org to find updates for a given plugin, and download the updates if needed.<br>
  * <b>VERY, VERY IMPORTANT</b>: Because there are no standards for adding auto-update toggles in your plugin's config, this system provides NO CHECK WITH YOUR CONFIG to make sure the user has allowed auto-updating.
  * <br>
  * It is a <b>BUKKIT POLICY</b> that you include a boolean value in your config that prevents the auto-updater from running <b>AT ALL</b>.
  * <br>
- * If you fail to include this option in your config, your plugin will be <b>REJECTED</b> when you attempt to submit it to dev.bukkit.org.
- * <p/>
+ * If you fail to include this option in your config, your plugin will be <b>REJECTED</b> when you attempt to submit it to dev.bukkit.org.<br>
  * An example of a good configuration option would be something similar to 'auto-update: true' - if this value is set to false you may NOT run the auto-updater.
  * <br>
  * If you are unsure about these rules, please read the plugin submission guidelines: http://goo.gl/8iU5l
@@ -154,6 +152,7 @@ public class Updater {
     /**
      * Initialize the updater
      *
+     * @param caller   The Server Caller
      * @param id       The dev.bukkit.org id of the project
      * @param type     Specify the type of update this will be. See {@link UpdateType}
      * @param announce True if the program should announce the progress of new updates in console
@@ -247,6 +246,7 @@ public class Updater {
 
     /**
      * Get the latest version's name.
+     * @return the latest version name
      */
     public String getLatestName() {
         this.waitForThread();
@@ -255,6 +255,7 @@ public class Updater {
 
     /**
      * Get the latest version's file link.
+     * @return The latest version file link.
      */
     public String getLatestFileLink() {
         this.waitForThread();
