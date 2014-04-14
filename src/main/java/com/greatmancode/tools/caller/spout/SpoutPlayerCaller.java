@@ -25,6 +25,7 @@ import org.spout.api.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class SpoutPlayerCaller extends PlayerCaller {
     public SpoutPlayerCaller(SpoutServerCaller caller) {
@@ -84,5 +85,10 @@ public class SpoutPlayerCaller extends PlayerCaller {
     public boolean isOp(String playerName) {
         // TODO: Hmm... There's not really a OP in Spout. Maybe use a permission flag?
         return false;
+    }
+
+    @Override
+    public UUID getUUID(String playerName) {
+        return null;
     }
 }

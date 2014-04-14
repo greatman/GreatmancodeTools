@@ -24,6 +24,7 @@ import net.canarymod.Canary;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class CanaryPlayerCaller extends PlayerCaller {
     public CanaryPlayerCaller(ServerCaller caller) {
@@ -65,5 +66,10 @@ public class CanaryPlayerCaller extends PlayerCaller {
     @Override
     public boolean isOp(String playerName) {
         return Canary.ops().isOpped(playerName);
+    }
+
+    @Override
+    public UUID getUUID(String playerName) {
+        return null;
     }
 }

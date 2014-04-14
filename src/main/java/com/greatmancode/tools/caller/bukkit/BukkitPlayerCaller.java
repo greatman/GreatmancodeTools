@@ -21,10 +21,12 @@ package com.greatmancode.tools.caller.bukkit;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class BukkitPlayerCaller extends PlayerCaller {
     public BukkitPlayerCaller(ServerCaller caller) {
@@ -82,5 +84,10 @@ public class BukkitPlayerCaller extends PlayerCaller {
     @Override
     public boolean isOp(String playerName) {
         return ((BukkitLoader) getCaller().getLoader()).getServer().getOfflinePlayer(playerName).isOp();
+    }
+
+    @Override
+    public UUID getUUID(String playerName) {
+        return Bukkit.getPlayer(playerName).getUniqueId();
     }
 }

@@ -27,7 +27,7 @@ import org.spout.api.event.player.PlayerJoinEvent;
 public class PlayerJoinEventListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(event.getPlayer().getName(), event.getPlayer().getDisplayName(), event.getPlayer().getWorld().getName()));
+        com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(event.getPlayer().getName(), event.getPlayer().getDisplayName(), event.getPlayer().getWorld().getName(), null));
         EventManager.getInstance().callEvent(pEvent);
     }
 }

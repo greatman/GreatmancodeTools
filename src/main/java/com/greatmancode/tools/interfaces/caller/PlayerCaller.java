@@ -19,6 +19,7 @@
 package com.greatmancode.tools.interfaces.caller;
 
 import java.util.List;
+import java.util.UUID;
 
 public abstract class PlayerCaller {
     protected final ServerCaller caller;
@@ -78,4 +79,11 @@ public abstract class PlayerCaller {
      * @return True if the player is a OP else false.
      */
     public abstract boolean isOp(String playerName);
+
+    /**
+     * Retrieve the UUID of a player.
+     * @param playerName The player name
+     * @return The UUID of the player
+     */
+    public abstract UUID getUUID(String playerName);
 }

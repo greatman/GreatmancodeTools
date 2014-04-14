@@ -23,6 +23,7 @@ import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class UnitTestPlayerCaller extends PlayerCaller {
     public UnitTestPlayerCaller(ServerCaller caller) {
@@ -53,6 +54,11 @@ public class UnitTestPlayerCaller extends PlayerCaller {
     @Override
     public boolean isOp(String playerName) {
         return playerName.equals("UnitTestPlayer");
+    }
+
+    @Override
+    public UUID getUUID(String playerName) {
+        return UUID.fromString(playerName);
     }
 
     @Override

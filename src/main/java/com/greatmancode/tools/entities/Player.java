@@ -18,38 +18,16 @@
  */
 package com.greatmancode.tools.entities;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+import java.util.UUID;
+
+@Data
+@RequiredArgsConstructor
 public class Player {
-    private String name;
-    private String displayName;
-    private String worldName;
-
-    public Player(String name, String displayName, String worldName) {
-        this.name = name;
-        this.displayName = displayName;
-        this.worldName = worldName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public String getWorldName() {
-        return worldName;
-    }
-
-    public void setWorldName(String worldName) {
-        this.worldName = worldName;
-    }
+    private final String name;
+    private final String displayName;
+    private final String worldName;
+    private final UUID uuid;
 }

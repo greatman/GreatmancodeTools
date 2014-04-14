@@ -34,7 +34,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spoutVersion>1.0.0-SNAPSHOT</spoutVersion>
-		<bukkitVersion>1.7.2-R0.3-SNAPSHOT</bukkitVersion>
+		<bukkitVersion>1.7.5-R0.1-SNAPSHOT</bukkitVersion>
 	</properties>
 
 	<repositories>
@@ -114,6 +114,12 @@
 			<artifactId>CanaryUtil</artifactId>
 			<version>0.3.1</version>
 		</dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.12.6</version>
+            <scope>provided</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
