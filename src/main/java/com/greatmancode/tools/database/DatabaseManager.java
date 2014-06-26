@@ -26,7 +26,6 @@ import com.alta189.simplesave.exceptions.TableRegistrationException;
 import com.alta189.simplesave.h2.H2Configuration;
 import com.alta189.simplesave.mysql.MySQLConfiguration;
 import com.alta189.simplesave.sqlite.SQLiteConfiguration;
-import com.greatmancode.tools.caller.spout.SpoutServerCaller;
 import com.greatmancode.tools.database.interfaces.DatabaseType;
 import com.greatmancode.tools.database.throwable.InvalidDatabaseConstructor;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
@@ -46,9 +45,6 @@ public class DatabaseManager {
                 config = new H2Configuration();
                 ((H2Configuration) config).setDatabase(path.getAbsolutePath());
             } else {
-                if (serverCaller instanceof SpoutServerCaller) {
-                    serverCaller.loadLibrary(serverCaller.getDataFolder() + File.separator + "sqlite.jar");
-                }
                 config = new SQLiteConfiguration(path.getAbsolutePath());
                 ((SQLiteConfiguration) config).setPrefix(tablePrefix);
             }
@@ -61,9 +57,6 @@ public class DatabaseManager {
     public DatabaseManager(DatabaseType type, String address, int port, String username, String password, String database, String tablePrefix, ServerCaller serverCaller) throws InvalidDatabaseConstructor {
         if (type.equals(DatabaseType.MYSQL)) {
             this.serverCaller = serverCaller;
-            if (serverCaller instanceof SpoutServerCaller) {
-                serverCaller.loadLibrary(serverCaller.getDataFolder() + File.separator + "mysql.jar");
-            }
             MySQLConfiguration config = new MySQLConfiguration();
             config.setHost(address);
             config.setPort(port);

@@ -33,7 +33,6 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spoutVersion>1.0.0-SNAPSHOT</spoutVersion>
 		<bukkitVersion>1.7.9-R0.2-SNAPSHOT</bukkitVersion>
 	</properties>
 
@@ -83,13 +82,6 @@
 			<version>1.2.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.spout</groupId>
-			<artifactId>spout-api</artifactId>
-			<version>${spoutVersion}</version>
-			<type>jar</type>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

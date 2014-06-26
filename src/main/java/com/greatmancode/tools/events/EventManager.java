@@ -20,14 +20,12 @@ package com.greatmancode.tools.events;
 
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
 import com.greatmancode.tools.caller.canary.CanaryServerCaller;
-import com.greatmancode.tools.caller.spout.SpoutServerCaller;
 import com.greatmancode.tools.caller.unittest.UnitTestServerCaller;
 import com.greatmancode.tools.events.bukkit.BukkitEventManager;
 import com.greatmancode.tools.events.canary.CanaryEventManager;
 import com.greatmancode.tools.events.interfaces.EventHandler;
 import com.greatmancode.tools.events.interfaces.Listener;
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
-import com.greatmancode.tools.events.spout.SpoutEventManager;
 import com.greatmancode.tools.events.unittest.UnitTestEventManager;
 import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
@@ -46,9 +44,7 @@ public class EventManager {
         instance = this;
         this.serverCaller = serverCaller;
 
-        if (serverCaller instanceof SpoutServerCaller) {
-            eventManager = new SpoutEventManager();
-        } else if (serverCaller instanceof BukkitServerCaller) {
+        if (serverCaller instanceof BukkitServerCaller) {
             eventManager = new BukkitEventManager();
         } else if (serverCaller instanceof CanaryServerCaller) {
             eventManager = new CanaryEventManager();
