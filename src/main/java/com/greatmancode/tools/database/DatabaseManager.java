@@ -18,36 +18,27 @@
  */
 package com.greatmancode.tools.database;
 
-import com.alta189.simplesave.Configuration;
-import com.alta189.simplesave.Database;
-import com.alta189.simplesave.DatabaseFactory;
-import com.alta189.simplesave.exceptions.ConnectionException;
-import com.alta189.simplesave.exceptions.TableRegistrationException;
-import com.alta189.simplesave.h2.H2Configuration;
-import com.alta189.simplesave.mysql.MySQLConfiguration;
-import com.alta189.simplesave.sqlite.SQLiteConfiguration;
 import com.greatmancode.tools.database.interfaces.DatabaseType;
 import com.greatmancode.tools.database.throwable.InvalidDatabaseConstructor;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 import java.io.File;
 
 public class DatabaseManager {
-    private Database db = null;
+    private HikariDataSource db = null;
+    private String tablePrefix = null;
     private ServerCaller serverCaller;
 
     public DatabaseManager(DatabaseType type, String tablePrefix, File path, ServerCaller serverCaller) throws InvalidDatabaseConstructor {
         if (type.equals(DatabaseType.H2) || type.equals(DatabaseType.SQLITE)) {
             this.serverCaller = serverCaller;
-            Configuration config;
-            if (type.equals(DatabaseType.H2)) {
-                serverCaller.loadLibrary(serverCaller.getDataFolder() + File.separator + "h2.jar");
-                config = new H2Configuration();
-                ((H2Configuration) config).setDatabase(path.getAbsolutePath());
-            } else {
-                config = new SQLiteConfiguration(path.getAbsolutePath());
-                ((SQLiteConfiguration) config).setPrefix(tablePrefix);
-            }
+            HikariConfig config = new HikariConfig();
+            config.setMaximumPoolSize(10);
+            config.setDataSourceClassName("org.sqlite.SQLiteDataSource");
+            config.addDataSourceProperty("databaseName", path.getAbsolutePath());
+            this.tablePrefix = tablePrefix;
             initialiseDatabase(config);
         } else {
             throw new InvalidDatabaseConstructor();
@@ -57,42 +48,31 @@ public class DatabaseManager {
     public DatabaseManager(DatabaseType type, String address, int port, String username, String password, String database, String tablePrefix, ServerCaller serverCaller) throws InvalidDatabaseConstructor {
         if (type.equals(DatabaseType.MYSQL)) {
             this.serverCaller = serverCaller;
-            MySQLConfiguration config = new MySQLConfiguration();
-            config.setHost(address);
-            config.setPort(port);
-            config.setUser(username);
-            config.setPassword(password);
-            config.setDatabase(database);
-            config.setPrefix(tablePrefix);
+            HikariConfig config = new HikariConfig();
+            config.setMaximumPoolSize(10);
+            config.setDataSourceClassName("com.mysql.jdbc.jdbc2.optional.MysqlDataSource");
+            config.addDataSourceProperty("serverName", address);
+            config.addDataSourceProperty("port", port);
+            config.addDataSourceProperty("databaseName", database);
+            config.addDataSourceProperty("user", username);
+            config.addDataSourceProperty("password", password);
+            config.addDataSourceProperty("autoDeserialize", true);
+            this.tablePrefix = tablePrefix;
             initialiseDatabase(config);
         } else {
             throw new InvalidDatabaseConstructor();
         }
     }
 
-    public void registerTable(Class<?> tableClass) throws TableRegistrationException {
-        if (db != null) {
-            db.registerTable(tableClass);
-        }
-    }
-
-    public void connect() throws ConnectionException {
-        if (db != null) {
-            db.connect();
-        }
-    }
-
-    public void close() throws ConnectionException {
-        if (db != null) {
-            db.close();
-        }
-    }
-
-    public Database getDatabase() {
+    public HikariDataSource getDatabase() {
         return db;
     }
 
-    private void initialiseDatabase(Configuration config) {
-        db = DatabaseFactory.createNewDatabase(config);
+    public String getTablePrefix() {
+        return tablePrefix;
+    }
+
+    private void initialiseDatabase(HikariConfig config) {
+        db = new HikariDataSource(config);
     }
 }

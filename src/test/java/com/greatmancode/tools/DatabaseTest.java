@@ -18,36 +18,40 @@
  */
 package com.greatmancode.tools;
 
-import java.io.File;
-import java.net.URISyntaxException;
-
-import com.alta189.simplesave.exceptions.ConnectionException;
-import com.alta189.simplesave.exceptions.TableRegistrationException;
 import com.greatmancode.tools.caller.unittest.UnitTestServerCaller;
 import com.greatmancode.tools.database.DatabaseManager;
 import com.greatmancode.tools.database.interfaces.DatabaseType;
 import com.greatmancode.tools.database.throwable.InvalidDatabaseConstructor;
 import com.greatmancode.tools.interfaces.UnitTestLoader;
-import com.greatmancode.tools.tables.TestTable;
-
 import org.junit.Test;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
 
 public class DatabaseTest {
 	@Test
-	public void test() throws URISyntaxException, InvalidDatabaseConstructor, TableRegistrationException, ConnectionException {
+	public void test() throws URISyntaxException, InvalidDatabaseConstructor, SQLException {
 		DatabaseManager dbManager = new DatabaseManager(DatabaseType.SQLITE, "test_", new File(new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "testConfig.db"), new UnitTestServerCaller(new UnitTestLoader()));
-		dbManager.registerTable(TestTable.class);
-		dbManager.connect();
-
-		TestTable table = new TestTable();
-		table.test = "wow";
-		dbManager.getDatabase().save(table);
-		table = dbManager.getDatabase().select(TestTable.class).where().equal("test", "wow").execute().findOne();
-		assertNotNull(table);
-		assertEquals("wow", table.test);
+        Connection connection = dbManager.getDatabase().getConnection();
+        PreparedStatement statement = connection.prepareStatement("CREATE TABLE "+dbManager.getTablePrefix()+"test ( " +
+                "  id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "  test varchar(255) NOT NULL" +
+                ");");
+        statement.executeUpdate();
+        statement.close();
+        statement = connection.prepareStatement("INSERT INTO "+dbManager.getTablePrefix()+"test(test) VALUES ('wow')");
+        statement.executeUpdate();
+        statement.close();
+        statement = connection.prepareStatement("SELECT * FROM "+dbManager.getTablePrefix()+"test WHERE test='wow'");
+        ResultSet set = statement.executeQuery();
+        set.next();
+        assertEquals("wow", set.getString("test"));
 	}
 }
 
