@@ -45,6 +45,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -113,5 +114,10 @@ public class BukkitConfig extends Config {
             }
         }
         return values;
+    }
+
+    @Override
+    public List<String> getStringList(String path) {
+        return configFile.getStringList(path);
     }
 }
