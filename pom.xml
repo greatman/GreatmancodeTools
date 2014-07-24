@@ -83,13 +83,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.xerial</groupId>
-			<artifactId>sqlite-jdbc</artifactId>
-			<version>3.7.15-M1</version>
-			<type>jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>net.canarymod</groupId>
 			<artifactId>CanaryLib</artifactId>
 			<version>1.0-RC-3</version>
@@ -104,6 +97,11 @@
             <artifactId>lombok</artifactId>
             <version>1.12.6</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.180</version>
         </dependency>
 	</dependencies>
 
@@ -127,8 +125,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<compilerArguments>
 						<O>-Xlint:all</O>
 						<O>-Xlint:-path</O>
@@ -172,12 +170,14 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-                            <minimizeJar>true</minimizeJar>
 							<relocations>
 							</relocations>
 							<artifactSet>
                                 <includes>
                                     <include>com.zaxxer:HikariCP</include>
+                                    <include>com.h2database:h2</include>
+                                    <include>org.javassist:javassist</include>
+                                    <include>org.slf4j:slf4j-api</include>
                                 </includes>
 							</artifactSet>
 						</configuration>

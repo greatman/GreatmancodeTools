@@ -65,7 +65,7 @@ public class UnitTestServerCaller extends ServerCaller {
 
     @Override
     public File getDataFolder() {
-        File file = new File(new File(new File("."), "target"),"testfiles");
+        File file = new File("target","testfiles");
         file.mkdirs();
         return file;
     }
