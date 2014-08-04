@@ -24,8 +24,7 @@ import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import net.canarymod.config.Configuration;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CanaryConfig extends Config {
     public CanaryConfig(File folder, String fileName, ServerCaller serverCaller) {
@@ -89,5 +88,10 @@ public class CanaryConfig extends Config {
             }
         }
         return result;
+    }
+
+    @Override
+    public List<String> getStringList(String path) {
+        return Arrays.asList(Configuration.getPluginConfig((CanaryLoader)serverCaller.getLoader()).getStringArray(path));
     }
 }
