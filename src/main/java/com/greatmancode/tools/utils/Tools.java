@@ -18,6 +18,10 @@
  */
 package com.greatmancode.tools.utils;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  * General tools for Craftconomy
  *
@@ -114,5 +118,20 @@ public class Tools {
      */
     public static boolean isPositive(double number) {
         return number >= 0.00;
+    }
+
+    public static void closeJDBCConnection(Connection connection) {
+        try {
+            if (connection != null) connection.close();
+        } catch (SQLException e) {
+        }
+    }
+
+    public static void closeJDBCStatement(PreparedStatement statement) {
+        try {
+            if (statement != null) statement.close();
+        } catch (SQLException e) {
+
+        }
     }
 }
