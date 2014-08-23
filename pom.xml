@@ -51,7 +51,7 @@
 		</repository>
 		<repository>
 			<id>CanaryLib-repo</id>
-			<url>http://repo2.visualillusionsent.net/repository/public/</url>
+			<url>http://repo.visualillusionsent.net/repository/public/</url>
 		</repository>
 	</repositories>
 
