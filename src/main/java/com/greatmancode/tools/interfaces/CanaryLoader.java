@@ -27,7 +27,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CanaryLoader extends Plugin implements Loader {
@@ -77,19 +76,19 @@ public class CanaryLoader extends Plugin implements Loader {
                 common.onEnable(canaryCaller, Logger.getLogger(getName()));
                 return true;
             } else {
-                this.getLogman().log(Level.SEVERE, "The class " + mainClass + " is invalid!");
+                this.getLogman().error("The class " + mainClass + " is invalid!");
                 return false;
             }
         } catch (IOException e) {
-            this.getLogman().log(Level.SEVERE, "Unable to load the main class!", e);
+            this.getLogman().error("Unable to load the main class!", e);
         } catch (ClassNotFoundException e) {
-            this.getLogman().log(Level.SEVERE, "Unable to load the main class!", e);
+            this.getLogman().error("Unable to load the main class!", e);
             return false;
         } catch (InstantiationException e) {
-            this.getLogman().log(Level.SEVERE, "Unable to load the main class!", e);
+            this.getLogman().error("Unable to load the main class!", e);
             return false;
         } catch (IllegalAccessException e) {
-            this.getLogman().log(Level.SEVERE, "Unable to load the main class!", e);
+            this.getLogman().error("Unable to load the main class!", e);
             return false;
         }
         return false;

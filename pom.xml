@@ -33,7 +33,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<bukkitVersion>1.7.9-R0.2-SNAPSHOT</bukkitVersion>
+		<bukkitVersion>1.7.9-R0.2</bukkitVersion>
 	</properties>
 
 	<repositories>
@@ -53,6 +53,10 @@
 			<id>CanaryLib-repo</id>
 			<url>http://repo.visualillusionsent.net/repository/public/</url>
 		</repository>
+        <repository>
+            <id>canaryutil-repo</id>
+            <url>http://repo.larry1123.net/content/groups/public/</url>
+        </repository>
 	</repositories>
 
 	<distributionManagement>
@@ -99,12 +103,12 @@
 		<dependency>
 			<groupId>net.canarymod</groupId>
 			<artifactId>CanaryLib</artifactId>
-			<version>1.0-RC-3</version>
+			<version>1.0-RC-4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>net.larry1123</groupId>
 			<artifactId>CanaryUtil</artifactId>
-			<version>0.3.1</version>
+			<version>0.3.3-SNAPSHOT</version>
 		</dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
