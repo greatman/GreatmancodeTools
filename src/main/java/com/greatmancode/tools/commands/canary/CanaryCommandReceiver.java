@@ -24,6 +24,9 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import net.canarymod.chat.MessageReceiver;
 import net.larry1123.util.api.plugin.commands.CommandExecute;
 
+import java.util.Collections;
+import java.util.List;
+
 public class CanaryCommandReceiver implements CommandReceiver, CommandExecute {
     private CommandHandler commandHandler;
 
@@ -49,5 +52,11 @@ public class CanaryCommandReceiver implements CommandReceiver, CommandExecute {
             }
             subCommand.execute(subCommandValue, messageReceiver.getName(), newArgs);
         }
+    }
+
+    @Override
+    public List<String> tabComplete(MessageReceiver messageReceiver, String[] strings) {
+        //TODO : Complete that
+        return Collections.emptyList();
     }
 }
