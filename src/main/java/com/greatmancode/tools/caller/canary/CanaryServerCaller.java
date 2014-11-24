@@ -1,4 +1,4 @@
-/*
+/**
  * This file is part of GreatmancodeTools.
  *
  * Copyright (c) 2013-2014, Greatman <http://github.com/greatman/>
@@ -46,7 +46,7 @@ public class CanaryServerCaller extends ServerCaller {
 
     @Override
     public void disablePlugin() {
-        Canary.loader().disablePlugin(((CanaryLoader) loader).getName());
+        Canary.pluginManager().disablePlugin(((CanaryLoader) loader).getName());
     }
 
     @Override

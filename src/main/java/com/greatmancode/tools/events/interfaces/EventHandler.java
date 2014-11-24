@@ -1,4 +1,4 @@
-/*
+/**
  * This file is part of GreatmancodeTools.
  *
  * Copyright (c) 2013-2014, Greatman <http://github.com/greatman/>
