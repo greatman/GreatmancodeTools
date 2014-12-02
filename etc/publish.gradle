@@ -24,7 +24,7 @@ task javadocJar(type: Jar, dependsOn: Javadoc) {
 
 publishing {
     publications {
-        shadow(MavenPublication) {
+        maven(MavenPublication) {
             from components.java
             Artifact sourcesJar
             Artifact javadocJar

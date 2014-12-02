@@ -23,6 +23,7 @@ repositories {
     maven { url "http://repo.visualillusionsent.net/repository/public/" }
     maven { url "http://repo.larry1123.net/content/groups/public/" }
     maven { url "https://libraries.minecraft.net" }
+    maven { url "http://repo.spongepowered.org/Sponge/maven" }
 }
 
 dependencies {
@@ -31,6 +32,8 @@ dependencies {
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     compile group: 'org.bukkit', name: 'bukkit', version: '1.7.9-R0.2'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.12.6'
+    compile group: 'org.spongepowered', name: 'spongeapi', version: '1.0'
+    compile group: 'org.spongepowered', name: 'sponge', version: '1.8-FML8.0.9.1016-SNAPSHOT'
     testCompile group: 'junit', name: 'junit', version: '4.10'
 }
 

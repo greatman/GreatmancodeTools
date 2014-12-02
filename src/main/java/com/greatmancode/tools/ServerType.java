@@ -22,5 +22,6 @@ public enum ServerType {
     BUKKIT,
     SPOUT,
     UNIT_TEST,
-    CANARY
+    CANARY,
+    SPONGE
 }
