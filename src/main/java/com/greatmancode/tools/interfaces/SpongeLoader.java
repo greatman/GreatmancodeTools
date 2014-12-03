@@ -21,6 +21,7 @@ package com.greatmancode.tools.interfaces;
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.sponge.SpongeServerCaller;
 import com.greatmancode.tools.events.EventManager;
+import lombok.Getter;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
@@ -36,6 +37,7 @@ import java.util.logging.Level;
 @Plugin(id = "GreatmancodeToolsLoader", name = "GreatmancodeToolsLoader", version = "1.0")
 public class SpongeLoader implements Loader {
 
+    @Getter
     private Game game;
     private EventManager eventManager;
     private Common common;
@@ -102,9 +104,5 @@ public class SpongeLoader implements Loader {
     @Override
     public Common getCommon() {
         return common;
-    }
-
-    public Game getGame() {
-        return game;
     }
 }
