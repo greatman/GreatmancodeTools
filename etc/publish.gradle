@@ -17,17 +17,17 @@ task sourcesJar(type: Jar) {
 }
 
 // javadoc jar
-task javadocJar(type: Jar, dependsOn: Javadoc) {
-    classifier = 'javadoc'
-    from 'build/docs/javadoc'
-}
+//task javadocJar(type: Jar, dependsOn: Javadoc) {
+//    classifier = 'javadoc'
+ //   from 'build/docs/javadoc'
+//}
 
 publishing {
     publications {
         maven(MavenPublication) {
             from components.java
             Artifact sourcesJar
-            Artifact javadocJar
+  //          Artifact javadocJar
 
             repositories {
                 maven {

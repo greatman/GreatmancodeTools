@@ -34,10 +34,10 @@ public class LanguageTest {
 	public void test() throws URISyntaxException {
 		LanguageManager languageManager = new LanguageManager(new UnitTestServerCaller(new UnitTestLoader()), new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "languageTest.yml");
 		languageManager.addLanguageEntry("test", "this is a test");
-		assertEquals("this is a test", languageManager.parse("test", null));
+		assertEquals("this is a test", languageManager.parse("test"));
 		languageManager = null;
 		languageManager = new LanguageManager(new UnitTestServerCaller(new UnitTestLoader()), new File(ConfigurationTest.class.getProtectionDomain().getCodeSource().getLocation().toURI()), "languageTest.yml");
-		assertEquals("this is a test", languageManager.parse("test", null));
+		assertEquals("this is a test", languageManager.parse("test"));
 		languageManager.addLanguageEntry("test2", "This is a %s");
 		assertEquals("This is a wow", languageManager.parse("test2", "wow"));
 		languageManager = null;

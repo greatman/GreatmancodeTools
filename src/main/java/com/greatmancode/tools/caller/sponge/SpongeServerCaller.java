@@ -1,3 +1,21 @@
+/**
+ * This file is part of GreatmancodeTools.
+ *
+ * Copyright (c) 2013-2014, Greatman <http://github.com/greatman/>
+ *
+ * GreatmancodeTools is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GreatmancodeTools is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.greatmancode.tools.caller.sponge;
 
 import com.google.common.base.Optional;
@@ -38,12 +56,12 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public boolean worldExist(String worldName) {
-        return ((SpongeLoader)loader).getGame().getWorld(worldName) != null;
+        return ((SpongeLoader)loader).getGame().getServer().get().getWorld(worldName) != null;
     }
 
     @Override
     public String getDefaultWorld() {
-        return ((SpongeLoader)loader).getGame().getWorlds().iterator().next().getName();
+        return ((SpongeLoader)loader).getGame().getServer().get().getWorlds().iterator().next().getName();
     }
 
     @Override

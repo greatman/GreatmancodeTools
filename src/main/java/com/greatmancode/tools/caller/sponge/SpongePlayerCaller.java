@@ -1,3 +1,21 @@
+/**
+ * This file is part of GreatmancodeTools.
+ *
+ * Copyright (c) 2013-2014, Greatman <http://github.com/greatman/>
+ *
+ * GreatmancodeTools is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GreatmancodeTools is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.greatmancode.tools.caller.sponge;
 
 import com.greatmancode.tools.interfaces.SpongeLoader;
@@ -20,17 +38,17 @@ public class SpongePlayerCaller extends PlayerCaller {
 
     @Override
     public boolean checkPermission(String playerName, String perm) {
-        return loader.getGame().getServiceManager().provide(PermissionService.class).get().login(loader.getGame().getPlayer("playerName").get()).isPermitted(perm);
+        return loader.getGame().getServiceManager().provide(PermissionService.class).get().login(loader.getGame().getServer().get().getPlayer("playerName").get()).isPermitted(perm);
     }
 
     @Override
     public void sendMessage(String playerName, String message) {
-        loader.getGame().getPlayer(playerName).get().sendMessage(message);
+        loader.getGame().getServer().get().getPlayer(playerName).get().sendMessage(message);
     }
 
     @Override
     public String getPlayerWorld(String playerName) {
-        return loader.getGame().getPlayer("test").get().getWorld().getName();
+        return loader.getGame().getServer().get().getPlayer("test").get().getWorld().getName();
     }
 
     @Override
@@ -41,7 +59,7 @@ public class SpongePlayerCaller extends PlayerCaller {
     @Override
     public List<String> getOnlinePlayers() {
         List<String> playerList = new ArrayList<>();
-        for (Player p : loader.getGame().getOnlinePlayers()) {
+        for (Player p : loader.getGame().getServer().get().getOnlinePlayers()) {
             playerList.add(p.getName());
         }
         return playerList;
@@ -54,6 +72,6 @@ public class SpongePlayerCaller extends PlayerCaller {
 
     @Override
     public UUID getUUID(String playerName) {
-        return loader.getGame().getPlayer(playerName).get().getUniqueId();
+        return loader.getGame().getServer().get().getPlayer(playerName).get().getUniqueId();
     }
 }

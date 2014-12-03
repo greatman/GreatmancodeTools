@@ -20,9 +20,11 @@ package com.greatmancode.tools.commands;
 
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
 import com.greatmancode.tools.caller.canary.CanaryServerCaller;
+import com.greatmancode.tools.caller.sponge.SpongeServerCaller;
 import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
 import com.greatmancode.tools.commands.canary.CanaryCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
+import com.greatmancode.tools.commands.sponge.SpongeCommandReceiver;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import java.util.HashMap;
@@ -41,6 +43,8 @@ public class CommandHandler {
             commandReceiver = new BukkitCommandReceiver(this);
         } else if (this.serverCaller instanceof CanaryServerCaller) {
             commandReceiver = new CanaryCommandReceiver(this);
+        } else if (this.serverCaller instanceof SpongeServerCaller) {
+            commandReceiver = new SpongeCommandReceiver(this);
         }
     }
 

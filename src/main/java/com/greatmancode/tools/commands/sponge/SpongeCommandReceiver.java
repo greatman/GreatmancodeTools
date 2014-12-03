@@ -1,8 +1,27 @@
+/**
+ * This file is part of GreatmancodeTools.
+ *
+ * Copyright (c) 2013-2014, Greatman <http://github.com/greatman/>
+ *
+ * GreatmancodeTools is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GreatmancodeTools is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.greatmancode.tools.commands.sponge;
 
 import com.google.common.base.Optional;
 import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.SubCommand;
+import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.util.command.CommandCallable;
@@ -13,7 +32,7 @@ import org.spongepowered.api.util.command.source.ConsoleSource;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpongeCommandReceiver implements CommandCallable {
+public class SpongeCommandReceiver implements CommandCallable, CommandReceiver {
 
     private final CommandHandler commandHandler;
 

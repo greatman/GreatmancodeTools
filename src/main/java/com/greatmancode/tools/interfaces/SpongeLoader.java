@@ -1,16 +1,31 @@
+/**
+ * This file is part of GreatmancodeTools.
+ *
+ * Copyright (c) 2013-2014, Greatman <http://github.com/greatman/>
+ *
+ * GreatmancodeTools is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GreatmancodeTools is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.greatmancode.tools.interfaces;
 
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.sponge.SpongeServerCaller;
 import com.greatmancode.tools.events.EventManager;
-import com.greatmancode.tools.interfaces.sponge.SpongeGToolsPluginContainer;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.util.event.Subscribe;
-import org.spongepowered.mod.SpongeMod;
-import org.spongepowered.mod.plugin.SpongePluginContainer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -86,7 +101,7 @@ public class SpongeLoader implements Loader {
 
     @Override
     public Common getCommon() {
-        return common
+        return common;
     }
 
     public Game getGame() {

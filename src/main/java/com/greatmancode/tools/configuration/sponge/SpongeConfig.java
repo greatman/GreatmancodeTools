@@ -1,3 +1,21 @@
+/**
+ * This file is part of GreatmancodeTools.
+ *
+ * Copyright (c) 2013-2014, Greatman <http://github.com/greatman/>
+ *
+ * GreatmancodeTools is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * GreatmancodeTools is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.greatmancode.tools.configuration.sponge;
 
 import com.greatmancode.tools.configuration.Config;
@@ -13,7 +31,7 @@ import java.util.Map;
 
 public class SpongeConfig extends Config {
 
-    private com.typesafe.config.Config file;
+    private ConfigFile file;
     public SpongeConfig(InputStream is, ServerCaller serverCaller) {
         super(is, serverCaller);
         //No can't do.
@@ -21,7 +39,7 @@ public class SpongeConfig extends Config {
 
     public SpongeConfig(File folder, String fileName, ServerCaller serverCaller) {
         super(folder, fileName, serverCaller);
-        file = (com.typesafe.config.Config) ConfigFile.parseFile(new File(folder, fileName));
+        file = ConfigFile.parseFile(new File(folder, fileName));
     }
 
     @Override
@@ -51,13 +69,13 @@ public class SpongeConfig extends Config {
 
     @Override
     public void setValue(String path, Object value) {
-        file = file.withValue(path, ConfigValueFactory.fromAnyRef(value));
-        //TODO: Write
+        file = (ConfigFile) file.withValue(path, ConfigValueFactory.fromAnyRef(value));
+        file.save(false);
     }
 
     @Override
     public boolean has(String path) {
-        return file.hasPath(path)
+        return file.hasPath(path);
     }
 
     @Override
