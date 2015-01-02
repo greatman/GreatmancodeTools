@@ -112,12 +112,12 @@ uploadArchives {
                 name 'Greatmancodetools'
                 packaging 'jar'
                 description 'Library to support multiple minecraft server backend'
-                url 'https://github.com/greatman/craftconomy3'
+                url 'https://github.com/greatman/GreatmancodeTools'
 
                 scm {
-                    connection 'https://github.com/greatman/craftconomy3.git'
-                    developerConnection 'https://github.com/greatman/craftconomy3.git'
-                    url 'https://github.com/greatman/craftconomy3'
+                    connection 'https://github.com/greatman/GreatmancodeTools.git'
+                    developerConnection 'https://github.com/greatman/GreatmancodeTools.git'
+                    url 'https://github.com/greatman/GreatmancodeTools'
                 }
 
                 licenses {
