@@ -7,7 +7,7 @@ apply plugin: 'eclipse'
 apply plugin: 'license'
 
 group = 'com.greatmancode'
-version = '1.1-SNAPSHOT'
+version = '1.1'
 
 description = "GreatmancodeTools"
 
@@ -111,7 +111,7 @@ uploadArchives {
             pom.project {
                 name 'Greatmancodetools'
                 packaging 'jar'
-                description 'Library to support multiple minecraft server backend'
+                description 'Library to support multiple minecraft server backend.'
                 url 'https://github.com/greatman/GreatmancodeTools'
 
                 scm {
