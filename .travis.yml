@@ -1,0 +1,16 @@
+language: java
+sudo: false
+jdk:
+  - oraclejdk8
+before_install:
+  - openssl aes-256-cbc -k "$opensslkey" -in key.gpg.enc -out key.gpg -d
+after_success:
+  - '[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_REPO_SLUG == greatman/GreatmancodeTools ]] && [[ $TRAVIS_BRANCH == master ]] && ./gradlew uploadArchives'
+env:
+  global:
+  - secure: i513ub2/SoUetr5RXR2uREOm8nBBZX6B1RAlb5IwcENBKNa1EB6vnHWUifbpQO6VSzgP/Dh1nLgTf8y50rts7GzVzo057zRQ5j+a9hmOqWvoeO+wK/ub7NSZ9eKZTwercjvGu19cUoZ/Y3EYAuI+9v+WDNWgGqhrKg7+phWBiDk=
+  - secure: mZPqBIHCG7Xectx0hZQDK/ihVv0zwZZCPo3qzv4eB9jbmVOSv9Qa4F20YmyEcxgVaO8egg+VcuSthbVzORcisuQPKGv4/tAEIT2FJfA1IpIVmQDyv30kSWuK0xjkLt8S+Lve3YMV/zoUTGnTNfdyQ2vxhsQLjoCv/IGQWrx8XRc=
+  - secure: EQ/le9IZtev15iLaPUx0qf4lSCWCxFDuglR0Ud5BwqnMtsIrC4KkLUEdyRzm5dU7cJcCRpWpDJiA/79n9J7RsJ/dLIh3CU7o5wW6G31qFlYW3H7pQsVHv/XMfeYaQjwOoGt8HE9JoRaoQ8XtF05tdTrSYpSuLrfxO6iOZ/pWhu0=
+  - secure: CUamZUTtmA0Wi19TpKH3laz7yGPBp2VbN0k+tfzvdLPDMdF8BmKTCqxIIGpCjoscoiWsHG368nySa6EdYs9vN1SaGI3+pX8ix9eGnIOUbJg+E2GU90q1WtF7E1Zw2IfQ9HP5GcLls826A1zlis7zY2iD+uL63tENaDALFWZtDhs=
+  - secure: foIN/ViRE1mWoB6Dcs4ZuX7Z1/zLrIJiLE+qKBaoP2AGIsdpt/FzvXdwvWyHopoXyOfvO4KrzLEDk0pepWc3eyJKuK1JkWYz3wImoDnLDABkK5MFLmUCtBGnQNqr6iBImPZWGASKNo7MfmWy1w93iCKhHt8hWgH1Z7L6buh6epo=
+  - secure: C41IIBfSOADMndrWu5EYDw1v4/kZFh5l7907//3+9zW9xGp5IBZMo0mj5Npb3sBULbl3G3+LH3rH7b7uIM1OPLlywYwVTxHVaUIzOreaDd2r5PWRddqceDGDz2Im6qjJZgZ4w04bH/gqT6K7sPm3IjQkJWwNBVrfxDobx25V81w=

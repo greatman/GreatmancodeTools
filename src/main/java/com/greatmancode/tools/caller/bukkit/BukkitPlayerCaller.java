@@ -74,8 +74,7 @@ public class BukkitPlayerCaller extends PlayerCaller {
     @Override
     public List<String> getOnlinePlayers() {
         List<String> list = new ArrayList<String>();
-        Player[] pList = ((BukkitLoader) getCaller().getLoader()).getServer().getOnlinePlayers();
-        for (Player p : pList) {
+        for (Player p : ((BukkitLoader) getCaller().getLoader()).getServer().getOnlinePlayers()) {
             list.add(p.getName());
         }
         return list;

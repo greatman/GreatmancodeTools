@@ -5,21 +5,32 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'license'
-apply from: 'etc/publish.gradle'
 
 group = 'com.greatmancode'
 version = '1.1-SNAPSHOT'
 
 description = "GreatmancodeTools"
 
+ext."signing.keyId" = System.getenv("keyId")
+ext."signing.secretKeyRingFile" = System.getenv("secretKeyRingFile")
+ext."signing.password" = System.getenv("keyPassword")
+
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+if (ext.isReleaseVersion) {
+    apply plugin: 'signing'
+    signing {
+        required = { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
+}
 
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "http://repo.bukkit.org/content/groups/public/" }
-    maven { url "http://repo.greatmancode.com/content/groups/public/" }
+    maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
     maven { url "http://repo.visualillusionsent.net/repository/public/" }
     maven { url "http://repo.larry1123.net/content/groups/public/" }
     maven { url "https://libraries.minecraft.net" }
@@ -30,7 +41,7 @@ dependencies {
     compile group: 'net.canarymod', name: 'CanaryLib', version: '1.0-RC-4-SNAPSHOT'
     compile group: 'net.larry1123', name: 'CanaryUtil', version: '0.3.4-SNAPSHOT'
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-    compile group: 'org.bukkit', name: 'bukkit', version: '1.7.9-R0.2'
+    compile group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.12.6'
     compile group: 'org.spongepowered', name: 'spongeapi', version: '1.1-SNAPSHOT'
     testCompile group: 'junit', name: 'junit', version: '4.10'
@@ -50,4 +61,79 @@ license {
     ext.copyright = 'Copyright (c) 2013-2014, Greatman'
     ext.url = 'http://github.com/greatman'
     ext.name = 'GreatmancodeTools'
+}
+
+// child script to publish to a maven repo
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
+
+// allow javadoc archive on Java 8 even if the javadoc isn't complete
+if (JavaVersion.current().isJava8Compatible()) {
+    allprojects {
+        tasks.withType(Javadoc) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+        }
+    }
+}
+
+// source jar
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.java.srcDirs
+}
+
+// javadoc jar
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+            if (ext.isReleaseVersion) {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            }
+
+            repository( url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: System.getenv("sonatypeUsername"), password: System.getenv("sonatypePassword"))
+            }
+
+            snapshotRepository( url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: System.getenv("sonatypeUsername"), password: System.getenv("sonatypePassword"))
+            }
+
+            pom.project {
+                name 'Greatmancodetools'
+                packaging 'jar'
+                description 'Library to support multiple minecraft server backend'
+                url 'https://github.com/greatman/craftconomy3'
+
+                scm {
+                    connection 'https://github.com/greatman/craftconomy3.git'
+                    developerConnection 'https://github.com/greatman/craftconomy3.git'
+                    url 'https://github.com/greatman/craftconomy3'
+                }
+
+                licenses {
+                    license {
+                        name 'LGPL v3'
+                        url 'https://www.gnu.org/licenses/lgpl.html'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'greatman'
+                        name 'William Lebel'
+                        email 'lebelwilliam@gmail.com'
+                    }
+                }
+            }
+        }
+    }
 }
