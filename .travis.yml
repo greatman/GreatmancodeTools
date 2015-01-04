@@ -7,6 +7,11 @@ before_install:
 after_success:
 - '[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_REPO_SLUG == greatman/GreatmancodeTools
   ]] && [[ $TRAVIS_BRANCH == master ]] && ./gradlew uploadArchives'
+notifications:
+  email: false
+  on_start: true
+  webhooks:
+    - http://n.tkte.ch/h/830/3JPW0Yn1N5gxfDu4fQxpIqs3
 env:
   global:
   - secure: Kh2uyeb/EY0/yNWjuWtKfDIcUceww00OzCpGDu712jMi2bmEkCM+Vw2fxy2UOz1MNdnkWTcxtqxTNCI0Curl+6JaxZr8BL8l3toAZ/0KL5HrQV+D5TXMXRPVB04IKGPYZJRPcK0MPcNpxHNAhBwPpJkEW+fRx6ushvCnMgt87EY=
