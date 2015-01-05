@@ -21,12 +21,14 @@ package com.greatmancode.tools.interfaces;
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.canary.CanaryServerCaller;
 import com.greatmancode.tools.events.EventManager;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import net.canarymod.plugin.Plugin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Logger;
 
 public class CanaryLoader extends Plugin implements Loader {
@@ -72,8 +74,7 @@ public class CanaryLoader extends Plugin implements Loader {
             Class<?> clazz = Class.forName(mainClass);
 
             if (Common.class.isAssignableFrom(clazz)) {
-                common = (Common) clazz.newInstance();
-                common.onEnable(canaryCaller, Logger.getLogger(getName()));
+                common = (Common) clazz.getConstructor(ServerCaller.class, Logger.class).newInstance(canaryCaller, Logger.getLogger(getName()));
                 return true;
             } else {
                 this.getLogman().error("The class " + mainClass + " is invalid!");
@@ -90,12 +91,18 @@ public class CanaryLoader extends Plugin implements Loader {
         } catch (IllegalAccessException e) {
             this.getLogman().error("Unable to load the main class!", e);
             return false;
+        } catch (NoSuchMethodException e) {
+            this.getLogman().error("Unable to load the main class!", e);
+            return false;
+        } catch (InvocationTargetException e) {
+            this.getLogman().error("Unable to load the main class!", e);
+            return false;
         }
         return false;
     }
 
     @Override
     public void disable() {
-
+        common.onDisable();
     }
 }

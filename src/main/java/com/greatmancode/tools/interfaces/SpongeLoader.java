@@ -21,6 +21,7 @@ package com.greatmancode.tools.interfaces;
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.sponge.SpongeServerCaller;
 import com.greatmancode.tools.events.EventManager;
+import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import lombok.Getter;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.state.PreInitializationEvent;
@@ -32,7 +33,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Plugin(id = "GreatmancodeToolsLoader", name = "GreatmancodeToolsLoader", version = "1.0")
 public class SpongeLoader implements Loader {
@@ -66,8 +69,7 @@ public class SpongeLoader implements Loader {
             Class<?> clazz = Class.forName(mainClass);
 
             if (Common.class.isAssignableFrom(clazz)) {
-                common = (Common) clazz.newInstance();
-                common.onEnable(serverCaller, serverCaller.getLogger());
+                common = (Common) clazz.getConstructor(ServerCaller.class, Logger.class).newInstance(serverCaller, serverCaller.getLogger());
                 //Since it's sponge, we need a bit more data to be able to load properly.
                 String name = br.readLine().split("name:")[1].trim();
                 String version = br.readLine().split("version:")[1].trim();
@@ -82,6 +84,10 @@ public class SpongeLoader implements Loader {
         } catch (InstantiationException e) {
             serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
         } catch (IllegalAccessException e) {
+            serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
+        } catch (NoSuchMethodException e) {
+            serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
+        } catch (InvocationTargetException e) {
             serverCaller.getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
         }
     }
