@@ -24,6 +24,7 @@ import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.events.canary.hooks.EconomyChangeHook;
 import com.greatmancode.tools.events.event.EconomyChangeEvent;
 import com.greatmancode.tools.interfaces.CanaryLoader;
+import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import net.canarymod.Canary;
@@ -147,5 +148,10 @@ public class CanaryServerCaller extends ServerCaller {
         if (event instanceof EconomyChangeEvent) {
             Canary.hooks().callHook(new EconomyChangeHook(((EconomyChangeEvent) event).getAccount(), ((EconomyChangeEvent) event).getAmount()));
         }
+    }
+
+    @Override
+    public Common retrievePlugin(String name) {
+        return ((CanaryLoader)Canary.pluginManager().getPlugin(name)).getCommon();
     }
 }

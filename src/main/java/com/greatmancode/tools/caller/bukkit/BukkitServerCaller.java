@@ -23,6 +23,7 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.events.event.EconomyChangeEvent;
 import com.greatmancode.tools.interfaces.BukkitLoader;
+import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.bukkit.Bukkit;
@@ -146,5 +147,10 @@ public class BukkitServerCaller extends ServerCaller {
         if (event instanceof EconomyChangeEvent) {
             ((BukkitLoader) loader).getServer().getPluginManager().callEvent(new com.greatmancode.tools.events.bukkit.events.EconomyChangeEvent(((EconomyChangeEvent) event).getAccount(), ((EconomyChangeEvent) event).getAmount()));
         }
+    }
+
+    @Override
+    public Common retrievePlugin(String name) {
+        return ((BukkitLoader)((BukkitLoader) loader).getServer().getPluginManager().getPlugin(name)).getCommon();
     }
 }

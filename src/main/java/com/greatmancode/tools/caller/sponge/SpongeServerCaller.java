@@ -22,6 +22,7 @@ import com.google.common.base.Optional;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.commands.sponge.SpongeCommandReceiver;
 import com.greatmancode.tools.events.Event;
+import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.SpongeLoader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
@@ -112,5 +113,10 @@ public class SpongeServerCaller extends ServerCaller {
     @Override
     public void throwEvent(Event event) {
 
+    }
+
+    @Override
+    public Common retrievePlugin(String name) {
+        return null;
     }
 }

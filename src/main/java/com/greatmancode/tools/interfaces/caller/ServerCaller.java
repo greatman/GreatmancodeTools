@@ -20,6 +20,7 @@ package com.greatmancode.tools.interfaces.caller;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
+import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
 
 import java.io.File;
@@ -161,4 +162,6 @@ public abstract class ServerCaller {
     public abstract Logger getLogger();
 
     public abstract void throwEvent(Event event);
+
+    public abstract Common retrievePlugin(String name);
 }
