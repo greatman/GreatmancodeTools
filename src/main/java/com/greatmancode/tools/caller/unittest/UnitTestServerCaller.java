@@ -20,6 +20,7 @@ package com.greatmancode.tools.caller.unittest;
 
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
+import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
@@ -116,5 +117,10 @@ public class UnitTestServerCaller extends ServerCaller {
     @Override
     public void throwEvent(Event event) {
         //TODO: Something here
+    }
+
+    @Override
+    public Common retrievePlugin(String name) {
+        return null;
     }
 }
