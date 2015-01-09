@@ -26,6 +26,8 @@ import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.SpongeLoader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
+import com.greatmancode.tools.utils.ServicePriority;
+import com.greatmancode.tools.utils.VaultEconomy;
 import org.spongepowered.api.service.permission.PermissionService;
 import org.spongepowered.api.util.command.CommandCallable;
 import org.spongepowered.api.util.command.CommandException;
@@ -118,5 +120,10 @@ public class SpongeServerCaller extends ServerCaller {
     @Override
     public Common retrievePlugin(String name) {
         return null;
+    }
+
+    @Override
+    public void setVaultEconomyHook(VaultEconomy instance, ServicePriority priority) {
+
     }
 }

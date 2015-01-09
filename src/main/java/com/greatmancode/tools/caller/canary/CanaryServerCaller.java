@@ -27,6 +27,8 @@ import com.greatmancode.tools.interfaces.CanaryLoader;
 import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
+import com.greatmancode.tools.utils.ServicePriority;
+import com.greatmancode.tools.utils.VaultEconomy;
 import net.canarymod.Canary;
 import net.canarymod.chat.Colors;
 import net.canarymod.chat.TextFormat;
@@ -153,5 +155,10 @@ public class CanaryServerCaller extends ServerCaller {
     @Override
     public Common retrievePlugin(String name) {
         return ((CanaryLoader)Canary.pluginManager().getPlugin(name)).getCommon();
+    }
+
+    @Override
+    public void setVaultEconomyHook(VaultEconomy instance, ServicePriority priority) {
+
     }
 }

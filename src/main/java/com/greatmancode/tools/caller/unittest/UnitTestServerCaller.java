@@ -23,6 +23,8 @@ import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
+import com.greatmancode.tools.utils.ServicePriority;
+import com.greatmancode.tools.utils.VaultEconomy;
 
 import java.io.File;
 import java.util.Random;
@@ -122,5 +124,10 @@ public class UnitTestServerCaller extends ServerCaller {
     @Override
     public Common retrievePlugin(String name) {
         return null;
+    }
+
+    @Override
+    public void setVaultEconomyHook(VaultEconomy instance, ServicePriority priority) {
+
     }
 }

@@ -26,9 +26,13 @@ import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
+import com.greatmancode.tools.utils.VaultEconomy;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.ServicePriority;
 
 import java.io.File;
 import java.util.logging.Logger;
@@ -152,5 +156,10 @@ public class BukkitServerCaller extends ServerCaller {
     @Override
     public Common retrievePlugin(String name) {
         return ((BukkitLoader)((BukkitLoader) loader).getServer().getPluginManager().getPlugin(name)).getCommon();
+    }
+
+    @Override
+    public void setVaultEconomyHook(VaultEconomy instance, com.greatmancode.tools.utils.ServicePriority priority) {
+        Bukkit.getServicesManager().register(Economy.class, instance, (Plugin) getLoader(), ServicePriority.valueOf(priority.name().toUpperCase()));
     }
 }

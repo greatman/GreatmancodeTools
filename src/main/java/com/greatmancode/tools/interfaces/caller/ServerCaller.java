@@ -22,6 +22,8 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
+import com.greatmancode.tools.utils.ServicePriority;
+import com.greatmancode.tools.utils.VaultEconomy;
 
 import java.io.File;
 import java.util.logging.Logger;
@@ -164,4 +166,10 @@ public abstract class ServerCaller {
     public abstract void throwEvent(Event event);
 
     public abstract Common retrievePlugin(String name);
+
+    /**
+     * Set the Vault Economy hook. Only working on Bukkit
+     * @param instance The vault economy instance
+     */
+    public abstract void setVaultEconomyHook(VaultEconomy instance, ServicePriority priority);
 }
