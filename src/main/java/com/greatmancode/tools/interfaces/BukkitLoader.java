@@ -22,13 +22,10 @@ import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
 import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
 import com.greatmancode.tools.events.EventManager;
-import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BukkitLoader extends JavaPlugin implements Loader {
     private Common common;
@@ -43,7 +40,8 @@ public class BukkitLoader extends JavaPlugin implements Loader {
         try {
             Class<?> clazz = Class.forName(mainClass);
             if (Common.class.isAssignableFrom(clazz)) {
-                common = (Common) clazz.getConstructor(ServerCaller.class, Logger.class).newInstance(bukkitCaller, getLogger());
+                common = (Common) clazz.newInstance();
+                common.onEnable(bukkitCaller, getLogger());
             } else {
                 getLogger().severe("The class " + mainClass + " is invalid!");
                 this.getServer().getPluginManager().disablePlugin(this);
@@ -55,12 +53,6 @@ public class BukkitLoader extends JavaPlugin implements Loader {
             getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
             this.getServer().getPluginManager().disablePlugin(this);
         } catch (IllegalAccessException e) {
-            getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
-            this.getServer().getPluginManager().disablePlugin(this);
-        } catch (NoSuchMethodException e) {
-            getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
-            this.getServer().getPluginManager().disablePlugin(this);
-        } catch (InvocationTargetException e) {
             getLogger().log(Level.SEVERE, "Unable to load the main class!", e);
             this.getServer().getPluginManager().disablePlugin(this);
         }

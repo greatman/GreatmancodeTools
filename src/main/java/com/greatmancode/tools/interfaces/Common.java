@@ -19,20 +19,11 @@
 package com.greatmancode.tools.interfaces;
 
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
-import lombok.Getter;
 
 import java.util.logging.Logger;
 
-@Getter
-public abstract class Common {
+public interface Common {
+    void onEnable(ServerCaller serverCaller, final Logger log);
 
-    private final ServerCaller serverCaller;
-    private final Logger log;
-
-    public Common(ServerCaller serverCaller, Logger log) {
-        this.serverCaller = serverCaller;
-        this.log = log;
-    }
-
-    abstract void onDisable();
+    void onDisable();
 }
