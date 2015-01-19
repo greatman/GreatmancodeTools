@@ -158,7 +158,7 @@ uploadArchives {
                     }
                     repository {
                         id 'sponge-repo'
-                        url 'http://repo.spongepowered.org/Sponge/maven'
+                        url 'http://repo.spongepowered.org/maven'
                     }
                 }
             }
