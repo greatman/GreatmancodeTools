@@ -5,6 +5,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'license'
+apply plugin: 'propdeps'
+apply plugin: 'propdeps-maven'
 
 group = 'com.greatmancode'
 version = '1.2-SNAPSHOT'
@@ -39,22 +41,24 @@ repositories {
 }
 
 dependencies {
-    compile group: 'net.canarymod', name: 'CanaryLib', version: '1.0-RC-4-SNAPSHOT'
-    compile group: 'net.larry1123', name: 'CanaryUtil', version: '0.3.4-SNAPSHOT'
-    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-    compile group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.12.6'
-    compile group: 'org.spongepowered', name: 'spongeapi', version: '1.1-SNAPSHOT'
-    compile group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.5'
+    provided group: 'net.canarymod', name: 'CanaryLib', version: '1.0-RC-4-SNAPSHOT'
+    provided group: 'net.larry1123', name: 'CanaryUtil', version: '0.3.4-SNAPSHOT'
+    provided group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    provided group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
+    provided group: 'org.projectlombok', name: 'lombok', version: '1.12.6'
+    provided group: 'org.spongepowered', name: 'spongeapi', version: '1.1-SNAPSHOT'
+    provided group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.5'
     testCompile group: 'junit', name: 'junit', version: '4.10'
 }
 
 buildscript {
     repositories {
         jcenter()
+        maven { url 'http://repo.spring.io/plugins-release/' }
     }
     dependencies {
         classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
     }
 }
 
@@ -110,16 +114,6 @@ uploadArchives {
                 authentication(userName: System.getenv("sonatypeUsername"), password: System.getenv("sonatypePassword"))
             }
 
-            // providedCompile -> provided scope
-            pom.withXml {
-                asNode().dependencies.'*'.findAll() {
-                    it.scope.text() == 'compile'  && project.configurations.providedCompile.allDependencies.find { dep ->
-                        dep.name == it.artifactId.text()
-                    }
-                }.each() {
-                    it.scope*.value = 'provided'
-                }
-            }
             pom.project {
                 name 'Greatmancodetools'
                 packaging 'jar'
