@@ -54,6 +54,11 @@ public class CanaryPlayerCaller extends PlayerCaller {
     }
 
     @Override
+    public String getPlayerWorld(UUID uuid) {
+        return Canary.getServer().getPlayerFromUUID(uuid).getWorld().getName();
+    }
+
+    @Override
     public boolean isOnline(String playerName) {
         return Canary.getServer().getPlayer(playerName) != null;
     }

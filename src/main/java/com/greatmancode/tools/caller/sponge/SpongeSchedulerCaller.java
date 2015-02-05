@@ -22,6 +22,8 @@ import com.greatmancode.tools.interfaces.SpongeLoader;
 import com.greatmancode.tools.interfaces.caller.SchedulerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
+import java.util.concurrent.TimeUnit;
+
 public class SpongeSchedulerCaller extends SchedulerCaller {
 
     private SpongeLoader loader;
@@ -37,11 +39,18 @@ public class SpongeSchedulerCaller extends SchedulerCaller {
 
     @Override
     public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
-        //TODO Async?
-        if (repeating > 0) {
-            loader.getGame().getScheduler().runRepeatingTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, repeating, firstStart).get();
+        if (async) {
+            if (repeating > 0) {
+                loader.getGame().getAsyncScheduler().runRepeatingTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, TimeUnit.MILLISECONDS, repeating, firstStart);
+            } else {
+                loader.getGame().getAsyncScheduler().runTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, TimeUnit.MILLISECONDS, repeating);
+            }
         } else {
-            loader.getGame().getScheduler().runRepeatingTask(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, repeating);
+            if (repeating > 0) {
+                loader.getGame().getSyncScheduler().runRepeatingTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, repeating, firstStart);
+            } else {
+                loader.getGame().getSyncScheduler().runTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, firstStart);
+            }
         }
         return 0;
     }
@@ -58,8 +67,7 @@ public class SpongeSchedulerCaller extends SchedulerCaller {
 
     @Override
     public int delay(Runnable entry, long start, boolean async) {
-        //TODO Async?
-        loader.getGame().getScheduler().runTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, start);
+        loader.getGame().getSyncScheduler().runTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, start);
         return 0;
     }
 }

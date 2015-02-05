@@ -57,6 +57,10 @@ public abstract class PlayerCaller {
      */
     public abstract String getPlayerWorld(String playerName);
 
+
+    public abstract String getPlayerWorld(UUID uuid);
+
+
     /**
      * Checks if a player is online
      *

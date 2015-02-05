@@ -58,12 +58,14 @@ public class BukkitPlayerCaller extends PlayerCaller {
 
     @Override
     public String getPlayerWorld(String playerName) {
-        String result = "";
         Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
-        if (p != null) {
-            result = p.getWorld().getName();
-        }
-        return result;
+        return p != null ? p.getWorld().getName() : "";
+    }
+
+    @Override
+    public String getPlayerWorld(UUID uuid) {
+        Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(uuid);
+        return (p != null) ? p.getWorld().getName() : "";
     }
 
     @Override

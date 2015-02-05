@@ -47,6 +47,11 @@ public class UnitTestPlayerCaller extends PlayerCaller {
     }
 
     @Override
+    public String getPlayerWorld(UUID uuid) {
+        return "UnitTestWorld";
+    }
+
+    @Override
     public boolean isOnline(String playerName) {
         return playerName.equals("console");
     }
