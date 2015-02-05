@@ -16,19 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.entities;
+package com.greatmancode.tools.commands;
 
-import com.greatmancode.tools.commands.CommandSender;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
-
-import java.util.UUID;
-
-@Data
-@RequiredArgsConstructor
-public class Player implements CommandSender {
-    private final String name;
-    private final String displayName;
-    private final String worldName;
-    private final UUID uuid;
+public interface CommandSender {
 }

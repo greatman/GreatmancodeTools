@@ -54,14 +54,14 @@ public class SubCommand implements Command {
         return commandList.containsKey(name);
     }
 
-    public void execute(String command, String sender, String[] args) {
+    public void execute(String command, CommandSender sender, String[] args) {
         if (level <= commandHandler.getLevel()) {
             if (commandExist(command)) {
                 Command entry = commandList.get(command);
                 if (entry instanceof CommandExecutor) {
                     CommandExecutor cmd = ((CommandExecutor) entry);
                     if (commandHandler.getServerCaller().getPlayerCaller().checkPermission(sender, cmd.getPermissionNode())) {
-                        if (cmd.playerOnly() && sender.equalsIgnoreCase("console")) {
+                        if (cmd.playerOnly() && sender instanceof ConsoleCommandSender) {
                             commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, "{{DARK_RED}}Only players can do this command!");
                             return;
                         }

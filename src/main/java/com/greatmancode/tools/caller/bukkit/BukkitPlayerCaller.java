@@ -18,6 +18,8 @@
  */
 package com.greatmancode.tools.caller.bukkit;
 
+import com.greatmancode.tools.commands.CommandSender;
+import com.greatmancode.tools.commands.ConsoleCommandSender;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
@@ -34,25 +36,22 @@ public class BukkitPlayerCaller extends PlayerCaller {
     }
 
     @Override
-    public boolean checkPermission(String playerName, String perm) {
+    public boolean checkPermission(CommandSender commandSender, String perm) {
         boolean result;
-        Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
-        if (p != null) {
-            result = p.isOp() || p.hasPermission(perm);
+        if (commandSender instanceof ConsoleCommandSender) {
+            return true;
         } else {
-            // It's the console
-            result = true;
+            Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(((com.greatmancode.tools.entities.Player)commandSender).getUuid());
+            return p != null ? (p.isOp() || p.hasPermission(perm)) : false;
         }
-        return result;
     }
 
     @Override
-    public void sendMessage(String playerName, String message) {
-        Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
-        if (p != null) {
-            p.sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
+    public void sendMessage(CommandSender commandSender, String message) {
+        if (commandSender instanceof ConsoleCommandSender) {
+            Bukkit.getConsoleSender().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
         } else {
-            ((BukkitLoader) getCaller().getLoader()).getServer().getConsoleSender().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
+            Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(((com.greatmancode.tools.entities.Player)commandSender).getUuid());
         }
     }
 

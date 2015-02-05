@@ -21,6 +21,8 @@ package com.greatmancode.tools.commands.canary;
 import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
+import net.canarymod.api.Server;
+import net.canarymod.api.entity.living.humanoid.Player;
 import net.canarymod.chat.MessageReceiver;
 import net.larry1123.util.api.plugin.commands.CommandExecute;
 
@@ -50,7 +52,14 @@ public class CanaryCommandReceiver implements CommandReceiver, CommandExecute {
                 subCommandValue = args[1];
                 System.arraycopy(args, 2, newArgs, 0, args.length - 2);
             }
-            subCommand.execute(subCommandValue, messageReceiver.getName(), newArgs);
+            com.greatmancode.tools.commands.CommandSender sender;
+            if (messageReceiver instanceof Server) {
+                sender = new com.greatmancode.tools.commands.ConsoleCommandSender();
+            } else {
+                Player p = (Player) messageReceiver;
+                sender = new com.greatmancode.tools.entities.Player(p.getName(), p.getDisplayName(), p.getWorld().getName(), p.getUUID());
+            }
+            subCommand.execute(subCommandValue, sender, newArgs);
         }
     }
 

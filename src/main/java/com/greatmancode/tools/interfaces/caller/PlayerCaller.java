@@ -18,6 +18,8 @@
  */
 package com.greatmancode.tools.interfaces.caller;
 
+import com.greatmancode.tools.commands.CommandSender;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -35,19 +37,19 @@ public abstract class PlayerCaller {
     /**
      * Check the permissions of a player
      *
-     * @param playerName The player name to check
+     * @param commandSender The player name to check
      * @param perm       The permission node to check
      * @return True if the player have the permission. Else false (Always true for the Console)
      */
-    public abstract boolean checkPermission(String playerName, String perm);
+    public abstract boolean checkPermission(CommandSender commandSender, String perm);
 
     /**
      * Sends a message to a player
      *
-     * @param playerName The player name to send the message
+     * @param commandSender The player name to send the message
      * @param message    The message to send
      */
-    public abstract void sendMessage(String playerName, String message);
+    public abstract void sendMessage(CommandSender commandSender, String message);
 
     /**
      * Retrieve the world name that a player is currently in

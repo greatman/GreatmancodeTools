@@ -18,6 +18,8 @@
  */
 package com.greatmancode.tools.commands.interfaces;
 
+import com.greatmancode.tools.commands.CommandSender;
+
 public abstract class CommandExecutor implements Command {
     /**
      * The execution of the command
@@ -25,7 +27,7 @@ public abstract class CommandExecutor implements Command {
      * @param sender The sender of the command
      * @param args   A String array of all the arguments
      */
-    public abstract void execute(String sender, String[] args);
+    public abstract void execute(CommandSender sender, String[] args);
 
     /**
      * Returns a usage/help line about the command
