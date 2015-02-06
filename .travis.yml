@@ -6,7 +6,7 @@ before_install:
 - openssl aes-256-cbc -k "$opensslkey" -in key.gpg.enc -out key.gpg -d
 after_success:
 - '[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_REPO_SLUG == greatman/GreatmancodeTools
-  ]] && [[ $TRAVIS_BRANCH == master ]] && ./gradlew uploadArchives --stacktrace --debug'
+  ]] && [[ $TRAVIS_BRANCH == master ]] && ./gradlew uploadArchives --stacktrace'
 notifications:
   email: false
   on_start: true
