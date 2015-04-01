@@ -23,7 +23,6 @@ import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
-import net.canarymod.api.Server;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.util.command.CommandCallable;
 import org.spongepowered.api.util.command.CommandException;
@@ -59,14 +58,11 @@ public class SpongeCommandReceiver implements CommandCallable, CommandReceiver {
                 subCommandValue = args[0];
                 System.arraycopy(args, 1, newArgs, 0, args.length - 1);
             }
-            com.greatmancode.tools.commands.CommandSender sender;
-            if (source instanceof ConsoleSource) {
-                sender = new com.greatmancode.tools.commands.ConsoleCommandSender();
-            } else {
-                Player p = (Player) source;
-                sender = new com.greatmancode.tools.entities.Player(p.getName(), p.getDisplayName().toString(), p.getWorld().getName(), p.getUniqueId());
+            if (source instanceof Player) {
+                subCommand.execute(subCommandValue, ((Player) source).getName(), newArgs);
+            } else if (source instanceof ConsoleSource) {
+                subCommand.execute(subCommandValue, "CONSOLE", newArgs);
             }
-            subCommand.execute(subCommandValue, sender, newArgs);
             return true;
         }
         return false;
@@ -94,6 +90,6 @@ public class SpongeCommandReceiver implements CommandCallable, CommandReceiver {
 
     @Override
     public List<String> getSuggestions(CommandSource source, String arguments) throws CommandException {
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 }

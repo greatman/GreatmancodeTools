@@ -18,9 +18,6 @@
  */
 package com.greatmancode.tools.caller.canary;
 
-import com.greatmancode.tools.commands.CommandSender;
-import com.greatmancode.tools.commands.ConsoleCommandSender;
-import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import net.canarymod.Canary;
@@ -35,19 +32,19 @@ public class CanaryPlayerCaller extends PlayerCaller {
     }
 
     @Override
-    public boolean checkPermission(CommandSender commandSender, String perm) {
-        if (commandSender instanceof ConsoleCommandSender) {
+    public boolean checkPermission(String playerName, String perm) {
+        if (playerName.equals("Console")) {
             return true;
         }
-        return Canary.getServer().getPlayerFromUUID(((Player)commandSender).getUuid()).hasPermission(perm) || isOp(((Player)commandSender).getName());
+        return Canary.getServer().getPlayer(playerName).hasPermission(perm) || isOp(playerName);
     }
 
     @Override
-    public void sendMessage(CommandSender playerName, String message) {
+    public void sendMessage(String playerName, String message) {
         if (playerName.equals("Console")) {
             Canary.getServer().message(getCaller().addColor(getCaller().getCommandPrefix() + message));
         } else {
-            Canary.getServer().getPlayerFromUUID(((Player)playerName).getUuid()).message(getCaller().addColor(getCaller().getCommandPrefix() + message));
+            Canary.getServer().getPlayer(playerName).message(getCaller().addColor(getCaller().getCommandPrefix() + message));
         }
     }
 

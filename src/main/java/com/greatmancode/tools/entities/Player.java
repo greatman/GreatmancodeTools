@@ -18,7 +18,6 @@
  */
 package com.greatmancode.tools.entities;
 
-import com.greatmancode.tools.commands.CommandSender;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +25,7 @@ import java.util.UUID;
 
 @Data
 @RequiredArgsConstructor
-public class Player implements CommandSender {
+public class Player {
     private final String name;
     private final String displayName;
     private final String worldName;

@@ -18,7 +18,6 @@
  */
 package com.greatmancode.tools.caller.unittest;
 
-import com.greatmancode.tools.commands.CommandSender;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
@@ -32,13 +31,13 @@ public class UnitTestPlayerCaller extends PlayerCaller {
     }
 
     @Override
-    public boolean checkPermission(CommandSender playerName, String perm) {
+    public boolean checkPermission(String playerName, String perm) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public void sendMessage(CommandSender playerName, String message) {
+    public void sendMessage(String playerName, String message) {
         caller.getLogger().info(playerName + ":" + message);
     }
 

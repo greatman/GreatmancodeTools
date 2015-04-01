@@ -21,11 +21,9 @@ package com.greatmancode.tools.commands.bukkit;
 import com.greatmancode.tools.commands.CommandHandler;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
-import com.greatmancode.tools.entities.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 
 public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
     private CommandHandler commandHandler;
@@ -50,14 +48,7 @@ public class BukkitCommandReceiver implements CommandReceiver, CommandExecutor {
                 subCommandValue = args[0];
                 System.arraycopy(args, 1, newArgs, 0, args.length - 1);
             }
-            com.greatmancode.tools.commands.CommandSender sender;
-            if (commandSender instanceof ConsoleCommandSender) {
-                sender = new com.greatmancode.tools.commands.ConsoleCommandSender();
-            } else {
-                Player p = (Player) commandSender;
-                sender = new Player(p.getName(), p.getDisplayName(), p.getWorldName(), p.getUuid());
-            }
-            subCommand.execute(subCommandValue, sender, newArgs);
+            subCommand.execute(subCommandValue, commandSender.getName(), newArgs);
             return true;
         }
         return false;

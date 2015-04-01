@@ -18,8 +18,6 @@
  */
 package com.greatmancode.tools.caller.bukkit;
 
-import com.greatmancode.tools.commands.CommandSender;
-import com.greatmancode.tools.commands.ConsoleCommandSender;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
@@ -36,22 +34,25 @@ public class BukkitPlayerCaller extends PlayerCaller {
     }
 
     @Override
-    public boolean checkPermission(CommandSender commandSender, String perm) {
+    public boolean checkPermission(String playerName, String perm) {
         boolean result;
-        if (commandSender instanceof ConsoleCommandSender) {
-            return true;
+        Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
+        if (p != null) {
+            result = p.isOp() || p.hasPermission(perm);
         } else {
-            Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(((com.greatmancode.tools.entities.Player)commandSender).getUuid());
-            return p != null ? (p.isOp() || p.hasPermission(perm)) : false;
+            // It's the console
+            result = true;
         }
+        return result;
     }
 
     @Override
-    public void sendMessage(CommandSender commandSender, String message) {
-        if (commandSender instanceof ConsoleCommandSender) {
-            Bukkit.getConsoleSender().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
+    public void sendMessage(String playerName, String message) {
+        Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayerExact(playerName);
+        if (p != null) {
+            p.sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
         } else {
-            Player p = ((BukkitLoader) getCaller().getLoader()).getServer().getPlayer(((com.greatmancode.tools.entities.Player)commandSender).getUuid());
+            ((BukkitLoader) getCaller().getLoader()).getServer().getConsoleSender().sendMessage(getCaller().addColor(getCaller().getCommandPrefix() + message));
         }
     }
 
