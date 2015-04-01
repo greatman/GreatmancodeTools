@@ -24,6 +24,7 @@ import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.spongepowered.api.entity.player.Player;
+import org.spongepowered.api.text.Text;
 import org.spongepowered.api.util.command.CommandCallable;
 import org.spongepowered.api.util.command.CommandException;
 import org.spongepowered.api.util.command.CommandSource;
@@ -74,17 +75,17 @@ public class SpongeCommandReceiver implements CommandCallable, CommandReceiver {
     }
 
     @Override
-    public Optional<String> getShortDescription() {
+    public String getShortDescription(CommandSource source) {
         return null;
     }
 
     @Override
-    public Optional<String> getHelp() {
+    public Text getHelp(CommandSource source) {
         return null;
     }
 
     @Override
-    public String getUsage() {
+    public String getUsage(CommandSource source) {
         return null;
     }
 

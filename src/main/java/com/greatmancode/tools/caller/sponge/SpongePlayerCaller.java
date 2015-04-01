@@ -23,6 +23,8 @@ import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.service.permission.PermissionService;
+import org.spongepowered.api.text.chat.ChatType;
+import org.spongepowered.api.text.chat.ChatTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,7 @@ public class SpongePlayerCaller extends PlayerCaller {
 
     @Override
     public void sendMessage(String playerName, String message) {
-        loader.getGame().getServer().get().getPlayer(playerName).get().sendMessage(message);
+        loader.getGame().getServer().get().getPlayer(playerName).get().sendMessage(ChatTypes.CHAT,message);
     }
 
     @Override

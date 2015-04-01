@@ -20,7 +20,7 @@ package com.greatmancode.tools.events.sponge;
 
 import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.EventManager;
-import org.spongepowered.api.event.entity.living.player.PlayerJoinEvent;
+import org.spongepowered.api.event.entity.player.PlayerJoinEvent;
 import org.spongepowered.api.util.event.Subscribe;
 
 public class PlayerJoinEventListener {
