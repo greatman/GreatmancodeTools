@@ -20,13 +20,14 @@ package com.greatmancode.tools.interfaces;
 
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.sponge.SpongeServerCaller;
+import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.EventManager;
 import lombok.Getter;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.event.Subscribe;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.util.event.Subscribe;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -104,5 +105,15 @@ public class SpongeLoader implements Loader {
     @Override
     public Common getCommon() {
         return common;
+    }
+
+    @Override
+    public CommandReceiver getCommandReceiver() {
+        return null;
+    }
+
+    @Override
+    public void setCommandReceiver(CommandReceiver receiver) {
+
     }
 }

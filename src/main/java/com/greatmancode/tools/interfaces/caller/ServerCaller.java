@@ -18,6 +18,7 @@
  */
 package com.greatmancode.tools.interfaces.caller;
 
+import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Common;
@@ -117,7 +118,7 @@ public abstract class ServerCaller {
      * @param help    The help line of the command
      * @param manager The manager that manage the command.
      */
-    public abstract void addCommand(String name, String help, CommandReceiver manager);
+    public abstract void addCommand(String name, String help, SubCommand command);
 
     /**
      * Retrieve the server version.

@@ -19,8 +19,7 @@
 package com.greatmancode.tools.caller.sponge;
 
 import com.google.common.base.Optional;
-import com.greatmancode.tools.commands.interfaces.CommandReceiver;
-import com.greatmancode.tools.commands.sponge.SpongeCommandReceiver;
+import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Common;
 import com.greatmancode.tools.interfaces.Loader;
@@ -28,10 +27,13 @@ import com.greatmancode.tools.interfaces.SpongeLoader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.utils.ServicePriority;
 import com.greatmancode.tools.utils.VaultEconomy;
-import org.spongepowered.api.service.permission.PermissionService;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.util.command.CommandCallable;
 import org.spongepowered.api.util.command.CommandException;
+import org.spongepowered.api.util.command.CommandResult;
 import org.spongepowered.api.util.command.CommandSource;
+import org.spongepowered.api.util.command.source.ConsoleSource;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -59,12 +61,12 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public boolean worldExist(String worldName) {
-        return ((SpongeLoader)loader).getGame().getServer().get().getWorld(worldName) != null;
+        return ((SpongeLoader)loader).getGame().getServer().getWorld(worldName) != null;
     }
 
     @Override
     public String getDefaultWorld() {
-        return ((SpongeLoader)loader).getGame().getServer().get().getWorlds().iterator().next().getName();
+        return ((SpongeLoader)loader).getGame().getServer().getWorlds().iterator().next().getName();
     }
 
     @Override
@@ -73,8 +75,59 @@ public class SpongeServerCaller extends ServerCaller {
     }
 
     @Override
-    public void addCommand(String name, String help, CommandReceiver manager) {
-        ((SpongeLoader)loader).getGame().getCommandDispatcher().register(loader, ((SpongeCommandReceiver)manager), name);
+    public void addCommand(String name, String help, final SubCommand subCommand) {
+        CommandCallable command = new CommandCallable() {
+            @Override
+            public Optional<CommandResult> process(CommandSource source, String arguments) throws CommandException {
+                String subCommandValue = "";
+                String[] newArgs;
+                String[] args = arguments.split(" ");
+                if (args.length <= 1) {
+                    newArgs = new String[0];
+                    if (args.length != 0) {
+                        subCommandValue = args[0];
+                    }
+                } else {
+                    newArgs = new String[args.length - 1];
+                    subCommandValue = args[0];
+                    System.arraycopy(args, 1, newArgs, 0, args.length - 1);
+                }
+                String username = source.getName();
+                if (source instanceof ConsoleSource) {
+                    username = "console";
+                }
+                subCommand.execute(subCommandValue, username, newArgs);
+                return Optional.of(CommandResult.success());
+            }
+
+            @Override
+            public List<String> getSuggestions(CommandSource source, String arguments) throws CommandException {
+                List<String> list = new ArrayList<>();
+                list.addAll(subCommand.getSubCommandKeys());
+                return list;
+            }
+
+            @Override
+            public boolean testPermission(CommandSource source) {
+                return true;
+            }
+
+            @Override
+            public Optional<Text> getShortDescription(CommandSource source) {
+                return Optional.absent();
+            }
+
+            @Override
+            public Optional<Text> getHelp(CommandSource source) {
+                return Optional.absent();
+            }
+
+            @Override
+            public Text getUsage(CommandSource source) {
+                return Texts.of();
+            }
+        };
+        ((SpongeLoader)loader).getGame().getCommandDispatcher().register(loader, command, name);
     }
 
     @Override
@@ -89,7 +142,7 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public String getPluginName() {
-        return null;
+        return "greatmancodetools";
     }
 
     @Override

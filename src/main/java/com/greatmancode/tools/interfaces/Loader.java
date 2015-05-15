@@ -19,6 +19,7 @@
 package com.greatmancode.tools.interfaces;
 
 import com.greatmancode.tools.ServerType;
+import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.EventManager;
 
 /**
@@ -46,4 +47,8 @@ public interface Loader {
      * @return The common class
      */
     Common getCommon();
+
+    CommandReceiver getCommandReceiver();
+
+    void setCommandReceiver(CommandReceiver receiver);
 }

@@ -18,6 +18,7 @@
  */
 package com.greatmancode.tools.caller.canary;
 
+import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.canary.CanaryCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
@@ -98,10 +99,9 @@ public class CanaryServerCaller extends ServerCaller {
     }
 
     @Override
-    public void addCommand(String name, String help, CommandReceiver manager) {
-
+    public void addCommand(String name, String help, SubCommand command) {
         try {
-            CanaryUtil.commands().registerCommand(new CommandData(new String[]{name}, new String[0], help, help), ((CanaryLoader) loader), null, ((CanaryCommandReceiver) manager), false);
+            CanaryUtil.commands().registerCommand(new CommandData(new String[]{name}, new String[0], help, help), ((CanaryLoader) loader), null, (CanaryCommandReceiver)loader.getCommandReceiver(), false);
         } catch (CommandDependencyException e) {
             e.printStackTrace();
         }

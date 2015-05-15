@@ -45,17 +45,17 @@ public class SpongePlayerCaller extends PlayerCaller {
 
     @Override
     public void sendMessage(String playerName, String message) {
-        loader.getGame().getServer().get().getPlayer(playerName).get().sendMessage(ChatTypes.CHAT,message);
+        loader.getGame().getServer().getPlayer(playerName).get().sendMessage(ChatTypes.CHAT,message);
     }
 
     @Override
     public String getPlayerWorld(String playerName) {
-        return loader.getGame().getServer().get().getPlayer("test").get().getWorld().getName();
+        return loader.getGame().getServer().getPlayer("test").get().getWorld().getName();
     }
 
     @Override
     public String getPlayerWorld(UUID uuid) {
-        return loader.getGame().getServer().get().getPlayer(uuid).get().getWorld().getName();
+        return loader.getGame().getServer().getPlayer(uuid).get().getWorld().getName();
     }
 
     @Override
@@ -66,7 +66,7 @@ public class SpongePlayerCaller extends PlayerCaller {
     @Override
     public List<String> getOnlinePlayers() {
         List<String> playerList = new ArrayList<>();
-        for (Player p : loader.getGame().getServer().get().getOnlinePlayers()) {
+        for (Player p : loader.getGame().getServer().getOnlinePlayers()) {
             playerList.add(p.getName());
         }
         return playerList;
@@ -79,6 +79,6 @@ public class SpongePlayerCaller extends PlayerCaller {
 
     @Override
     public UUID getUUID(String playerName) {
-        return loader.getGame().getServer().get().getPlayer(playerName).get().getUniqueId();
+        return loader.getGame().getServer().getPlayer(playerName).get().getUniqueId();
     }
 }

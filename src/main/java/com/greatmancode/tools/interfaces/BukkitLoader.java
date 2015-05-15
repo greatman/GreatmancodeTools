@@ -20,9 +20,11 @@ package com.greatmancode.tools.interfaces;
 
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
+import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
 import com.greatmancode.tools.events.EventManager;
-import org.bukkit.Bukkit;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -30,6 +32,9 @@ import java.util.logging.Level;
 public class BukkitLoader extends JavaPlugin implements Loader {
     private Common common;
     private EventManager eventManager;
+    @Getter
+    @Setter
+    private CommandReceiver commandReceiver;
 
     @Override
     public void onEnable() {

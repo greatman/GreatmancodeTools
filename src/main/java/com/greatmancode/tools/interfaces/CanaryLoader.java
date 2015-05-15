@@ -20,7 +20,11 @@ package com.greatmancode.tools.interfaces;
 
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.canary.CanaryServerCaller;
+import com.greatmancode.tools.commands.canary.CanaryCommandReceiver;
+import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.EventManager;
+import lombok.Getter;
+import lombok.Setter;
 import net.canarymod.plugin.Plugin;
 
 import java.io.BufferedReader;
@@ -32,6 +36,9 @@ import java.util.logging.Logger;
 public class CanaryLoader extends Plugin implements Loader {
     private Common common;
     private EventManager eventManager;
+    @Getter
+    @Setter
+    private CommandReceiver commandReceiver;
 
     @Override
     public void onEnable() {

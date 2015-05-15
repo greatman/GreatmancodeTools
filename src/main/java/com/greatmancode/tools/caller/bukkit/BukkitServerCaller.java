@@ -18,6 +18,7 @@
  */
 package com.greatmancode.tools.caller.bukkit;
 
+import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
@@ -30,6 +31,7 @@ import com.greatmancode.tools.utils.VaultEconomy;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicePriority;
@@ -99,10 +101,8 @@ public class BukkitServerCaller extends ServerCaller {
     }
 
     @Override
-    public void addCommand(String name, String help, CommandReceiver manager) {
-        if (manager instanceof BukkitCommandReceiver) {
-            ((BukkitLoader) loader).getCommand(name).setExecutor((BukkitCommandReceiver) manager);
-        }
+    public void addCommand(String name, String help, SubCommand subCommand) {
+        ((BukkitLoader) loader).getCommand(name).setExecutor((CommandExecutor) loader.getCommandReceiver());
     }
 
     @Override

@@ -20,6 +20,7 @@ package com.greatmancode.tools.interfaces;
 
 import com.greatmancode.tools.ServerType;
 import com.greatmancode.tools.caller.unittest.UnitTestServerCaller;
+import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.EventManager;
 
 public class UnitTestLoader implements Loader {
@@ -52,5 +53,15 @@ public class UnitTestLoader implements Loader {
     @Override
     public Common getCommon() {
         return null;
+    }
+
+    @Override
+    public CommandReceiver getCommandReceiver() {
+        return null;
+    }
+
+    @Override
+    public void setCommandReceiver(CommandReceiver receiver) {
+
     }
 }

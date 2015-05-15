@@ -20,14 +20,14 @@ package com.greatmancode.tools.events.sponge;
 
 import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.EventManager;
+import org.spongepowered.api.event.Subscribe;
 import org.spongepowered.api.event.entity.player.PlayerJoinEvent;
-import org.spongepowered.api.util.event.Subscribe;
 
 public class PlayerJoinEventListener {
 
     @Subscribe
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
-        com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(event.getPlayer().getName(), event.getPlayer().getDisplayName().toString(), event.getPlayer().getWorld().getName(), null));
+        com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(event.getPlayer().getName(), event.getPlayer().getDisplayNameData().getDisplayName().toString(), event.getPlayer().getWorld().getName(), null));
         EventManager.getInstance().callEvent(pEvent);
     }
 }

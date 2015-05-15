@@ -20,21 +20,28 @@ package com.greatmancode.tools.commands;
 
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
 import com.greatmancode.tools.caller.canary.CanaryServerCaller;
-import com.greatmancode.tools.caller.sponge.SpongeServerCaller;
 import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
 import com.greatmancode.tools.commands.canary.CanaryCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
-import com.greatmancode.tools.commands.sponge.SpongeCommandReceiver;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandHandler {
+    @Getter
     private ServerCaller serverCaller;
+    @Getter
     private CommandReceiver commandReceiver;
+
     private Map<String, SubCommand> commandList = new HashMap<String, SubCommand>();
+    @Setter
+    @Getter
     private int currentLevel = 0;
+    @Getter
+    @Setter
     private String wrongLevelMsg = "Wrong level!";
 
     public CommandHandler(ServerCaller serverCaller) {
@@ -43,39 +50,12 @@ public class CommandHandler {
             commandReceiver = new BukkitCommandReceiver(this);
         } else if (this.serverCaller instanceof CanaryServerCaller) {
             commandReceiver = new CanaryCommandReceiver(this);
-        } else if (this.serverCaller instanceof SpongeServerCaller) {
-            commandReceiver = new SpongeCommandReceiver(this);
         }
-    }
-
-    public ServerCaller getServerCaller() {
-        return serverCaller;
-    }
-
-    public void setLevel(int level) {
-        currentLevel = level;
-    }
-
-    /**
-     * Current Command Handler level. Level allows you to block certain commands.
-     *
-     * @return The current level
-     */
-    public int getLevel() {
-        return currentLevel;
-    }
-
-    public String getWrongLevelMsg() {
-        return wrongLevelMsg;
-    }
-
-    public void setWrongLevelMsg(String msg) {
-        wrongLevelMsg = msg;
     }
 
     public CommandHandler registerMainCommand(String name, SubCommand subCommand) {
         commandList.put(name, subCommand);
-        serverCaller.addCommand(name, "", commandReceiver);
+        serverCaller.addCommand(name, "", subCommand);
         return this;
     }
 

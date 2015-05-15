@@ -20,15 +20,15 @@ package com.greatmancode.tools.commands;
 
 import com.greatmancode.tools.commands.interfaces.Command;
 import com.greatmancode.tools.commands.interfaces.CommandExecutor;
+import lombok.Getter;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SubCommand implements Command {
     private Map<String, Command> commandList = new HashMap<String, Command>();
     private CommandHandler commandHandler;
     private SubCommand parent;
+    @Getter
     private String name;
     private int level;
 
@@ -55,7 +55,7 @@ public class SubCommand implements Command {
     }
 
     public void execute(String command, String sender, String[] args) {
-        if (level <= commandHandler.getLevel()) {
+        if (level <= commandHandler.getCurrentLevel()) {
             if (commandExist(command)) {
                 Command entry = commandList.get(command);
                 if (entry instanceof CommandExecutor) {
@@ -115,6 +115,10 @@ public class SubCommand implements Command {
         } else {
             commandHandler.getServerCaller().getPlayerCaller().sendMessage(sender, commandHandler.getWrongLevelMsg());
         }
+    }
+
+    public Set<String> getSubCommandKeys() {
+        return Collections.unmodifiableSet(commandList.keySet());
     }
 
     public String getSubCommandList() {

@@ -18,6 +18,7 @@
  */
 package com.greatmancode.tools.caller.unittest;
 
+import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Common;
@@ -74,8 +75,7 @@ public class UnitTestServerCaller extends ServerCaller {
     }
 
     @Override
-    public void addCommand(String name, String help, CommandReceiver manager) {
-        // TODO Auto-generated method stub
+    public void addCommand(String name, String help, SubCommand command) {
 
     }
 
