@@ -27,6 +27,7 @@ import com.greatmancode.tools.interfaces.SpongeLoader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.utils.ServicePriority;
 import com.greatmancode.tools.utils.VaultEconomy;
+import org.spongepowered.api.Game;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.util.command.CommandCallable;
@@ -41,12 +42,14 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class SpongeServerCaller extends ServerCaller {
+    private String name, version;
 
-
-    public SpongeServerCaller(Loader loader) {
-        super(loader);
+    public SpongeServerCaller(SpongeLoader spongeLoader, String name, String version) {
+        super(spongeLoader);
         addPlayerCaller(new SpongePlayerCaller(this));
         addSchedulerCaller(new SpongeSchedulerCaller(this));
+        this.name = name;
+        this.version = version;
     }
 
     @Override
@@ -56,7 +59,7 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public String addColor(String message) {
-        return null;
+        return message;
     }
 
     @Override
@@ -71,7 +74,7 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public File getDataFolder() {
-        return null;
+        return new File(".");
     }
 
     @Override
@@ -137,12 +140,12 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public String getPluginVersion() {
-        return null;
+        return version;
     }
 
     @Override
     public String getPluginName() {
-        return "greatmancodetools";
+        return name;
     }
 
     @Override
@@ -152,12 +155,12 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public void registerPermission(String permissionNode) {
-       //TODO how?
+       //None
     }
 
     @Override
     public boolean isOnlineMode() {
-        return false;
+        return true;
     }
 
     @Override
@@ -167,12 +170,16 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public void throwEvent(Event event) {
-
+        //Not used
+       // Game game = ((SpongeLoader) loader).getGame();
+        //game.getEventManager().post(event);
     }
 
     @Override
     public Common retrievePlugin(String name) {
-        return null;
+
+        Game game = ((SpongeLoader)loader).getGame();
+        return (Common) game.getPluginManager().getPlugin(name).get().getInstance();
     }
 
     @Override

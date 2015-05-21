@@ -43,6 +43,7 @@ public class SpongeLoader implements Loader {
     private EventManager eventManager;
     private Common common;
 
+
     @Subscribe
     public void preInitialisationEvent(PreInitializationEvent event) {
         game = event.getGame();
@@ -56,7 +57,7 @@ public class SpongeLoader implements Loader {
 
     @Override
     public void onEnable() {
-        SpongeServerCaller serverCaller = new SpongeServerCaller(this);
+        SpongeServerCaller serverCaller = new SpongeServerCaller(this, getClass().getAnnotation(Plugin.class).name(), getClass().getAnnotation(Plugin.class).version());
         eventManager = new EventManager(serverCaller);
         InputStream is = this.getClass().getResourceAsStream("/loader.yml");
         BufferedReader br = new BufferedReader(new InputStreamReader(is));

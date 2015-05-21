@@ -60,7 +60,7 @@ public class SpongePlayerCaller extends PlayerCaller {
 
     @Override
     public boolean isOnline(String playerName) {
-        return false;
+        return loader.getGame().getServer().getPlayer(playerName).isPresent();
     }
 
     @Override
