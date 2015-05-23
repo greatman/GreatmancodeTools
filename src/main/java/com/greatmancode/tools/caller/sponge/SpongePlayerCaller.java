@@ -23,8 +23,7 @@ import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.service.permission.PermissionService;
-import org.spongepowered.api.text.chat.ChatType;
-import org.spongepowered.api.text.chat.ChatTypes;
+import org.spongepowered.api.text.Texts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +39,21 @@ public class SpongePlayerCaller extends PlayerCaller {
 
     @Override
     public boolean checkPermission(String playerName, String perm) {
-        return loader.getGame().getServiceManager().provide(PermissionService.class).get().getUserSubjects().get(playerName).hasPermission(perm);
+        if (playerName.equals("console")) {
+            return true;
+        }
+        UUID uuid = getUUID(playerName);
+        return loader.getGame().getServiceManager().provide(PermissionService.class).get().getUserSubjects().get(uuid.toString()).hasPermission(perm);
     }
 
     @Override
     public void sendMessage(String playerName, String message) {
-        loader.getGame().getServer().getPlayer(playerName).get().sendMessage(ChatTypes.CHAT,message);
+        caller.getLogger().info("THE PLAYER NAME:" + playerName);
+        if (playerName.equals("console")) {
+            caller.getLogger().info(message);
+            return;
+        }
+        loader.getGame().getServer().getPlayer(playerName).get().sendMessage(Texts.of(message));
     }
 
     @Override

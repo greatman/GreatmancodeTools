@@ -27,7 +27,7 @@ public class PlayerJoinEventListener {
 
     @Subscribe
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
-        com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(event.getPlayer().getName(), event.getPlayer().getDisplayNameData().getDisplayName().toString(), event.getPlayer().getWorld().getName(), null));
+        com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(event.getUser().getName(), event.getUser().getDisplayNameData().getDisplayName().toString(), event.getUser().getWorld().getName(), null));
         EventManager.getInstance().callEvent(pEvent);
     }
 }

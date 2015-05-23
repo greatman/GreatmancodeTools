@@ -22,7 +22,6 @@ import com.google.common.base.Optional;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Common;
-import com.greatmancode.tools.interfaces.Loader;
 import com.greatmancode.tools.interfaces.SpongeLoader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.utils.ServicePriority;
@@ -74,7 +73,9 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public File getDataFolder() {
-        return new File(".");
+        File data = new File("mods" + File.separator + "Craftconomy3");
+        data.mkdirs();
+        return data;
     }
 
     @Override
@@ -135,7 +136,7 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public String getServerVersion() {
-        return ((SpongeLoader)loader).getGame().getImplementationVersion();
+        return String.format("%s %s", "Sponge", ((SpongeLoader)loader).getGame().getPlatform().getVersion());
     }
 
     @Override
@@ -160,7 +161,7 @@ public class SpongeServerCaller extends ServerCaller {
 
     @Override
     public boolean isOnlineMode() {
-        return true;
+        return ((SpongeLoader)loader).getGame().getServer().getOnlineMode();
     }
 
     @Override

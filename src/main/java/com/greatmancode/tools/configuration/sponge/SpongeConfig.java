@@ -26,8 +26,10 @@ import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SpongeConfig extends Config {
 
@@ -90,7 +92,11 @@ public class SpongeConfig extends Config {
 
     @Override
     public Map<String, String> getStringMap(String path) {
-        return null;
+        Map<String, String> map = new HashMap<>();
+        for (Map.Entry<Object, ? extends CommentedConfigurationNode> entry : file.getNode(path).getChildrenMap().entrySet()) {
+            map.put(entry.getKey().toString(), entry.getValue().getString());
+        }
+        return map;
     }
 
     @Override
