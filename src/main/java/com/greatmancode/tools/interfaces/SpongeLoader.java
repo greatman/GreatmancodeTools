@@ -25,7 +25,7 @@ import com.greatmancode.tools.events.EventManager;
 import lombok.Getter;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.Subscribe;
-import org.spongepowered.api.event.state.PreInitializationEvent;
+import org.spongepowered.api.event.state.ServerAboutToStartEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
 
@@ -45,7 +45,7 @@ public class SpongeLoader implements Loader {
 
 
     @Subscribe
-    public void preInitialisationEvent(PreInitializationEvent event) {
+    public void preInitialisationEvent(ServerAboutToStartEvent event) {
         game = event.getGame();
         onEnable();
     }
