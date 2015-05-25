@@ -71,7 +71,7 @@ public class SpongeServerCaller extends ServerCaller {
     public Text addColorSponge(String message) {
         message = getCommandPrefix() + message;
         TextBuilder textMain = Texts.builder();
-        Matcher m = Pattern.compile("(\\{\\{([a-zA-z0-9:_\\s]+)\\}\\}|[a-zA-z0-9:_\\s]+)").matcher(message);
+        Matcher m = Pattern.compile("(\\{\\{([^\\{\\}]+)\\}\\}|[^\\{\\}]+)").matcher(message);
         TextColor.Base color = null;
         TextStyle.Base style = null;
         while (m.find()) {

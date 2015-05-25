@@ -51,6 +51,7 @@ public class CommandHandler {
         } else if (this.serverCaller instanceof CanaryServerCaller) {
             commandReceiver = new CanaryCommandReceiver(this);
         }
+        serverCaller.getLoader().setCommandReceiver(commandReceiver);
     }
 
     public CommandHandler registerMainCommand(String name, SubCommand subCommand) {
