@@ -9,7 +9,7 @@ apply plugin: 'propdeps'
 apply plugin: 'propdeps-maven'
 
 group = 'com.greatmancode'
-version = '1.2-SNAPSHOT'
+version = '1.2'
 
 description = "GreatmancodeTools"
 
