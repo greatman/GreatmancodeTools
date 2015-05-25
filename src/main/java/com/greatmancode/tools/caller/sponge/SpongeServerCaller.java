@@ -28,7 +28,12 @@ import com.greatmancode.tools.utils.ServicePriority;
 import com.greatmancode.tools.utils.VaultEconomy;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.TextBuilder;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.text.format.TextColor;
+import org.spongepowered.api.text.format.TextColors;
+import org.spongepowered.api.text.format.TextStyle;
+import org.spongepowered.api.text.format.TextStyles;
 import org.spongepowered.api.util.command.CommandCallable;
 import org.spongepowered.api.util.command.CommandException;
 import org.spongepowered.api.util.command.CommandResult;
@@ -39,6 +44,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SpongeServerCaller extends ServerCaller {
     private String name, version;
@@ -59,6 +66,100 @@ public class SpongeServerCaller extends ServerCaller {
     @Override
     public String addColor(String message) {
         return message;
+    }
+
+    public Text addColorSponge(String message) {
+        message = getCommandPrefix() + message;
+        TextBuilder textMain = Texts.builder();
+        Matcher m = Pattern.compile("(\\{\\{([a-zA-z0-9:_\\s]+)\\}\\}|[a-zA-z0-9:_\\s]+)").matcher(message);
+        TextColor.Base color = null;
+        TextStyle.Base style = null;
+        while (m.find()) {
+            
+            String entry = m.group();
+            if (entry.contains("{{")) {
+                color = null;
+                style = null;
+                switch (entry) {
+                    case "{{BLACK}}":
+                        color = TextColors.BLACK;
+                        break;
+                    case "{{DARK_BLUE}}":
+                        color = TextColors.DARK_BLUE;
+                        break;
+                    case "{{DARK_GREEN}}":
+                        color = TextColors.DARK_GREEN;
+                        break;
+                    case "{{DARK_CYAN}}":
+                        color = TextColors.DARK_AQUA;
+                        break;
+                    case "{{DARK_RED}}":
+                        color = TextColors.DARK_RED;
+                        break;
+                    case "{{PURPLE}}":
+                        color = TextColors.DARK_PURPLE;
+                        break;
+                    case "{{GOLD}}":
+                        color = TextColors.GOLD;
+                        break;
+                    case "{{GRAY}}":
+                        color = TextColors.GRAY;
+                        break;
+                    case "{{DARK_GRAY}}":
+                        color = TextColors.DARK_GRAY;
+                        break;
+                    case "{{BLUE}}":
+                        color = TextColors.AQUA; //TODO Wrong color
+                        break;
+                    case "{{BRIGHT_GREEN}}":
+                        color = TextColors.GREEN;
+                        break;
+                    case "{{CYAN}}":
+                        color = TextColors.AQUA;
+                        break;
+                    case "{{RED}}":
+                        color = TextColors.RED;
+                        break;
+                    case "{{LIGHT_PURPLE}}":
+                        color = TextColors.LIGHT_PURPLE;
+                        break;
+                    case "{{YELLOW}}":
+                        color = TextColors.YELLOW;
+                        break;
+                    case "{{WHITE}}":
+                        color = TextColors.WHITE;
+                        break;
+                    case "{{OBFUSCATED}}":
+                        style = TextStyles.OBFUSCATED;
+                        break;
+                    case "{{BOLD}}":
+                        style = TextStyles.BOLD;
+                        break;
+                    case "{{STRIKETHROUGH}}":
+                        style = TextStyles.STRIKETHROUGH;
+                        break;
+                    case "{{UNDERLINE}}":
+                        style = TextStyles.UNDERLINE;
+                        break;
+                    case "{{ITALIC}}":
+                        style = TextStyles.ITALIC;
+                        break;
+                    case "{{RESET}}":
+                        style = TextStyles.RESET;
+                        break;
+                }
+            } else {
+                TextBuilder text = Texts.builder(entry);
+                if (color != null) {
+                    text.color(color);
+                }
+                if (style != null) {
+                    text.style(style);
+                }
+                textMain.append(text.build());
+            }
+        }
+        return textMain.build();
     }
 
     @Override

@@ -93,7 +93,8 @@ public class SpongeConfig extends Config {
     @Override
     public Map<String, String> getStringMap(String path) {
         Map<String, String> map = new HashMap<>();
-        for (Map.Entry<Object, ? extends CommentedConfigurationNode> entry : file.getNode(path).getChildrenMap().entrySet()) {
+        Set<? extends Map.Entry<Object, ? extends CommentedConfigurationNode>> childrens = path.equals("") ? file.getChildrenMap().entrySet(): file.getNode(path).getChildrenMap().entrySet();
+        for (Map.Entry<Object, ? extends CommentedConfigurationNode> entry : childrens) {
             map.put(entry.getKey().toString(), entry.getValue().getString());
         }
         return map;

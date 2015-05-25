@@ -27,8 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LanguageManager {
-    private static final String MAIN_KEY = "language";
-    private static final String SEPARATOR = ".";
     private Config languageFile = null;
     private Map<String, String> languageList = new HashMap<String, String>();
 
@@ -38,12 +36,12 @@ public class LanguageManager {
     }
 
     private void loadLanguage() {
-        languageList = languageFile.getStringMap(MAIN_KEY);
+        languageList = languageFile.getStringMap("");
     }
 
     public void addLanguageEntry(String key, String value) {
         if (!languageList.containsKey(key)) {
-            languageFile.setValue(MAIN_KEY + SEPARATOR + key, value);
+            languageFile.setValue(key, value);
             loadLanguage();
         }
     }

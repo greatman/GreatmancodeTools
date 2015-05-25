@@ -32,8 +32,10 @@ import java.util.UUID;
 public class SpongePlayerCaller extends PlayerCaller {
 
     private SpongeLoader loader;
+
     public SpongePlayerCaller(ServerCaller caller) {
         super(caller);
+
         loader = ((SpongeLoader) caller.getLoader());
     }
 
@@ -48,17 +50,16 @@ public class SpongePlayerCaller extends PlayerCaller {
 
     @Override
     public void sendMessage(String playerName, String message) {
-        caller.getLogger().info("THE PLAYER NAME:" + playerName);
         if (playerName.equals("console")) {
             caller.getLogger().info(message);
             return;
         }
-        loader.getGame().getServer().getPlayer(playerName).get().sendMessage(Texts.of(message));
+        loader.getGame().getServer().getPlayer(playerName).get().sendMessage(((SpongeServerCaller)getCaller()).addColorSponge(message));
     }
 
     @Override
     public String getPlayerWorld(String playerName) {
-        return loader.getGame().getServer().getPlayer("test").get().getWorld().getName();
+        return loader.getGame().getServer().getPlayer(playerName).get().getWorld().getName();
     }
 
     @Override
