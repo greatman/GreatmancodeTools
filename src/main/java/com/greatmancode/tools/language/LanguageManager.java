@@ -29,14 +29,28 @@ import java.util.Map;
 public class LanguageManager {
     private Config languageFile = null;
     private Map<String, String> languageList = new HashMap<String, String>();
+    private ServerCaller serverCaller;
+    private File path;
+    private String fileName;
 
     public LanguageManager(ServerCaller serverCaller, File path, String fileName) {
         languageFile = new ConfigurationManager(serverCaller).loadFile(path, fileName);
+        this.serverCaller = serverCaller;
+        this.path = path;
+        this.fileName = fileName;
         loadLanguage();
+
     }
 
     private void loadLanguage() {
-        languageList = languageFile.getStringMap("");
+        try {
+            languageList = languageFile.getStringMap("");
+        } catch (ClassCastException e) {
+            new File(path, fileName).delete();
+            languageFile = new ConfigurationManager(serverCaller).loadFile(path, fileName);
+            languageList = languageFile.getStringMap("");
+        }
+
     }
 
     public void addLanguageEntry(String key, String value) {

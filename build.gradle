@@ -9,7 +9,7 @@ apply plugin: 'propdeps'
 apply plugin: 'propdeps-maven'
 
 group = 'com.greatmancode'
-version = '1.2'
+version = '1.3-SNAPSHOT'
 
 description = "GreatmancodeTools"
 
@@ -29,11 +29,15 @@ if (ext.isReleaseVersion) {
     }
 }
 
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
     maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
-    maven { url "http://repo.visualillusionsent.net/repository/public/" }
+    //maven { url "http://repo.visualillusionsent.net/repository/public/" }
     maven { url "http://repo.larry1123.net/content/groups/public/" }
     maven { url "https://libraries.minecraft.net" }
     maven { url "http://repo.spongepowered.org/maven" }
@@ -42,7 +46,7 @@ repositories {
 }
 
 dependencies {
-    provided group: 'net.canarymod', name: 'CanaryLib', version: '1.0-RC-4-SNAPSHOT'
+    provided group: 'net.canarymod', name: 'CanaryLib', version: '1.2.1-SNAPSHOT'
     provided group: 'net.larry1123', name: 'CanaryUtil', version: '0.3.4-SNAPSHOT'
     provided group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     provided group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
