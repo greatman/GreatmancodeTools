@@ -21,11 +21,12 @@ package com.greatmancode.tools.events.bukkit;
 import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.EventManager;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinEventListener implements Listener {
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         com.greatmancode.tools.events.playerEvent.PlayerJoinEvent pEvent = new com.greatmancode.tools.events.playerEvent.PlayerJoinEvent(new Player(event.getPlayer().getName(), event.getPlayer().getDisplayName(), event.getPlayer().getWorld().getName(), event.getPlayer().getUniqueId()));
         EventManager.getInstance().callEvent(pEvent);
