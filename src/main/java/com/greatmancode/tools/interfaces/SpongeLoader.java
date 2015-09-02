@@ -24,9 +24,9 @@ import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.events.EventManager;
 import lombok.Getter;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.event.Subscribe;
-import org.spongepowered.api.event.state.ServerAboutToStartEvent;
-import org.spongepowered.api.event.state.ServerStoppingEvent;
+import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.game.state.GameAboutToStartServerEvent;
+import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
 
 import java.io.BufferedReader;
@@ -44,14 +44,14 @@ public class SpongeLoader implements Loader {
     private Common common;
 
 
-    @Subscribe
-    public void preInitialisationEvent(ServerAboutToStartEvent event) {
+    @Listener
+    public void preInitialisationEvent(GameAboutToStartServerEvent event) {
         game = event.getGame();
         onEnable();
     }
 
-    @Subscribe
-    public void onShutdown(ServerStoppingEvent event){
+    @Listener
+    public void onShutdown(GameStoppingServerEvent event){
         onDisable();
     }
 

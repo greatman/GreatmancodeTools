@@ -41,15 +41,15 @@ public class SpongeSchedulerCaller extends SchedulerCaller {
     public int schedule(Runnable entry, long firstStart, long repeating, boolean async) {
         if (async) {
             if (repeating > 0) {
-                loader.getGame().getAsyncScheduler().runRepeatingTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, TimeUnit.MILLISECONDS, repeating, firstStart);
+                loader.getGame().getScheduler().createTaskBuilder().delay(firstStart, TimeUnit.MILLISECONDS).async().interval(repeating, TimeUnit.MILLISECONDS).execute(entry).submit(loader.getGame().getPluginManager().fromInstance(loader).get());
             } else {
-                loader.getGame().getAsyncScheduler().runTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, TimeUnit.MILLISECONDS, repeating);
+                loader.getGame().getScheduler().createTaskBuilder().delay(firstStart, TimeUnit.MILLISECONDS).async().execute(entry).submit(loader.getGame().getPluginManager().fromInstance(loader).get());
             }
         } else {
             if (repeating > 0) {
-                loader.getGame().getSyncScheduler().runRepeatingTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, repeating, firstStart);
+                loader.getGame().getScheduler().createTaskBuilder().delay(firstStart, TimeUnit.MILLISECONDS).interval(repeating, TimeUnit.MILLISECONDS).execute(entry).submit(loader.getGame().getPluginManager().fromInstance(loader).get());
             } else {
-                loader.getGame().getSyncScheduler().runTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, firstStart);
+                loader.getGame().getScheduler().createTaskBuilder().delay(firstStart, TimeUnit.MILLISECONDS).execute(entry).submit(loader.getGame().getPluginManager().fromInstance(loader).get());
             }
         }
         return 0;
@@ -67,7 +67,7 @@ public class SpongeSchedulerCaller extends SchedulerCaller {
 
     @Override
     public int delay(Runnable entry, long start, boolean async) {
-        loader.getGame().getSyncScheduler().runTaskAfter(loader.getGame().getPluginManager().fromInstance(loader).get(), entry, start);
+        schedule(entry,start,0,async);
         return 0;
     }
 }

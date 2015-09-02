@@ -72,7 +72,7 @@ public class SpongeServerCaller extends ServerCaller {
         message = getCommandPrefix() + message;
         TextBuilder textMain = Texts.builder();
         Matcher m = Pattern.compile("(\\{\\{([^\\{\\}]+)\\}\\}|[^\\{\\}]+)").matcher(message);
-        TextColor.Base color = null;
+        TextColor color = null;
         TextStyle.Base style = null;
         while (m.find()) {
             
@@ -183,7 +183,7 @@ public class SpongeServerCaller extends ServerCaller {
     public void addCommand(String name, String help, final SubCommand subCommand) {
         CommandCallable command = new CommandCallable() {
             @Override
-            public Optional<CommandResult> process(CommandSource source, String arguments) throws CommandException {
+            public CommandResult process(CommandSource source, String arguments) throws CommandException {
                 String subCommandValue = "";
                 String[] newArgs;
                 String[] args = arguments.split(" ");
@@ -202,7 +202,7 @@ public class SpongeServerCaller extends ServerCaller {
                     username = "console";
                 }
                 subCommand.execute(subCommandValue, username, newArgs);
-                return Optional.of(CommandResult.success());
+                return CommandResult.success();
             }
 
             @Override

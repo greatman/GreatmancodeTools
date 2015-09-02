@@ -37,7 +37,7 @@ public class SpongeEventManager implements ServerEventManager {
     @Override
     public void eventRegistered(String event, ServerCaller serverCaller) {
         if (map.containsKey(event)) {
-            ((SpongeLoader)serverCaller.getLoader()).getGame().getEventManager().register(serverCaller.getLoader(), map.get(event));
+            ((SpongeLoader)serverCaller.getLoader()).getGame().getEventManager().registerListeners(serverCaller.getLoader(), map.get(event));
         }
     }
 }

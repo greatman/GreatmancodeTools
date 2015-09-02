@@ -21,9 +21,8 @@ package com.greatmancode.tools.caller.sponge;
 import com.greatmancode.tools.interfaces.SpongeLoader;
 import com.greatmancode.tools.interfaces.caller.PlayerCaller;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
-import org.spongepowered.api.entity.player.Player;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.service.permission.PermissionService;
-import org.spongepowered.api.text.Texts;
 
 import java.util.ArrayList;
 import java.util.List;
