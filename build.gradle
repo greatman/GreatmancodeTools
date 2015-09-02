@@ -37,17 +37,12 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
-    //maven { url "http://repo.visualillusionsent.net/repository/public/" }
-    maven { url "http://repo.larry1123.net/content/groups/public/" }
     maven { url "https://libraries.minecraft.net" }
     maven { url "http://repo.spongepowered.org/maven" }
     maven { url "http://nexus.theyeticave.net/content/repositories/pub_releases" }
-    maven { url "http://repo.mcstats.org/content/repositories/releases/"}
 }
 
 dependencies {
-    provided group: 'net.canarymod', name: 'CanaryLib', version: '1.2.1-SNAPSHOT'
-    provided group: 'net.larry1123', name: 'CanaryUtil', version: '0.3.4-SNAPSHOT'
     provided group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     provided group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
     provided group: 'org.projectlombok', name: 'lombok', version: '1.12.6'
@@ -150,24 +145,12 @@ uploadArchives {
                         url 'https://hub.spigotmc.org/nexus/content/groups/public/'
                     }
                     repository {
-                        id 'canary-repo'
-                        url 'http://repo.visualillusionsent.net/repository/public/'
-                    }
-                    repository {
-                        id 'larry-repo'
-                        url 'http://repo.larry1123.net/content/groups/public/'
-                    }
-                    repository {
                         id 'minecraft-repo'
                         url 'https://libraries.minecraft.net'
                     }
                     repository {
                         id 'sponge-repo'
                         url 'http://repo.spongepowered.org/maven'
-                    }
-                    repository {
-                        id 'metrics-repo'
-                        url 'http://repo.mcstats.org/content/repositories/releases/'
                     }
                 }
             }

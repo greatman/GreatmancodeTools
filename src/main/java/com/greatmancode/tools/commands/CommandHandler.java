@@ -19,9 +19,7 @@
 package com.greatmancode.tools.commands;
 
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
-import com.greatmancode.tools.caller.canary.CanaryServerCaller;
 import com.greatmancode.tools.commands.bukkit.BukkitCommandReceiver;
-import com.greatmancode.tools.commands.canary.CanaryCommandReceiver;
 import com.greatmancode.tools.commands.interfaces.CommandReceiver;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import lombok.Getter;
@@ -48,8 +46,6 @@ public class CommandHandler {
         this.serverCaller = serverCaller;
         if (this.serverCaller instanceof BukkitServerCaller) {
             commandReceiver = new BukkitCommandReceiver(this);
-        } else if (this.serverCaller instanceof CanaryServerCaller) {
-            commandReceiver = new CanaryCommandReceiver(this);
         }
         serverCaller.getLoader().setCommandReceiver(commandReceiver);
     }

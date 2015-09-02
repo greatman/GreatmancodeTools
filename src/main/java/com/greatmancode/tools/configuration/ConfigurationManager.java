@@ -19,11 +19,9 @@
 package com.greatmancode.tools.configuration;
 
 import com.greatmancode.tools.caller.bukkit.BukkitServerCaller;
-import com.greatmancode.tools.caller.canary.CanaryServerCaller;
 import com.greatmancode.tools.caller.sponge.SpongeServerCaller;
 import com.greatmancode.tools.caller.unittest.UnitTestServerCaller;
 import com.greatmancode.tools.configuration.bukkit.BukkitConfig;
-import com.greatmancode.tools.configuration.canary.CanaryConfig;
 import com.greatmancode.tools.configuration.sponge.SpongeConfig;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
@@ -46,8 +44,6 @@ public class ConfigurationManager {
 
         if (serverCaller instanceof BukkitServerCaller || serverCaller instanceof UnitTestServerCaller) {
             file = new BukkitConfig(folder, fileName, serverCaller);
-        } else if (serverCaller instanceof CanaryServerCaller) {
-            file = new CanaryConfig(folder, fileName, serverCaller);
         } else if (serverCaller instanceof SpongeServerCaller) {
             file = new SpongeConfig(folder, fileName, serverCaller);
         }
