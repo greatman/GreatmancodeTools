@@ -18,31 +18,25 @@
  */
 package com.greatmancode.tools.events.sponge.events;
 
-import com.greatmancode.tools.caller.sponge.SpongeServerCaller;
-import com.greatmancode.tools.interfaces.SpongeLoader;
-import org.spongepowered.api.Game;
-import org.spongepowered.api.event.GameEvent;
-import org.spongepowered.api.util.event.callback.CallbackList;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.spongepowered.api.event.cause.Cause;
+import org.spongepowered.api.event.impl.AbstractEvent;
 
-public class EconomyChangeEvent implements GameEvent {
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class EconomyChangeEvent extends AbstractEvent {
 
-    private Game game;
     private String account;
     private double amount;
 
-    public EconomyChangeEvent(SpongeServerCaller caller, String account, double amount) {
-        this.game = ((SpongeLoader)caller.getLoader()).getGame();
+    public EconomyChangeEvent(String account, double amount) {
         this.account = account;
         this.amount = amount;
     }
 
     @Override
-    public Game getGame() {
-        return game;
-    }
-
-    @Override
-    public CallbackList getCallbacks() {
-        return new CallbackList();
+    public Cause getCause() {
+        return null;
     }
 }

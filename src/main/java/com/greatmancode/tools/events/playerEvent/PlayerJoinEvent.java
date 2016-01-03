@@ -21,8 +21,10 @@ package com.greatmancode.tools.events.playerEvent;
 import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.Event;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class PlayerJoinEvent extends Event {
     private final Player p;
 

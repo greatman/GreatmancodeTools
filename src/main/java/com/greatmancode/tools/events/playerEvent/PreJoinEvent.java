@@ -20,6 +20,7 @@ package com.greatmancode.tools.events.playerEvent;
 
 import com.greatmancode.tools.events.Event;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ import java.util.UUID;
  * Created by greatman on 16-01-03.
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class PreJoinEvent extends Event {
     private final String name;
     private final UUID uuid;

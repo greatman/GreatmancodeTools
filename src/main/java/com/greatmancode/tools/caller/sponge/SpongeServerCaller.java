@@ -18,7 +18,6 @@
  */
 package com.greatmancode.tools.caller.sponge;
 
-import com.google.common.base.Optional;
 import com.greatmancode.tools.commands.SubCommand;
 import com.greatmancode.tools.events.Event;
 import com.greatmancode.tools.interfaces.Common;
@@ -27,22 +26,21 @@ import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import com.greatmancode.tools.utils.ServicePriority;
 import com.greatmancode.tools.utils.VaultEconomy;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.command.CommandCallable;
+import org.spongepowered.api.command.CommandException;
+import org.spongepowered.api.command.CommandResult;
+import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.command.source.ConsoleSource;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.TextBuilder;
-import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.text.format.TextColor;
 import org.spongepowered.api.text.format.TextColors;
 import org.spongepowered.api.text.format.TextStyle;
 import org.spongepowered.api.text.format.TextStyles;
-import org.spongepowered.api.util.command.CommandCallable;
-import org.spongepowered.api.util.command.CommandException;
-import org.spongepowered.api.util.command.CommandResult;
-import org.spongepowered.api.util.command.CommandSource;
-import org.spongepowered.api.util.command.source.ConsoleSource;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -70,7 +68,7 @@ public class SpongeServerCaller extends ServerCaller {
 
     public Text addColorSponge(String message) {
         message = getCommandPrefix() + message;
-        TextBuilder textMain = Texts.builder();
+        Text.Builder textMain = Text.builder();
         Matcher m = Pattern.compile("(\\{\\{([^\\{\\}]+)\\}\\}|[^\\{\\}]+)").matcher(message);
         TextColor color = null;
         TextStyle.Base style = null;
@@ -149,7 +147,8 @@ public class SpongeServerCaller extends ServerCaller {
                         break;
                 }
             } else {
-                TextBuilder text = Texts.builder(entry);
+                Text.Builder text = Text.builder(entry);
+
                 if (color != null) {
                     text.color(color);
                 }
@@ -218,26 +217,26 @@ public class SpongeServerCaller extends ServerCaller {
             }
 
             @Override
-            public Optional<Text> getShortDescription(CommandSource source) {
-                return Optional.absent();
+            public java.util.Optional<? extends Text> getShortDescription(CommandSource source) {
+                return Optional.empty();
             }
 
             @Override
-            public Optional<Text> getHelp(CommandSource source) {
-                return Optional.absent();
+            public java.util.Optional<? extends Text> getHelp(CommandSource source) {
+                return Optional.empty();
             }
 
             @Override
             public Text getUsage(CommandSource source) {
-                return Texts.of();
+                return Text.of();
             }
         };
-        ((SpongeLoader)loader).getGame().getCommandDispatcher().register(loader, command, name);
+        ((SpongeLoader)loader).getGame().getCommandManager().register(loader, command, name);
     }
 
     @Override
     public String getServerVersion() {
-        return String.format("%s %s", "Sponge", ((SpongeLoader)loader).getGame().getPlatform().getVersion());
+        return String.format("%s %s", "Sponge", ((SpongeLoader)loader).getGame().getPlatform().getMinecraftVersion().getName());
     }
 
     @Override
@@ -281,7 +280,7 @@ public class SpongeServerCaller extends ServerCaller {
     public Common retrievePlugin(String name) {
 
         Game game = ((SpongeLoader)loader).getGame();
-        return (Common) game.getPluginManager().getPlugin(name).get().getInstance();
+        return (Common) game.getPluginManager().getPlugin(name).get().getInstance().get();
     }
 
     @Override
