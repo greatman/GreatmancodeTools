@@ -20,6 +20,7 @@ package com.greatmancode.tools.events.bukkit;
 
 import com.greatmancode.tools.events.interfaces.ServerEventManager;
 import com.greatmancode.tools.events.playerEvent.PlayerJoinEvent;
+import com.greatmancode.tools.events.playerEvent.PreJoinEvent;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 import org.bukkit.Bukkit;
@@ -33,6 +34,7 @@ public class BukkitEventManager implements ServerEventManager {
 
     public BukkitEventManager() {
         map.put(PlayerJoinEvent.class.getName(), new PlayerJoinEventListener());
+        map.put(PreJoinEvent.class.getName(), new PreJoinEventListener());
     }
 
     public void eventRegistered(String event, ServerCaller serverCaller) {
