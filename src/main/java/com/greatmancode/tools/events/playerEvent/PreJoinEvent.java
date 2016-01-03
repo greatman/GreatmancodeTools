@@ -18,15 +18,21 @@
  */
 package com.greatmancode.tools.events.playerEvent;
 
-import com.greatmancode.tools.entities.Player;
 import com.greatmancode.tools.events.Event;
 import lombok.Data;
 
-@Data
-public class PlayerJoinEvent extends Event {
-    private final Player p;
+import java.util.UUID;
 
-    public PlayerJoinEvent(Player p) {
-        this.p = p;
+/**
+ * Created by greatman on 16-01-03.
+ */
+@Data
+public class PreJoinEvent extends Event {
+    private final String name;
+    private final UUID uuid;
+
+    public PreJoinEvent(String name, UUID uniqueId) {
+        this.name = name;
+        this.uuid = uniqueId;
     }
 }

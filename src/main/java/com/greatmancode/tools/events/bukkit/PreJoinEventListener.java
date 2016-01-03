@@ -16,17 +16,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with GreatmancodeTools.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.greatmancode.tools.events.playerEvent;
+package com.greatmancode.tools.events.bukkit;
 
-import com.greatmancode.tools.entities.Player;
-import com.greatmancode.tools.events.Event;
-import lombok.Data;
+import com.greatmancode.tools.events.EventManager;
+import com.greatmancode.tools.events.playerEvent.PreJoinEvent;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
-@Data
-public class PlayerJoinEvent extends Event {
-    private final Player p;
+/**
+ * Created by greatman on 16-01-03.
+ */
+public class PreJoinEventListener implements Listener {
 
-    public PlayerJoinEvent(Player p) {
-        this.p = p;
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPreJoinEvent(AsyncPlayerPreLoginEvent event) {
+        PreJoinEvent prejoinEvent = new PreJoinEvent(event.getName(), event.getUniqueId());
+        EventManager.getInstance().callEvent(prejoinEvent);
     }
 }
