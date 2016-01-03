@@ -1,7 +1,7 @@
 /**
  * This file is part of GreatmancodeTools.
  *
- * Copyright (c) 2013-2015, Greatman <http://github.com/greatman/>
+ * Copyright (c) 2013-2016, Greatman <http://github.com/greatman/>
  *
  * GreatmancodeTools is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by

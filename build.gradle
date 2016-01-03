@@ -64,7 +64,7 @@ buildscript {
 
 license {
     header rootProject.file('HEADER.txt')
-    ext.copyright = 'Copyright (c) 2013-2015, Greatman'
+    ext.copyright = 'Copyright (c) 2013-2016, Greatman'
     ext.url = 'http://github.com/greatman'
     ext.name = 'GreatmancodeTools'
 }
