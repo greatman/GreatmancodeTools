@@ -159,6 +159,11 @@ public class BukkitServerCaller extends ServerCaller {
     }
 
     @Override
+    public boolean isPluginEnabled(String name) {
+        return ((BukkitLoader) loader).getServer().getPluginManager().isPluginEnabled(name);
+    }
+
+    @Override
     public void setVaultEconomyHook(VaultEconomy instance, com.greatmancode.tools.utils.ServicePriority priority) {
         Bukkit.getServicesManager().register(Economy.class, instance, (Plugin) getLoader(), ServicePriority.valueOf(priority.name().toUpperCase()));
     }

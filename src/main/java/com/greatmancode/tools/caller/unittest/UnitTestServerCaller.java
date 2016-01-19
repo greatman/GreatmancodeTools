@@ -127,6 +127,11 @@ public class UnitTestServerCaller extends ServerCaller {
     }
 
     @Override
+    public boolean isPluginEnabled(String name) {
+        return false;
+    }
+
+    @Override
     public void setVaultEconomyHook(VaultEconomy instance, ServicePriority priority) {
 
     }

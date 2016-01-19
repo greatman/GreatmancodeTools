@@ -168,6 +168,7 @@ public abstract class ServerCaller {
 
     public abstract Common retrievePlugin(String name);
 
+    public abstract boolean isPluginEnabled(String name);
     /**
      * Set the Vault Economy hook. Only working on Bukkit
      * @param instance The vault economy instance

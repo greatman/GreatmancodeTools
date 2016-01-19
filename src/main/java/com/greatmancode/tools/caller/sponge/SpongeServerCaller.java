@@ -284,6 +284,12 @@ public class SpongeServerCaller extends ServerCaller {
     }
 
     @Override
+    public boolean isPluginEnabled(String name) {
+        Game game = ((SpongeLoader)loader).getGame();
+        return game.getPluginManager().isLoaded(name);
+    }
+
+    @Override
     public void setVaultEconomyHook(VaultEconomy instance, ServicePriority priority) {
 
     }
