@@ -23,8 +23,14 @@ import be.maximvdw.placeholderapi.PlaceholderReplaceEvent;
 import be.maximvdw.placeholderapi.PlaceholderReplacer;
 import com.greatmancode.tools.interfaces.BukkitLoader;
 import com.greatmancode.tools.interfaces.Loader;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FeatherBoard {
 
@@ -34,7 +40,7 @@ public class FeatherBoard {
                 PlaceholderAPI.registerPlaceholder((Plugin) loader, name, new PlaceholderReplacer() {
                     @Override
                     public String onPlaceholderReplace(PlaceholderReplaceEvent placeholderReplaceEvent) {
-                        return event.getResult(placeholderReplaceEvent.getOfflinePlayer().getName(), placeholderReplaceEvent.isOnline());
+                        return event.getValue(placeholderReplaceEvent.getOfflinePlayer().getName(), placeholderReplaceEvent.isOnline());
                     }
                 });
             }
@@ -44,6 +50,31 @@ public class FeatherBoard {
 
 
         public abstract class FeatherBoardReplaceEvent {
+            private Map<String, UserData> cache = new HashMap<>();
+            public String getValue(String username, boolean isOnline) {
+                if (cache.containsKey(username)) {
+                    UserData data = cache.get(username);
+                    if (new Date().getTime() <= (data.getDate().getTime() + 60000)) { //1 minute cache
+                        return data.getValue();
+                    } else {
+                        String result = getResult(username, isOnline);
+                        cache.put(username, new UserData(new Date(), result));
+                        return getResult(username, isOnline);
+                    }
+
+                } else {
+                    String result = getResult(username, isOnline);
+                    cache.put(username, new UserData(new Date(), result));
+                    return getResult(username, isOnline);
+                }
+
+            }
             public abstract String getResult(String username, boolean isOnline);
+        }
+        @Data
+        @AllArgsConstructor
+        private class UserData {
+            private Date date;
+            private String value;
         }
 }
