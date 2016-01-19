@@ -49,7 +49,7 @@ public class FeatherBoard {
 
 
 
-        public abstract class FeatherBoardReplaceEvent {
+        public static abstract class FeatherBoardReplaceEvent {
             private Map<String, UserData> cache = new HashMap<>();
             public String getValue(String username, boolean isOnline) {
                 if (cache.containsKey(username)) {
@@ -73,7 +73,7 @@ public class FeatherBoard {
         }
         @Data
         @AllArgsConstructor
-        private class UserData {
+        private static class UserData {
             private Date date;
             private String value;
         }
