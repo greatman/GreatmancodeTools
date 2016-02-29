@@ -45,7 +45,7 @@ repositories {
 
 dependencies {
     provided group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-    provided group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
+    provided group: 'org.bukkit', name: 'bukkit', version: '1.9-SNAPSHOT'
     provided group: 'org.projectlombok', name: 'lombok', version: '1.12.6'
     provided group: 'org.spongepowered', name: 'spongeapi', version: '3.0.0'
     provided group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.5'

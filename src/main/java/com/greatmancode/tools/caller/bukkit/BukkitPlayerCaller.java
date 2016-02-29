@@ -89,6 +89,6 @@ public class BukkitPlayerCaller extends PlayerCaller {
 
     @Override
     public UUID getUUID(String playerName) {
-        return Bukkit.getPlayer(playerName).getUniqueId();
+        return Bukkit.getOfflinePlayer(playerName).getUniqueId();
     }
 }
