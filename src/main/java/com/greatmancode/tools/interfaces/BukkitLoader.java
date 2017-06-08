@@ -27,7 +27,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.net.URISyntaxException;
 import java.util.logging.Level;
 
 public class BukkitLoader extends JavaPlugin implements Loader {
@@ -41,12 +40,7 @@ public class BukkitLoader extends JavaPlugin implements Loader {
     public void onEnable() {
         BukkitServerCaller bukkitCaller = new BukkitServerCaller(this);
         eventManager = new EventManager(bukkitCaller);
-        BukkitConfig bukkitConfig = null;
-        try {
-            bukkitConfig = new BukkitConfig(this.getClass().getResource("/loader.yml"), bukkitCaller);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        BukkitConfig bukkitConfig = new BukkitConfig(this.getClass().getResourceAsStream("/loader.yml"), bukkitCaller);
         String mainClass = bukkitConfig.getString("main-class");
         try {
             Class<?> clazz = Class.forName(mainClass);

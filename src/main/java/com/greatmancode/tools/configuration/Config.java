@@ -39,7 +39,7 @@ package com.greatmancode.tools.configuration;
 import com.greatmancode.tools.interfaces.caller.ServerCaller;
 
 import java.io.File;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -52,17 +52,17 @@ public abstract class Config {
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
     protected final ServerCaller serverCaller;
     protected final File file;
-    protected final URL url;
+    protected final InputStream is;
 
-    public Config(URL url, ServerCaller serverCaller) {
+    public Config(InputStream is, ServerCaller serverCaller) {
         file = null;
-        this.url = url;
+        this.is = is;
         this.serverCaller = serverCaller;
     }
 
     public Config(File folder, String fileName, ServerCaller serverCaller) {
         this.serverCaller = serverCaller;
-        this.url = null;
+        this.is = null;
         file = new File(folder, fileName);
     }
 

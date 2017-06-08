@@ -43,11 +43,9 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,9 +61,9 @@ public class BukkitConfig extends Config {
         configFile = YamlConfiguration.loadConfiguration(file);
     }
 
-    public BukkitConfig(URL resource, BukkitServerCaller bukkitCaller) throws URISyntaxException {
+    public BukkitConfig(InputStream resource, BukkitServerCaller bukkitCaller) {
         super(resource, bukkitCaller);
-        configFile = YamlConfiguration.loadConfiguration(new File(resource.toURI()));
+        configFile = YamlConfiguration.loadConfiguration(new InputStreamReader(resource));
     }
 
     @Override
