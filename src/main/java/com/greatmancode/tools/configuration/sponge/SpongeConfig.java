@@ -35,10 +35,6 @@ public class SpongeConfig extends Config {
 
     private CommentedConfigurationNode file;
     private HoconConfigurationLoader loader;
-    public SpongeConfig(InputStream is, ServerCaller serverCaller) {
-        super(is, serverCaller);
-        //No can't do.
-    }
 
     public SpongeConfig(File folder, String fileName, ServerCaller serverCaller) {
         super(folder, fileName, serverCaller);
