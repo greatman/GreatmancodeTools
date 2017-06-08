@@ -39,17 +39,17 @@ repositories {
     maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
     maven { url "https://libraries.minecraft.net" }
     maven { url "http://repo.spongepowered.org/maven" }
-    maven { url "http://nexus.theyeticave.net/content/repositories/pub_releases" }
+    maven { url "http://nexus.hc.to/content/repositories/pub_releases" }
     maven { url "http://repo.mvdw-software.be/content/groups/public/"}
 }
 
 dependencies {
     provided group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-    provided group: 'org.bukkit', name: 'bukkit', version: '1.9-SNAPSHOT'
+    provided group: 'org.bukkit', name: 'bukkit', version: '1.12-R0.1-SNAPSHOT'
     provided group: 'org.projectlombok', name: 'lombok', version: '1.12.6'
     provided group: 'org.spongepowered', name: 'spongeapi', version: '3.0.0'
     provided group: 'net.milkbowl.vault', name: 'VaultAPI', version: '1.5'
-    provided group: 'be.maximvdw', name: 'MVdWPlaceholderAPI', version: '1.0.1-SNAPSHOT'
+    provided group: 'be.maximvdw', name: 'MVdWPlaceholderAPI', version: '1.0.2-SNAPSHOT'
     testCompile group: 'junit', name: 'junit', version: '4.10'
 }
 
